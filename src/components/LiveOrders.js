@@ -8,13 +8,9 @@ function LiveOrders() {
     
     useEffect(() => {
         async function fetchData() {
-            const user={
-                customer_Id:JSON.parse(localStorage.getItem('currentuser'))[0].customer_Id
-            }
           try {
-            const data = await (await axios.post('http://localhost:5000/api/admin/getliveorders',user)).data
+            const data = await (await axios.get('http://localhost:5000/api/admin/getliveorders')).data
             setInfo(data.data)
-
             console.log(data.data)
 
     
@@ -32,8 +28,7 @@ function LiveOrders() {
       async function add(id,status) {
         const user = {
             cart_Id:id,
-            status:status,
-            customer_Id:JSON.parse(localStorage.getItem('currentuser'))[0].customer_Id
+            status:status
         };
 
         console.log(user)
@@ -51,8 +46,7 @@ function LiveOrders() {
 
       async function reject(id,status) {
         const user = {
-            cart_Id:id,
-            customer_Id:JSON.parse(localStorage.getItem('currentuser'))[0].customer_Id
+            cart_Id:id
         };
 
         console.log(user)
@@ -158,10 +152,10 @@ function LiveOrders() {
                                     <div className="card-body bordersofcard">
                                         {info && info.map((items)=>{
                                             return <>
-                                            {items.Orderstatus === 1 ?(<>
+                                            {items.Orderstatus === '1' ?(<>
                                                 <div class="accordion" id={`accordion${items.cart_Id}`}>
                                             {/* Div start */}
-                                            <div class="accordion-item accitem">
+                                            <div class="accordion-item accitem"  key={`${items.cart_Id}`} >
                                                 <h2 class="accordion-header cursor" id={`heading${items.cart_Id}`} data-bs-toggle="collapse" data-bs-target={`#collapse${items.cart_Id}`} aria-expanded="true" aria-controls={`#collapse${items.cart_Id}`}>
 
                                                     <div className="row justify-content-center align-items-center">
@@ -212,7 +206,7 @@ function LiveOrders() {
                                     <div className="card-body bordersofcard">
                                         {info && info.map((items)=>{
                                             return <>
-                                            {items.Orderstatus === 2 ?(<>
+                                            {items.Orderstatus === '2' ?(<>
                                             
                                                 <div class="accordion" id={`accordion${items.cart_Id}`}>
                                             <div class="accordion-item accitem">
@@ -268,7 +262,7 @@ function LiveOrders() {
                                     <div className="card-body bordersofcard">
                                     {info && info.map((items)=>{
                                             return <>
-                                            {items.Orderstatus === 3 ?(<>
+                                            {items.Orderstatus === '3' ?(<>
                                             
                                                 <div class="accordion" id={`accordion${items.cart_Id}`}>
                                             <div class="accordion-item accitem">
