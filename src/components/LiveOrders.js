@@ -234,11 +234,11 @@ function LiveOrders() {
                                                         {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                                         <div className="row btnrow">
                                                             <div className="col-md-6">
-                                                                <button type="button" className="btn actionbtns" onClick={()=>{add(items.cart_Id,items.Orderstatus)}}>Accept</button>
+                                                                <button type="button" className="btn actionbtns" onClick={()=>{add(items.cart_Id,items.Orderstatus)}}>Prepared</button>
                                                             </div>
                                                             <div className="col-md-6">
 
-                                                                <button type="button" className="btn actionbtns" onClick={()=>{reject(items.cart_Id,items.Orderstatus)}}>Reject</button></div>
+                                                                <button type="button" className="btn actionbtns" onClick={()=>{reject(items.cart_Id,items.Orderstatus)}}>Assign to driver</button></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -288,14 +288,6 @@ function LiveOrders() {
                                                         <h2 className="emailformat">{items.name}</h2>
                                                         <h2 className="addresstime"><span></span>House No: {items.house}, {items.flat},{items.street},{items.postcode},{items.town}</h2>
                                                         {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
-                                                        <div className="row btnrow">
-                                                            <div className="col-md-6">
-                                                                <button type="button" className="btn actionbtns" onClick={()=>{add(items.cart_Id,items.Orderstatus)}}>Accept</button>
-                                                            </div>
-                                                            <div className="col-md-6">
-
-                                                                <button type="button" className="btn actionbtns" onClick={()=>{reject(items.cart_Id,items.Orderstatus)}}>Reject</button></div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
