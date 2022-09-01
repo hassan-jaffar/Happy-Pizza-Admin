@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Dashboard.css"
+import CustomersTable from "./CustomersTable";
 import Navbar from "./Navbar";
 
-function Dashboard() {
+function Customers() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
           <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
@@ -23,12 +23,12 @@ function Dashboard() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/LiveOrders" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/LiveOrders"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">
-                      {" "}
-                      Live Orders
-                    </span>
+                    <span className="ms-1 d-none d-sm-inline">Live Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -86,42 +86,7 @@ function Dashboard() {
             </div>
           </div>
           <div className="col-lg-9">
-            <div className="row">
-              <div className="col-md-12">
-                <h2 className="mt-5 mb-2 mx-3 responsiveness">DASHBOARD</h2>
-                <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
-                  <h1>
-                    <i className="fa-solid fa-circle-check me-3"></i>
-                  </h1>
-                  <h1>Your Restaurant is Open!</h1>
-                  <h1 className="mlauto">
-                    <i className="fa-solid fa-pen"></i>
-                  </h1>
-                </div>
-              </div>
-            </div>
-            <div className="row justify-content-center">
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">Sales Volume</h5>
-                <h4 className="boldtext">$0.00</h4>
-                <h6>(days)</h6>
-              </div>
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">Orders</h5>
-                <h4 className="boldtext">0</h4>
-                <h6>Today</h6>
-              </div>
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">No of Items</h5>
-                <h4 className="boldtext">244</h4>
-                <h6>items</h6>
-              </div>
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">Customers</h5>
-                <h4 className="boldtext">46</h4>
-                <h6>Customers</h6>
-              </div>
-            </div>
+            <CustomersTable/>
           </div>
         </div>
       </div>
@@ -129,4 +94,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Customers;
