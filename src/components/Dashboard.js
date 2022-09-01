@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Dashboard.css"
+import Navbar from "./Navbar";
 
 function Dashboard() {
   return (
     <>
+    <Navbar/>
       <div className="container-fluid">
         <div className="row flex-nowrap">
           <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
@@ -29,7 +32,7 @@ function Dashboard() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/Orders" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-chart-line"></i>
                     <span className="ms-1 d-none d-sm-inline"> Orders</span>
                   </Link>

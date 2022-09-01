@@ -28,42 +28,102 @@ code {
   padding: 10px !important;
  }
 
- .openh1{
-  box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
-  border-radius: 25px;
-  display: inline-flex !important;
-  width: 100%;
- }
-
- .mlauto{
-  margin-left: auto;
- }
-
- .dashboardcards{
-  box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
-  border-radius: 25px;
-  margin: 40px 15px;
-  padding: 40px 20px;
- }
-
  .boldtext{
   font-weight: bold;
  }
 
- @media
-(max-width: 992px)
-{
-  .sidebar{
-    display: none !important;
-  }
-.body{
-  overflow-x: hidden !important;
-}
-.responsiveness{
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-.dashboardcards{
-  width: 80%;
+ .bs{
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
  }
+
+ .menu{
+  margin: 10px 0;
+  position: sticky;
+  z-index: 1000;
+}
+
+.btnicon{
+  margin: 0 5px;
+}
+
+.menuitems{
+  margin: auto;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.menuitems a{
+  color: black;
+  display: contents;
+}
+
+.menuitems button{
+  margin: auto 5px;
+}
+
+.menuimg{
+  margin: auto;
+  width: 100px;
+  height: 60px;
+}
+
+.homebtn{
+  width: 100%;
+  margin: 40px auto;
+}
+
+.homebtn a{
+  color: white !important;
+}
+
+.disablebtn a{
+  color: white !important;
+}
+
+.mainnavbar{
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.userdditem{
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 20px !important;
+}
+
+.userddmenu{
+  width: 300px;
+}
+
+ @media
+  (max-width: 992px)
+  {
+    .menu{
+      display: flex !important;
+      flex-direction: row;
+    }
+    .menuitems{
+      width: 33.33%;
+    }
+    .disablebtn{
+      display: none;
+    }
+    .menuitems button{
+      margin: 0;
+      font-size: small;
+    }
+    .menuitems a{
+      margin: 0;
+      font-size: small;
+    }
+    .sidebar{
+      display: none !important;
+    }
+  .body{
+    overflow-x: hidden !important;
+  }
+  .responsiveness{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
