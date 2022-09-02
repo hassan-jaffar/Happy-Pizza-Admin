@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Dashboard.css"
+import "./Dashboard.css";
 import Navbar from "./Navbar";
 
 function Dashboard() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
           <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
@@ -23,61 +23,98 @@ function Dashboard() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/LiveOrders" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/liveorders"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">
-                      {" "}
-                      Live Orders
-                    </span>
+                    <span className="ms-1 d-none d-sm-inline">Live Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Orders" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/orders"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-chart-line"></i>
                     <span className="ms-1 d-none d-sm-inline"> Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Customers" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/customers"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-user"></i>
                     <span className="ms-1 d-none d-sm-inline"> Customers</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-car"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Drivers...</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-star"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Ranks...</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/menu" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-book"></i>
                     <span className="ms-1 d-none d-sm-inline"> Menu...</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/setting"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-gear"></i>
                     <span className="ms-1 d-none d-sm-inline"> Setting...</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    to="/addresses"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-arrows-to-dot"></i>
-                    <span className="ms-1 d-none d-sm-inline">Marketing</span>
-                  </Link>
+                <div className="dropdown">
+                    <button
+                      className="btn btn-light dropdown-toggle boldtext align-middle sidebartag"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="fa-solid fa-arrows-to-dot"></i>
+                      <span className="ms-1 d-none d-sm-inline"> Marketing...</span>
+                    </button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <li>
+                        <Link
+                          className="dropdown-item nav-link align-middle boldtext sidebartag"
+                          to="/coupon"
+                        >
+                        <i className="fa-solid fa-tag btnicon"></i>
+                          Discounts
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item nav-link align-middle boldtext sidebartag"
+                          to="/bulksms"
+                        >
+                        <i className="fa-solid fa-message btnicon"></i>
+                        Bulk SMS
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item nav-link align-middle boldtext sidebartag"
+                          to="/share"
+                        >
+                        <i className="fa-solid fa-share btnicon"></i>
+                          Share
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/change-password"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-lock-open"></i>
                     <span className="ms-1 d-none d-sm-inline">Password</span>
                   </Link>
@@ -86,7 +123,7 @@ function Dashboard() {
             </div>
           </div>
           <div className="col-lg-9">
-            <div className="row">
+            <div className="row responsiveness">
               <div className="col-md-12">
                 <h2 className="mt-5 mb-2 mx-3 responsiveness">DASHBOARD</h2>
                 <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
@@ -94,13 +131,13 @@ function Dashboard() {
                     <i className="fa-solid fa-circle-check me-3"></i>
                   </h1>
                   <h1>Your Restaurant is Open!</h1>
-                  <h1 className="mlauto">
+                  <h1 className="mlauto responsiveness">
                     <i className="fa-solid fa-pen"></i>
                   </h1>
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center">
+            <div className="row justify-content-center responsiveness">
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext">Sales Volume</h5>
                 <h4 className="boldtext">$0.00</h4>

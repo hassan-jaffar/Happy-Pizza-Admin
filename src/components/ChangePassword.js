@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import "./Orders.css";
-import OrdersTable from "./OrdersTable";
+import { Link } from "react-router-dom";
+import ChangePasswordTable from "./ChangePasswordTable";
 
-function Orders() {
+function ChangePassword() {
   return (
     <>
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
-          <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
+          <div className="col-auto col-lg-3 col-xl-2 px-sm-2 px-0 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">OWNER</h5>
               <ul
@@ -66,6 +65,7 @@ function Orders() {
                     >
                       <i className="fa-solid fa-arrows-to-dot"></i>
                       <span className="ms-1 d-none d-sm-inline"> Marketing...</span>
+
                     </button>
                     <ul
                       className="dropdown-menu"
@@ -111,7 +111,7 @@ function Orders() {
             </div>
           </div>
           <div className="col-lg-9">
-            <OrdersTable/>
+            <ChangePasswordTable/>
           </div>
         </div>
       </div>
@@ -119,4 +119,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default ChangePassword;

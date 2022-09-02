@@ -10,14 +10,14 @@ function CustomersTable() {
           <div className="table-responsive">
             <table className="table mt-2 mb-5 mx-4 bs">
               <thead>
-              <tr>
-                <th scope="col">CLIENTS DATA</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-              </tr>
+                <tr>
+                  <th scope="col">CLIENTS DATA</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
@@ -31,52 +31,97 @@ function CustomersTable() {
                 <tr>
                   <th scope="row">Chloe NIcklin</th>
                   <td>chloe.nicklin.1993@gmail.com</td>
-                  <td>
-                  26 Sep 2021 05:50 PM
-                  </td>
+                  <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
-                  <td><button className="btn btn-primary">:</button></td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-outline-dark deactivatebtn"
+                      data-bs-container="body"
+                      data-bs-toggle="popover"
+                      data-bs-placement="bottom"
+                      data-bs-content="Deactivate"
+                    >
+                      <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">Chloe NIcklin</th>
                   <td>chloe.nicklin.1993@gmail.com</td>
-                  <td>
-                  26 Sep 2021 05:50 PM
-                  </td>
+                  <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
-                  <td><button className="btn btn-primary">:</button></td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-outline-dark deactivatebtn"
+                      data-bs-container="body"
+                      data-bs-toggle="popover"
+                      data-bs-placement="bottom"
+                      data-bs-content="Deactivate"
+                    >
+                      <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">Chloe NIcklin</th>
                   <td>chloe.nicklin.1993@gmail.com</td>
-                  <td>
-                  26 Sep 2021 05:50 PM
-                  </td>
+                  <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
-                  <td><button className="btn btn-primary">:</button></td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-outline-dark deactivatebtn"
+                      data-bs-container="body"
+                      data-bs-toggle="popover"
+                      data-bs-placement="bottom"
+                      data-bs-content="Deactivate"
+                    >
+                      <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">Chloe NIcklin</th>
                   <td>chloe.nicklin.1993@gmail.com</td>
-                  <td>
-                  26 Sep 2021 05:50 PM
-                  </td>
+                  <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
-                  <td><button className="btn btn-primary">:</button></td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-outline-dark deactivatebtn"
+                      data-bs-container="body"
+                      data-bs-toggle="popover"
+                      data-bs-placement="bottom"
+                      data-bs-content="Deactivate"
+                    >
+                      <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">Chloe NIcklin</th>
                   <td>chloe.nicklin.1993@gmail.com</td>
-                  <td>
-                  26 Sep 2021 05:50 PM
-                  </td>
+                  <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
-                  <td><button className="btn btn-primary">:</button></td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-outline-dark deactivatebtn"
+                      data-bs-container="body"
+                      data-bs-toggle="popover"
+                      data-bs-placement="bottom"
+                      data-bs-content="Deactivate"
+                    >
+                      <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </button>{" "}
+                  </td>
                 </tr>
               </tbody>
             </table>

@@ -23,61 +23,85 @@ function Customers() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    to="/LiveOrders"
-                    className="nav-link align-middle sidebartag"
-                  >
+                  <Link to="/liveorders" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">Live Orders</span>
+                    <span className="ms-1 d-none d-sm-inline">
+                      Live Orders
+                    </span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Orders" className="nav-link align-middle sidebartag">
+                  <Link to="/orders" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-chart-line"></i>
                     <span className="ms-1 d-none d-sm-inline"> Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Customers" className="nav-link align-middle sidebartag">
+                  <Link to="/customers" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-user"></i>
                     <span className="ms-1 d-none d-sm-inline"> Customers</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-car"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Drivers...</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-star"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Ranks...</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/menu" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-book"></i>
                     <span className="ms-1 d-none d-sm-inline"> Menu...</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/setting" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-gear"></i>
                     <span className="ms-1 d-none d-sm-inline"> Setting...</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    to="/addresses"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-arrows-to-dot"></i>
-                    <span className="ms-1 d-none d-sm-inline">Marketing</span>
-                  </Link>
+                <div className="dropdown">
+                    <button
+                      className="btn btn-light dropdown-toggle boldtext align-middle sidebartag"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="fa-solid fa-arrows-to-dot"></i>
+                      <span className="ms-1 d-none d-sm-inline"> Marketing...</span>
+                    </button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <li>
+                        <Link
+                          className="dropdown-item nav-link align-middle boldtext sidebartag"
+                          to="/coupon"
+                        >
+                        <i className="fa-solid fa-tag btnicon"></i>
+                          Discounts
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item nav-link align-middle boldtext sidebartag"
+                          to="/bulksms"
+                        >
+                        <i className="fa-solid fa-message btnicon"></i>
+                        Bulk SMS
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item nav-link align-middle boldtext sidebartag"
+                          to="/share"
+                        >
+                        <i className="fa-solid fa-share btnicon"></i>
+                          Share
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/change-password" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-lock-open"></i>
                     <span className="ms-1 d-none d-sm-inline">Password</span>
                   </Link>
