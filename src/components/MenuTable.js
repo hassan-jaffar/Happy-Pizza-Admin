@@ -4,10 +4,41 @@ import { Link } from "react-router-dom";
 import '../components/Menu.css'
 
 function MenuTable() {
-  const [category, setcategory] = useState(
-    []
-  )
+  const [category, setcategory] = useState([])
   const [item, setItem] = useState([])
+  const [name, setName] = useState('')
+
+  async function add(){
+    const user = {
+      name
+  };
+
+  try {
+      const result = await axios.post(" http://localhost:5000/api/admin/createmenu",user).data;
+      console.log(result)
+      update()
+      setName('')
+
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+async function update(){
+
+  try {
+
+    const data = await (await axios.get('http://localhost:5000/api/admin/getallmenu')).data
+    setcategory(data.data);
+    console.log(category)
+
+
+  } catch (error) {
+    console.log(error);
+
+  }
+
+}
 
   useEffect(() => {
     async function fetchData() {
@@ -82,6 +113,9 @@ function MenuTable() {
                     <input
                       className="form-control my-4 py-2 px-4"
                       placeholder="Category name..."
+                      value={name}
+                      onChange={(e)=>{setName(e.target.value)}}
+                      required
                     />
                     <div className="form-check form-switch">
                       <input
@@ -105,7 +139,7 @@ function MenuTable() {
                     >
                       Close
                     </button>
-                    <button type="button" className="btn btn-primary">
+                    <button type="button" onClick={add} className="btn btn-primary">
                       Save
                     </button>
                   </div>
