@@ -59,11 +59,12 @@ try {
 
 async function edit(ID){
   const user = {
-    ID
+    ID,
+    name
 };
 
 try {
-    const result = await axios.post(" http://localhost:5000/api/admin/deletemenu",user).data;
+    const result = await axios.post(" http://localhost:5000/api/admin/updatemenu ",user).data;
     console.log(result)
     update()
     setName('')
