@@ -40,6 +40,40 @@ async function update(){
 
 }
 
+async function del(ID){
+  const user = {
+    ID
+};
+
+try {
+    const result = await axios.post(" http://localhost:5000/api/admin/deletemenu",user).data;
+    console.log(result)
+    update()
+    setName('')
+
+} catch (error) {
+    console.log(error);
+}
+
+}
+
+async function edit(ID){
+  const user = {
+    ID
+};
+
+try {
+    const result = await axios.post(" http://localhost:5000/api/admin/deletemenu",user).data;
+    console.log(result)
+    update()
+    setName('')
+
+} catch (error) {
+    console.log(error);
+}
+
+}
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -168,8 +202,8 @@ async function update(){
                       {categorys.Name}
                       <div className="mlauto">
                         <button className="btn btn-info menu-buttons"><i class="fa-solid fa-plus"></i></button>
-                        <button className="btn btn-warning menu-buttons"><i class="fa-solid fa-pencil"></i></button>
-                        <button className="btn btn-danger  menu-buttons"><i class="fa-solid fa-trash"></i></button>
+                        <button className="btn btn-warning menu-buttons" onClick={()=>{edit(categorys.ID)}}><i class="fa-solid fa-pencil"></i></button>
+                        <button className="btn btn-danger  menu-buttons" onClick={()=>{del(categorys.ID)}}><i class="fa-solid fa-trash"></i></button>
                         <button className="btn btn-info  menu-buttons"><i class="fa-solid fa-arrow-down"></i></button>
                         <button className="btn btn-info  menu-buttons"><i class="fa-solid fa-arrow-up"></i></button>
                       </div>
