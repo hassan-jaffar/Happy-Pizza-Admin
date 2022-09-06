@@ -366,7 +366,7 @@ function LiveOrders() {
                                                 );
                                               }}
                                             >
-                                              Accept
+                                              Prepaid
                                             </button>
                                           </div>
                                           <div className="col-md-6">
@@ -380,7 +380,7 @@ function LiveOrders() {
                                                 );
                                               }}
                                             >
-                                              Reject
+                                              Assigned to driver
                                             </button>
                                           </div>
                                         </div>
@@ -462,7 +462,7 @@ function LiveOrders() {
                                           {items.postcode},{items.town}
                                         </h2>
                                         {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
-                                        <div className="row btnrow">
+                                        {/* <div className="row btnrow">
                                           <div className="col-md-6">
                                             <button
                                               type="button"
@@ -491,7 +491,7 @@ function LiveOrders() {
                                               Reject
                                             </button>
                                           </div>
-                                        </div>
+                                        </div> */}
                                       </div>
                                     </div>
                                   </div>
