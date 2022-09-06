@@ -1,6 +1,23 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 
 function CustomersTable() {
+  const [customers, setCustomers] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+
+      try {
+        const data = await (await axios.get('http://localhost:5000/api/admin/getcustomers')).data
+        setCustomers(data.data)
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+  
   return (
     <>
       <div className="row justify-content-center">
@@ -28,9 +45,11 @@ function CustomersTable() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">Chloe NIcklin</th>
-                  <td>chloe.nicklin.1993@gmail.com</td>
+                {customers && customers.map((customer)=>{
+                  return <>
+                  <tr>
+                  <th scope="row">{customer.name}</th>
+                  <td>{customer.email}</td>
                   <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
@@ -47,7 +66,10 @@ function CustomersTable() {
                     </button>
                   </td>
                 </tr>
-                <tr>
+                  </>
+                })}
+                
+                {/* <tr>
                   <th scope="row">Chloe NIcklin</th>
                   <td>chloe.nicklin.1993@gmail.com</td>
                   <td>26 Sep 2021 05:50 PM</td>
@@ -122,7 +144,7 @@ function CustomersTable() {
                       <i className="fa-solid fa-ellipsis-vertical"></i>
                     </button>{" "}
                   </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>
