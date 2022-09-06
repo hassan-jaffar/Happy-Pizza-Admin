@@ -3,3 +3,11 @@
     width: 95%;
     border-radius: 20px;
 }
+
+.primary{
+    background-color: blue;
+}
+
+.info{
+    background-color: #03CFB7;
+}

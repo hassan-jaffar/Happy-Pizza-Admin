@@ -1,7 +1,23 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 import "./Orders.css";
 
 function OrdersTable() {
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+
+      try {
+        const data = await (await axios.get('http://localhost:5000/api/admin/getallorders')).data
+        setOrders(data.data)
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
   return (
     <>
 <div className="row justify-content-center">
@@ -73,22 +89,26 @@ function OrdersTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
+        {orders && orders.map((order)=>{
+          return <>
+                  <tr>
           <th scope="row">
-            1017-1661245479-002
+          <span class="badge text-bg-info info">{order.cart_Id}</span>
+            
           </th>
-          <td>House No: 1, Cross Place, DY3 1PE, Sedgley</td>
+          <td>{order.house},Flat:{order.flat},{order.street},{order.postcode},{order.town}</td>
           <td>
-            13 August 2022
-            <br />
-            7:26 PM
+            {order.DateTime}
           </td>
-          <td>Delivery</td>
-          <td>Accept</td>
-          <td>cod(unpaid)</td>
-          <td>$17.93</td>
+          <td><span class="badge text-bg-primary primary">collection</span></td>
+          <td><span class="badge text-bg-info info">{order.Orderstatus === "1" ? (<>Pending</>):order.Orderstatus === "2" ?(<>In Process</>):order.Orderstatus === "3" ?(<>Completed</>):(<>Rejected</>)}</span></td>
+          <td><span class="badge text-bg-primary primary">cod(unpaid)</span></td>
+          <td>${order.Price}</td>
         </tr>
-        <tr>
+          </>
+        })}
+
+        {/* <tr>
           <th scope="row">1017-1661245479-002</th>
           <td>House No: 1, Cross Place, DY3 1PE, Sedgley</td>
           <td>
@@ -145,7 +165,7 @@ function OrdersTable() {
           <td>Accept</td>
           <td>cod(unpaid)</td>
           <td>$17.93</td>
-        </tr>
+        </tr> */}
       </tbody>
     </table>
   </div>
