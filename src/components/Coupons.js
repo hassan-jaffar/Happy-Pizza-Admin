@@ -45,59 +45,70 @@ function Coupons() {
                 <li className="nav-item">
                   <Link to="/menu" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-book"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Menu...</span>
+                    <span className="ms-1 d-none d-sm-inline"> Menu</span>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/setting" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-gear"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Setting...</span>
+                    <span className="ms-1 d-none d-sm-inline"> Setting</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                <div className="dropdown">
-                    <button
-                      className="btn btn-light dropdown-toggle boldtext align-middle sidebartag"
-                      type="button"
-                      id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <i className="fa-solid fa-arrows-to-dot"></i>
-                      <span className="ms-1 d-none d-sm-inline"> Marketing...</span>
-                    </button>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton1"
-                    >
-                      <li>
-                        <Link
-                          className="dropdown-item nav-link align-middle boldtext sidebartag"
-                          to="/coupon"
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button
+                          class="accordion-button collapsed boldtext align-middle sidebartag"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
                         >
-                        <i className="fa-solid fa-tag btnicon"></i>
-                          Discounts
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item nav-link align-middle boldtext sidebartag"
-                          to="/bulksms"
-                        >
-                        <i className="fa-solid fa-message btnicon"></i>
-                        Bulk SMS
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item nav-link align-middle boldtext sidebartag"
-                          to="/share"
-                        >
-                        <i className="fa-solid fa-share btnicon"></i>
-                          Share
-                        </Link>
-                      </li>
-                    </ul>
+                          <i className="fa-solid fa-arrows-to-dot"></i>
+                          <span className="ms-1 d-none d-sm-inline">
+                            Marketing
+                          </span>
+                        </button>
+                      </h2>
+                      <div
+                        id="collapseTwo"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample"
+                      >
+                        <div class="accordion-body">
+                            <li>
+                              <Link
+                                className="dropdown-item nav-link align-middle boldtext sidebartag"
+                                to="/coupon"
+                              >
+                                <i className="fa-solid fa-tag btnicon"></i>
+                                Discounts
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="dropdown-item nav-link align-middle boldtext sidebartag"
+                                to="/bulksms"
+                              >
+                                <i className="fa-solid fa-message btnicon"></i>
+                                Bulk SMS
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="dropdown-item nav-link align-middle boldtext sidebartag"
+                                to="/share"
+                              >
+                                <i className="fa-solid fa-share btnicon"></i>
+                                Share
+                              </Link>
+                            </li>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </li>
                 <li className="nav-item">

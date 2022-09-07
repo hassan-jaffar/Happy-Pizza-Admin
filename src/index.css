@@ -153,6 +153,11 @@ code {
   display: flex;
 }
 
+.modal-img{
+  width: 150px;
+  height: 150px;
+}
+
  @media
   (max-width: 992px)
   {
