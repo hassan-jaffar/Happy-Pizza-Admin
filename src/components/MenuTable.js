@@ -79,25 +79,42 @@ function MenuTable() {
     }
   }
 
+  async function update1() {
+    try {
+      const data = await (
+        await axios.get("http://localhost:5000/api/admin/getallitems")
+      ).data;
+      setItem(data.data);
+      console.log(item);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  async function addItem(ID) {
-    // const user = {
-    //   ID,
-    //   name,
-    // };
+  async function addItem(category_id) {
+    const user = {
+      category_id,
+      title,
+      description,
+      price,
+      image
+    };
 
-    // try {
-    //   const result = await axios.post(
-    //     " http://localhost:5000/api/admin/updatemenu ",
-    //     user
-    //   ).data;
-    //   console.log(result);
-    //   update();
-    //   setName("");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    alert(ID)
+    try {
+      const result = await axios.post(
+        " http://localhost:5000/api/admin/createitem ",
+        user
+      ).data;
+      console.log(result);
+      update1();
+      setName("");
+      setTitle("");
+      setPrice("");
+      setdescription("");
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   useEffect(() => {
