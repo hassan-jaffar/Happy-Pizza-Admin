@@ -63,7 +63,7 @@ function MenuTable() {
   async function edit(ID) {
     const user = {
       ID,
-      name,
+      title
     };
 
     try {
@@ -73,31 +73,12 @@ function MenuTable() {
       ).data;
       console.log(result);
       update();
-      setName("");
+      setTitle("");
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function editcat(ID) {
-    // const user = {
-    //   ID,
-    //   name,
-    // };
-
-    // try {
-    //   const result = await axios.post(
-    //     " http://localhost:5000/api/admin/updatemenu ",
-    //     user
-    //   ).data;
-    //   console.log(result);
-    //   update();
-    //   setName("");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    alert(ID)
-  }
 
   async function addItem(ID) {
     // const user = {
@@ -270,9 +251,9 @@ function MenuTable() {
                               data-bs-toggle="modal"
                               data-bs-target={`#edititemModal${categorys.ID}`}
                               className="btn btn-warning menu-buttons"
-                              onClick={() => {
-                                edit(categorys.ID);
-                              }}
+                              // onClick={() => {
+                              //   edit(categorys.ID);
+                              // }}
                             >
                               <i className="fa-solid fa-pencil"></i>
                             </button>
@@ -606,7 +587,7 @@ function MenuTable() {
                           >
                             Close
                           </button>
-                          <button type="button" className="btn btn-primary" onClick={()=>{editcat(categorys.ID)}}>
+                          <button type="button" className="btn btn-primary" onClick={()=>{edit(categorys.ID)}}>
                             Update
                           </button>
                         </div>
