@@ -260,7 +260,7 @@ function MenuTable() {
                             <button
                               type="button"
                               data-bs-toggle="modal"
-                              data-bs-target="#additemModal"
+                              data-bs-target={`#additemModal${categorys.ID}`}
                               className="btn btn-info menu-buttons"
                             >
                               <i className="fa-solid fa-plus"></i>
@@ -268,7 +268,7 @@ function MenuTable() {
                             <button
                               type="button"
                               data-bs-toggle="modal"
-                              data-bs-target="#edititemModal"
+                              data-bs-target={`#edititemModal${categorys.ID}`}
                               className="btn btn-warning menu-buttons"
                               onClick={() => {
                                 edit(categorys.ID);
@@ -384,7 +384,7 @@ function MenuTable() {
 
                   <div
                     className="modal fade"
-                    id="additemModal"
+                    id={`additemModal${categorys.ID}`}
                     tabindex="-1"
                     aria-labelledby="additemModalLabel"
                     aria-hidden="true"
@@ -471,7 +471,7 @@ function MenuTable() {
 
                   <div
                     className="modal fade"
-                    id="edititemModal"
+                    id={`edititemModal${categorys.ID}`}
                     tabindex="-1"
                     aria-labelledby="edititemModalLabel"
                     aria-hidden="true"
