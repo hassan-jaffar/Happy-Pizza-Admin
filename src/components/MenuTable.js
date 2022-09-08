@@ -7,6 +7,10 @@ function MenuTable() {
   const [category, setcategory] = useState([]);
   const [item, setItem] = useState([]);
   const [name, setName] = useState("");
+  const [title, setTitle] = useState("")
+  const [description, setdescription] = useState("")
+  const [price, setPrice] = useState("")
+  const [image, setImage] = useState("")
 
   async function add() {
     const user = {
@@ -73,6 +77,46 @@ function MenuTable() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async function editcat(ID) {
+    // const user = {
+    //   ID,
+    //   name,
+    // };
+
+    // try {
+    //   const result = await axios.post(
+    //     " http://localhost:5000/api/admin/updatemenu ",
+    //     user
+    //   ).data;
+    //   console.log(result);
+    //   update();
+    //   setName("");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    alert(ID)
+  }
+
+  async function addItem(ID) {
+    // const user = {
+    //   ID,
+    //   name,
+    // };
+
+    // try {
+    //   const result = await axios.post(
+    //     " http://localhost:5000/api/admin/updatemenu ",
+    //     user
+    //   ).data;
+    //   console.log(result);
+    //   update();
+    //   setName("");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    alert(ID)
   }
 
   useEffect(() => {
@@ -362,15 +406,21 @@ function MenuTable() {
                           <input
                             className="form-control mb-3"
                             placeholder="Item Name..."
+                            value={title}
+                            onChange={(e)=>{setTitle(e.target.value)}}
                           />
                           <textarea
                             className="form-control my-3"
                             placeholder="Item Description..."
                             rows="3"
+                            value={description}
+                            onChange={(e)=>{setdescription(e.target.value)}}
                           />
                           <input
                             className="form-control my-3"
                             placeholder="Item Price..."
+                            value={price}
+                            onChange={(e)=>{setPrice(e.target.value)}}
                           />
                           <div className="form-check form-switch my-3">
                           <div className="row justify-content-between">
@@ -395,7 +445,7 @@ function MenuTable() {
                             />
                           </div>
                           <div className="text-center my-3">
-                            <img className="modal-img" src="" />
+                            <img className="modal-img" src="" value={image} />
                           </div>
                         </div>
                         <div className="modal-footer">
@@ -406,7 +456,7 @@ function MenuTable() {
                           >
                             Close
                           </button>
-                          <button type="button" className="btn btn-primary">
+                          <button type="button" className="btn btn-primary" onClick={()=>{addItem(categorys.ID)}}>
                             Save
                           </button>
                         </div>
@@ -440,7 +490,7 @@ function MenuTable() {
                           ></button>
                         </div>
                         <div className="modal-body">
-                          <input className="form-control" />
+                          <input type="text" placeholder={categorys.Name} className="form-control" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
                           <div className="form-check form-switch my-3">
                           <div className="row justify-content-between">
                           <label
@@ -551,7 +601,7 @@ function MenuTable() {
                           >
                             Close
                           </button>
-                          <button type="button" className="btn btn-primary">
+                          <button type="button" className="btn btn-primary" onClick={()=>{editcat(categorys.ID)}}>
                             Update
                           </button>
                         </div>
