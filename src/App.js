@@ -10,6 +10,7 @@ import BulkSMS from './components/BulkSMS';
 import Coupons from './components/Coupons';
 import AddCoupon from './components/AddCoupon';
 import Menu from './components/Menu';
+import ItemManagement from './components/ItemManagement';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/orders" element={<Orders/>}></Route>
       <Route path="/customers" element={<Customers/>}></Route>
       <Route path="/menu" element={<Menu/>}></Route>
+      <Route path="/item-management" element={<ItemManagement/>}></Route>
       {/* <Route path="/setting" element={<Setting/>}></Route> */}
       <Route path="/coupon" element={<Coupons/>}></Route>
       <Route path="/coupon/create" element={<AddCoupon/>}></Route>

@@ -132,8 +132,8 @@ code {
 }
 
 .menucards{
-  width: 90%;
-  height: 160px;
+  width: 100%;
+  height: 200px;
   margin: 20px 10px;
   padding: 10px;
   border: 1px solid black;
@@ -150,12 +150,27 @@ code {
 }
 
 .menudetails{
-  display: flex;
+  display: inline-flex !important;
+  width: 100% !important;
 }
 
 .modal-img{
   width: 150px;
   height: 150px;
+}
+
+.managementimg{
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.fullwidth{
+  width: 100% !important;
+}
+
+.blackclr{
+  color: black !important;
 }
 
  @media

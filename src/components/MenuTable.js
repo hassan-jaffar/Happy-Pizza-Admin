@@ -301,7 +301,7 @@ function MenuTable() {
                         data-bs-parent={`#accordion${categorys.ID}`}
                       >
                         <div className="accordion-body menudetails">
-                          <div className="row">
+                          <div className="row fullwidth">
                             {item &&
                               item.map((items) => {
                                 return (
@@ -310,13 +310,18 @@ function MenuTable() {
                                       <>
                                         <div className="col-md-4">
                                           <div className="menucards">
-                                            <div className="row">
+                                          <Link to="/item-management" style={{ textDecoration: 'none' }}>
+                                            <div className="row blackclr">
                                               <div className="col-md-12">
-                                                <h5 className="pb-3 d-block mb-5">
+                                                <h5 className="d-block">
                                                   {items.Title}
                                                 </h5>
+                                                <p className="mb-5 d-block">
+                                                  {items.Title}
+                                                </p>
                                               </div>
                                             </div>
+                                            </Link>
                                             <div className="row">
                                               <div className="col-md-6">
                                                 <p>
