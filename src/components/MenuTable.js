@@ -307,7 +307,7 @@ function MenuTable() {
                                     {items.category_id === categorys.ID ? (
                                       <>
                                         <div className="col-md-4">
-                                          <div className="menucards">
+                                          <div className="menucards bs">
                                           <Link to="/item-management" style={{ textDecoration: 'none' }}>
                                             <div className="row blackclr">
                                               <div className="col-md-12">

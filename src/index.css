@@ -173,6 +173,12 @@ code {
   color: black !important;
 }
 
+.orderdetailimg{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
  @media
   (max-width: 992px)
   {

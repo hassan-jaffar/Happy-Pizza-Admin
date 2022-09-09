@@ -1,0 +1,216 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+function OrderDetailTable() {
+  return (
+    <>
+      <div className="row justify-content-center">
+        <div className="col-md-12">
+          <h1 className="mt-5 mx-4 responsiveness text-start">Order Detail</h1>
+
+          <div className="row">
+            <div className="col-md-8 py-4 px-4">
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>ORDER INFO</h6>
+                <hr />
+                <p>Invoice ID: 1051-1662139410-001</p>
+                <p>Delivery method: Delivery</p>
+                <p>Time slot: 7:36 PM - 8:06 PM</p>
+                <p>Payment method: STRIPE</p>
+                <p>Payment status: Paid</p>
+              </div>
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>ORDER DETAIL</h6>
+                <hr />
+                <div className="table-responsive">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">PRODUCT</th>
+                        <th scope="col">ITEMS</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">TOTAL</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                          <img src="" className="orderdetailimg" />
+                          FVZFNCDCSNVKSDCKJDZVKJLJVDVZSC
+                        </th>
+                        <td>1</td>
+                        <td>$7.80</td>
+                        <td>$7.80</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <img src="" className="orderdetailimg" />
+                          FVZFNCDCSNVKSDCKJDZVKJLJVDVZSC
+                        </th>
+                        <td>1</td>
+                        <td>$7.80</td>
+                        <td>$7.80</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>CUSTOMER INFORMATION</h6>
+                <hr />
+                <p>Name: Rhodri Williams</p>
+                <p>Email: rhodriwilliams1985@gmail.com</p>
+                <p>
+                  Address: House No: 92, Charles Hayward drive, WV4 6GB,
+                  Wolverhampton
+                </p>
+                <p>Flat: 92</p>
+              </div>
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>RESTAURANT INFORMATION</h6>
+                <hr />
+                <p>Golden Fry Sedgley</p>
+                <p>3 Alderwood Precinct</p>
+                <p>01902597575</p>
+              </div>
+            </div>
+            <div className="col-md-4 py-4 px-4">
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6 className="mb-3">ACTIONS</h6>
+                <hr />
+                <button className="btn btn-primary me-2">Prepared</button>
+                <button className="btn btn-primary">Assign to deliver</button>
+              </div>
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>FINANCE</h6>
+                <hr />
+                <div className="table-responsive">
+                  <table className="table">
+                    <tbody>
+                      <tr>
+                        <td scope="row">SUB-TOTAL</td>
+                        <td>$5.50</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">DELIVERY</td>
+                        <td>$5.50</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">NET TOTAL</td>
+                        <td colspan="2">$5.50</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">DISCOUNT</td>
+                        <td colspan="2">$5.50</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">TOTAL</th>
+                        <td colspan="2">$5.50</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>ORDER TRACKING</h6>
+                <hr />
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13611.200265534018!2d74.3023612!3d31.4746856!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd90d41edbbe08d45!2sINNOVATION.TECH!5e0!3m2!1sen!2s!4v1660646556492!5m2!1sen!2s"
+                  width="250"
+                  height="350"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              <div className="orderdetailcards bs br my-5 px-3 py-4">
+                <h6>STATUS HISTORY</h6>
+                <hr />
+                <div class="card-body">
+                  <div class="card-body">
+                    <div
+                      class="timeline timeline-one-side"
+                      id="status-history"
+                      data-timeline-content="axis"
+                      data-timeline-axis-style="dashed"
+                    >
+                      <div class="timeline-block">
+                        <span class="timeline-step badge bg-success">
+                          <i class="fa fa-regular fa-bell"></i>
+                        </span>
+                        <div class="timeline-content">
+                          <div class="d-flex justify-content-between pt-1">
+                            <div>
+                              <span class="text-muted text-sm font-weight-bold">
+                                Just created
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                                06:23 PM
+                              </small>
+                            </div>
+                          </div>
+                          <h6 class="text-sm mt-1 mb-0">
+                            Status from: Rhodri Williams
+                          </h6>
+                        </div>
+                      </div>
+                      <div class="timeline-block">
+                        <span class="timeline-step badge bg-success">
+                          <i class="fa fa-regular fa-bell"></i>
+                        </span>
+                        <div class="timeline-content">
+                          <div class="d-flex justify-content-between pt-1">
+                            <div>
+                              <span class="text-muted text-sm font-weight-bold">
+                                Pending
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                                06:23 PM
+                              </small>
+                            </div>
+                          </div>
+                          <h6 class="text-sm mt-1 mb-0">
+                            Status from: CNF Admin
+                          </h6>
+                        </div>
+                      </div>
+                      <div class="timeline-block">
+                        <span class="timeline-step badge bg-success">
+                          <i class="fa fa-regular fa-bell"></i>
+                        </span>
+                        <div class="timeline-content">
+                          <div class="d-flex justify-content-between pt-1">
+                            <div>
+                              <span class="text-muted text-sm font-weight-bold">
+                                Accepted by restaurant
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                                06:46 PM
+                              </small>
+                            </div>
+                          </div>
+                          <h6 class="text-sm mt-1 mb-0">Status from: Owner3</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default OrderDetailTable;
