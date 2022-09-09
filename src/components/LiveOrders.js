@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
+import {Howl, Howler} from 'howler';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LiveOrders.css";
+import ping from "../audioclip/ping-82822.mp3"
 import Navbar from "./Navbar";
 
 function LiveOrders() {
   const [info, setInfo] = useState([]);
+  var sound = new Howl({
+    src: [ping]
+  });
+  
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -14,7 +21,11 @@ function LiveOrders() {
           await axios.get("http://localhost:5000/api/admin/getliveorders")
         ).data;
         setInfo(data.data);
-        console.log(data.data);
+        if(data){
+          sound.play();
+        }
+        
+        console.log(data.data['Orderstatus']);
       } catch (error) {
         console.log(error);
       }
@@ -24,6 +35,19 @@ function LiveOrders() {
       fetchData();
     }, 5000);
   }, []);
+
+  async function update() {
+    try {
+      const data = await (
+        await axios.get("http://localhost:5000/api/admin/getliveorders")
+      ).data;
+      setInfo(data.data);
+      
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function add(id, status) {
     const user = {
@@ -39,6 +63,7 @@ function LiveOrders() {
         user
       ).data;
       console.log(result);
+      update();
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +82,7 @@ function LiveOrders() {
         user
       ).data;
       console.log(result);
+      update();
     } catch (error) {
       console.log(error);
     }
