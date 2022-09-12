@@ -17,7 +17,7 @@ function Menu() {
                 id="menu"
               >
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/home" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-house"></i>
                     <span className="ms-1 d-none d-sm-inline"> Dashboard</span>
                   </Link>

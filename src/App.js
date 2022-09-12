@@ -12,12 +12,16 @@ import AddCoupon from "./components/AddCoupon";
 import Menu from "./components/Menu";
 import ItemManagement from "./components/ItemManagement";
 import OrderDetail from "./components/OrderDetail";
+import SigninPage from "./components/SigninPage";
+import RegisterPage from "./components/RegisterPage";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Dashboard />}></Route>
+        <Route path="/" element={<SigninPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/home" element={<Dashboard />}></Route>
         <Route path="/liveorders" element={<LiveOrders />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
         <Route path="/order-detail" element={<OrderDetail />}></Route>

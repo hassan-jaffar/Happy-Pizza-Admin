@@ -48,15 +48,15 @@ function CustomersTable() {
                 {customers && customers.map((customer)=>{
                   return <>
                   <tr>
-                  <th scope="row">{customer.name}</th>
-                  <td>{customer.email}</td>
+                  <th scope="row" className="blueclrname">{customer.name}</th>
+                  <td className="blueclrname">{customer.email}</td>
                   <td>26 Sep 2021 05:50 PM</td>
                   <td>£0.00</td>
                   <td>---</td>
                   <td>
                     <button
                       type="button"
-                      className="btn btn-outline-dark deactivatebtn"
+                      className="btn btn-outline-primary deactivatebtn blueclrname"
                       data-bs-container="body"
                       data-bs-toggle="popover"
                       data-bs-placement="bottom"

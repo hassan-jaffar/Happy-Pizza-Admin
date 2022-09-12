@@ -12,6 +12,19 @@ code {
     monospace;
 }
 
+.blueclrname{
+  color: blue;
+}
+
+.signinimg{
+  width: 100%;
+  height: 810px;
+}
+
+.registerimg{
+  width: 100%;
+  height: 1150px;
+}
 
 .sidebar{
   background-color: white;
@@ -25,7 +38,7 @@ code {
   background-color: white;
   color: black;
   display: block !important;
-  padding: 10px !important;
+  padding: 10px 50px 10px 10px!important;
  }
 
  .boldtext{
@@ -220,5 +233,8 @@ code {
   .mobile-responsive{
     display: block !important;
     justify-content: start;
+  }
+  .signinimg, .registerimg{
+    display: none;
   }
 }

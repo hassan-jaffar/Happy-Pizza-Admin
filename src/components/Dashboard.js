@@ -17,9 +17,9 @@ function Dashboard() {
                 id="menu"
               >
                 <li className="nav-item">
-                  <Link to="/" className="nav-link align-middle sidebartag">
+                  <Link to="/home" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-house"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Dashboard</span>
+                    <span className="ms-1 d-none d-sm-inline">Dashboard</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -28,7 +28,7 @@ function Dashboard() {
                     className="nav-link align-middle sidebartag"
                   >
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">Live Orders</span>
+                    <span className="ms-1 d-none d-sm-inline"> Live Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -139,34 +139,34 @@ function Dashboard() {
                 <h2 className="mt-5 mb-2 mx-3 responsiveness">DASHBOARD</h2>
                 <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
                   <h1>
-                    <i className="fa-solid fa-circle-check me-3"></i>
+                    <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
                   </h1>
-                  <h1>Your Restaurant is Open!</h1>
+                  <h1 className="boldtext">Your Restaurant is Open!</h1>
                   <h1 className="mlauto responsiveness">
-                    <i className="fa-solid fa-pen"></i>
+                    <i className="fa-solid fa-pen peniconclr"></i>
                   </h1>
                 </div>
               </div>
             </div>
             <div className="row justify-content-center responsiveness">
               <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">Sales Volume</h5>
-                <h4 className="boldtext">$0.00</h4>
+                <h5 className="boldtext cardtitleclr">Sales Volume</h5>
+                <h4 className="boldtext cardinfoclr">$0.00</h4>
                 <h6>(days)</h6>
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">Orders</h5>
-                <h4 className="boldtext">0</h4>
+                <h5 className="boldtext cardtitleclr">Orders</h5>
+                <h4 className="boldtext cardinfoclr">0</h4>
                 <h6>Today</h6>
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">No of Items</h5>
-                <h4 className="boldtext">244</h4>
+                <h5 className="boldtext cardtitleclr">No of Items</h5>
+                <h4 className="boldtext cardinfoclr">244</h4>
                 <h6>items</h6>
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext">Customers</h5>
-                <h4 className="boldtext">46</h4>
+                <h5 className="boldtext cardtitleclr">Customers</h5>
+                <h4 className="boldtext cardinfoclr">46</h4>
                 <h6>Customers</h6>
               </div>
             </div>
