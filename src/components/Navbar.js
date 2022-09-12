@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const getstatus = localStorage.getItem('status');
+  function logout() {
+    localStorage.setItem('status','false');
+    localStorage.removeItem('currentuser');
+    window.location.href="/";
+  }
   return (
     <>
       <nav className="navbar-light justify-content-center mainnavbar">
@@ -28,11 +34,7 @@ function Navbar() {
           </div>
 
           <div className="col-md-4 menuitems text-end">
-            <Link to="/login">
-              <button className="btn btn-light">
-                <i className="fa-solid fa-user btnicon"></i>Sign in
-              </button>
-            </Link>
+          {getstatus==="true" ? (<>
             <div className="dropdown">
               <button
                 className="btn btn-light dropdown-toggle"
@@ -44,7 +46,10 @@ function Navbar() {
                 <i className="fa-solid fa-user"></i>
               </button>
               <ul className="dropdown-menu userddmenu" aria-labelledby="dropdownMenuButton1">
-              <li className="dropdown-item"><p className="dropdown-item text-center userdditem boldtext">USER NAME</p></li>
+              <li className="dropdown-item"><p className="dropdown-item text-center userdditem boldtext">{getstatus === "true" ? (<>
+                {JSON.parse(localStorage.getItem('currentuser'))[0].name}
+              </>) : (<>
+                OWNER</>)}</p></li>
               <li><hr class="dropdown-divider"/></li>
                 <li>
                   <Link to="/profile">
@@ -65,11 +70,20 @@ function Navbar() {
                   </Link>
                 </li>
                 <li><hr class="dropdown-divider"/></li>
-                <Link to="/login">
-                    <button className="btn btn-light userdditem dropdown-item">LOG OUT</button>
+                <Link to="/">
+                    <button className="btn btn-light userdditem dropdown-item" onClick={logout}>LOG OUT</button>
                   </Link>
               </ul>
             </div>
+          </>):(<>
+            <Link to="/login">
+              <button className="btn btn-light">
+                <i className="fa-solid fa-user btnicon"></i>Sign in
+              </button>
+            </Link>
+            </>)}
+
+
           </div>
         </div>
       </nav>
