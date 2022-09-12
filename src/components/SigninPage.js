@@ -13,12 +13,13 @@ function SigninPage() {
     e.preventDefault()
     const user = {
       email,
-      password,
+      password
     }
   
       try {
+
         // setloading(true)
-        const result = (await axios.post('http://localhost:5000/api/user/login', user)).data;
+        const result = (await axios.post('http://localhost:5000/api/admin/loginadmin', user)).data;
         console.log(result.data)
 
         localStorage.setItem('currentuser', JSON.stringify(result.data));
