@@ -20,12 +20,17 @@ function LiveOrders() {
         const data = await (
           await axios.get("http://localhost:5000/api/admin/getliveorders")
         ).data;
+
+        const count = await (await axios.get("http://localhost:5000/api/admin/getliveorderscount")).data;
         setInfo(data.data);
-        if(data){
-          sound.play();
+         
+      if(count.data === "true")
+        {
+
+          sound.play()
         }
         
-        console.log(data.data['Orderstatus']);
+      
       } catch (error) {
         console.log(error);
       }
@@ -35,6 +40,8 @@ function LiveOrders() {
       fetchData();
     }, 5000);
   }, []);
+
+  
 
   async function update() {
     try {
@@ -339,6 +346,7 @@ function LiveOrders() {
                           <>
                             {items.Orderstatus === "2" ? (
                               <>
+                              
                                 <div
                                   class="accordion"
                                   id={`accordion${items.cart_Id}`}
