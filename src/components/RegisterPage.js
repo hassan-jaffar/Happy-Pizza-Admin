@@ -26,12 +26,12 @@ function RegisterPage() {
         try {
 
             // setloading(true)
-            const result = await axios.post("http://localhost:5000/api/user/register",user).data;
+            const result = await axios.post("http://localhost:5000/api/admin/registeradmin",user).data;
             console.log(result)
             toast.success("Registration Successfull")
             // setloading(true)
             setInterval(() => {
-              window.location.href = "/login"
+              window.location.href = "/"
             }, 2000);
 
             
