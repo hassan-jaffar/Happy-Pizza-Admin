@@ -4,6 +4,34 @@ import axios from "axios";
 function CustomersTable() {
   const [customers, setCustomers] = useState([])
 
+  async function del(ID) {
+    const info = {
+      ID
+    }
+
+    try {
+      const data = (await axios.post('http://localhost:5000/api/user/deletecustomer', info)).data
+      update()
+      // toast.success("Address successfully deactivated.")
+      // window.location.reload();
+      // console.log(data.data)
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  async function update(){
+      try {
+        const data = await (await axios.get('http://localhost:5000/api/admin/getcustomers')).data
+        setCustomers(data.data)
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
   useEffect(() => {
     async function fetchData() {
 
@@ -54,16 +82,21 @@ function CustomersTable() {
                   <td>£0.00</td>
                   <td>---</td>
                   <td>
+                    <div className="dropdown">
                     <button
                       type="button"
                       className="btn btn-outline-primary deactivatebtn blueclrname"
-                      data-bs-container="body"
-                      data-bs-toggle="popover"
-                      data-bs-placement="bottom"
-                      data-bs-content="Deactivate"
+                      id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                      // data-bs-container="body"
+                      // data-bs-placement="bottom"
+                      // data-bs-content="Deactivate"
                     >
                       <i className="fa-solid fa-ellipsis-vertical"></i>
                     </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li class="dropdown-item" onClick={()=>{del(customer.customer_Id)}}>Delete</li>
+  </ul>
+  </div>
                   </td>
                 </tr>
                   </>
@@ -152,6 +185,6 @@ function CustomersTable() {
       </div>
     </>
   );
-}
+              }
 
 export default CustomersTable;
