@@ -14,6 +14,7 @@ import ItemManagement from "./components/ItemManagement";
 import OrderDetail from "./components/OrderDetail";
 import SigninPage from "./components/SigninPage";
 import RegisterPage from "./components/RegisterPage";
+import Settings from "./components/Settings";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/item-management" element={<ItemManagement />}></Route>
-        {/* <Route path="/setting" element={<Setting/>}></Route> */}
+        <Route path="/setting" element={<Settings/>}></Route>
         <Route path="/coupon" element={<Coupons />}></Route>
         <Route path="/coupon/create" element={<AddCoupon />}></Route>
         <Route path="/bulksms" element={<BulkSMS />}></Route>
