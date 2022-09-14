@@ -31,7 +31,7 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>ORDER INFO</h6>
                 <hr />
-                <p>Invoice ID: {orders.cart_id}</p>
+                <p>Invoice ID: {orders.ID}</p>
                 <p>Delivery method: Delivery</p>
                 <p>Time slot: 7:36 PM - 8:06 PM</p>
                 <p>Payment method: STRIPE</p>
@@ -76,13 +76,13 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>CUSTOMER INFORMATION</h6>
                 <hr />
-                <p>Name: Rhodri Williams</p>
-                <p>Email: rhodriwilliams1985@gmail.com</p>
+                <p>Name: {orders.name}</p>
+                <p>Email: {orders.email}</p>
                 <p>
-                  Address: House No: 92, Charles Hayward drive, WV4 6GB,
-                  Wolverhampton
+                  Address: House No: {orders.house}, {orders.street}, {orders.postcode},
+                  {orders.town}
                 </p>
-                <p>Flat: 92</p>
+                <p>Flat: {orders.flat}</p>
               </div>
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>RESTAURANT INFORMATION</h6>
@@ -107,23 +107,23 @@ function OrderDetailTable() {
                     <tbody>
                       <tr>
                         <td scope="row">SUB-TOTAL</td>
-                        <td>$5.50</td>
+                        <td>${orders.total}</td>
                       </tr>
                       <tr>
                         <td scope="row">DELIVERY</td>
-                        <td>$5.50</td>
+                        <td>${orders.total}</td>
                       </tr>
                       <tr>
                         <td scope="row">NET TOTAL</td>
-                        <td colspan="2">$5.50</td>
+                        <td colspan="2">${orders.total}</td>
                       </tr>
                       <tr>
                         <td scope="row">DISCOUNT</td>
-                        <td colspan="2">$5.50</td>
+                        <td colspan="2">${orders.total}</td>
                       </tr>
                       <tr>
                         <th scope="row">TOTAL</th>
-                        <td colspan="2">$5.50</td>
+                        <td colspan="2">${orders.total}</td>
                       </tr>
                     </tbody>
                   </table>
