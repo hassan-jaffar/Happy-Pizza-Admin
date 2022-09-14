@@ -308,7 +308,7 @@ function MenuTable() {
                                       <>
                                         <div className="col-md-4">
                                           <div className="menucards bs">
-                                          <Link to="/item-management" style={{ textDecoration: 'none' }}>
+                                          <Link to={`/item-management/${items.ID}/${items.category_id}`} style={{ textDecoration: 'none' }}>
                                             <div className="row blackclr">
                                               <div className="col-md-12">
                                                 <h5 className="d-block">

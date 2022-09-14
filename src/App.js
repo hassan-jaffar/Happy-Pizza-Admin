@@ -28,7 +28,7 @@ function App() {
         <Route path="/order-detail" element={<OrderDetail />}></Route>
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
-        <Route path="/item-management" element={<ItemManagement />}></Route>
+        <Route path="/item-management/:itemid/:categoryid" element={<ItemManagement />}></Route>
         <Route path="/setting" element={<Settings/>}></Route>
         <Route path="/coupon" element={<Coupons />}></Route>
         <Route path="/coupon/create" element={<AddCoupon />}></Route>
