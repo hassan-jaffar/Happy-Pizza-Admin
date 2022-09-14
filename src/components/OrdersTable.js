@@ -98,12 +98,12 @@ function OrdersTable() {
                         <tr>
                             <th scope="row">
                               <span class="badge text-bg-info info">
-                                {order.cart_Id}
+                                {order.orderitemid}
                               </span>
                             </th>
 
                             <td>
-                            <Link to="/order-detail" style={{ textDecoration: "none", color: "black" }}>
+                            <Link to={`/order-detail/${order.cart_Id}`} style={{ textDecoration: "none", color: "black" }}>
 
                               {order.house},Flat:{order.flat},{order.street},
                               {order.postcode},{order.town}

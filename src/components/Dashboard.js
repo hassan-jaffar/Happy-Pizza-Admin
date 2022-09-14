@@ -1,10 +1,27 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios"
 import "./Dashboard.css";
 import Navbar from "./Navbar";
 
 function Dashboard() {
   const getstatus = localStorage.getItem('status');
+  const [orders, setOrders] = useState([])
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get("http://localhost:5000/api/admin/getorderlength")
+        ).data;
+        setOrders(data.data);
+        
+      } catch (error) {
+        console.log(error,'err')
+      }
+    }
+    fetchData()
+  }, [])
+  
   return (
     <>
       <Navbar />
@@ -160,7 +177,7 @@ function Dashboard() {
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext cardtitleclr">Orders</h5>
-                <h4 className="boldtext cardinfoclr">0</h4>
+                <h4 className="boldtext cardinfoclr">{orders}</h4>
                 <h6>Today</h6>
               </div>
               <div className="col-md-2 dashboardcards responsiveness">

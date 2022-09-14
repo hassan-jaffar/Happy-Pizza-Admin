@@ -1,7 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link,useParams } from "react-router-dom";
 
 function OrderDetailTable() {
+  const [orders, setOrders] = useState([]);
+  const {id} = useParams()
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(`http://localhost:5000/api/admin/getorderdetails/${id}`)
+        ).data;
+        setOrders(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="row justify-content-center">
@@ -13,7 +31,7 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>ORDER INFO</h6>
                 <hr />
-                <p>Invoice ID: 1051-1662139410-001</p>
+                <p>Invoice ID: {orders.cart_id}</p>
                 <p>Delivery method: Delivery</p>
                 <p>Time slot: 7:36 PM - 8:06 PM</p>
                 <p>Payment method: STRIPE</p>
