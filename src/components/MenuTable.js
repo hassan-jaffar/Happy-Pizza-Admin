@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../components/Menu.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MenuTable() {
   const [category, setcategory] = useState([]);
+  const [categoryname, setname] = useState([]);
   const [item, setItem] = useState([]);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("")
-  const [description, setdescription] = useState("")
+  const [description, setdescription] = useState("")  
   const [price, setPrice] = useState("")
   const [image, setImage] = useState("")
+  const refCloseadd = useRef(null)
+  const refCloseedit = useRef(null)
+  const refCloseimage = useRef(null)
+  const refClosecategory = useRef(null)
 
   async function add() {
     const user = {
@@ -23,10 +30,12 @@ function MenuTable() {
         user
       ).data;
       console.log(result);
+      refClosecategory.current.click();
       update();
       setName("");
     } catch (error) {
       console.log(error);
+      toast.warn("Something went wrong try again!")
     }
   }
 
@@ -53,10 +62,14 @@ function MenuTable() {
         user
       ).data;
       console.log(result);
-      update();
-      setName("");
+      toast.success("Category has been deleted")
+      setInterval(() => {
+        update();
+      }, 2000);
+
     } catch (error) {
       console.log(error);
+      toast.warn("Something went wrong try again!")
     }
   }
 
@@ -72,10 +85,13 @@ function MenuTable() {
         user
       ).data;
       console.log(result);
+      toast.success("Category has been updated")
+      refCloseedit.current.click();
       update();
       setTitle("");
     } catch (error) {
       console.log(error);
+      toast.warn("Something went wrong try again!")
     }
   }
 
@@ -107,12 +123,15 @@ function MenuTable() {
       ).data;
       console.log(result);
       update1();
+      toast.success("Item has been Added")
+      refCloseadd.current.click();
       setName("");
       setTitle("");
       setPrice("");
       setdescription("");
     } catch (error) {
       console.log(error);
+      toast.warn("Something went wrong try again!")
     }
 
   }
@@ -149,6 +168,7 @@ function MenuTable() {
 
   return (
     <>
+      <ToastContainer />
       <div className="row sharebox">
         <h3 className="my-3 mx-5 responsiveness">RESTAURANT MENU MANAGEMENT</h3>
         <div className="col-lg-12 bs br mx-5 my-5 py-5 px-5 responsiveness">
@@ -216,6 +236,7 @@ function MenuTable() {
                       type="button"
                       className="btn btn-secondary"
                       data-bs-dismiss="modal"
+                      ref={refClosecategory}
                     >
                       Close
                     </button>
@@ -448,7 +469,7 @@ function MenuTable() {
                             />
                           </div>
                           <div className="text-center my-3">
-                            <img className="modal-img" src="" value={image} />
+                            <img className="modal-img" src="" alt=".." value={image} />
                           </div>
                         </div>
                         <div className="modal-footer">
@@ -456,6 +477,7 @@ function MenuTable() {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal"
+                            ref={refCloseadd}
                           >
                             Close
                           </button>
@@ -492,8 +514,13 @@ function MenuTable() {
                             aria-label="Close"
                           ></button>
                         </div>
+
+                        
                         <div className="modal-body">
-                          <input type="text" placeholder={categorys.Name} className="form-control" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
+                          {/* Change require here */}
+                          <input type="text"  className="form-control" name={categorys.ID} value={categorys.Name} onChange={(e)=>{setcategory(category.map((val)=>val.ID===categorys.ID?{...val,Name:e.target.value}:val));setTitle(e.target.value)}} />
+                          {/* Change require end here */}
+
                           <div className="form-check form-switch my-3">
                           <div className="row justify-content-between">
                           <label
@@ -601,6 +628,7 @@ function MenuTable() {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal"
+                            ref={refCloseedit}
                           >
                             Close
                           </button>
@@ -654,6 +682,7 @@ function MenuTable() {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal"
+                            ref={refCloseimage}
                           >
                             Close
                           </button>
