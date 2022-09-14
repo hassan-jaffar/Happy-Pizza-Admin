@@ -6,7 +6,8 @@ import Navbar from "./Navbar";
 
 function Dashboard() {
   const getstatus = localStorage.getItem('status');
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState()
+  const [customer, setcustomer] = useState()
   useEffect(() => {
     async function fetchData() {
       try {
@@ -14,6 +15,21 @@ function Dashboard() {
           await axios.get("http://localhost:5000/api/admin/getorderlength")
         ).data;
         setOrders(data.data);
+        
+      } catch (error) {
+        console.log(error,'err')
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get("http://localhost:5000/api/admin/getcustomerlength")
+        ).data;
+        setcustomer(data.data);
         
       } catch (error) {
         console.log(error,'err')
@@ -187,7 +203,7 @@ function Dashboard() {
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext cardtitleclr">Customers</h5>
-                <h4 className="boldtext cardinfoclr">46</h4>
+                <h4 className="boldtext cardinfoclr">{customer}</h4>
                 <h6>Customers</h6>
               </div>
             </div>
