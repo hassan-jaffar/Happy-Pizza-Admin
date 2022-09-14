@@ -98,7 +98,7 @@ function OrdersTable() {
                         <tr>
                             <th scope="row">
                               <span class="badge text-bg-info info">
-                                {order.orderitemid}
+                                {order.ID}
                               </span>
                             </th>
 
@@ -134,7 +134,7 @@ function OrdersTable() {
                                 cod(unpaid)
                               </span>
                             </td>
-                            <td>${order.Price}</td>
+                            <td>${order.total}</td>
                         </tr>
 
                       </>
