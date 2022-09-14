@@ -8,6 +8,7 @@ function Dashboard() {
   const getstatus = localStorage.getItem('status');
   const [orders, setOrders] = useState()
   const [customer, setcustomer] = useState()
+  const [item, setitem] = useState()
   useEffect(() => {
     async function fetchData() {
       try {
@@ -37,6 +38,21 @@ function Dashboard() {
     }
     fetchData()
   }, [])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (await axios.get("http://localhost:5000/api/admin/getitemslength")).data
+        console.log(data.data)
+        setitem(data.data)
+      } catch (error) {
+        console.log(error,"err")
+      }
+      
+    }
+    fetchData()
+  }, [])
+  
   
   return (
     <>
@@ -198,7 +214,7 @@ function Dashboard() {
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext cardtitleclr">No of Items</h5>
-                <h4 className="boldtext cardinfoclr">244</h4>
+                <h4 className="boldtext cardinfoclr">{item}</h4>
                 <h6>items</h6>
               </div>
               <div className="col-md-2 dashboardcards responsiveness">
