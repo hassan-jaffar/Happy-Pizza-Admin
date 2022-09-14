@@ -1,8 +1,61 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link,useParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ItemManagementTable() {
+  const { itemid } = useParams();
+  const { categoryid } = useParams();
+  const [item, setitem] = useState({Title:""})
+  const [title, setTitle] = useState("")
+  const [Description, setDescription] = useState("")
+  const [Price, setPrice] = useState("")
+
+  async function handleUpdate() {
+    const detail ={
+      title,
+      Description,
+      Price
+    }
+
+    try {
+      const result = await axios.post(
+        `http://localhost:5000/api/admin/updateitemmanagement/${itemid}/${categoryid}`,
+        detail
+      ).data;
+      console.log(result);
+      toast.success("Item has been updated")
+      setInterval(() => {
+        window.location.href="/menu"
+      }, 2000);
+
+    } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong try again!")
+    }
+    
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(`http://localhost:5000/api/admin/getitemmanagement/${itemid}/${categoryid}`)
+        ).data;
+        setitem(data.data);
+        console.log(item);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+  
+
   return (
     <>
+        <ToastContainer />
       <div className="row sharebox">
         <h3 className="my-3 mx-5 responsiveness">ITEM MANAGEMENT</h3>
         <div className="col-lg-12 bs br mx-5 my-5 py-5 px-5 responsiveness">
@@ -23,8 +76,11 @@ function ItemManagementTable() {
               <label for="itemname">Item Name</label>
               <input
                 id="itemname"
+                type="text"
                 className="form-control mt-2 mb-5 py-3"
-                placeholder="Item Name..."
+                // placeholder={`${item.Title}`}
+                value={item.Title}
+                onChange={(e) => { setitem(e.target.value); setTitle(e.target.value) }}
               />
               <label for="description">Item Description</label>
               <textarea
@@ -32,12 +88,16 @@ function ItemManagementTable() {
                 className="form-control mt-2 mb-5"
                 placeholder="Item Description..."
                 rows="5"
+                value={item.Description}
+                onChange={(e) => { setitem(e.target.value); setDescription(e.target.value) }}
               />
               <label for="price">Item Price</label>
               <input
                 id="price"
                 className="form-control mt-2 mb-5 py-3"
                 placeholder="Item Price..."
+                value={item.Price}
+                onChange={(e) => { setitem(e.target.value); setPrice(e.target.value) }}
               />
               <label for="vat">
                 VAT Percentage (calculated into item price)
@@ -183,7 +243,7 @@ function ItemManagementTable() {
               </div>
               <div className="text-end mt-5">
                 <hr />
-                <button className="btn btn-primary my-5">Update Item</button>
+                <button className="btn btn-primary my-5" onClick={handleUpdate}>Update Item</button>
               </div>
             </div>
           </div>
