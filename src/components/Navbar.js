@@ -25,7 +25,7 @@ function Navbar() {
           </div>
 
           <div className="col-md-4 menuitems text-center">
-            <Link to="/">
+            <Link to="/home">
               <img
                 className="menuimg"
                 src="https://www.happyspizzaburger.co.uk/uploads/restorants/198031cc-1875-4d54-8945-8135a96f353a_large.jpg"
@@ -76,7 +76,7 @@ function Navbar() {
               </ul>
             </div>
           </>):(<>
-            <Link to="/login">
+            <Link to="/">
               <button className="btn btn-light">
                 <i className="fa-solid fa-user btnicon"></i>Sign in
               </button>
