@@ -148,18 +148,7 @@ function OrderDetailTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {items.length === 1 ? (<>
-                        <tr>
-                        <th scope="row">
-                          <img src={items.Image} className="orderdetailimg" style={{width:"20% !important",height:"auto"}} alt=".."/>
-                          {items.Title}
-                        </th>
-                        <td>{items.Quantity}</td>
-                        <td>${items.Price}</td>
-                        <td>${items.totalp}</td>
-                      </tr>
-                      </>):items.length>1 ? (<>
-                        {items.map((item)=>{
+                      {items && items.map((item)=>{
                         return <>
                       <tr>
                         <th scope="row">
@@ -172,7 +161,6 @@ function OrderDetailTable() {
                       </tr>
                         </>
                       })}
-                      </>):(<></>)}
 
 
                       {/* <tr>
@@ -244,7 +232,7 @@ function OrderDetailTable() {
                                                 );
                                               }}>Assign to deliver</button>
                 </>):(<>
-                  <p>---------------------------------------------</p>
+                  
                 </>)}
                   
                   </>
