@@ -5,8 +5,63 @@ import { Link,useParams } from "react-router-dom";
 function OrderDetailTable() {
   const [orders, setOrders] = useState([]);
   const [items, setItems] = useState([])
+  const [info, setInfo] = useState([])
   const {id} = useParams()
   const {cid} = useParams()
+
+  async function add(id, status) {
+    const user = {
+      cart_Id: id,
+      status: status,
+    };
+    // alert(id)
+
+    console.log(user);
+
+    try {
+      const result = await axios.post(
+        "http://localhost:5000/api/admin/acceptorder",
+        user
+      ).data;
+      console.log(result);
+    //   // update();
+      update();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function reject(id, status) {
+    const user = {
+      cart_Id: id,
+    };
+
+    console.log(user);
+
+    try {
+      const result = await axios.post(
+        "http://localhost:5000/api/admin/rejectorder",
+        user
+      ).data;
+      console.log(result);
+      update();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function update() {
+    try {
+      const data = await (
+        await axios.get("http://localhost:5000/api/admin/getliveorders")
+      ).data;
+      setInfo(data.data);
+      
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +92,26 @@ function OrderDetailTable() {
       } catch (error) {
         console.log(error);
 
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get("http://localhost:5000/api/admin/getliveorders")
+        ).data;
+
+        
+        setInfo(data.data);
+        
+         
+        
+      
+      } catch (error) {
+        console.log(error);
       }
     }
     fetchData();
@@ -134,10 +209,48 @@ function OrderDetailTable() {
             </div>
             <div className="col-md-4 py-4 px-4">
               <div className="orderdetailcards bs br my-5 px-3 py-4">
-                <h6 className="mb-3">ACTIONS</h6>
+              <h6 className="mb-3">ACTIONS</h6>
+                {info.map((item)=>{
+                  return <>
+                {item.Orderstatus === "1" ? (<>
+                  
                 <hr />
-                <button className="btn btn-primary me-2">Prepared</button>
-                <button className="btn btn-primary">Assign to deliver</button>
+                <button className="btn btn-primary me-2" onClick={() => {
+                                                add(
+                                                  item.cart_Id,
+                                                  item.Orderstatus
+                                                );
+                                              }}>Accept</button>
+                <button className="btn btn-primary" onClick={() => {
+                                                reject(
+                                                  item.cart_Id,
+                                                  item.Orderstatus
+                                                );
+                                              }}>Reject</button>
+
+                </>): item.Orderstatus === "2" ? (<>
+                  
+                <hr />
+                <button className="btn btn-primary me-2" onClick={() => {
+                                                add(
+                                                  item.cart_Id,
+                                                  item.Orderstatus
+                                                );
+                                              }}>Prepared</button>
+                <button className="btn btn-primary"  onClick={() => {
+                                                reject(
+                                                  item.cart_Id,
+                                                  item.Orderstatus
+                                                );
+                                              }}>Assign to deliver</button>
+                </>):(<>
+                  <p>---------------------------------------------</p>
+                </>)}
+                  
+                  </>
+                })}
+
+
               </div>
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>FINANCE</h6>
