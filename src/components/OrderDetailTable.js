@@ -76,7 +76,7 @@ function OrderDetailTable() {
                       {items.length === 1 ? (<>
                         <tr>
                         <th scope="row">
-                          <img src={items.Image} className="orderdetailimg" alt=".."/>
+                          <img src={items.Image} className="orderdetailimg" style={{width:"20% !important",height:"auto"}} alt=".."/>
                           {items.Title}
                         </th>
                         <td>{items.Quantity}</td>
@@ -88,7 +88,7 @@ function OrderDetailTable() {
                         return <>
                       <tr>
                         <th scope="row">
-                          <img src={item.Image} className="orderdetailimg" alt=".."/>
+                          <img src={item.Image} className="orderdetailimg" style={{width:"20%",height:"auto"}} alt=".."/>
                           {item.Title}
                         </th>
                         <td>{item.Quantity}</td>
