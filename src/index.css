@@ -12,6 +12,37 @@ code {
     monospace;
 }
 
+.navbaruserbtn{
+  font-size: 24px;
+  border-radius: 50px;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+}
+
+.navbaruserbtn:hover {
+  background-color: black;
+  color: grey;
+  border: 1px solid black;
+}
+
+.navbaruserbtn::after {
+  content: none;
+}
+
+.pinkbg{
+  background-color:crimson;
+  color: white;
+  width: 95%;
+}
+
+.pinkbg:hover{
+  background-color:crimson !important;
+  color: white !important;
+  width: 95%;
+}
+
+
 .blueclrname{
   color: blue;
 }
@@ -103,13 +134,18 @@ code {
 }
 
 .userdditem{
-  font-size: 18px;
-  font-weight: 600;
-  padding: 10px 20px !important;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 5px 10px !important;
+}
+
+.userdditem:hover{
+  width: 95%;
+  background-color:aliceblue;
 }
 
 .userddmenu{
-  width: 300px;
+  width: 180px;
 }
 
 .deactivatebtn{

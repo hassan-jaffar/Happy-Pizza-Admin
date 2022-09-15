@@ -8,6 +8,21 @@
  .mlauto{
   margin-left: auto !important;
  }
+
+ .editpencilbtn{
+  background-color: red !important;
+  border-radius: 50px !important;
+  width: 45px;
+  height: 45px;
+  font-size: 20px !important;
+  color: white !important;
+  border: 1px solid red !important;
+ }
+
+ .editpencilbtn:hover{
+  background-color: darkred !important;
+  border: 1px solid darkred !important;
+ }
   
 
  .checkiconclr{
@@ -23,23 +38,41 @@
   color: green;
 }
 
-.peniconclr{
-  color:red;
+.accordion-button::after {
+  content: none;
 }
+
 
    .dashboardcards{
     box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
     border-radius: 25px;
     margin: 40px 15px;
     padding: 40px 20px;
+    width: 100%;
    }
   
+.cardsrow{
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.cardslink{
+  width: 25% !important;
+}
+
    @media
   (max-width: 992px)
   {
   .dashboardcards{
-    width: 80%;
+    width: 100%;
     margin-left: 0 !important;
     margin-right: 0 !important;
    }
+   .cardsrow{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .cardslink{
+    width: 100% !important;
+  }
   }
