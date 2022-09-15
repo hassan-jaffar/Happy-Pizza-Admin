@@ -25,7 +25,7 @@ function App() {
         <Route path="/home" element={<Dashboard />}></Route>
         <Route path="/liveorders" element={<LiveOrders />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
-        <Route path="/order-detail/:id" element={<OrderDetail />}></Route>
+        <Route path="/order-detail/:id/:cid" element={<OrderDetail />}></Route>
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/item-management/:itemid/:categoryid" element={<ItemManagement />}></Route>

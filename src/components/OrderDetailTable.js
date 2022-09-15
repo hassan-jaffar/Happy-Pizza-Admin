@@ -5,12 +5,13 @@ import { Link,useParams } from "react-router-dom";
 function OrderDetailTable() {
   const [orders, setOrders] = useState([]);
   const {id} = useParams()
+  const {cid} = useParams()
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get(`http://localhost:5000/api/admin/getorderdetails/${id}`)
+          await axios.get(`http://localhost:5000/api/admin/getorderdetails/${id}/${cid}`)
         ).data;
         setOrders(data.data);
       } catch (error) {

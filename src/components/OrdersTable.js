@@ -103,7 +103,7 @@ function OrdersTable() {
                             </th>
 
                             <td>
-                            <Link to={`/order-detail/${order.cart_Id}`} style={{ textDecoration: "none", color: "black" }}>
+                            <Link to={`/order-detail/${order.cart_Id}/${order.customer_Id}`} style={{ textDecoration: "none", color: "black" }}>
 
                               {order.house},Flat:{order.flat},{order.street},
                               {order.postcode},{order.town}
