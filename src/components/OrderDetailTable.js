@@ -4,6 +4,7 @@ import { Link,useParams } from "react-router-dom";
 
 function OrderDetailTable() {
   const [orders, setOrders] = useState([]);
+  const [items, setItems] = useState([])
   const {id} = useParams()
   const {cid} = useParams()
 
@@ -16,6 +17,26 @@ function OrderDetailTable() {
         setOrders(data.data);
       } catch (error) {
         console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+
+      const temp = {
+        customer_Id:cid
+      }
+      try {
+
+        const data = (await axios.post("http://localhost:5000/api/admin/getcartorderdetailitems",temp)).data;
+        console.log(data.data)
+        setItems(data.data)
+
+      } catch (error) {
+        console.log(error);
+
       }
     }
     fetchData();
@@ -52,7 +73,21 @@ function OrderDetailTable() {
                       </tr>
                     </thead>
                     <tbody>
+                      {items.map((item)=>{
+                        return <>
                       <tr>
+                        <th scope="row">
+                          <img src={item.Image} className="orderdetailimg" />
+                          {item.Title}
+                        </th>
+                        <td>{item.Quantity}</td>
+                        <td>${item.Price}</td>
+                        <td>${item.totalp}</td>
+                      </tr>
+                        </>
+                      })}
+
+                      {/* <tr>
                         <th scope="row">
                           <img src="" className="orderdetailimg" />
                           FVZFNCDCSNVKSDCKJDZVKJLJVDVZSC
@@ -60,16 +95,7 @@ function OrderDetailTable() {
                         <td>1</td>
                         <td>$7.80</td>
                         <td>$7.80</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <img src="" className="orderdetailimg" />
-                          FVZFNCDCSNVKSDCKJDZVKJLJVDVZSC
-                        </th>
-                        <td>1</td>
-                        <td>$7.80</td>
-                        <td>$7.80</td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
