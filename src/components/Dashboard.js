@@ -13,7 +13,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getorderlength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength")
         ).data;
         setOrders(data.data);
       } catch (error) {
@@ -27,7 +27,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getcustomerlength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength")
         ).data;
         setcustomer(data.data);
       } catch (error) {
@@ -41,7 +41,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getitemslength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength")
         ).data;
         console.log(data.data);
         setitem(data.data);
@@ -404,21 +404,21 @@ function Dashboard() {
                 <h6>(days)</h6>
               </div>
               </Link>
-              <Link to="/" style={{ textDecoration: 'none'}} className="cardslink">
+              <Link to="/orders" style={{ textDecoration: 'none'}} className="cardslink">
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext cardtitleclr">Orders</h5>
                 <h4 className="boldtext cardinfoclr">{orders}</h4>
                 <h6>Today</h6>
               </div>
               </Link>
-              <Link to="/" style={{ textDecoration: 'none'}} className="cardslink">
+              <Link to="/menu" style={{ textDecoration: 'none'}} className="cardslink">
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext cardtitleclr">No of Items</h5>
                 <h4 className="boldtext cardinfoclr">{item}</h4>
                 <h6>items</h6>
               </div>
               </Link>
-              <Link to="/" style={{ textDecoration: 'none'}} className="cardslink">
+              <Link to="/customers" style={{ textDecoration: 'none'}} className="cardslink">
               <div className="col-md-2 dashboardcards responsiveness">
                 <h5 className="boldtext cardtitleclr">Customers</h5>
                 <h4 className="boldtext cardinfoclr">{customer}</h4>

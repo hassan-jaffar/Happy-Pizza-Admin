@@ -20,7 +20,7 @@ function OrderDetailTable() {
 
     try {
       const result = await axios.post(
-        "http://localhost:5000/api/admin/acceptorder",
+        "https://apinodejs.creativeparkingsolutions.com/api/admin/acceptorder",
         user
       ).data;
       console.log(result);
@@ -40,7 +40,7 @@ function OrderDetailTable() {
 
     try {
       const result = await axios.post(
-        "http://localhost:5000/api/admin/rejectorder",
+        "https://apinodejs.creativeparkingsolutions.com/api/admin/rejectorder",
         user
       ).data;
       console.log(result);
@@ -53,7 +53,7 @@ function OrderDetailTable() {
   async function update() {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/api/admin/getliveorders")
+        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getliveorders")
       ).data;
       setInfo(data.data);
       
@@ -67,7 +67,7 @@ function OrderDetailTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get(`http://localhost:5000/api/admin/getorderdetails/${id}/${cid}`)
+          await axios.get(`https://apinodejs.creativeparkingsolutions.com/api/admin/getorderdetails/${id}/${cid}`)
         ).data;
         setOrders(data.data);
       } catch (error) {
@@ -85,7 +85,7 @@ function OrderDetailTable() {
       }
       try {
 
-        const data = (await axios.post("http://localhost:5000/api/admin/getcartorderdetailitems",temp)).data;
+        const data = (await axios.post("https://apinodejs.creativeparkingsolutions.com/api/admin/getcartorderdetailitems",temp)).data;
         console.log(data.data)
         setItems(data.data)
 
@@ -101,7 +101,7 @@ function OrderDetailTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getliveorders")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getliveorders")
         ).data;
 
         
