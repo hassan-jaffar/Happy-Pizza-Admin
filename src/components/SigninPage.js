@@ -116,10 +116,6 @@ function SigninPage() {
                 </button>
               </div>
             </form>
-
-            <p className="my-5">
-              Do you have an account yet? <Link to="/register">Register</Link>
-            </p>
           </div>
           <div className="col-md-8 responsiveness">
             <img

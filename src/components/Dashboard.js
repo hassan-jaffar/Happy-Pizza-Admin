@@ -52,6 +52,8 @@ function Dashboard() {
     fetchData();
   }, []);
 
+
+
   return (
     <>
       <Navbar />
@@ -194,6 +196,7 @@ function Dashboard() {
             <div className="row gx-0 responsiveness">
               <div className="col-md-12">
                 <h2 className="mt-5 mb-2 mx-3 responsiveness">DASHBOARD</h2>
+                
                 <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
                   <h6>
                     <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
@@ -427,6 +430,7 @@ function Dashboard() {
               </Link>
             </div>
           </div>
+
         </div>
       </div>
     </>
