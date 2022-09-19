@@ -48,12 +48,12 @@ function OrdersTable() {
                 data-bs-parent="#accordionExample"
               >
                 <div className="accordion-body text-start my-3">
-                  <label for="daterange" className="me-1 boldtext">
+                  <label for="daterange" className="me-1 my-1 boldtext">
                     Date Range
                   </label>
                   <input
                     id="daterange"
-                    className="me-1 py-1"
+                    className="me-1 my-1 py-1"
                     placeholder="Start Date"
                   />
                   <input
@@ -61,7 +61,7 @@ function OrdersTable() {
                     className="me-1 py-1"
                     placeholder="End Date"
                   />
-                  <label for="customerfilter" className="boldtext ms-2">
+                  <label for="customerfilter" className="boldtext ms-2 my-1">
                     Filter by Customer:
                   </label>
                   <input
@@ -69,8 +69,8 @@ function OrdersTable() {
                     className="mx-1 py-1"
                     placeholder="Select an option"
                   />
-                  <button className="btn btn-primary mx-1">Export</button>
-                  <button className="btn btn-primary mx-1">Search</button>
+                  <button className="btn btn-primary my-1 mx-1">Export</button>
+                  <button className="btn btn-primary my-1 mx-1">Search</button>
                 </div>
               </div>
             </div>
