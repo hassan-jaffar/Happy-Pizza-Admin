@@ -1,6 +1,11 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 
 function LoyaltyScheme() {
+  const [status, setStatus] = useState(false)
+  const [redeem, setredeem ] = useState("")
+  const [points, setpoints] = useState("")
+  const [currency_points, setCurrency_points] = useState("")
   return (
     <>
       <h6 className="px-1">LOYALTY SCHEME</h6>
