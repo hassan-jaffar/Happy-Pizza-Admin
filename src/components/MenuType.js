@@ -1,6 +1,37 @@
-import React from "react";
+import React,{useState} from "react";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MenuType() {
+  const [lowercase, setlowercase] = useState(false)
+  const [uppercase, setuppercase] = useState(false)
+  const [capitalized, setcapitalized] = useState(false)
+
+  async function register(){
+    const details = {
+      lowercase,
+      uppercase,
+      capitalized
+    }
+    try {
+      
+      const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
+      console.log(result)
+      toast.success("Data has been saved")
+
+      setlowercase(false)
+      setuppercase(false)
+      setcapitalized(true)
+
+
+
+  } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong!")
+
+  }
+  }
   return (
     <>
       <h6 className="px-1">MENU TYPE</h6>
@@ -13,6 +44,8 @@ function MenuType() {
             type="radio"
             name="flexRadioDefault0"
             id="flexRadioDefault1"
+            checked={uppercase}
+            onChange={(e)=>{setuppercase(e.target.checked)}}
           />
           <label className="form-check-label" for="flexRadioDefault1">
             Uppercase
@@ -24,6 +57,8 @@ function MenuType() {
             type="radio"
             name="flexRadioDefault0"
             id="flexRadioDefault3"
+            checked={lowercase}
+            onChange={(e)=>{setlowercase(e.target.checked)}}
           />
           <label className="form-check-label" for="flexRadioDefault3">
             Lowercase
@@ -35,7 +70,10 @@ function MenuType() {
             type="radio"
             name="flexRadioDefault0"
             id="flexRadioDefault2"
-            checked
+            checked={capitalized}
+            onChange={(e)=>{setcapitalized(e.target.checked)
+            
+            }}
           />
           <label className="form-check-label" for="flexRadioDefault2">
             Capitalized
@@ -43,7 +81,7 @@ function MenuType() {
         </div>
       </div>
       <div className="container mt-5 text-center">
-        <button className="btn btn-info py-2 w-25">Save</button>
+        <button className="btn btn-info py-2 w-25" onClick={register} >Save</button>
       </div>
     </>
   );
