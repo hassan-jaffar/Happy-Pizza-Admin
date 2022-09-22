@@ -85,7 +85,7 @@ code {
  }
 
  .menu{
-  /* margin: 10px 0; */
+  margin: 0px;
   position: sticky;
   z-index: 1000;
 }
