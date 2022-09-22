@@ -55,57 +55,58 @@ function ItemManagement() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingTwo">
+                  <div className="accordion" id="accordionExample">
+                    <div className="accordion-item" style={{border: 'none'}}>
+                      <h2 className="accordion-header" id="headingTwo">
                         <button
-                          class="accordion-button collapsed boldtext align-middle sidebartag"
+                          className="accordion-button collapsed boldtext align-middle "
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseTwo"
                           aria-expanded="false"
                           aria-controls="collapseTwo"
+                          style={{padding: '1rem'}}
                         >
                           <i className="fa-solid fa-arrows-to-dot"></i>
-                          <span className="ms-1 d-none d-sm-inline">
+                          <span className="ms-1">
                             Marketing
                           </span>
                         </button>
                       </h2>
                       <div
                         id="collapseTwo"
-                        class="accordion-collapse collapse"
+                        className="accordion-collapse collapse"
                         aria-labelledby="headingTwo"
                         data-bs-parent="#accordionExample"
                       >
-                        <div class="accordion-body">
-                            <li>
-                              <Link
-                                className="dropdown-item nav-link align-middle boldtext sidebartag"
-                                to="/coupon"
-                              >
-                                <i className="fa-solid fa-tag btnicon"></i>
-                                Discounts
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                className="dropdown-item nav-link align-middle boldtext sidebartag"
-                                to="/bulksms"
-                              >
-                                <i className="fa-solid fa-message btnicon"></i>
-                                Bulk SMS
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                className="dropdown-item nav-link align-middle boldtext sidebartag"
-                                to="/share"
-                              >
-                                <i className="fa-solid fa-share btnicon"></i>
-                                Share
-                              </Link>
-                            </li>
+                        <div className="accordion-body">
+                          <li>
+                            <Link
+                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                              to="/coupon"
+                            >
+                              <i className="fa-solid fa-tag btnicon"></i>
+                              Discounts
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                              to="/bulksms"
+                            >
+                              <i className="fa-solid fa-message btnicon"></i>
+                              Bulk SMS
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                              to="/share"
+                            >
+                              <i className="fa-solid fa-share btnicon"></i>
+                              Share
+                            </Link>
+                          </li>
                         </div>
                       </div>
                     </div>

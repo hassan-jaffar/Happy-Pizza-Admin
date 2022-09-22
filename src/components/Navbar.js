@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css"
 
 function Navbar() {
   const getstatus = localStorage.getItem("status");
@@ -14,17 +15,159 @@ function Navbar() {
         <div className="row menu responsiveness">
           <div className="col-md-4 menuitems text-start">
             <button
-              className="btn"
+              className="btn sidemenu"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"
               aria-controls="offcanvasExample"
-              // onClick={()=>document.getElementsByClassName("dashboardbody").style.marginLeft = "70px"}
             >
               <h2>
                 <i className="fa-solid fa-bars"></i>
               </h2>
             </button>
+          </div>
+
+          <div
+            className="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+          >
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+                MENU
+              </h5>
+              <button
+                type="button"
+                className="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="offcanvas-body">
+            <div className="row">
+              <div className="col-md-12">
+                <li className="nav-item">
+                  <Link to="/home" className="nav-link align-middle sidemenuitems">
+                    <i className="fa-solid fa-house"></i>
+                    <span className="ms-5">Dashboard</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/liveorders"
+                    className="nav-link align-middle sidemenuitems "
+                  >
+                    <i className="fa-solid fa-bag-shopping"></i>
+                    <span className="ms-5 ">
+                      {" "}
+                      Live Orders
+                    </span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/orders"
+                    className="nav-link align-middle sidemenuitems "
+                  >
+                    <i className="fa-solid fa-chart-line"></i>
+                    <span className="ms-5 "> Orders</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/customers"
+                    className="nav-link align-middle sidemenuitems "
+                  >
+                    <i className="fa-solid fa-user"></i>
+                    <span className="ms-5 "> Customers</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/menu" className="nav-link align-middle sidemenuitems ">
+                    <i className="fa-solid fa-book"></i>
+                    <span className="ms-5 "> Menu</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/setting"
+                    className="nav-link align-middle sidemenuitems "
+                  >
+                    <i className="fa-solid fa-gear"></i>
+                    <span className="ms-5"> Setting</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <div className="accordion" id="accordionExample">
+                    <div className="accordion-item" style={{border: 'none'}}>
+                      <h2 className="accordion-header" id="headingTwo">
+                        <button
+                          className="accordion-button collapsed boldtext align-middle "
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
+                          style={{padding: '1rem'}}
+                        >
+                          <i className="fa-solid fa-arrows-to-dot"></i>
+                          <span className="ms-5" style={{fontWeight: 'normal'}}>
+                            Marketing
+                          </span>
+                        </button>
+                      </h2>
+                      <div
+                        id="collapseTwo"
+                        className="accordion-collapse collapse"
+                        aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample"
+                      >
+                        <div className="accordion-body">
+                          <li>
+                            <Link
+                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                              to="/coupon"
+                            >
+                              <i className="fa-solid fa-tag btnicon"></i>
+                              Discounts
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                              to="/bulksms"
+                            >
+                              <i className="fa-solid fa-message btnicon"></i>
+                              Bulk SMS
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                              to="/share"
+                            >
+                              <i className="fa-solid fa-share btnicon"></i>
+                              Share
+                            </Link>
+                          </li>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/change-password"
+                    className="nav-link align-middle sidemenuitems "
+                  >
+                    <i className="fa-solid fa-lock-open"></i>
+                    <span className="ms-5 ">Password</span>
+                  </Link>
+                </li>
+              </div>
+            </div>
+            </div>
           </div>
 
           <div className="col-md-4 menuitems text-center">
