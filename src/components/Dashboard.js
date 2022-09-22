@@ -13,7 +13,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getorderlength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength")
         ).data;
         setOrders(data.data);
       } catch (error) {
@@ -27,7 +27,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getcustomerlength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength")
         ).data;
         setcustomer(data.data);
       } catch (error) {
@@ -41,7 +41,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getitemslength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength")
         ).data;
         console.log(data.data);
         setitem(data.data);

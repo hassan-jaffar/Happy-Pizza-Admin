@@ -26,7 +26,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " http://localhost:5000/api/admin/createmenu",
+        " https://apinodejs.creativeparkingsolutions.com/api/admin/createmenu",
         user
       ).data;
       console.log(result);
@@ -42,7 +42,7 @@ function MenuTable() {
   async function update() {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/api/admin/getallmenu")
+        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallmenu")
       ).data;
       setcategory(data.data);
       console.log(category);
@@ -58,7 +58,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " http://localhost:5000/api/admin/deletemenu",
+        " https://apinodejs.creativeparkingsolutions.com/api/admin/deletemenu",
         user
       ).data;
       console.log(result);
@@ -81,7 +81,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " http://localhost:5000/api/admin/updatemenu ",
+        " https://apinodejs.creativeparkingsolutions.com/api/admin/updatemenu ",
         user
       ).data;
       console.log(result);
@@ -98,7 +98,7 @@ function MenuTable() {
   async function update1() {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/api/admin/getallitems")
+        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallitems")
       ).data;
       setItem(data.data);
       console.log(item);
@@ -118,7 +118,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " http://localhost:5000/api/admin/createitem ",
+        " https://apinodejs.creativeparkingsolutions.com/api/admin/createitem ",
         user
       ).data;
       console.log(result);
@@ -140,7 +140,7 @@ function MenuTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getallmenu")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallmenu")
         ).data;
         setcategory(data.data);
         console.log(category);
@@ -155,7 +155,7 @@ function MenuTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getallitems")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallitems")
         ).data;
         setItem(data.data);
         console.log(item);

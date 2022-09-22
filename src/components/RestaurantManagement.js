@@ -34,7 +34,7 @@ function RestaurantManagement() {
 
     try {
 
-      const result = await axios.post("http://localhost:5000/api/setting/resturantmanagement",details).data;
+      const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/resturantmanagement",details).data;
       console.log(result)
       toast.success("Registration Successfull")
       // setInterval(() => {
