@@ -1,6 +1,56 @@
-import React from "react";
+import React,{useState} from "react";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SettingsApp() {
+  const [title, settitle] = useState("")
+  const [description, setdescription] = useState("")
+  const [api_key, setapi_key] = useState("")
+  const [main_printer, setmain_printer] = useState("")
+  const [standard_printer, setstandard_printer] = useState("")
+  const [kitchen_printer, setkitchen_printer] = useState("")
+  const [standard_print, setstandard_print] = useState("On order received")
+  const [main_print, setmain_print] = useState("We accept the order")
+  const [kitchen_print, setkitchen_print] = useState("We accept the order")
+
+  async function register() {
+    const details = {
+      title,
+      description,
+      api_key,
+      main_printer,
+      standard_printer,
+      kitchen_printer,
+      standard_print,
+      main_print,
+      kitchen_print
+    }
+
+    try {
+
+      const result = await axios.post("http://localhost:5000/api/setting/apps",details).data;
+      console.log(result)
+      toast.success("Data has been saved")
+
+      settitle("");
+      setdescription("");
+      setapi_key("");
+      setmain_printer("");
+      setstandard_printer("");
+      setkitchen_printer("");
+      setstandard_print("On order received");
+      setmain_print("We accept the order");
+      setkitchen_print("We accept the order")
+
+
+
+  } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong!")
+
+  }
+  }
   return (
     <>
       <h6 className="px-1">APPS</h6>
@@ -18,6 +68,8 @@ function SettingsApp() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Impressum"
+            value={title}
+            onChange={(e)=>{settitle(e.target.value)}}
           />
           <label for="impressum" className="mt-3">
             Impressum:
@@ -27,6 +79,8 @@ function SettingsApp() {
             className="form-control my-2 py-2"
             type="text"
             rows="5"
+            value={description}
+            onChange={(e)=>{setdescription(e.target.value)}}
           />
           <h1 className="boldtext mt-5">Print Node</h1>
           <hr />
@@ -38,6 +92,8 @@ function SettingsApp() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Enter printnode.com api key"
+            value={api_key}
+            onChange={(e)=>{setapi_key(e.target.value)}}
           />
           <label for="titleimpress" className="mt-3">
             Main Thermal Printer ID:
@@ -47,6 +103,8 @@ function SettingsApp() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Enter printnode printer  ID"
+            value={main_printer}
+            onChange={(e)=>{setmain_printer(e.target.value)}}
           />
           <label for="titleimpress" className="mt-3">
             Kitchen Thermal Printer ID:
@@ -56,6 +114,8 @@ function SettingsApp() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Enter printnode printer ID"
+            value={kitchen_printer}
+            onChange={(e)=>{setkitchen_printer(e.target.value)}}
           />
           <label for="titleimpress" className="mt-3">
             Standard Printer ID:
@@ -65,36 +125,38 @@ function SettingsApp() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Enter printnode printer ID for A4 Invoice printing"
+            value={standard_printer}
+            onChange={(e)=>{setstandard_printer(e.target.value)}}
           />
           <label for="titleimpress" className="mt-3">
             Print A4 Standard order when:
           </label>
-          <select className="form-select" aria-label="Default select example">
-            <option value="1">We accept the order</option>
-            <option value="2" selected>
+          <select className="form-select" aria-label="Default select example" value={standard_print} onChange={(e)=>{setstandard_print(e.target.value)}}>
+            <option value="We accept the order">We accept the order</option>
+            <option value="On order received" selected>
               On order received
             </option>
           </select>
           <label for="titleimpress" className="mt-3">
             Print on main thermal printer when:
           </label>
-          <select className="form-select" aria-label="Default select example">
-            <option value="1" selected>
+          <select className="form-select" aria-label="Default select example" value={main_print} onChange={(e)=>{setmain_print(e.target.value)}}>
+            <option value="We accept the order" selected>
               We accept the order
             </option>
-            <option value="2">On order received</option>
+            <option value="On order received">On order received</option>
           </select>
           <label for="titleimpress" className="mt-3">
             Print on kitchen thermal printer when:
           </label>
-          <select className="form-select" aria-label="Default select example">
-            <option value="1" selected>
+          <select className="form-select" aria-label="Default select example" value={kitchen_print} onChange={(e)=>{setkitchen_print(e.target.value)}}>
+            <option value="We accept the order" selected>
               We accept the order
             </option>
-            <option value="2">On order received</option>
+            <option value="On order received">On order received</option>
           </select>
           <div className="container mt-5 text-center">
-            <button className="btn btn-info py-2 w-25">Save</button>
+            <button className="btn btn-info py-2 w-25" onClick={register} >Save</button>
           </div>
         </div>
       </div>
