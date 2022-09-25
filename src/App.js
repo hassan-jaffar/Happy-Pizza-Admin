@@ -15,6 +15,7 @@ import OrderDetail from "./components/OrderDetail";
 import SigninPage from "./components/SigninPage";
 import RegisterPage from "./components/RegisterPage";
 import Settings from "./components/Settings";
+import Resturants from "./components/Resturants";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SigninPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/resturant" element={<Resturants />}></Route>
         <Route path="/home" element={<Dashboard />}></Route>
         <Route path="/liveorders" element={<LiveOrders />}></Route>
         <Route path="/orders" element={<Orders />}></Route>

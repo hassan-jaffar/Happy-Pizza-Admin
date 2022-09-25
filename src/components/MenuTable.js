@@ -115,24 +115,25 @@ function MenuTable() {
       price,
       image
     };
+    alert(image)
 
-    try {
-      const result = await axios.post(
-        " http://localhost:5000/api/admin/createitem ",
-        user
-      ).data;
-      console.log(result);
-      update1();
-      toast.success("Item has been Added")
-      refCloseadd.current.click();
-      setName("");
-      setTitle("");
-      setPrice("");
-      setdescription("");
-    } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong try again!")
-    }
+    // try {
+    //   const result = await axios.post(
+    //     " http://localhost:5000/api/admin/createitem ",
+    //     user
+    //   ).data;
+    //   console.log(result);
+    //   update1();
+    //   toast.success("Item has been Added")
+    //   refCloseadd.current.click();
+    //   setName("");
+    //   setTitle("");
+    //   setPrice("");
+    //   setdescription("");
+    // } catch (error) {
+    //   console.log(error);
+    //   toast.warn("Something went wrong try again!")
+    // }
 
   }
 
@@ -466,10 +467,13 @@ function MenuTable() {
                               type="file"
                               class="form-control"
                               id="inputGroupFile02"
+                              name="image"
+                              value={image}
+                              onClick={(e)=>{setImage(e.target.files[0])}}
                             />
                           </div>
                           <div className="text-center my-3">
-                            <img className="modal-img" src="" alt=".." value={image} />
+                            <img className="modal-img" src="" alt=".." />
                           </div>
                         </div>
                         <div className="modal-footer">

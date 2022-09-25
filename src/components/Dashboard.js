@@ -115,6 +115,12 @@ function Dashboard() {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/resturant" className="nav-link align-middle sidebartag">
+                    {/* <i className="fa-solid fa-book"></i> */}
+                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link
                     to="/setting"
                     className="nav-link align-middle sidebartag"
