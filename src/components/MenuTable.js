@@ -1,23 +1,23 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../components/Menu.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MenuTable() {
   const [category, setcategory] = useState([]);
   const [categoryname, setname] = useState([]);
   const [item, setItem] = useState([]);
   const [name, setName] = useState("");
-  const [title, setTitle] = useState("")
-  const [description, setdescription] = useState("")  
-  const [price, setPrice] = useState("")
-  const [image, setImage] = useState("")
-  const refCloseadd = useRef(null)
-  const refCloseedit = useRef(null)
-  const refCloseimage = useRef(null)
-  const refClosecategory = useRef(null)
+  const [title, setTitle] = useState("");
+  const [description, setdescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const refCloseadd = useRef(null);
+  const refCloseedit = useRef(null);
+  const refCloseimage = useRef(null);
+  const refClosecategory = useRef(null);
 
   async function add() {
     const user = {
@@ -35,7 +35,7 @@ function MenuTable() {
       setName("");
     } catch (error) {
       console.log(error);
-      toast.warn("Something went wrong try again!")
+      toast.warn("Something went wrong try again!");
     }
   }
 
@@ -62,21 +62,20 @@ function MenuTable() {
         user
       ).data;
       console.log(result);
-      toast.success("Category has been deleted")
+      toast.success("Category has been deleted");
       setInterval(() => {
         update();
       }, 2000);
-
     } catch (error) {
       console.log(error);
-      toast.warn("Something went wrong try again!")
+      toast.warn("Something went wrong try again!");
     }
   }
 
   async function edit(ID) {
     const user = {
       ID,
-      title
+      title,
     };
 
     try {
@@ -85,13 +84,13 @@ function MenuTable() {
         user
       ).data;
       console.log(result);
-      toast.success("Category has been updated")
+      toast.success("Category has been updated");
       refCloseedit.current.click();
       update();
       setTitle("");
     } catch (error) {
       console.log(error);
-      toast.warn("Something went wrong try again!")
+      toast.warn("Something went wrong try again!");
     }
   }
 
@@ -113,28 +112,27 @@ function MenuTable() {
       title,
       description,
       price,
-      image
+      image,
     };
     alert(image)
 
-    // try {
-    //   const result = await axios.post(
-    //     " http://localhost:5000/api/admin/createitem ",
-    //     user
-    //   ).data;
-    //   console.log(result);
-    //   update1();
-    //   toast.success("Item has been Added")
-    //   refCloseadd.current.click();
-    //   setName("");
-    //   setTitle("");
-    //   setPrice("");
-    //   setdescription("");
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.warn("Something went wrong try again!")
-    // }
-
+    try {
+      const result = await axios.post(
+        " http://localhost:5000/api/admin/createitem ",
+        user
+      ).data;
+      console.log(result);
+      update1();
+      toast.success("Item has been Added");
+      refCloseadd.current.click();
+      setName("");
+      setTitle("");
+      setPrice("");
+      setdescription("");
+    } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong try again!");
+    }
   }
 
   useEffect(() => {
@@ -217,19 +215,19 @@ function MenuTable() {
                       required
                     />
                     <div className="form-check form-switch">
-                    <div className="row justify-content-between">
-                          <label
-                              className="form-check-label"
-                              for="flexSwitchCheckDefault"
-                            >
-                              Discountable
-                            </label>
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="flexSwitchCheckDefault"
-                            />
-                          </div>
+                      <div className="row justify-content-between">
+                        <label
+                          className="form-check-label"
+                          for="flexSwitchCheckDefault"
+                        >
+                          Discountable
+                        </label>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id="flexSwitchCheckDefault"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="modal-footer">
@@ -267,51 +265,57 @@ function MenuTable() {
                         className="accordion-header"
                         id={`heading${categorys.ID}`}
                       >
-                        <button
-                          className="accordion-button collapsed boldtext"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={`#collapse${categorys.ID}`}
-                          aria-expanded="false"
-                          aria-controls={`collapse${categorys.ID}`}
-                        >
-                          {categorys.Name}
-                          <div className="mlauto">
+                        <div className="row">
+                          <div className="col-md-12">
                             <button
+                              className="accordion-button collapsed boldtext"
                               type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target={`#additemModal${categorys.ID}`}
-                              className="btn btn-info menu-buttons"
+                              data-bs-toggle="collapse"
+                              data-bs-target={`#collapse${categorys.ID}`}
+                              aria-expanded="false"
+                              aria-controls={`collapse${categorys.ID}`}
                             >
-                              <i className="fa-solid fa-plus"></i>
-                            </button>
-                            <button
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target={`#edititemModal${categorys.ID}`}
-                              className="btn btn-warning menu-buttons"
-                              // onClick={() => {
-                              //   edit(categorys.ID);
-                              // }}
-                            >
-                              <i className="fa-solid fa-pencil"></i>
-                            </button>
-                            <button
-                              className="btn btn-danger menu-buttons"
-                              onClick={() => {
-                                del(categorys.ID);
-                              }}
-                            >
-                              <i className="fa-solid fa-trash"></i>
-                            </button>
-                            <button className="btn btn-info menu-buttons">
-                              <i className="fa-solid fa-arrow-down"></i>
-                            </button>
-                            <button className="btn btn-info menu-buttons">
-                              <i className="fa-solid fa-arrow-up"></i>
+                              <div className="menuresponsive"> {categorys.Name}</div>
+                              <div className="row mlauto menuresponsive">
+                                <div className="col-md-12">
+                                <button
+                                  type="button"
+                                  data-bs-toggle="modal"
+                                  data-bs-target={`#additemModal${categorys.ID}`}
+                                  className="btn btn-info menu-buttons"
+                                >
+                                  <i className="fa-solid fa-plus"></i>
+                                </button>
+                                <button
+                                  type="button"
+                                  data-bs-toggle="modal"
+                                  data-bs-target={`#edititemModal${categorys.ID}`}
+                                  className="btn btn-warning menu-buttons"
+                                  // onClick={() => {
+                                  //   edit(categorys.ID);
+                                  // }}
+                                >
+                                  <i className="fa-solid fa-pencil"></i>
+                                </button>
+                                <button
+                                  className="btn btn-danger menu-buttons"
+                                  onClick={() => {
+                                    del(categorys.ID);
+                                  }}
+                                >
+                                  <i className="fa-solid fa-trash"></i>
+                                </button>
+                                <button className="btn btn-info menu-buttons">
+                                  <i className="fa-solid fa-arrow-down"></i>
+                                </button>
+                                <button className="btn btn-info menu-buttons">
+                                  <i className="fa-solid fa-arrow-up"></i>
+                                </button>
+                                </div>
+                              </div>
                             </button>
                           </div>
-                        </button>
+                        </div>
                       </h2>
 
                       <div
@@ -330,20 +334,23 @@ function MenuTable() {
                                       <>
                                         <div className="col-md-4">
                                           <div className="menucards bs">
-                                          <Link to={`/item-management/${items.ID}/${items.category_id}`} style={{ textDecoration: 'none' }}>
-                                            <div className="row blackclr">
-                                              <div className="col-md-12">
-                                                <h5 className="d-block">
-                                                  {items.Title}
-                                                </h5>
-                                                <p className="mb-5 d-block">
-                                                  {items.Title}
-                                                </p>
+                                            <Link
+                                              to={`/item-management/${items.ID}/${items.category_id}`}
+                                              style={{ textDecoration: "none" }}
+                                            >
+                                              <div className="row blackclr">
+                                                <div className="col-md-12">
+                                                  <h5 className="d-block">
+                                                    {items.Title}
+                                                  </h5>
+                                                  <p className="mb-5 d-block">
+                                                    {items.Title}
+                                                  </p>
+                                                </div>
                                               </div>
-                                            </div>
                                             </Link>
                                             <div className="row">
-                                              <div className="col-md-6">
+                                              <div className="col-6">
                                                 <p>
                                                   {items.Price !==
                                                   "undefined" ? (
@@ -357,7 +364,7 @@ function MenuTable() {
                                                   )}
                                                 </p>
                                               </div>
-                                              <div className="col-md-6 text-end">
+                                              <div className="col-6 text-end">
                                                 <button
                                                   className="btn btn-light"
                                                   type="button"
@@ -432,35 +439,41 @@ function MenuTable() {
                             className="form-control mb-3"
                             placeholder="Item Name..."
                             value={title}
-                            onChange={(e)=>{setTitle(e.target.value)}}
+                            onChange={(e) => {
+                              setTitle(e.target.value);
+                            }}
                           />
                           <textarea
                             className="form-control my-3"
                             placeholder="Item Description..."
                             rows="3"
                             value={description}
-                            onChange={(e)=>{setdescription(e.target.value)}}
+                            onChange={(e) => {
+                              setdescription(e.target.value);
+                            }}
                           />
                           <input
                             className="form-control my-3"
                             placeholder="Item Price..."
                             value={price}
-                            onChange={(e)=>{setPrice(e.target.value)}}
+                            onChange={(e) => {
+                              setPrice(e.target.value);
+                            }}
                           />
                           <div className="form-check form-switch my-3">
-                          <div className="row justify-content-between">
-                          <label
-                              className="form-check-label"
-                              for="flexSwitchCheckDefault"
-                            >
-                              Discountable
-                            </label>
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="flexSwitchCheckDefault"
-                            />
-                          </div>
+                            <div className="row justify-content-between">
+                              <label
+                                className="form-check-label"
+                                for="flexSwitchCheckDefault"
+                              >
+                                Discountable
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="flexSwitchCheckDefault"
+                              />
+                            </div>
                           </div>
                           <div class="input-group my-3">
                             <input
@@ -473,7 +486,12 @@ function MenuTable() {
                             />
                           </div>
                           <div className="text-center my-3">
-                            <img className="modal-img" src="" alt=".." />
+                            <img
+                              className="modal-img"
+                              src=""
+                              alt=".."
+                              value={image}
+                            />
                           </div>
                         </div>
                         <div className="modal-footer">
@@ -485,7 +503,13 @@ function MenuTable() {
                           >
                             Close
                           </button>
-                          <button type="button" className="btn btn-primary" onClick={()=>{addItem(categorys.ID)}}>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={() => {
+                              addItem(categorys.ID);
+                            }}
+                          >
                             Save
                           </button>
                         </div>
@@ -519,112 +543,134 @@ function MenuTable() {
                           ></button>
                         </div>
 
-                        
                         <div className="modal-body">
                           {/* Change require here */}
-                          <input type="text"  className="form-control" name={categorys.ID} value={categorys.Name} onChange={(e)=>{setcategory(category.map((val)=>val.ID===categorys.ID?{...val,Name:e.target.value}:val));setTitle(e.target.value)}} />
+                          <input
+                            type="text"
+                            className="form-control"
+                            name={categorys.ID}
+                            value={categorys.Name}
+                            onChange={(e) => {
+                              setcategory(
+                                category.map((val) =>
+                                  val.ID === categorys.ID
+                                    ? { ...val, Name: e.target.value }
+                                    : val
+                                )
+                              );
+                              setTitle(e.target.value);
+                            }}
+                          />
                           {/* Change require end here */}
 
                           <div className="form-check form-switch my-3">
-                          <div className="row justify-content-between">
-                          <label
-                              className="form-check-label"
-                              for="flexSwitchCheckDefault"
-                            >
-                              Discountable
-                            </label>
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="flexSwitchCheckDefault"
-                            />
-                          </div>
+                            <div className="row justify-content-between">
+                              <label
+                                className="form-check-label"
+                                for="flexSwitchCheckDefault"
+                              >
+                                Discountable
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="flexSwitchCheckDefault"
+                              />
+                            </div>
                           </div>
                           <h4 className="mt-3 mb-2 boldtext">Available Days</h4>
                           <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="sunday">
-                              Sunday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="sunday"
-                            />
-                          </div>
-                          </div>
-                          <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="monday">
-                              Monday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="monday"
-                            />
-                          </div>
+                            <div className="row justify-content-between">
+                              <label className="form-check-label" for="sunday">
+                                Sunday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="sunday"
+                              />
+                            </div>
                           </div>
                           <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="tuesday">
-                              Tuesday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="tuesday"
-                            />
-                          </div>
-                          </div>
-                          <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="wednesday">
-                              Wednesday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="wednesday"
-                            />
-                          </div>
+                            <div className="row justify-content-between">
+                              <label className="form-check-label" for="monday">
+                                Monday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="monday"
+                              />
+                            </div>
                           </div>
                           <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="thursday">
-                              Thursday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="thursday"
-                            />
-                          </div>
-
-                          </div>
-                          <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="friday">
-                              Friday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="friday"
-                            />
-                          </div>
+                            <div className="row justify-content-between">
+                              <label className="form-check-label" for="tuesday">
+                                Tuesday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="tuesday"
+                              />
+                            </div>
                           </div>
                           <div className="form-check form-switch my-2">
-                          <div className="row justify-content-between">
-                          <label className="form-check-label" for="saturday">
-                              Saturday
-                            </label>
-                          <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="saturday"
-                            />
+                            <div className="row justify-content-between">
+                              <label
+                                className="form-check-label"
+                                for="wednesday"
+                              >
+                                Wednesday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="wednesday"
+                              />
+                            </div>
                           </div>
+                          <div className="form-check form-switch my-2">
+                            <div className="row justify-content-between">
+                              <label
+                                className="form-check-label"
+                                for="thursday"
+                              >
+                                Thursday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="thursday"
+                              />
+                            </div>
+                          </div>
+                          <div className="form-check form-switch my-2">
+                            <div className="row justify-content-between">
+                              <label className="form-check-label" for="friday">
+                                Friday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="friday"
+                              />
+                            </div>
+                          </div>
+                          <div className="form-check form-switch my-2">
+                            <div className="row justify-content-between">
+                              <label
+                                className="form-check-label"
+                                for="saturday"
+                              >
+                                Saturday
+                              </label>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="saturday"
+                              />
+                            </div>
                           </div>
                         </div>
                         <div className="modal-footer">
@@ -636,7 +682,13 @@ function MenuTable() {
                           >
                             Close
                           </button>
-                          <button type="button" className="btn btn-primary" onClick={()=>{edit(categorys.ID)}}>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={() => {
+                              edit(categorys.ID);
+                            }}
+                          >
                             Update
                           </button>
                         </div>
