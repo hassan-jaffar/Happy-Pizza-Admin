@@ -5,7 +5,27 @@ import { Link } from "react-router-dom";
 
 function OrdersTable() {
   const [orders, setOrders] = useState([]);
+  const [duplicateorders, setduplicateorders] = useState([])
+  const [type, settype] = useState("-- Select an option --")
 
+
+  async function searchByName(){
+    // alert("you have searched")
+  }
+
+  function filterByName(e){
+    settype(e);
+
+    if (e!=="-- Select an option --") {
+      
+      // const temprooms = duplicateorders.filter(order=>order.ID===e)
+      const temporders = duplicateorders.filter(order=>order.ID===parseInt(e))
+      setOrders(temporders);
+    }
+    else{
+      setOrders(orders)
+    }
+  }
   useEffect(() => {
     async function fetchData() {
       try {
@@ -13,6 +33,7 @@ function OrdersTable() {
           await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallorders")
         ).data;
         setOrders(data.data);
+        setduplicateorders(data.data)
       } catch (error) {
         console.log(error);
       }
@@ -64,13 +85,25 @@ function OrdersTable() {
                   <label for="customerfilter" className="boldtext ms-2 my-1">
                     Filter by Customer:
                   </label>
-                  <input
+                  {/* <input
                     id="customerfilter"
                     className="mx-1 py-1"
                     placeholder="Select an option"
-                  />
+                  /> */}
+                  <select id="customerfilter" className="form-select mx-1 py-1" aria-label="Default select example" value={type} onChange={(e)=>{filterByName(e.target.value)}}>
+  
+  {orders.length > 0 && orders.map((order)=>{
+    return <>
+    <option value="-- Select an option --" selected>-- Select an option --</option>
+      <option value={order.ID}>{order.ID}</option>  
+    </>
+  })}
+
+  {/* <option value="2">Two</option>
+  <option value="3">Three</option> */}
+</select>
                   <button className="btn btn-primary my-1 mx-1">Export</button>
-                  <button className="btn btn-primary my-1 mx-1">Search</button>
+                  <button className="btn btn-primary my-1 mx-1" onClick={searchByName()}>Search</button>
                 </div>
               </div>
             </div>
