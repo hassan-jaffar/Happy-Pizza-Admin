@@ -2,16 +2,31 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Orders.css";
 import { Link } from "react-router-dom";
+import { DatePicker, Space  } from 'antd';
+import 'antd/dist/antd.css';
+const { RangePicker } = DatePicker;
+
 
 function OrdersTable() {
   const [orders, setOrders] = useState([]);
   const [duplicateorders, setduplicateorders] = useState([])
   const [type, settype] = useState("-- Select an option --")
+  const [fromdate , setfromdate] = useState();
+  const [todate , settodate] = useState();
+
 
 
   async function searchByName(){
     // alert("you have searched")
   }
+
+  function filterByDate(dates){
+    setfromdate(dates[0])
+    settodate(dates[1])
+
+    alert(fromdate)
+  }   
+
 
   function filterByName(e){
     settype(e);
@@ -72,16 +87,12 @@ function OrdersTable() {
                   <label for="daterange" className="me-1 my-1 boldtext">
                     Date Range
                   </label>
-                  <input
+                  {/* <input
                     id="daterange"
                     className="me-1 my-1 py-1"
                     placeholder="Start Date"
-                  />
-                  <input
-                    id="daterange"
-                    className="me-1 py-1"
-                    placeholder="End Date"
-                  />
+                  /> */}
+                  <RangePicker format='DD-MM-YYYY' onChange={filterByDate} />
                   <label for="customerfilter" className="boldtext ms-2 my-1">
                     Filter by Customer:
                   </label>
