@@ -4,6 +4,7 @@ import "./Orders.css";
 import { Link } from "react-router-dom";
 import { DatePicker, Space  } from 'antd';
 import 'antd/dist/antd.css';
+import moment from 'moment';
 const { RangePicker } = DatePicker;
 
 
@@ -21,10 +22,10 @@ function OrdersTable() {
   }
 
   function filterByDate(dates){
-    setfromdate(dates[0])
+    setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
     settodate(dates[1])
 
-    alert(fromdate)
+    alert(dates[0])
   }   
 
 
