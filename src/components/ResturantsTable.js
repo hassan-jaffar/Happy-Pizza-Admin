@@ -4,17 +4,17 @@ import "./Orders.css";
 import { Link } from "react-router-dom";
 
 function ResturantsTable() {
-  const [orders, setOrders] = useState([]);
+  const [resturants, setresturants] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/admin/getallorders"
+            "http://localhost:5000/api/superadmin/getallresturants"
           )
         ).data;
-        setOrders(data.data);
+        setresturants(data.data);
       } catch (error) {
         console.log(error);
       }
@@ -123,47 +123,45 @@ function ResturantsTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {orders &&
-                        orders.map((order) => {
+                      {resturants &&
+                        resturants.map((item) => {
                           return (
                             <>
                               <tr>
-                                <th scope="row">{order.ID}</th>
+                                <th scope="row">{item.name}</th>
 
-                                <td>
-                                  <Link
+                                <td style={{width:"16%"}}>
+                                  {/* <Link
                                     to={`/order-detail/${order.cart_Id}/${order.customer_Id}`}
                                     style={{
                                       textDecoration: "none",
                                       color: "black",
                                     }}
-                                  >
-                                    {order.house},Flat:{order.flat},
-                                    {order.street},{order.postcode},{order.town}
-                                  </Link>
+                                  > */}
+                                  <img style={{width:"56%",height:"auto"}} src={item.image} alt="...." />
+                                  {/* {item.image} */}
+                                  {/* </Link> */}
                                 </td>
-                                <td>{order.DateTime}</td>
-                                <td>collection</td>
+                                <td>{item.owner_name}</td>
+                                <td>{item.owner_email}</td>
                                 <td>
-                                  {order.Orderstatus === "1" ? (
-                                    <>Pending</>
-                                  ) : order.Orderstatus === "2" ? (
-                                    <>In Process</>
-                                  ) : order.Orderstatus === "3" ? (
-                                    <>Completed</>
-                                  ) : (
-                                    <>Rejected</>
-                                  )}
+                                25 Sep 2022 02:02 PM 
                                 </td>
                                 <td>
                                   <span class="badge bg-info primary">
-                                    cod(unpaid)
+                                    Active
                                   </span>
                                 </td>
                                 <td>
-                                  <span class="badge bg-danger primary">
-                                    ${order.total}
+                                    {item.status === "true" ? (<>
+                                      <span class="badge bg-info primary">
+                                    live
                                   </span>
+                                    </>):(<>
+                                  <span class="badge bg-danger primary">
+                                    Not live
+                                  </span>
+                                    </>)}
                                 </td>
                                 <td>
                                   <div className="dropdown">
