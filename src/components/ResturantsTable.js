@@ -53,7 +53,7 @@ function ResturantsTable() {
 
   async function update(){
     try {
-      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallresturants')).data
+      const data = await (await axios.get('https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallresturants')).data
       setresturants(data.data)
 
     } catch (error) {
@@ -66,7 +66,7 @@ function ResturantsTable() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getallresturants"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallresturants"
           )
         ).data;
         setresturants(data.data);
