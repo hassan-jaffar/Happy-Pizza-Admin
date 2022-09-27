@@ -35,6 +35,22 @@ function ResturantsTable() {
     }
   }
 
+
+  
+  async function activate(ID){
+    const info = {
+      ID
+    }
+    try {
+      const data = (await axios.post('http://localhost:5000/api/superadmin/activateresturant', info)).data
+      update()
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async function update(){
     try {
       const data = await (await axios.get('http://localhost:5000/api/superadmin/getallresturants')).data
@@ -228,7 +244,7 @@ function ResturantsTable() {
                                       <li className="dropdown-item" onClick={()=>{deactivate(item.ID)}} >
                                         Deactivate
                                       </li>
-                                      <li className="dropdown-item">
+                                      <li className="dropdown-item" onClick={()=>{activate(item.ID)}}>
                                         Activate
                                       </li>
                                       <li class="dropdown-item" onClick={()=>{del(item.ID)}}>
