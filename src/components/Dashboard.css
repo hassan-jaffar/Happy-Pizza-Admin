@@ -76,3 +76,11 @@
     width: 100% !important;
   }
   }
+
+.liveStatus {
+  color: #44D2CB;
+  background-color: #CDF5F1;
+  text-align: center;
+  width: 40px;
+  border-radius: 4px;
+}

@@ -5,6 +5,39 @@ import "./Dashboard.css";
 import Navbar from "./Navbar";
 
 function Dashboard() {
+  // start of resturant information map
+  var resturantData = [
+    {
+      id: 1,
+      name: "CnF Admin Panel",
+    },
+    {
+      id: 2,
+      name: "	Shahjee",
+    },
+    {
+      id: 3,
+      name: "Brits Pizzeria",
+    },
+    {
+      id: 4,
+      name: "Pizza Uno",
+    },
+    {
+      id: 5,
+      name: "Happys Pizza & Burger",
+    },
+    {
+      id: 6,
+      name: "Happys Pizza & Burger",
+    },
+    {
+      id: 7,
+      name: "Curry House Swinton",
+    },
+  ];
+  // end of resturant information map
+
   const getstatus = localStorage.getItem("status");
   const [orders, setOrders] = useState();
   const [customer, setcustomer] = useState();
@@ -13,7 +46,9 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength")
+          await axios.get(
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength"
+          )
         ).data;
         setOrders(data.data);
       } catch (error) {
@@ -27,7 +62,9 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength")
+          await axios.get(
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength"
+          )
         ).data;
         setcustomer(data.data);
       } catch (error) {
@@ -41,7 +78,9 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength")
+          await axios.get(
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength"
+          )
         ).data;
         console.log(data.data);
         setitem(data.data);
@@ -51,8 +90,6 @@ function Dashboard() {
     }
     fetchData();
   }, []);
-
-
 
   return (
     <>
@@ -115,7 +152,10 @@ function Dashboard() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/resturant" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/resturant"
+                    className="nav-link align-middle sidebartag"
+                  >
                     {/* <i className="fa-solid fa-book"></i> */}
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
@@ -131,7 +171,7 @@ function Dashboard() {
                 </li>
                 <li className="nav-item">
                   <div className="accordion" id="accordionExample">
-                    <div className="accordion-item" style={{border: 'none'}}>
+                    <div className="accordion-item" style={{ border: "none" }}>
                       <h2 className="accordion-header" id="headingTwo">
                         <button
                           className="accordion-button collapsed boldtext align-middle "
@@ -140,12 +180,10 @@ function Dashboard() {
                           data-bs-target="#collapseTwo"
                           aria-expanded="false"
                           aria-controls="collapseTwo"
-                          style={{padding: '1rem'}}
+                          style={{ padding: "1rem" }}
                         >
                           <i className="fa-solid fa-arrows-to-dot"></i>
-                          <span className="ms-1">
-                            Marketing
-                          </span>
+                          <span className="ms-1">Marketing</span>
                         </button>
                       </h2>
                       <div
@@ -203,7 +241,7 @@ function Dashboard() {
             <div className="row gx-0 responsiveness">
               <div className="col-md-12">
                 <h2 className="mt-5 mb-2 mx-3 responsiveness">DASHBOARD</h2>
-                
+
                 <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
                   <h6>
                     <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
@@ -367,7 +405,9 @@ function Dashboard() {
                                       rows="3"
                                     ></textarea>
                                   </div>
-                                  <label className="mb-1 mt-2 boldtext">DateRange</label>
+                                  <label className="mb-1 mt-2 boldtext">
+                                    DateRange
+                                  </label>
                                   <div class="input-group mb-3">
                                     <input
                                       type="text"
@@ -387,7 +427,10 @@ function Dashboard() {
                               </div>
                             </div>
                           </div>
-                          <button type="button" className="btn btn-info mt-2 d-block w-100">
+                          <button
+                            type="button"
+                            className="btn btn-info mt-2 d-block w-100"
+                          >
                             Save
                           </button>
                         </div>
@@ -406,38 +449,289 @@ function Dashboard() {
                 </div>
               </div>
             </div>
+            {/* start of 1st resturant analytics  */}
             <div className="row justify-content-center cardsrow responsiveness">
-            <Link to="/" style={{ textDecoration: 'none' }} className="cardslink">
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext cardtitleclr">Sales Volume</h5>
-                <h4 className="boldtext cardinfoclr">$0.00</h4>
-                <h6>(days)</h6>
-              </div>
+              <Link
+                to="/"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <h5 className="boldtext cardtitleclr">Sales Volume</h5>
+                  <h4 className="boldtext cardinfoclr">$0.00</h4>
+                  <h6>(days)</h6>
+                </div>
               </Link>
-              <Link to="/orders" style={{ textDecoration: 'none'}} className="cardslink">
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext cardtitleclr">Orders</h5>
-                <h4 className="boldtext cardinfoclr">{orders}</h4>
-                <h6>Today</h6>
-              </div>
+              <Link
+                to="/orders"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <h5 className="boldtext cardtitleclr">Orders</h5>
+                  <h4 className="boldtext cardinfoclr">{orders}</h4>
+                  <h6>Today</h6>
+                </div>
               </Link>
-              <Link to="/menu" style={{ textDecoration: 'none'}} className="cardslink">
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext cardtitleclr">No of Items</h5>
-                <h4 className="boldtext cardinfoclr">{item}</h4>
-                <h6>items</h6>
-              </div>
+              <Link
+                to="/menu"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <h5 className="boldtext cardtitleclr">No of Items</h5>
+                  <h4 className="boldtext cardinfoclr">{item}</h4>
+                  <h6>items</h6>
+                </div>
               </Link>
-              <Link to="/customers" style={{ textDecoration: 'none'}} className="cardslink">
-              <div className="col-md-2 dashboardcards responsiveness">
-                <h5 className="boldtext cardtitleclr">Customers</h5>
-                <h4 className="boldtext cardinfoclr">{customer}</h4>
-                <h6>Customers</h6>
-              </div>
+              <Link
+                to="/customers"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <h5 className="boldtext cardtitleclr">Customers</h5>
+                  <h4 className="boldtext cardinfoclr">{customer}</h4>
+                  <h6>Customers</h6>
+                </div>
               </Link>
             </div>
-          </div>
+            {/* end of 1st resturant analytics  */}
 
+            {/* start of 2nd resturant analytics  */}
+            <div className="row justify-content-center cardsrow responsiveness">
+              <Link
+                to="/"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <div className="row">
+                    <div className="col-10">
+                      <h5 className="boldtext cardtitleclr">Sales Volume</h5>
+                    </div>
+                    <div className="col-2 text-end">
+                      <h4>
+                        {" "}
+                        <i
+                          style={{ color: "#DD3948" }}
+                          class="fas fa-clock"
+                        ></i>
+                      </h4>
+                    </div>
+                  </div>
+                  <h4 className="boldtext cardinfoclr">$0.00</h4>
+                  <h6>(days)</h6>
+                </div>
+              </Link>
+              <Link
+                to="/orders"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <div className="row">
+                    <div className="col-6">
+                      <h5 className="boldtext cardtitleclr">Order</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h4>
+                        {" "}
+                        <i
+                          style={{ color: "#1975FD" }}
+                          class="fas fa-book-open"
+                        ></i>
+                      </h4>
+                    </div>
+                  </div>
+                  <h4 className="boldtext cardinfoclr">{orders}</h4>
+                  <h6>Today</h6>
+                </div>
+              </Link>
+              <Link
+                to="/menu"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <div className="row">
+                    <div className="col-6">
+                      <h5 className="boldtext cardtitleclr">Resturants</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h4>
+                        {" "}
+                        <i
+                          style={{ color: "#4650DD" }}
+                          class="far fa-bookmark"
+                        ></i>
+                      </h4>
+                    </div>
+                  </div>
+                  <h4 className="boldtext cardinfoclr">{item}</h4>
+                  <h6>Resturants</h6>
+                </div>
+              </Link>
+              <Link
+                to="/customers"
+                style={{ textDecoration: "none" }}
+                className="cardslink"
+              >
+                <div className="col-md-2 dashboardcards responsiveness">
+                  <div className="row">
+                    <div className="col-6">
+                      <h5 className="boldtext cardtitleclr">Views</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h4>
+                        {" "}
+                        <i
+                          style={{ color: "#3FB95B" }}
+                          class="fas fa-globe-americas"
+                        ></i>
+                      </h4>
+                    </div>
+                  </div>
+                  <h4 className="boldtext cardinfoclr">{customer}</h4>
+                  <h6>Views (All)</h6>
+                </div>
+              </Link>
+            </div>
+            {/* end of 2nd resturant analytics  */}
+
+            {/* start of live resturant */}
+
+            <div className="container dashboardcards">
+              <div className="row">
+                <div className="col">
+                  <h6>LIVE RESTAURENTS</h6>
+                </div>
+                <hr style={{ padding: "1px" }} className="mt-4 text-muted"></hr>
+              </div>
+
+              <div className="row">
+                <div className="col d-flex justify-content-end">
+                  <select
+                    style={{ width: "70px" }}
+                    class="form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    {/* <option selected>Open this select menu</option> */}
+                    <option value="1">5</option>
+                    <option value="2">10</option>
+                    <option value="3">15</option>
+                  </select>
+                  <span className="text-muted mt-1">entries per page</span>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-3">
+                  <h6 className="boldtext fs-5">#</h6>
+                </div>
+                <div class="col-8">
+                  <h6 className="boldtext">Name</h6>
+                </div>
+                <div class="col-1">
+                  <h6 className="boldtext">Status</h6>
+                </div>
+                <hr style={{ padding: "0px" }} className="text-muted"></hr>
+              </div>
+              {/* start of maping information of resturant */}
+              <div class="row">
+                {resturantData.map((restData) => {
+                  return (
+                    <>
+                      <div class="col-3">
+                        <p className="text-muted">{restData.id}</p>
+                      </div>
+                      <div class="col-8">
+                        <p>{restData.name}</p>
+                      </div>
+                      <div class="col-1">
+                        <p className="liveStatus">Live</p>
+                      </div>
+                      <hr
+                        style={{ padding: "0px" }}
+                        className="text-muted"
+                      ></hr>
+                    </>
+                  );
+                })}
+              </div>
+              {/* end of maping information of resturant */}
+
+              <div className="row">
+                <div className="col-6">
+                  <p className="text-muted">Showing 1 to 9 of 9 entries</p>
+                </div>
+                <div className="col-6 d-flex justify-content-end">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          Previous
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          1
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          2
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          3
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            {/* end of live resturant */}
+
+            {/* start of google map for resturant */}
+            <div className="container dashboardcards">
+              <div className="row">
+                <div className="col-6">
+                  <h6>REALTIME MAP</h6>
+                </div>
+                <div className="col-6 text-end">
+                  <h6>DELIVERY ACTIVITIES</h6>
+                </div>
+                <hr style={{ padding: "1px" }} className="mt-4 text-muted"></hr>
+              </div>
+              <div className="col-12">
+                <div className="mapouter">
+                  <div class="gmap_canvas">
+                    <iframe
+                      style={{ height: "400px" }}
+                      className="gmap_iframe"
+                      width="100%"
+                      frameborder="0"
+                      scrolling="no"
+                      marginheight="0"
+                      marginwidth="0"
+                      src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                    ></iframe>
+                    <a href="https://mcpenation.com/">Resturants</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* end of google map for resturant */}
+          </div>
         </div>
       </div>
     </>
