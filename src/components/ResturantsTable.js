@@ -99,7 +99,7 @@ function ResturantsTable() {
               <h4>RESTURANTS</h4>
             </div>
             <div className="col-md-6 text-end mt-5">
-              <button className="btn btn-primary">Add Resturant</button>
+              <Link to='/addresturant'><button className="btn btn-primary">Add Resturant</button></Link>
             </div>
             <hr style={{ padding: "2px" }} className="mt-4 text-muted"></hr>
           </div>

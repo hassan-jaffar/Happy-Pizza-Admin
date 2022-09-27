@@ -16,6 +16,7 @@ import SigninPage from "./components/SigninPage";
 import RegisterPage from "./components/RegisterPage";
 import Settings from "./components/Settings";
 import Resturants from "./components/Resturants";
+import AddResturant from "./components/AddResturant";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<SigninPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/resturant" element={<Resturants />}></Route>
+        <Route path="/addresturant" element={<AddResturant />}></Route>
         <Route path="/home" element={<Dashboard />}></Route>
         <Route path="/liveorders" element={<LiveOrders />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
