@@ -6,6 +6,45 @@ import { Link } from "react-router-dom";
 function ResturantsTable() {
   const [resturants, setresturants] = useState([]);
 
+  async function del(ID) {
+    const info = {
+      ID
+    }
+
+    try {
+      const data = (await axios.post('http://localhost:5000/api/superadmin/deleteresturant', info)).data
+      update()
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function deactivate(ID){
+    const info = {
+      ID
+    }
+    try {
+      const data = (await axios.post('http://localhost:5000/api/superadmin/deactivateresturant', info)).data
+      update()
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function update(){
+    try {
+      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallresturants')).data
+      setresturants(data.data)
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -186,13 +225,13 @@ function ResturantsTable() {
                                       <li className="dropdown-item">
                                         Login as
                                       </li>
-                                      <li className="dropdown-item">
+                                      <li className="dropdown-item" onClick={()=>{deactivate(item.ID)}} >
                                         Deactivate
                                       </li>
                                       <li className="dropdown-item">
                                         Activate
                                       </li>
-                                      <li class="dropdown-item">
+                                      <li class="dropdown-item" onClick={()=>{del(item.ID)}}>
                                         <i className="fa-solid fa-ban btnicon"></i>
                                         Delete
                                       </li>
