@@ -19,7 +19,7 @@ function SigninPage() {
       try {
 
         // setloading(true)
-        const result = (await axios.post('https://apinodejs.creativeparkingsolutions.com/api/admin/loginadmin', user)).data;
+        const result = (await axios.post('https://localhost:5000/api/admin/loginadmin', user)).data;
         console.log(result.data)
 
         localStorage.setItem('currentuser', JSON.stringify(result.data));
