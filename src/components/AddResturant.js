@@ -199,6 +199,24 @@ function AddResturant() {
                 </li>
                 <li className="nav-item">
                   <Link
+                    to="/resturant"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-utensils"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/pages"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-file"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
                     to="/setting"
                     className="nav-link align-middle sidebartag"
                   >

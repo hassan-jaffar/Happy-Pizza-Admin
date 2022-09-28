@@ -156,8 +156,17 @@ function Dashboard() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    {/* <i className="fa-solid fa-book"></i> */}
+                    <i class="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/pages"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-file"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -625,43 +634,34 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div class="row mt-3">
-                <div class="col-3">
-                  <h6 className="boldtext fs-5">#</h6>
-                </div>
-                <div class="col-8">
-                  <h6 className="boldtext">Name</h6>
-                </div>
-                <div class="col-1">
-                  <h6 className="boldtext">Status</h6>
-                </div>
-                <hr style={{ padding: "0px" }} className="text-muted"></hr>
-              </div>
               {/* start of maping information of resturant */}
-              <div class="row">
-                {resturantData.map((restData) => {
-                  return (
-                    <>
-                      <div class="col-3">
-                        <p className="text-muted">{restData.id}</p>
-                      </div>
-                      <div class="col-8">
-                        <p>{restData.name}</p>
-                      </div>
-                      <div class="col-1">
-                        <p className="liveStatus">Live</p>
-                      </div>
-                      <hr
-                        style={{ padding: "0px" }}
-                        className="text-muted"
-                      ></hr>
-                    </>
-                  );
-                })}
+              <div class="row mt-2">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  {resturantData.map((restData) => {
+                    return (
+                      <>
+                        <tbody>
+                          <tr>
+                            <td scope="row">{restData.id}</td>
+                            <td>{restData.name}</td>
+                            <td><p className="liveStatus">Live</p></td>
+                          </tr>
+                        </tbody>
+                      </>
+                    );
+                  })}
+                </table>
               </div>
               {/* end of maping information of resturant */}
 
-              <div className="row">
+              <div className="row mt-3">
                 <div className="col-6">
                   <p className="text-muted">Showing 1 to 9 of 9 entries</p>
                 </div>

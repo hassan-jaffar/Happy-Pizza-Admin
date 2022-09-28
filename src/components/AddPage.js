@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import "./Orders.css";
-import ResturantsTable from "./ResturantsTable";
+import { Link } from "react-router-dom";
+import { CKEditor } from "ckeditor4-react";
 
-function Resturants() {
+function AddPage() {
   return (
     <>
       <Navbar />
@@ -24,21 +23,28 @@ function Resturants() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/liveorders" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/liveorders"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">
-                      Live Orders
-                    </span>
+                    <span className="ms-1 d-none d-sm-inline">Live Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/orders" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/orders"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-chart-line"></i>
                     <span className="ms-1 d-none d-sm-inline"> Orders</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/customers" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/customers"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-user"></i>
                     <span className="ms-1 d-none d-sm-inline"> Customers</span>
                   </Link>
@@ -68,14 +74,17 @@ function Resturants() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/setting" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/setting"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-gear"></i>
                     <span className="ms-1 d-none d-sm-inline"> Setting</span>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <div className="accordion" id="accordionExample">
-                    <div className="accordion-item" style={{border: 'none'}}>
+                    <div className="accordion-item" style={{ border: "none" }}>
                       <h2 className="accordion-header" id="headingTwo">
                         <button
                           className="accordion-button collapsed boldtext align-middle "
@@ -84,12 +93,10 @@ function Resturants() {
                           data-bs-target="#collapseTwo"
                           aria-expanded="false"
                           aria-controls="collapseTwo"
-                          style={{padding: '1rem'}}
+                          style={{ padding: "1rem" }}
                         >
                           <i className="fa-solid fa-arrows-to-dot"></i>
-                          <span className="ms-1">
-                            Marketing
-                          </span>
+                          <span className="ms-1">Marketing</span>
                         </button>
                       </h2>
                       <div
@@ -132,7 +139,10 @@ function Resturants() {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <Link to="/change-password" className="nav-link align-middle sidebartag">
+                  <Link
+                    to="/change-password"
+                    className="nav-link align-middle sidebartag"
+                  >
                     <i className="fa-solid fa-lock-open"></i>
                     <span className="ms-1 d-none d-sm-inline">Password</span>
                   </Link>
@@ -141,7 +151,59 @@ function Resturants() {
             </div>
           </div>
           <div className="col-lg-9">
-            <ResturantsTable/>
+            <div className="container mt-5">
+              <div className="row">
+                <div className="col-12">
+                  <div className="row">
+                    <h1>PAGES</h1>
+                  </div>
+
+                  <div className="container bs mb-5">
+                    <div className="row">
+                      <div className="col-6 mt-5">
+                        <h6>PAGES INFORMATION</h6>
+                      </div>
+                      <div className="col-6 text-end mt-5">
+                        <Link to='/pages'><button type="button" class="btn btn-primary">
+                          BACK TO PAGES
+                        </button></Link>
+                      </div>
+                      <hr style={{ padding: "0px" }} className="mt-4"></hr>
+                    </div>
+
+                    <div className="row">
+                      <div className="col">
+                        <input
+                          style={{ padding: "20px" }}
+                          type="text"
+                          class="form-control"
+                          placeholder="Title"
+                          aria-label="Username"
+                          aria-describedby="basic-addon1"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-12 mt-3 mb-5">
+                        <label
+                          for="exampleFormControlInput1"
+                          class="form-label text-muted"
+                        >
+                          Content
+                        </label>
+                        <CKEditor />
+                      </div>
+                    </div>
+                    <div className="row">
+                        <div className="col text-end mb-4">
+                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" class="btn">Save</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -149,4 +211,4 @@ function Resturants() {
   );
 }
 
-export default Resturants;
+export default AddPage;
