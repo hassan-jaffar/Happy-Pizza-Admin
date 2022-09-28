@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function Pages() {
   const [page, setpage] = useState([]);
+  const [status, setstatus] = useState(true);
 
   async function del(ID){
     const details = {
@@ -37,6 +38,10 @@ function Pages() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async function change(ID) {
+    alert(ID)
   }
 
   useEffect(() => {
@@ -253,7 +258,9 @@ function Pages() {
                                     type="checkbox"
                                     role="switch"
                                     id="flexSwitchCheckChecked"
-                                    checked={pages.status === "true" ? ("checked"):("")}
+                                    checked={pages.status === "true" && ('checked')}
+                                    onChange={(e)=>{setstatus(e.target.checked)}}
+                                    // onClick={()=>{change(pages.ID)}}
                                   />
                                 </div>
                               </td>
