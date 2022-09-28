@@ -47,7 +47,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://localhost:5000/api/admin/getorderlength"
+            "http://localhost:5000/api/admin/getorderlength"
           )
         ).data;
         setOrders(data.data);
@@ -63,7 +63,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://localhost:5000/api/admin/getcustomerlength"
+            "http://localhost:5000/api/admin/getcustomerlength"
           )
         ).data;
         setcustomer(data.data);
@@ -79,7 +79,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://localhost:5000/api/admin/getitemslength"
+            "http://localhost:5000/api/admin/getitemslength"
           )
         ).data;
         console.log(data.data);

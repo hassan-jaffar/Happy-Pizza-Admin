@@ -14,7 +14,7 @@ function Configuration() {
     }
     try {
 
-      const result = await axios.post("https://localhost:5000/api/setting/config",details).data;
+      const result = await axios.post("http://localhost:5000/api/setting/config",details).data;
       console.log(result)
       toast.success("Data has been saved")
 

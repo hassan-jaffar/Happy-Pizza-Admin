@@ -46,7 +46,7 @@ function OrdersTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://localhost:5000/api/admin/getallorders")
+          await axios.get("http://localhost:5000/api/admin/getallorders")
         ).data;
         setOrders(data.data);
         setduplicateorders(data.data)
