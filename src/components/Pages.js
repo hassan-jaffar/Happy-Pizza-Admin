@@ -17,6 +17,7 @@ function Pages() {
         details
       ).data;
       setpage(result.data)
+      update()
       // toast.success("Item has been updated")
       // setInterval(() => {
       //   window.location.href="/menu"
@@ -25,6 +26,16 @@ function Pages() {
     } catch (error) {
       console.log(error);
       // toast.warn("Something went wrong try again!")
+    }
+  }
+
+  async function update(){
+    try {
+      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallpages')).data
+      setpage(data.data)
+
+    } catch (error) {
+      console.log(error);
     }
   }
 
