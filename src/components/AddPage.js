@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import { CKEditor } from "ckeditor4-react";
 
 function AddPage() {
+  const [title, settitle] = useState("");
+  const [description, setdescription] = useState("");
+  const [status, setstatus] = useState(true);
+
+  async function add() {
+    const details = {
+      title,
+      description,
+      status
+    }
+    alert(description)
+
+    // try {
+
+      // setloading(true)
+      // const result = await axios.post("http://localhost:5000/api/superadmin/addpage",details).data;
+      // console.log(result)
+      // toast.success("Registration Successfull")
+      // setloading(true)
+      // setInterval(() => {
+      //   window.location.href = "/pages"
+      // }, 2000);
+
+      // settitle('');
+      // setdescription('');
+
+
+
+  // } catch (error) {
+  //     console.log(error);
+      // toast.warn("Something went wrong!")
+      // setloading(true)
+  // }
+  }
   return (
     <>
       <Navbar />
@@ -180,6 +215,8 @@ function AddPage() {
                           placeholder="Title"
                           aria-label="Username"
                           aria-describedby="basic-addon1"
+                          value={title}
+                          onChange={(e)=>{settitle(e.target.value)}}
                         />
                       </div>
                     </div>
@@ -192,12 +229,14 @@ function AddPage() {
                         >
                           Content
                         </label>
-                        <CKEditor />
+                        <CKEditor
+                        
+                        onChange={(e)=>{ }} />
                       </div>
                     </div>
                     <div className="row">
                         <div className="col text-end mb-4">
-                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" class="btn">Save</button>
+                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" class="btn" onClick={add}>Save</button>
                         </div>
                     </div>
                   </div>

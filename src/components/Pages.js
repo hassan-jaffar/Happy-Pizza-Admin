@@ -1,31 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 
 function Pages() {
-  var pagesData = [
-    {
-      title: "Terms and conditions",
-    },
-    {
-      title: "Privacy Policy",
-    },
-    {
-      title: "Terms Of Use",
-    },
-    {
-      title: "Allergy Information",
-    },
-    {
-      title: "Governing Laws",
-    },
-    {
-      title: "Refund and Cancellation Policy",
-    },
-    {
-      title: "Delivery Policy",
-    },
-  ];
+  const [page, setpage] = useState([]);
+  const [status, setstatus] = useState("true");
+
+  const [status2, setstatus2] = useState(true);
+
+  async function del(ID){
+    const details = {
+      ID
+    }
+
+    try {
+      const result = await axios.post(
+        `http://localhost:5000/api/superadmin/deletepage`,
+        details
+      ).data;
+      setpage(result.data)
+      update()
+      // toast.success("Item has been updated")
+      // setInterval(() => {
+      //   window.location.href="/menu"
+      // }, 2000);
+
+    } catch (error) {
+      console.log(error);
+      // toast.warn("Something went wrong try again!")
+    }
+  }
+
+  async function update(){
+    try {
+      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallpages')).data
+      setpage(data.data)
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function change(ID) {
+    // alert(ID)
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(
+            "http://localhost:5000/api/superadmin/getallpages"
+          )
+        ).data;
+        setpage(data.data);
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <Navbar />
@@ -210,11 +245,11 @@ function Pages() {
                           </th>
                         </tr>
                       </thead>
-                      {pagesData.map((page) => {
+                      {page.map((pages) => {
                         return (
                           <tbody>
                             <tr>
-                              <td scope="row">{page.title}</td>
+                              <td >{pages.status}</td>
                               <td>
                                 <Link to="/addpage">Click for details</Link>
                               </td>
@@ -225,6 +260,9 @@ function Pages() {
                                     type="checkbox"
                                     role="switch"
                                     id="flexSwitchCheckChecked"
+                                    checked={pages.status === "true" && ('checked')}
+                                    onChange={(e)=>{setstatus2(e.target.value);change(pages.ID)}}
+                                    // onClick={()=>{change(pages.ID)}}
                                   />
                                 </div>
                               </td>
@@ -244,7 +282,7 @@ function Pages() {
                                     class="dropdown-menu"
                                     aria-labelledby="dropdownMenuButton"
                                   >
-                                    <li class="dropdown-item">
+                                    <li class="dropdown-item" onClick={()=>{del(pages.ID)}}>
                                       <i className="fa-solid fa-ban btnicon"></i>
                                       Delete
                                     </li>
