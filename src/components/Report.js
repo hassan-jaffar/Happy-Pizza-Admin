@@ -1,65 +1,10 @@
-import React from "react";
-import Navbar from "./Navbar";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Navbar from "./Navbar";
 
 function Report() {
-  var orderReport = [
-    {
-      id: "1326-1664404112-003",
-      name: "Sam",
-      date: "2022-09-28",
-      method: "stripe",
-      status: "Delivered",
-      plateformfee: 0.66,
-      processorfee: 0.85,
-      net: 19.49,
-      total: 21.0,
-    },
-    {
-      id: "1326-1664404112-003",
-      name: "Sam",
-      date: "2022-09-28",
-      method: "stripe",
-      status: "Delivered",
-      plateformfee: 0.66,
-      processorfee: 0.85,
-      net: 19.49,
-      total: 21.0,
-    },
-    {
-      id: "1326-1664404112-003",
-      name: "Sam",
-      date: "2022-09-28",
-      method: "stripe",
-      status: "Delivered",
-      plateformfee: 0.66,
-      processorfee: 0.85,
-      net: 19.49,
-      total: 21.0,
-    },
-    {
-      id: "1326-1664404112-003",
-      name: "Sam",
-      date: "2022-09-28",
-      method: "stripe",
-      status: "Delivered",
-      plateformfee: 0.66,
-      processorfee: 0.85,
-      net: 19.49,
-      total: 21.0,
-    },
-    {
-      id: "1326-1664404112-003",
-      name: "Sam",
-      date: "2022-09-28",
-      method: "stripe",
-      status: "Delivered",
-      plateformfee: 0.66,
-      processorfee: 0.85,
-      net: 19.49,
-      total: 21.0,
-    },
-  ];
+  const [orderReport, setorderReport] = useState([])
 
   var orderData = [
     {
@@ -83,6 +28,24 @@ function Report() {
       value: 41195.61,
     },
   ];
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(
+            "http://localhost:5000/api/superadmin/orderreport"
+          )
+        ).data;
+        setorderReport(data.data);
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  
+  }, [])
+  
   return (
     <>
       <Navbar />
@@ -399,14 +362,24 @@ function Report() {
                     return (
                       <tbody>
                         <tr>
-                          <th scope="row">{report.id}</th>
+                          <th scope="row">{report.cart_Id}</th>
                           <td>{report.name}</td>
-                          <td>{report.date}</td>
-                          <td>{report.method}</td>
-                          <td>{report.status}</td>
-                          <td>£{report.plateformfee}</td>
-                          <td>£{report.processorfee}</td>
-                          <td>£{report.net}</td>
+                          <td>{report.DateTime}</td>
+                          <td>stripe</td>
+                          <td>
+                          {report.Orderstatus === "1" ? (
+                                  <>Pending</>
+                                ) : report.Orderstatus === "2" ? (
+                                  <>In Process</>
+                                ) : report.Orderstatus === "3" ? (
+                                  <>Completed</>
+                                ) : (
+                                  <>Rejected</>
+                                )}
+                          </td>
+                          <td>£ 0.25</td>
+                          <td>£ 9</td>
+                          <td>£{report.total}</td>
                           <td>£{report.total}</td>
                         </tr>
                       </tbody>
