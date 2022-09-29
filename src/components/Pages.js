@@ -249,9 +249,9 @@ function Pages() {
                         return (
                           <tbody>
                             <tr>
-                              <td >{pages.status}</td>
+                              <td >{pages.title}</td>
                               <td>
-                                <Link to="/addpage">Click for details</Link>
+                                <Link to={`/addpage/${pages.ID}`}>Click for details</Link>
                               </td>
                               <td>
                                 <div class="form-check form-switch">
@@ -260,8 +260,8 @@ function Pages() {
                                     type="checkbox"
                                     role="switch"
                                     id="flexSwitchCheckChecked"
-                                    checked={pages.status === "true" && ('checked')}
-                                    onChange={(e)=>{setstatus2(e.target.value);change(pages.ID)}}
+                                    checked={pages.status === "true" ? (true):(false)}
+                                    onChange={(e)=>{setstatus(e.target.checked);change(pages.ID)}}
                                     // onClick={()=>{change(pages.ID)}}
                                   />
                                 </div>

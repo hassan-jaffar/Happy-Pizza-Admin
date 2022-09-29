@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { CKEditor } from "ckeditor4-react";
 
 function AddPage() {
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [status, setstatus] = useState(true);
+  const [updatetitle, setupdatetitle] = useState()
+  const [updatedescription, setupdatedescription] = useState()
+  const { ID } = useParams();
 
   async function add() {
     const details = {
@@ -39,6 +42,36 @@ function AddPage() {
       // setloading(true)
   // }
   }
+
+  async function edit() {
+    const details = {
+      ID,
+      updatetitle,
+      updatedescription
+    }
+
+    try {
+      const result = await axios.post("http://localhost:5000/api/superadmin/editpage",details).data; 
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(`http://localhost:5000/api/superadmin/editpageitem/${ID}`)
+        ).data;
+        setupdatetitle(data.data['title']);
+        setupdatedescription(data.data['description']);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+
   return (
     <>
       <Navbar />
@@ -185,7 +218,68 @@ function AddPage() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-9">
+          {ID>0 ?(<>
+            <div className="col-lg-9">
+            <div className="container mt-5">
+              <div className="row">
+                <div className="col-12">
+                  <div className="row">
+                    <h1>PAGES</h1>
+                  </div>
+
+                  <div className="container bs mb-5">
+                    <div className="row">
+                      <div className="col-6 mt-5">
+                        <h6>PAGES INFORMATION</h6>
+                      </div>
+                      <div className="col-6 text-end mt-5">
+                        <Link to='/pages'><button type="button" class="btn btn-primary">
+                          BACK TO PAGES
+                        </button></Link>
+                      </div>
+                      <hr style={{ padding: "0px" }} className="mt-4"></hr>
+                    </div>
+
+                    <div className="row">
+                      <div className="col">
+                        <input
+                          style={{ padding: "20px" }}
+                          type="text"
+                          class="form-control"
+                          placeholder="Title"
+                          aria-label="Username"
+                          aria-describedby="basic-addon1"
+                          value={updatetitle}
+                          onChange={(e)=>{setupdatetitle(e.target.value)}}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-12 mt-3 mb-5">
+                        <label
+                          for="exampleFormControlInput1"
+                          class="form-label text-muted"
+                        >
+                          Content
+                        </label>
+                        <CKEditor
+                        
+                        onChange={(e)=>{ }} />
+                      </div>
+                    </div>
+                    <div className="row">
+                        <div className="col text-end mb-4">
+                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" class="btn" onClick={edit}>Save</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </>):(<>
+            <div className="col-lg-9">
             <div className="container mt-5">
               <div className="row">
                 <div className="col-12">
@@ -244,6 +338,8 @@ function AddPage() {
               </div>
             </div>
           </div>
+          </>)}
+
         </div>
       </div>
     </>
