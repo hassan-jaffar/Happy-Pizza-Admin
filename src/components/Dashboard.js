@@ -171,6 +171,15 @@ function Dashboard() {
                 </li>
                 <li className="nav-item">
                   <Link
+                    to="/report"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-chart-bar"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Report</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
                     to="/setting"
                     className="nav-link align-middle sidebartag"
                   >

@@ -19,6 +19,7 @@ import Resturants from "./components/Resturants";
 import AddResturant from "./components/AddResturant";
 import Pages from "./components/Pages";
 import AddPage from "./components/AddPage";
+import Report from "./components/Report";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/change-password" element={<ChangePassword />}></Route>
         <Route path="/pages" element={<Pages />}></Route>
         <Route path="/addpage" element={<AddPage />}></Route>
+        <Route path="/report" element={<Report />}></Route>
         <Route
           path="*"
           element={
