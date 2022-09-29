@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 
 function Pages() {
   const [page, setpage] = useState([]);
-  const [status, setstatus] = useState(true);
+  const [status, setstatus] = useState("true");
+
+  const [status2, setstatus2] = useState(true);
 
   async function del(ID){
     const details = {
@@ -41,7 +43,7 @@ function Pages() {
   }
 
   async function change(ID) {
-    alert(ID)
+    // alert(ID)
   }
 
   useEffect(() => {
@@ -247,7 +249,7 @@ function Pages() {
                         return (
                           <tbody>
                             <tr>
-                              <td >{pages.title}</td>
+                              <td >{pages.status}</td>
                               <td>
                                 <Link to="/addpage">Click for details</Link>
                               </td>
@@ -259,7 +261,7 @@ function Pages() {
                                     role="switch"
                                     id="flexSwitchCheckChecked"
                                     checked={pages.status === "true" && ('checked')}
-                                    onChange={(e)=>{setstatus(e.target.checked)}}
+                                    onChange={(e)=>{setstatus2(e.target.value);change(pages.ID)}}
                                     // onClick={()=>{change(pages.ID)}}
                                   />
                                 </div>

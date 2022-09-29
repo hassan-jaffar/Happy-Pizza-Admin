@@ -229,7 +229,9 @@ function AddPage() {
                         >
                           Content
                         </label>
-                        <CKEditor value={description} onChange={(e)=>{setdescription(e.target.value)}} />
+                        <CKEditor
+                        
+                        onChange={(e)=>{ }} />
                       </div>
                     </div>
                     <div className="row">
