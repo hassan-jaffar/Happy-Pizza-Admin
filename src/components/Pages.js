@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 function Pages() {
   const [page, setpage] = useState([]);
-  const [status, setstatus] = useState("true");
+  // const [status, setstatus] = useState("");
 
-  const [status2, setstatus2] = useState(true);
+  // const [status2, setstatus2] = useState(true);
 
   async function del(ID){
     const details = {
@@ -42,8 +42,25 @@ function Pages() {
     }
   }
 
-  async function change(ID) {
-    // alert(ID)
+  async function change(ID,status) {
+
+    const details = {
+      ID,
+      status
+    }
+    alert(typeof(status))
+
+    // try {
+    //     const data = await (
+    //       await axios.post(
+    //         "http://localhost:5000/api/superadmin/updatepagestatus",details
+    //       )
+    //     ).data;
+    //     setpage(data.data);
+    //     update()
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   useEffect(() => {
@@ -261,7 +278,8 @@ function Pages() {
                                     role="switch"
                                     id="flexSwitchCheckChecked"
                                     checked={pages.status === "true" ? (true):(false)}
-                                    onChange={(e)=>{setstatus(e.target.checked);change(pages.ID)}}
+                                    onChange={(e)=>{setpage(page.map((item)=>( {...item,status:JSON.parse(e.target.checked)})));change(pages.ID,pages.status)}}
+                                    // onChange={(e)=>{change(pages.ID,e)}}
                                     // onClick={()=>{change(pages.ID)}}
                                   />
                                 </div>

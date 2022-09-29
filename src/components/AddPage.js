@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Link,useParams } from "react-router-dom";
-import { CKEditor } from "ckeditor4-react";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import parse, { attributesToProps } from 'html-react-parser';
 
 function AddPage() {
   const [title, settitle] = useState("");
@@ -11,6 +13,20 @@ function AddPage() {
   const [updatetitle, setupdatetitle] = useState()
   const [updatedescription, setupdatedescription] = useState()
   const { ID } = useParams();
+  const [data, setData] = React.useState('');
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      // Define your onSubmit function here
+      // ...
+  };
+
+  const inputHandler = (event, editor) => {
+      console.log(parse(editor.getData()).props.children);
+      // Define your onSubmit function here
+      // ...
+      // for example, setData() here
+
+  };
 
   async function add() {
     const details = {
@@ -324,8 +340,10 @@ function AddPage() {
                           Content
                         </label>
                         <CKEditor
-                        
-                        onChange={(e)=>{ }} />
+                        id="inputText"
+                        editor={ClassicEditor}
+                        onChange={inputHandler}
+                         />
                       </div>
                     </div>
                     <div className="row">
