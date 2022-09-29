@@ -5,43 +5,29 @@ import "./Dashboard.css";
 import Navbar from "./Navbar";
 
 function Dashboard() {
-  // start of resturant information map
-  var resturantData = [
-    {
-      id: 1,
-      name: "CnF Admin Panel",
-    },
-    {
-      id: 2,
-      name: "	Shahjee",
-    },
-    {
-      id: 3,
-      name: "Brits Pizzeria",
-    },
-    {
-      id: 4,
-      name: "Pizza Uno",
-    },
-    {
-      id: 5,
-      name: "Happys Pizza & Burger",
-    },
-    {
-      id: 6,
-      name: "Happys Pizza & Burger",
-    },
-    {
-      id: 7,
-      name: "Curry House Swinton",
-    },
-  ];
-  // end of resturant information map
-
+  const [resturantData, setresturantData] = useState([])
   const getstatus = localStorage.getItem("status");
   const [orders, setOrders] = useState();
   const [customer, setcustomer] = useState();
   const [item, setitem] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(
+            "http://localhost:5000/api/superadmin/getliveresturants"
+          )
+        ).data;
+        setresturantData(data.data);
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
+
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -658,9 +644,9 @@ function Dashboard() {
                       <>
                         <tbody>
                           <tr>
-                            <td scope="row">{restData.id}</td>
+                            <td>{restData.ID}</td>
                             <td>{restData.name}</td>
-                            <td><p className="liveStatus">Live</p></td>
+                            <td><p className="liveStatus">{restData.status === "true" && (<>Live</>)}</p></td>
                           </tr>
                         </tbody>
                       </>
