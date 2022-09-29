@@ -10,6 +10,7 @@ function Dashboard() {
   const [orders, setOrders] = useState();
   const [customer, setcustomer] = useState();
   const [item, setitem] = useState();
+  const [resturantcount, setresturantcount] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -19,7 +20,14 @@ function Dashboard() {
             "http://localhost:5000/api/superadmin/getliveresturants"
           )
         ).data;
+
+        const result = await (
+          await axios.get(
+            "http://localhost:5000/api/superadmin/resturantcount"
+          )
+        ).data;
         setresturantData(data.data);
+        setresturantcount(result.data)
       } catch (error) {
         console.log(error, "err");
       }
@@ -572,7 +580,7 @@ function Dashboard() {
                       </h4>
                     </div>
                   </div>
-                  <h4 className="boldtext cardinfoclr">{item}</h4>
+                  <h4 className="boldtext cardinfoclr">{resturantcount}</h4>
                   <h6>Resturants</h6>
                 </div>
               </Link>
