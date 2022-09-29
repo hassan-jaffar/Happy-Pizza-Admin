@@ -223,7 +223,7 @@ function LiveOrders() {
               LIVE ORDERS
             </h1>
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-4">
                 <div className="card cardattributes">
                   <div className="card-header titleheader">
                     <h4 className="card-title ">New Orders</h4>
@@ -336,7 +336,7 @@ function LiveOrders() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-4">
                 <div className="card cardattributes">
                   <div className="card-header titleheaderaccepted">
                     <h4 className="card-title">Accepted/Cooking</h4>
@@ -445,7 +445,7 @@ function LiveOrders() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-4">
                 <div className="card cardattributes">
                   <div className="card-header titleheadercompleted">
                     <h4 className="card-title ">Completed</h4>
