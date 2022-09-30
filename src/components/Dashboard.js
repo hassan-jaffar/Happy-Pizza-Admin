@@ -613,7 +613,7 @@ function Dashboard() {
 
             {/* start of live resturant */}
 
-            <div className="container dashboardcards">
+            <div className="container dashboardcards mb-5">
               <div className="row">
                 <div className="col">
                   <h6>LIVE RESTAURENTS</h6>

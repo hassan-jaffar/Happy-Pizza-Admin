@@ -8,54 +8,62 @@ function ResturantsTable() {
 
   async function del(ID) {
     const info = {
-      ID
-    }
+      ID,
+    };
 
     try {
-      const data = (await axios.post('http://localhost:5000/api/superadmin/deleteresturant', info)).data
-      update()
-
-
+      const data = (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/deleteresturant",
+          info
+        )
+      ).data;
+      update();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async function deactivate(ID){
+  async function deactivate(ID) {
     const info = {
-      ID
-    }
+      ID,
+    };
     try {
-      const data = (await axios.post('http://localhost:5000/api/superadmin/deactivateresturant', info)).data
-      update()
-
-
+      const data = (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/deactivateresturant",
+          info
+        )
+      ).data;
+      update();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-
-  
-  async function activate(ID){
+  async function activate(ID) {
     const info = {
-      ID
-    }
+      ID,
+    };
     try {
-      const data = (await axios.post('http://localhost:5000/api/superadmin/activateresturant', info)).data
-      update()
-
-
+      const data = (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/activateresturant",
+          info
+        )
+      ).data;
+      update();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async function update(){
+  async function update() {
     try {
-      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallresturants')).data
-      setresturants(data.data)
-
+      const data = await (
+        await axios.get("http://localhost:5000/api/superadmin/getallresturants")
+      ).data;
+      setresturants(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -148,23 +156,25 @@ function ResturantsTable() {
           </div>
 
           <div className="ms-4 bs mb-5">
-          {/* 1st row  */}
-          <div className="row my-5 mx-4">
-            <div className="col-md-6 text-start mt-5">
-              <h4>RESTURANTS</h4>
+            {/* 1st row  */}
+            <div className="row my-5 mx-4">
+              <div className="col-md-6 text-start mt-5">
+                <h4>RESTURANTS</h4>
+              </div>
+              <div className="col-md-6 text-end mt-5">
+                <Link to="/addresturant">
+                  <button className="btn btn-primary">Add Resturant</button>
+                </Link>
+              </div>
+              <hr style={{ padding: "2px" }} className="mt-4 text-muted"></hr>
             </div>
-            <div className="col-md-6 text-end mt-5">
-              <Link to='/addresturant'><button className="btn btn-primary">Add Resturant</button></Link>
-            </div>
-            <hr style={{ padding: "2px" }} className="mt-4 text-muted"></hr>
-          </div>
 
-          {/* 2nd row for data  */}
+            {/* 2nd row for data  */}
 
-          <div className="row ms-3">
+            <div className="row ms-3">
               <div className="col-md-12">
                 <div className="table-responsive">
-                  <table style={{marginBottom: '180px'}} className="table">
+                  <table style={{ marginBottom: "180px" }} className="table">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -185,7 +195,7 @@ function ResturantsTable() {
                               <tr>
                                 <th scope="row">{item.name}</th>
 
-                                <td style={{width:"16%"}}>
+                                <td style={{ width: "16%" }}>
                                   {/* <Link
                                     to={`/order-detail/${order.cart_Id}/${order.customer_Id}`}
                                     style={{
@@ -193,30 +203,36 @@ function ResturantsTable() {
                                       color: "black",
                                     }}
                                   > */}
-                                  <img style={{width:"56%",height:"auto"}} src={item.image} alt="...." />
+                                  <img
+                                    style={{ width: "56%", height: "auto" }}
+                                    src={item.image}
+                                    alt="...."
+                                  />
                                   {/* {item.image} */}
                                   {/* </Link> */}
                                 </td>
                                 <td>{item.owner_name}</td>
                                 <td>{item.owner_email}</td>
-                                <td>
-                                25 Sep 2022 02:02 PM 
-                                </td>
+                                <td>25 Sep 2022 02:02 PM</td>
                                 <td>
                                   <span class="badge bg-info primary">
                                     Active
                                   </span>
                                 </td>
                                 <td>
-                                    {item.status === "true" ? (<>
+                                  {item.status === "true" ? (
+                                    <>
                                       <span class="badge bg-info primary">
-                                    live
-                                  </span>
-                                    </>):(<>
-                                  <span class="badge bg-danger primary">
-                                    Not live
-                                  </span>
-                                    </>)}
+                                        live
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <span class="badge bg-danger primary">
+                                        Not live
+                                      </span>
+                                    </>
+                                  )}
                                 </td>
                                 <td>
                                   <div className="dropdown">
@@ -241,13 +257,28 @@ function ResturantsTable() {
                                       <li className="dropdown-item">
                                         Login as
                                       </li>
-                                      <li className="dropdown-item" onClick={()=>{deactivate(item.ID)}} >
+                                      <li
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                          deactivate(item.ID);
+                                        }}
+                                      >
                                         Deactivate
                                       </li>
-                                      <li className="dropdown-item" onClick={()=>{activate(item.ID)}}>
+                                      <li
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                          activate(item.ID);
+                                        }}
+                                      >
                                         Activate
                                       </li>
-                                      <li class="dropdown-item" onClick={()=>{del(item.ID)}}>
+                                      <li
+                                        class="dropdown-item"
+                                        onClick={() => {
+                                          del(item.ID);
+                                        }}
+                                      >
                                         <i className="fa-solid fa-ban btnicon"></i>
                                         Delete
                                       </li>
@@ -320,9 +351,44 @@ function ResturantsTable() {
                     </tbody>
                   </table>
                 </div>
+
+                <div
+                  style={{ marginTop: "-150px" }}
+                  className="d-flex justify-content-end me-5"
+                >
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          Previous
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          1
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          2
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          3
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
               </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </>
