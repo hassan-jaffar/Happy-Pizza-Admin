@@ -107,12 +107,17 @@ function MenuTable() {
   }
 
   async function addItem(category_id) {
+    var formData = new FormData();
+    formData.append("photo",file)
+    formData.append("title",title);
+    formData.append("description",description);
+    formData.append("price",price);
     const user = {
-      category_id,
-      title,
-      description,
-      price,
-      file
+      category_id
+      // title,
+      // description,
+      // price,
+      // file
     };
     const config = {
       headers:{
@@ -125,7 +130,7 @@ function MenuTable() {
     try {
       const result = await axios.post(
         " http://localhost:5000/api/admin/createitem ",
-        user,config
+        formData,config,user
       ).data;
       console.log(result);
       update1();
@@ -446,6 +451,8 @@ function MenuTable() {
                           <input
                             className="form-control mb-3"
                             placeholder="Item Name..."
+                            name="title"
+                            id="title"
                             value={title}
                             onChange={(e) => {
                               setTitle(e.target.value);
@@ -455,6 +462,8 @@ function MenuTable() {
                             className="form-control my-3"
                             placeholder="Item Description..."
                             rows="3"
+                            name="description"
+                            id="description"
                             value={description}
                             onChange={(e) => {
                               setdescription(e.target.value);
@@ -463,11 +472,14 @@ function MenuTable() {
                           <input
                             className="form-control my-3"
                             placeholder="Item Price..."
+                            name="price"
+                            id="price"
                             value={price}
                             onChange={(e) => {
                               setPrice(e.target.value);
                             }}
                           />
+                          <input type="hidden" name="" id="" value={categorys.ID}/>
                           <div className="form-check form-switch my-3">
                             <div className="row justify-content-between">
                               <label

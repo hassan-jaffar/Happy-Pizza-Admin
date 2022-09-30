@@ -11,6 +11,7 @@ function Dashboard() {
   const [customer, setcustomer] = useState();
   const [item, setitem] = useState();
   const [resturantcount, setresturantcount] = useState([])
+  const [sales, setsales] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -26,8 +27,15 @@ function Dashboard() {
             "http://localhost:5000/api/superadmin/resturantcount"
           )
         ).data;
+
+        const salevalume = await (
+          await axios.get(
+            "http://localhost:5000/api/admin/salesvloume"
+          )
+        ).data;
         setresturantData(data.data);
         setresturantcount(result.data)
+        setsales(salevalume.data)
       } catch (error) {
         console.log(error, "err");
       }
@@ -84,6 +92,20 @@ function Dashboard() {
     }
     fetchData();
   }, []);
+
+  let total = 0;
+  // for (const product of order) {
+  //     const productTotal = product.price;
+  //     total = total + productTotal;
+  // }
+  for (var i = 0; i < sales.length; i++) {
+      let productTotal = sales[i].total;
+      total = total + parseFloat(productTotal);
+    
+  }
+
+  
+  let roundoff = total.toFixed(3)
 
   return (
     <>
@@ -508,7 +530,7 @@ function Dashboard() {
                     >
                       <div style={{height: '145px'}} className="col-md-2 dashboardcards responsiveness">
                         <h5 className="boldtext cardtitleclr">Sales Volume</h5>
-                        <h4 className="boldtext cardinfoclr">$0.00</h4>
+                        <h4 className="boldtext cardinfoclr">${roundoff}</h4>
                         <h6>(days)</h6>
                       </div>
                     </Link>
@@ -572,7 +594,7 @@ function Dashboard() {
                       </h4>
                     </div>
                   </div>
-                  <h4 className="boldtext cardinfoclr">$0.00</h4>
+                  <h4 className="boldtext cardinfoclr">${roundoff}</h4>
                   <h6>(days)</h6>
                 </div>
               </Link>
