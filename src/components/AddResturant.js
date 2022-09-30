@@ -42,6 +42,7 @@ function AddResturant() {
   const [oclient_secret, setoclient_secret] = useState("");
   const [oterminal_id, setoterminal_id] = useState("");
   const [otest_mode, setotest_mode] = useState("");
+  const getstatus = localStorage.getItem("status");
 
   async function register(){
     const details = {
@@ -153,15 +154,24 @@ function AddResturant() {
         <div className="row flex-nowrap">
           <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
-              <h5 className="my-5 text-center">OWNER</h5>
+              <h5 className="my-5 text-center">
+                {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (
+                  <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
+                ) : JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 ? (
+                  <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
+                ): (<>
+                Owner
+                </>)}
+              </h5>
               <ul
                 className="nav nav-tabs mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
               >
-                <li className="nav-item">
+                {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
+                  <li className="nav-item">
                   <Link to="/home" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-house"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Dashboard</span>
+                    <span className="ms-1 d-none d-sm-inline">Dashboard</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -170,7 +180,10 @@ function AddResturant() {
                     className="nav-link align-middle sidebartag"
                   >
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">Live Orders</span>
+                    <span className="ms-1 d-none d-sm-inline">
+                      {" "}
+                      Live Orders
+                    </span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -195,24 +208,6 @@ function AddResturant() {
                   <Link to="/menu" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-book"></i>
                     <span className="ms-1 d-none d-sm-inline"> Menu</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/resturant"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-utensils"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/pages"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-file"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -289,6 +284,61 @@ function AddResturant() {
                     <span className="ms-1 d-none d-sm-inline">Password</span>
                   </Link>
                 </li>
+                </>):(<>
+                  <li className="nav-item">
+                  <Link to="/home" className="nav-link align-middle sidebartag">
+                    <i className="fa-solid fa-house"></i>
+                    <span className="ms-1 d-none d-sm-inline">Dashboard</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/orders"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i className="fa-solid fa-chart-line"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Orders</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/resturant"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-utensils"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/pages"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-file"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/report"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-chart-bar"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Report</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/change-password"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i className="fa-solid fa-lock-open"></i>
+                    <span className="ms-1 d-none d-sm-inline">Password</span>
+                  </Link>
+                </li>
+
+                </>)}
+                
               </ul>
             </div>
           </div>

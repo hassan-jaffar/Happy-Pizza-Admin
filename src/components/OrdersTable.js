@@ -13,6 +13,7 @@ function OrdersTable() {
   const [type, settype] = useState("-- Select an option --");
   const [fromdate, setfromdate] = useState();
   const [todate, settodate] = useState();
+  const getstatus = localStorage.getItem("status");
 
   async function searchByName() {
     // alert("you have searched")
@@ -172,8 +173,8 @@ function OrdersTable() {
               </div>
             </div>
           </div>
-
-          <div className="table-responsive">
+{getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
+  <div className="table-responsive">
             <table className="table my-5 mx-4 bs">
               <thead>
                 <tr>
@@ -239,8 +240,8 @@ function OrdersTable() {
               </tbody>
             </table>
           </div>
-
-          <div className="mx-4 bs ps-4 pt-4 mb-5">
+</>):(<>
+  <div className="mx-4 bs ps-4 pt-4 mb-5">
             <h6>ORDERS HISTORY</h6>
             <hr></hr>
             <div className="table-responsive">
@@ -342,6 +343,10 @@ function OrdersTable() {
               </nav>
             </div>
           </div>
+</>)}
+
+
+
         </div>
       </div>
     </>
