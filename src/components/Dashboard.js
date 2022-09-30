@@ -93,17 +93,20 @@ function Dashboard() {
           <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
-                {getstatus === "true" ? (
+                {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
-                ) : (
-                  <>OWNER</>
-                )}
+                ) : JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 ? (
+                  <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
+                ): (<>
+                Owner
+                </>)}
               </h5>
               <ul
                 className="nav nav-tabs mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
               >
-                <li className="nav-item">
+                {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
+                  <li className="nav-item">
                   <Link to="/home" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Dashboard</span>
@@ -143,33 +146,6 @@ function Dashboard() {
                   <Link to="/menu" className="nav-link align-middle sidebartag">
                     <i className="fa-solid fa-book"></i>
                     <span className="ms-1 d-none d-sm-inline"> Menu</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/resturant"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-utensils"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/pages"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-file"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/report"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-chart-bar"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -246,6 +222,61 @@ function Dashboard() {
                     <span className="ms-1 d-none d-sm-inline">Password</span>
                   </Link>
                 </li>
+                </>):(<>
+                  <li className="nav-item">
+                  <Link to="/home" className="nav-link align-middle sidebartag">
+                    <i className="fa-solid fa-house"></i>
+                    <span className="ms-1 d-none d-sm-inline">Dashboard</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/orders"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i className="fa-solid fa-chart-line"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Orders</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/resturant"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-utensils"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/pages"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-file"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/report"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i class="fas fa-chart-bar"></i>
+                    <span className="ms-1 d-none d-sm-inline"> Report</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/change-password"
+                    className="nav-link align-middle sidebartag"
+                  >
+                    <i className="fa-solid fa-lock-open"></i>
+                    <span className="ms-1 d-none d-sm-inline">Password</span>
+                  </Link>
+                </li>
+
+                </>)}
+                
               </ul>
             </div>
           </div>
@@ -254,7 +285,8 @@ function Dashboard() {
               <div className="col-md-12">
                 <h2 className="mt-5 mb-2 mx-3 responsiveness">DASHBOARD</h2>
 
-                <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
+                  {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 && (<>
+                    <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
                   <h6>
                     <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
                   </h6>
@@ -459,59 +491,67 @@ function Dashboard() {
                     </div>
                   </div>
                 </div>
+                  </>)}
+
               </div>
             </div>
-            {/* start of 1st resturant analytics  */}
-            <div className="row justify-content-center cardsrow responsiveness">
-              <Link
-                to="/orders"
-                style={{ textDecoration: "none" }}
-                className="cardslink"
-              >
-                <div style={{height: '145px'}} className="col-md-2 dashboardcards responsiveness">
-                  <h5 className="boldtext cardtitleclr">Sales Volume</h5>
-                  <h4 className="boldtext cardinfoclr">$0.00</h4>
-                  <h6>(days)</h6>
-                </div>
-              </Link>
-              <Link
-                to="/orders"
-                style={{ textDecoration: "none" }}
-                className="cardslink"
-              >
-                <div className="col-md-2 dashboardcards responsiveness">
-                  <h5 className="boldtext cardtitleclr">Orders</h5>
-                  <h4 className="boldtext cardinfoclr">{orders}</h4>
-                  <h6>Today</h6>
-                </div>
-              </Link>
-              <Link
-                to="/menu"
-                style={{ textDecoration: "none" }}
-                className="cardslink"
-              >
-                <div className="col-md-2 dashboardcards responsiveness">
-                  <h5 className="boldtext cardtitleclr">No of Items</h5>
-                  <h4 className="boldtext cardinfoclr">{item}</h4>
-                  <h6>items</h6>
-                </div>
-              </Link>
-              <Link
-                to="/customers"
-                style={{ textDecoration: "none" }}
-                className="cardslink"
-              >
-                <div className="col-md-2 dashboardcards responsiveness">
-                  <h5 className="boldtext cardtitleclr">Customers</h5>
-                  <h4 className="boldtext cardinfoclr">{customer}</h4>
-                  <h6>Customers</h6>
-                </div>
-              </Link>
-            </div>
-            {/* end of 1st resturant analytics  */}
 
-            {/* start of 2nd resturant analytics  */}
-            <div className="row justify-content-center cardsrow responsiveness">
+
+            {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (
+                  <>           
+                   {/* start of 1st resturant analytics  */}
+                  <div className="row justify-content-center cardsrow responsiveness">
+                    <Link
+                      to="/orders"
+                      style={{ textDecoration: "none" }}
+                      className="cardslink"
+                    >
+                      <div style={{height: '145px'}} className="col-md-2 dashboardcards responsiveness">
+                        <h5 className="boldtext cardtitleclr">Sales Volume</h5>
+                        <h4 className="boldtext cardinfoclr">$0.00</h4>
+                        <h6>(days)</h6>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/orders"
+                      style={{ textDecoration: "none" }}
+                      className="cardslink"
+                    >
+                      <div className="col-md-2 dashboardcards responsiveness">
+                        <h5 className="boldtext cardtitleclr">Orders</h5>
+                        <h4 className="boldtext cardinfoclr">{orders}</h4>
+                        <h6>Today</h6>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/menu"
+                      style={{ textDecoration: "none" }}
+                      className="cardslink"
+                    >
+                      <div className="col-md-2 dashboardcards responsiveness">
+                        <h5 className="boldtext cardtitleclr">No of Items</h5>
+                        <h4 className="boldtext cardinfoclr">{item}</h4>
+                        <h6>items</h6>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/customers"
+                      style={{ textDecoration: "none" }}
+                      className="cardslink"
+                    >
+                      <div className="col-md-2 dashboardcards responsiveness">
+                        <h5 className="boldtext cardtitleclr">Customers</h5>
+                        <h4 className="boldtext cardinfoclr">{customer}</h4>
+                        <h6>Customers</h6>
+                      </div>
+                    </Link>
+                  </div>
+                  {/* end of 1st resturant analytics  */}
+                  </>
+                ) : (
+                  <>
+                  {/* start of 2nd resturant analytics  */}
+                              <div className="row justify-content-center cardsrow responsiveness">
               <Link
                 to="/orders"
                 style={{ textDecoration: "none" }}
@@ -610,7 +650,11 @@ function Dashboard() {
               </Link>
             </div>
             {/* end of 2nd resturant analytics  */}
+                  </>
+                )}
 
+
+{getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 && (<>
             {/* start of live resturant */}
 
             <div className="container dashboardcards">
@@ -734,6 +778,8 @@ function Dashboard() {
             </div>
 
             {/* end of google map for resturant */}
+</>)}
+
           </div>
         </div>
       </div>
