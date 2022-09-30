@@ -13,7 +13,7 @@ function MenuTable() {
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
+  const [file,setFile] = useState("");
   const refCloseadd = useRef(null);
   const refCloseedit = useRef(null);
   const refCloseimage = useRef(null);
@@ -112,14 +112,20 @@ function MenuTable() {
       title,
       description,
       price,
-      image,
+      file
     };
-    alert(image)
+    const config = {
+      headers:{
+          "Content-Type":"multipart/form-data"
+      }
+  }
+    // alert(image)
+    // alert(file)
 
     try {
       const result = await axios.post(
         " http://localhost:5000/api/admin/createitem ",
-        user
+        user,config
       ).data;
       console.log(result);
       update1();
@@ -129,6 +135,7 @@ function MenuTable() {
       setTitle("");
       setPrice("");
       setdescription("");
+      setFile("");
     } catch (error) {
       console.log(error);
       toast.warn("Something went wrong try again!");
@@ -420,6 +427,7 @@ function MenuTable() {
                   >
                     <div className="modal-dialog">
                       <div className="modal-content">
+                        <form enctype="multipart/form-data">
                         <div className="modal-header">
                           <h5
                             className="modal-title boldtext"
@@ -480,9 +488,9 @@ function MenuTable() {
                               type="file"
                               class="form-control"
                               id="inputGroupFile02"
-                              name="image"
-                              value={image}
-                              onClick={(e)=>{setImage(e.target.files[0])}}
+                              name="photo"
+                              value={file}
+                              onClick={(e)=>{setFile(e.target.files[0])}}
                             />
                           </div>
                           <div className="text-center my-3">
@@ -490,7 +498,7 @@ function MenuTable() {
                               className="modal-img"
                               src=""
                               alt=".."
-                              value={image}
+                              value={file}
                             />
                           </div>
                         </div>
@@ -513,6 +521,7 @@ function MenuTable() {
                             Save
                           </button>
                         </div>
+                        </form>
                       </div>
                     </div>
                   </div>
