@@ -11,3 +11,7 @@
 .info{
     background-color: #03CFB7;
 }
+
+.idHover:hover {
+    color: rgb(11, 11, 114);
+  }

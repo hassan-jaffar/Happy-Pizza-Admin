@@ -147,7 +147,7 @@ function ResturantsTable() {
             </div>
           </div>
 
-          <div className="ms-4 bs">
+          <div className="ms-4 bs mb-5">
           {/* 1st row  */}
           <div className="row my-5 mx-4">
             <div className="col-md-6 text-start mt-5">
@@ -164,7 +164,7 @@ function ResturantsTable() {
           <div className="row ms-3">
               <div className="col-md-12">
                 <div className="table-responsive">
-                  <table className="table">
+                  <table style={{marginBottom: '180px'}} className="table">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>

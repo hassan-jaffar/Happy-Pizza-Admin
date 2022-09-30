@@ -2,44 +2,40 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Orders.css";
 import { Link } from "react-router-dom";
-import { DatePicker, Space  } from 'antd';
-import 'antd/dist/antd.css';
-import moment from 'moment';
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.css";
+import moment from "moment";
 const { RangePicker } = DatePicker;
-
 
 function OrdersTable() {
   const [orders, setOrders] = useState([]);
-  const [duplicateorders, setduplicateorders] = useState([])
-  const [type, settype] = useState("-- Select an option --")
-  const [fromdate , setfromdate] = useState();
-  const [todate , settodate] = useState();
+  const [duplicateorders, setduplicateorders] = useState([]);
+  const [type, settype] = useState("-- Select an option --");
+  const [fromdate, setfromdate] = useState();
+  const [todate, settodate] = useState();
 
-
-
-  async function searchByName(){
+  async function searchByName() {
     // alert("you have searched")
   }
 
-  function filterByDate(dates){
-    setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
-    settodate(dates[1])
+  function filterByDate(dates) {
+    setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
+    settodate(dates[1]);
 
-    alert(dates[0])
-  }   
+    alert(dates[0]);
+  }
 
-
-  function filterByName(e){
+  function filterByName(e) {
     settype(e);
 
-    if (e!=="-- Select an option --") {
-      
+    if (e !== "-- Select an option --") {
       // const temprooms = duplicateorders.filter(order=>order.ID===e)
-      const temporders = duplicateorders.filter(order=>order.ID===parseInt(e))
+      const temporders = duplicateorders.filter(
+        (order) => order.ID === parseInt(e)
+      );
       setOrders(temporders);
-    }
-    else{
-      setOrders(orders)
+    } else {
+      setOrders(orders);
     }
   }
   useEffect(() => {
@@ -49,17 +45,40 @@ function OrdersTable() {
           await axios.get("http://localhost:5000/api/admin/getallorders")
         ).data;
         setOrders(data.data);
-        setduplicateorders(data.data)
+        setduplicateorders(data.data);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+
+  var orderHistory = [
+    {
+      id: "1338-1664486773-004",
+      logo: "https://bit.ly/3ClJBPI",
+      restaurant: "Happys Pizza & Burger",
+      created: "29 Sep 2022 10:26 PM",
+      method: "Delivery",
+      status: "Accept",
+      payment: "cod (unpaid)",
+      total: 22.0,
+    },
+    {
+      id: "1338-1664486773-004",
+      logo: "https://bit.ly/3ClJBPI",
+      restaurant: "Happys Pizza & Burger",
+      created: "29 Sep 2022 10:26 PM",
+      method: "Delivery",
+      status: "Accept",
+      payment: "cod (unpaid)",
+      total: 22,
+    },
+  ];
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-md-12 text-center">
+        <div className="col-md-12">
           <h1 className="my-5 mx-4 responsiveness text-start">ORDERS</h1>
           <div
             className="accordion my-2 mx-4 bs responsiveness"
@@ -85,37 +104,70 @@ function OrdersTable() {
                 data-bs-parent="#accordionExample"
               >
                 <div className="accordion-body text-start my-3">
-                  <label for="daterange" className="me-1 my-1 boldtext">
-                    Date Range
-                  </label>
-                  {/* <input
+                  <div className="row">
+                    <div className="col-md-4">
+                      <label for="daterange" className="me-1 my-1 boldtext">
+                        Date Range
+                      </label>
+                      {/* <input
                     id="daterange"
                     className="me-1 my-1 py-1"
                     placeholder="Start Date"
                   /> */}
-                  <RangePicker format='DD-MM-YYYY' onChange={filterByDate} />
-                  <label for="customerfilter" className="boldtext ms-2 my-1">
-                    Filter by Customer:
-                  </label>
-                  {/* <input
+                      <RangePicker
+                        format="DD-MM-YYYY"
+                        onChange={filterByDate}
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <label
+                        for="customerfilter"
+                        className="boldtext ms-2 my-1"
+                      >
+                        Filter by Customer:
+                      </label>
+                      {/* <input
                     id="customerfilter"
                     className="mx-1 py-1"
                     placeholder="Select an option"
                   /> */}
-                  <select id="customerfilter" className="form-select mx-1 py-1" aria-label="Default select example" value={type} onChange={(e)=>{filterByName(e.target.value)}}>
-  
-  {orders.length > 0 && orders.map((order)=>{
-    return <>
-    <option value="-- Select an option --" selected>-- Select an option --</option>
-      <option value={order.ID}>{order.ID}</option>  
-    </>
-  })}
+                      <select
+                        id="customerfilter"
+                        className="form-select mx-1 py-1"
+                        aria-label="Default select example"
+                        value={type}
+                        onChange={(e) => {
+                          filterByName(e.target.value);
+                        }}
+                      >
+                        {orders.length > 0 &&
+                          orders.map((order) => {
+                            return (
+                              <>
+                                <option value="-- Select an option --" selected>
+                                  -- Select an option --
+                                </option>
+                                <option value={order.ID}>{order.ID}</option>
+                              </>
+                            );
+                          })}
 
-  {/* <option value="2">Two</option>
+                        {/* <option value="2">Two</option>
   <option value="3">Three</option> */}
-</select>
-                  <button className="btn btn-primary my-1 mx-1">Export</button>
-                  <button className="btn btn-primary my-1 mx-1" onClick={searchByName()}>Search</button>
+                      </select>
+                    </div>
+                    <div className="col-md-4 pt-4">
+                      <button className="btn btn-primary my-1 mx-1">
+                        Export
+                      </button>
+                      <button
+                        className="btn btn-primary my-1 mx-1"
+                        onClick={searchByName()}
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,118 +187,160 @@ function OrdersTable() {
                 </tr>
               </thead>
               <tbody>
-
                 {orders &&
                   orders.map((order) => {
                     return (
                       <>
                         <tr>
-                            <th scope="row">
-                              <span class="badge text-bg-info info">
-                                {order.ID}
-                              </span>
-                            </th>
+                          <th scope="row">
+                            <span class="badge text-bg-info info">
+                              {order.ID}
+                            </span>
+                          </th>
 
-                            <td>
-                            <Link to={`/order-detail/${order.cart_Id}/${order.customer_Id}`} style={{ textDecoration: "none", color: "black" }}>
-
+                          <td>
+                            <Link
+                              to={`/order-detail/${order.cart_Id}/${order.customer_Id}`}
+                              style={{ textDecoration: "none", color: "black" }}
+                            >
                               {order.house},Flat:{order.flat},{order.street},
                               {order.postcode},{order.town}
-                              </Link>
-
-                            </td>
-                            <td>{order.DateTime}</td>
-                            <td>
-                              <span class="badge text-bg-primary primary">
-                                collection
-                              </span>
-                            </td>
-                            <td>
-                              <span class="badge text-bg-info info">
-                                {order.Orderstatus === "1" ? (
-                                  <>Pending</>
-                                ) : order.Orderstatus === "2" ? (
-                                  <>In Process</>
-                                ) : order.Orderstatus === "3" ? (
-                                  <>Completed</>
-                                ) : (
-                                  <>Rejected</>
-                                )}
-                              </span>
-                            </td>
-                            <td>
-                              <span class="badge text-bg-primary primary">
-                                cod(unpaid)
-                              </span>
-                            </td>
-                            <td>${order.total}</td>
+                            </Link>
+                          </td>
+                          <td>{order.DateTime}</td>
+                          <td>
+                            <span class="badge text-bg-primary primary">
+                              collection
+                            </span>
+                          </td>
+                          <td>
+                            <span class="badge text-bg-info info">
+                              {order.Orderstatus === "1" ? (
+                                <>Pending</>
+                              ) : order.Orderstatus === "2" ? (
+                                <>In Process</>
+                              ) : order.Orderstatus === "3" ? (
+                                <>Completed</>
+                              ) : (
+                                <>Rejected</>
+                              )}
+                            </span>
+                          </td>
+                          <td>
+                            <span class="badge text-bg-primary primary">
+                              cod(unpaid)
+                            </span>
+                          </td>
+                          <td>${order.total}</td>
                         </tr>
-
                       </>
                     );
                   })}
-
-                {/* <tr>
-          <th scope="row">1017-1661245479-002</th>
-          <td>House No: 1, Cross Place, DY3 1PE, Sedgley</td>
-          <td>
-            13 August 2022
-            <br />
-            7:26 PM
-          </td>
-          <td>Delivery</td>
-          <td>Accept</td>
-          <td>cod(unpaid)</td>
-          <td>$17.93</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            1017-1661245479-002
-          </th>
-          <td>House No: 1, Cross Place, DY3 1PE, Sedgley</td>
-          <td>
-            13 August 2022
-            <br />
-            7:26 PM
-          </td>
-          <td>Delivery</td>
-          <td>Accept</td>
-          <td>cod(unpaid)</td>
-          <td>$17.93</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            1017-1661245479-002
-          </th>
-          <td>House No: 1, Cross Place, DY3 1PE, Sedgley</td>
-          <td>
-            13 August 2022
-            <br />
-            7:26 PM
-          </td>
-          <td>Delivery</td>
-          <td>Accept</td>
-          <td>cod(unpaid)</td>
-          <td>$17.93</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            1017-1661245479-002
-          </th>
-          <td>House No: 1, Cross Place, DY3 1PE, Sedgley</td>
-          <td>
-            13 August 2022
-            <br />
-            7:26 PM
-          </td>
-          <td>Delivery</td>
-          <td>Accept</td>
-          <td>cod(unpaid)</td>
-          <td>$17.93</td>
-        </tr> */}
               </tbody>
-              
             </table>
+          </div>
+
+          <div className="mx-4 bs ps-4 pt-4 mb-5">
+            <h6>ORDERS HISTORY</h6>
+            <hr></hr>
+            <div className="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Restaurant</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Method</th>
+                    <th scope="col">Last status</th>
+                    <th scope="col">Payment status</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+
+                {orderHistory.map((history) => {
+                  return (
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                          <Link to="/order-detail/:id/:cid">
+                            <span class="badge bg-primary idHover">{history.id}</span>
+                          </Link>
+                        </th>
+                        <th>
+                          <Link to="/order-detail/:id/:cid">
+                            <span>
+                              <img src={history.logo} alt="logo" height="45" />
+                            </span>
+                            <span className="text-dark">{history.restaurant}</span>
+                          </Link>
+                        </th>
+                        <td >
+                          <Link to="/order-detail/:id/:cid">
+                            <span className="text-dark">{history.created}</span>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link to="/order-detail/:id/:cid">
+                            <span class="badge bg-primary">
+                              {history.method}
+                            </span>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link to="/order-detail/:id/:cid">
+                            <span class="badge bg-info">{history.status}</span>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link to="/order-detail/:id/:cid">
+                            <span class="badge bg-primary">
+                              {history.payment}
+                            </span>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link to="/order-detail/:id/:cid">
+                           <span className="text-dark">${history.total}</span> 
+                          </Link>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+              </table>
+            </div>
+
+            <div className="d-flex justify-content-end mt-4 me-5 pb-4">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      Previous
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      1
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      2
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      3
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      Next
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>

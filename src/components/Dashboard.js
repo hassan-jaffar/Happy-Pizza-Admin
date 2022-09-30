@@ -464,11 +464,11 @@ function Dashboard() {
             {/* start of 1st resturant analytics  */}
             <div className="row justify-content-center cardsrow responsiveness">
               <Link
-                to="/"
+                to="/orders"
                 style={{ textDecoration: "none" }}
                 className="cardslink"
               >
-                <div className="col-md-2 dashboardcards responsiveness">
+                <div style={{height: '145px'}} className="col-md-2 dashboardcards responsiveness">
                   <h5 className="boldtext cardtitleclr">Sales Volume</h5>
                   <h4 className="boldtext cardinfoclr">$0.00</h4>
                   <h6>(days)</h6>
@@ -513,11 +513,11 @@ function Dashboard() {
             {/* start of 2nd resturant analytics  */}
             <div className="row justify-content-center cardsrow responsiveness">
               <Link
-                to="/"
+                to="/orders"
                 style={{ textDecoration: "none" }}
                 className="cardslink"
               >
-                <div className="col-md-2 dashboardcards responsiveness">
+                <div style={{height: '160px'}} className="col-md-2 dashboardcards responsiveness">
                   <div className="row">
                     <div className="col-10">
                       <h5 className="boldtext cardtitleclr">Sales Volume</h5>
@@ -704,7 +704,7 @@ function Dashboard() {
             {/* end of live resturant */}
 
             {/* start of google map for resturant */}
-            <div className="container dashboardcards">
+            <div className="container dashboardcards mt-5">
               <div className="row">
                 <div className="col-6">
                   <h6>REALTIME MAP</h6>
