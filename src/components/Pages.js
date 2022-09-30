@@ -48,19 +48,18 @@ function Pages() {
       ID,
       status
     }
-    alert(typeof(status))
 
-    // try {
-    //     const data = await (
-    //       await axios.post(
-    //         "http://localhost:5000/api/superadmin/updatepagestatus",details
-    //       )
-    //     ).data;
-    //     setpage(data.data);
-    //     update()
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+        const data = await (
+          await axios.post(
+            "http://localhost:5000/api/superadmin/updatepagestatus",details
+          )
+        ).data;
+        setpage(data.data);
+        update()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -262,7 +261,7 @@ function Pages() {
                           </th>
                         </tr>
                       </thead>
-                      {page.map((pages) => {
+                      {page && page.map((pages) => {
                         return (
                           <tbody>
                             <tr>
@@ -278,7 +277,7 @@ function Pages() {
                                     role="switch"
                                     id="flexSwitchCheckChecked"
                                     checked={pages.status === "true" ? (true):(false)}
-                                    onChange={(e)=>{setpage(page.map((item)=>( {...item,status:JSON.parse(e.target.checked)})));change(pages.ID,pages.status)}}
+                                    onChange={(e)=>{setpage(page.map((item)=>( {...item,status:JSON.stringify(e.target.checked)})));change(pages.ID,JSON.stringify(e.target.checked))}}
                                     // onChange={(e)=>{change(pages.ID,e)}}
                                     // onClick={()=>{change(pages.ID)}}
                                   />
