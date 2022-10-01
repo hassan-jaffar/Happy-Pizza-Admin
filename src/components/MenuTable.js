@@ -112,39 +112,41 @@ function MenuTable() {
     formData.append("title",title);
     formData.append("description",description);
     formData.append("price",price);
-    const user = {
-      category_id
+
+    console.log(file)
+    // const user = {
+    //   category_id
       // title,
       // description,
       // price,
       // file
-    };
-    const config = {
-      headers:{
-          "Content-Type":"multipart/form-data"
-      }
-  }
+    // };
+  //   const config = {
+  //     headers:{
+  //         "Content-Type":"multipart/form-data"
+  //     }
+  // }
     // alert(image)
     // alert(file)
 
-    try {
-      const result = await axios.post(
-        " http://localhost:5000/api/admin/createitem ",
-        formData,config,user
-      ).data;
-      console.log(result);
-      update1();
-      toast.success("Item has been Added");
-      refCloseadd.current.click();
-      setName("");
-      setTitle("");
-      setPrice("");
-      setdescription("");
-      setFile("");
-    } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong try again!");
-    }
+    // try {
+    //   const result = await axios.post(
+    //     " http://localhost:5000/api/admin/createitem ",
+    //     formData,config,user
+    //   ).data;
+    //   console.log(result);
+    //   update1();
+    //   toast.success("Item has been Added");
+    //   refCloseadd.current.click();
+    //   setName("");
+    //   setTitle("");
+    //   setPrice("");
+    //   setdescription("");
+    //   setFile("");
+    // } catch (error) {
+    //   console.log(error);
+    //   toast.warn("Something went wrong try again!");
+    // }
   }
 
   useEffect(() => {
@@ -501,8 +503,8 @@ function MenuTable() {
                               class="form-control"
                               id="inputGroupFile02"
                               name="photo"
-                              value={file}
-                              onClick={(e)=>{setFile(e.target.files[0])}}
+                              // value={file}
+                              onClick={(e)=>{setFile(e.target.files.length)}}
                             />
                           </div>
                           <div className="text-center my-3">
@@ -510,7 +512,7 @@ function MenuTable() {
                               className="modal-img"
                               src=""
                               alt=".."
-                              value={file}
+                              // value={file}
                             />
                           </div>
                         </div>
