@@ -9,11 +9,14 @@ const { RangePicker } = DatePicker;
 
 function OrdersTable() {
   const [orders, setOrders] = useState([]);
+  const [orders1, setOrders1] = useState([]);
   const [orderHistory, setorderHistory] = useState([]);
+  const [orderHistory1, setorderHistory1] = useState([]);
   const [duplicateorders, setduplicateorders] = useState([]);
+  const [duplicateorderHistory, setduplicateorderHistory] = useState([]);
   const [type, settype] = useState("-- Select an option --");
-  const [fromdate, setfromdate] = useState();
-  const [todate, settodate] = useState();
+  const [fromdate, setfromdate] = useState(moment().format("MMMM Do YYYY, h:mm a"));
+  const [todate, settodate] = useState(moment().format("MMMM Do YYYY, h:mm a"));
   
   const getstatus = localStorage.getItem("status");
 
@@ -22,10 +25,28 @@ function OrdersTable() {
   }
 
   function filterByDate(dates) {
-    setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
+    setfromdate(dates[0]);
     settodate(dates[1]);
 
-    alert(dates[0]);
+    alert(todate)
+
+    var temp = []
+    var availablity = false;
+    for (let i = 0; i < orderHistory.length; i++) {
+      if (orderHistory.length > 0) {
+        if(!moment(orderHistory[i].DateTime).format('MMMM Do YYYY, h:mm a').isBetween(fromdate , todate)){
+          alert("Yes there are some")
+        }
+        else{
+          alert("testing fail")
+        }
+      }
+      else{
+        alert("In the else")
+      }
+      
+    }
+ 
   }
 
   function filterByName(e) {
@@ -34,13 +55,28 @@ function OrdersTable() {
     if (e !== "-- Select an option --") {
       // const temprooms = duplicateorders.filter(order=>order.ID===e)
       const temporders = duplicateorders.filter(
-        (order) => order.ID === parseInt(e)
+        (order) => order.cart_Id === parseInt(e)
       );
       setOrders(temporders);
     } else {
-      setOrders(orders);
+      setOrders(orders1);
     }
   }
+
+  function filterByRestaurant(e) {
+    settype(e);
+
+    if (e !== "-- Select an option --") {
+      const tempresturants = duplicateorderHistory.filter(
+        (order) => order.cart_Id === parseInt(e)
+      );
+      setorderHistory(tempresturants);
+    } else {
+      setorderHistory(orderHistory1);
+    }
+  }
+
+  console.log(orders)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -53,7 +89,10 @@ function OrdersTable() {
         ).data;
         setOrders(data.data);
         setduplicateorders(data.data);
+        setOrders1(data.data)
         setorderHistory(resturant.data);
+        setorderHistory1(resturant.data);
+        setduplicateorderHistory(resturant.data);
       } catch (error) {
         console.log(error);
       }
@@ -127,7 +166,8 @@ function OrdersTable() {
                         onChange={filterByDate}
                       />
                     </div>
-                    <div className="col-md-4">
+                    { getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
+                      <div className="col-md-4">
                       <label
                         for="customerfilter"
                         className="boldtext ms-2 my-1"
@@ -148,14 +188,15 @@ function OrdersTable() {
                           filterByName(e.target.value);
                         }}
                       >
-                        {orders.length > 0 &&
-                          orders.map((order) => {
+                        <option value="-- Select an option --" selected>
+                            -- Select an option --
+                          </option>
+                        {orders1.length > 0 &&
+                          orders1.map((order) => {
+
                             return (
                               <>
-                                <option value="-- Select an option --" selected>
-                                  -- Select an option --
-                                </option>
-                                <option value={order.ID}>{order.ID}</option>
+                                <option value={order.cart_Id}>{order.name}</option>
                               </>
                             );
                           })}
@@ -164,6 +205,42 @@ function OrdersTable() {
   <option value="3">Three</option> */}
                       </select>
                     </div>
+                    </>):(<>
+                      <div className="col-md-4">
+                      <label
+                        for="customerfilter"
+                        className="boldtext ms-2 my-1"
+                      >
+                        Filter by Restaurant:
+                      </label>
+                      <select
+                        id="customerfilter"
+                        className="form-select mx-1 py-1"
+                        aria-label="Default select example"
+                        value={type}
+                        onChange={(e) => {
+                          filterByRestaurant(e.target.value);
+                        }}
+                      >
+                        <option value="-- Select an option --" selected>
+                            -- Select an option --
+                          </option>
+                        {orderHistory1.length > 0 &&
+                          orderHistory1.map((order) => {
+
+                            return (
+                              <>
+                                <option value={order.cart_Id}>{order.name}</option>
+                              </>
+                            );
+                          })}
+
+                        {/* <option value="2">Two</option>
+  <option value="3">Three</option> */}
+                      </select>
+                    </div>
+                    </>)}
+
                     <div className="col-md-4 pt-4">
                       <button className="btn btn-primary my-1 mx-1">
                         Export
@@ -202,7 +279,7 @@ function OrdersTable() {
                         <tr>
                           <th scope="row">
                             <span class="badge text-bg-info info">
-                              {order.ID}
+                              {order.cart_Id}
                             </span>
                           </th>
 
@@ -215,7 +292,7 @@ function OrdersTable() {
                               {order.postcode},{order.town}
                             </Link>
                           </td>
-                          <td>{order.DateTime}</td>
+                          <td>{moment(order.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
                           <td>
                             <span class="badge text-bg-primary primary">
                               collection
@@ -287,7 +364,7 @@ function OrdersTable() {
                         <td >
                           <Link
                               to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
-                            <span className="text-dark">{history.DateTime}</span>
+                            <span className="text-dark">{moment(history.DateTime).format('MMMM Do YYYY, h:mm:ss a')}</span>
                           </Link>
                         </td>
                         <td>
