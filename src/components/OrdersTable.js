@@ -9,10 +9,12 @@ const { RangePicker } = DatePicker;
 
 function OrdersTable() {
   const [orders, setOrders] = useState([]);
+  const [orderHistory, setorderHistory] = useState([]);
   const [duplicateorders, setduplicateorders] = useState([]);
   const [type, settype] = useState("-- Select an option --");
   const [fromdate, setfromdate] = useState();
   const [todate, settodate] = useState();
+  
   const getstatus = localStorage.getItem("status");
 
   async function searchByName() {
@@ -45,8 +47,13 @@ function OrdersTable() {
         const data = await (
           await axios.get("http://localhost:5000/api/admin/getallorders")
         ).data;
+
+        const resturant = await (
+          await axios.get("http://localhost:5000/api/superadmin/orderreport")
+        ).data;
         setOrders(data.data);
         setduplicateorders(data.data);
+        setorderHistory(resturant.data);
       } catch (error) {
         console.log(error);
       }
@@ -54,28 +61,28 @@ function OrdersTable() {
     fetchData();
   }, []);
 
-  var orderHistory = [
-    {
-      id: "1338-1664486773-004",
-      logo: "https://bit.ly/3ClJBPI",
-      restaurant: "Happys Pizza & Burger",
-      created: "29 Sep 2022 10:26 PM",
-      method: "Delivery",
-      status: "Accept",
-      payment: "cod (unpaid)",
-      total: 22.0,
-    },
-    {
-      id: "1338-1664486773-004",
-      logo: "https://bit.ly/3ClJBPI",
-      restaurant: "Happys Pizza & Burger",
-      created: "29 Sep 2022 10:26 PM",
-      method: "Delivery",
-      status: "Accept",
-      payment: "cod (unpaid)",
-      total: 22,
-    },
-  ];
+  // var orderHistory = [
+  //   {
+  //     id: "1338-1664486773-004",
+  //     logo: "https://bit.ly/3ClJBPI",
+  //     restaurant: "Happys Pizza & Burger",
+  //     created: "29 Sep 2022 10:26 PM",
+  //     method: "Delivery",
+  //     status: "Accept",
+  //     payment: "cod (unpaid)",
+  //     total: 22.0,
+  //   },
+  //   {
+  //     id: "1338-1664486773-004",
+  //     logo: "https://bit.ly/3ClJBPI",
+  //     restaurant: "Happys Pizza & Burger",
+  //     created: "29 Sep 2022 10:26 PM",
+  //     method: "Delivery",
+  //     status: "Accept",
+  //     payment: "cod (unpaid)",
+  //     total: 22,
+  //   },
+  // ];
   return (
     <>
       <div className="row justify-content-center">
@@ -263,44 +270,61 @@ function OrdersTable() {
                     <tbody>
                       <tr>
                         <th scope="row">
-                          <Link to="/order-detail/:id/:cid">
-                            <span class="badge bg-primary idHover">{history.id}</span>
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
+                            <span class="badge bg-primary idHover">{history.cart_Id}</span>
                           </Link>
                         </th>
                         <th>
-                          <Link to="/order-detail/:id/:cid">
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
                             <span>
-                              <img src={history.logo} alt="logo" height="45" />
+                              <img src={history.image} alt="logo" height="45" />
                             </span>
-                            <span className="text-dark">{history.restaurant}</span>
+                            <span className="text-dark">{history.name}</span>
                           </Link>
                         </th>
                         <td >
-                          <Link to="/order-detail/:id/:cid">
-                            <span className="text-dark">{history.created}</span>
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
+                            <span className="text-dark">{history.DateTime}</span>
                           </Link>
                         </td>
                         <td>
-                          <Link to="/order-detail/:id/:cid">
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
                             <span class="badge bg-primary">
-                              {history.method}
+                              Delivery
                             </span>
                           </Link>
                         </td>
                         <td>
-                          <Link to="/order-detail/:id/:cid">
-                            <span class="badge bg-info">{history.status}</span>
-                          </Link>
-                        </td>
-                        <td>
-                          <Link to="/order-detail/:id/:cid">
-                            <span class="badge bg-primary">
-                              {history.payment}
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
+                            <span class="badge bg-info">
+                            {history.Orderstatus === "1" ? (
+                                <>Pending</>
+                              ) : history.Orderstatus === "2" ? (
+                                <>In Process</>
+                              ) : history.Orderstatus === "3" ? (
+                                <>Completed</>
+                              ) : (
+                                <>Rejected</>
+                              )}
                             </span>
                           </Link>
                         </td>
                         <td>
-                          <Link to="/order-detail/:id/:cid">
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
+                            <span class="badge bg-primary">
+                            cod(unpaid)
+                            </span>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link
+                              to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
                            <span className="text-dark">${history.total}</span> 
                           </Link>
                         </td>
