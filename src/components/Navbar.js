@@ -33,7 +33,8 @@ function Navbar() {
             id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel"
           >
-            <div className="offcanvas-header">
+            {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
+              <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasExampleLabel">
                 MENU
               </h5>
@@ -168,6 +169,80 @@ function Navbar() {
               </div>
             </div>
             </div>
+            </>):(<>
+              <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+                MENU
+              </h5>
+              <button
+                type="button"
+                className="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="offcanvas-body">
+            <div className="row">
+              <div className="col-md-12">
+              <>
+                  <li className="nav-item">
+                  <Link to="/home" className="nav-link align-middle sidemenuitems">
+                    <i className="fa-solid fa-house"></i>
+                    <span className="ms-5 ">Dashboard</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/orders"
+                    className="nav-link align-middle sidemenuitems"
+                  >
+                    <i className="fa-solid fa-chart-line"></i>
+                    <span className="ms-5 "> Orders</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/resturant"
+                    className="nav-link align-middle sidemenuitems"
+                  >
+                    <i class="fas fa-utensils"></i>
+                    <span className="ms-5 "> Resturants</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/pages"
+                    className="nav-link align-middle sidemenuitems"
+                  >
+                    <i class="fas fa-file"></i>
+                    <span className="ms-5 "> Pages</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/report"
+                    className="nav-link align-middle sidemenuitems"
+                  >
+                    <i class="fas fa-chart-bar"></i>
+                    <span className="ms-5 "> Report</span>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/change-password"
+                    className="nav-link align-middle sidemenuitems"
+                  >
+                    <i className="fa-solid fa-lock-open"></i>
+                    <span className="ms-5 ">Password</span>
+                  </Link>
+                </li>
+
+                </>
+              </div>
+            </div>
+            </div>
+            </>)}
+
           </div>
 
           <div className="col-md-4 menuitems text-center">
