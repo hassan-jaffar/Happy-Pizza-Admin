@@ -20,6 +20,7 @@ import AddResturant from "./components/AddResturant";
 import Pages from "./components/Pages";
 import AddPage from "./components/AddPage";
 import Report from "./components/Report";
+import MyProfile from "./components/MyProfile";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/pages" element={<Pages />}></Route>
         <Route path="/addpage" element={<AddPage />}></Route>
         <Route path="/report" element={<Report />}></Route>
+        <Route path="/profile" element={<MyProfile />}></Route>
         <Route
           path="*"
           element={
