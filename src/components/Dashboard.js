@@ -579,7 +579,7 @@ function Dashboard() {
                 style={{ textDecoration: "none" }}
                 className="cardslink"
               >
-                <div style={{height: '160px'}} className="col-md-2 dashboardcards responsiveness">
+                <div className="col-md-2 dashboardcards responsiveness">
                   <div className="row">
                     <div className="col-10">
                       <h5 className="boldtext cardtitleclr">Sales Volume</h5>
