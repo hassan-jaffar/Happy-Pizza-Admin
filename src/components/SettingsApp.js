@@ -156,7 +156,7 @@ function SettingsApp() {
             <option value="On order received">On order received</option>
           </select>
           <div className="container mt-5 text-center">
-            <button className="btn btn-info py-2 w-25" onClick={register} >Save</button>
+            <button className="btn btn-info py-2" onClick={register} >Save</button>
           </div>
         </div>
       </div>

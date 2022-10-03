@@ -100,9 +100,13 @@ border: 0;
             display: none;
         }
         .Stroketext{
-            width: 30%;
+            /* width: 30%; */
+            padding: 5px;
+            font-size: large;
         }
         .Stroketexts{
-            width: 30%;
+            /* width: 30%; */
+            padding: 5px;
+            font-size: large;
         }
 }

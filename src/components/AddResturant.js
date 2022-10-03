@@ -355,7 +355,7 @@ function AddResturant() {
                     <div className="col-md-6 text-start mt-2">
                       <h4>RESTAURANT MANAGEMENT</h4>
                     </div>
-                    <div className="col-md-6 text-end mt-2">
+                    <div className="col-md-6 text-end mt-2 resLeft">
                       <Link to="/resturant">
                         <button className="btn btn-primary">
                           Back to list
