@@ -9,7 +9,7 @@ function Content() {
       <div className="row">
         <div className="col-md-12">
           <div className="container mt-5 text-center">
-            <button className="btn btn-info py-2 w-25">Save</button>
+            <button className="btn btn-info py-2">Save</button>
           </div>
         </div>
       </div>

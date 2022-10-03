@@ -83,7 +83,7 @@ function ChangePasswordTable() {
             value={cpassword}
             onChange={(e)=>{setcpassword(e.target.value)}}
           />
-          <button className="btn btn-primary usercartbtn" onClick={register}>
+          <button className="btn btn-primary" onClick={register}>
             Change Password
           </button>
         </div>

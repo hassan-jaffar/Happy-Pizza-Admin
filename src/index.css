@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: auto !important;
 }
 
 code {
@@ -159,13 +160,6 @@ code {
   align-items: center;
 }
 
-.usercartbtn {
-  margin-left: auto;
-  font-weight: 500;
-  font-size: large;
-  width: 25%;
-}
-
 .qrcode {
   margin: 20px auto !important;
   display: block;
@@ -257,10 +251,6 @@ code {
     display: none !important;
     /* width: 10% !important; */
   }
-  .body {
-    overflow-y: hidden !important; /* Hide vertical scrollbar */
-    overflow-x: hidden !important; /* Hide horizontal scrollbar */
-  }
   .responsiveness {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -291,5 +281,11 @@ code {
     width: 80px;
     height: 80px;
     margin: 10px 40px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .resLeft {
+    display: flex;
   }
 }

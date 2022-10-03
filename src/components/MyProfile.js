@@ -238,15 +238,10 @@ function MyProfile() {
             </div>
           </div>
           <div className="col-lg-9">
-            <div className="container mt-5">
-              <div className="row">
-                <div className="col">
+              <div className="container mt-5">
                   <h1>USER PROFILE</h1>
-                </div>
-              </div>
-
               <div className="row">
-                <div className="col-md-8 bs mb-5">
+                <div className="col-12 bs">
                   <div className="row p-4">
                     <div className="col-6">
                       <h5 className="mt-1">USER PROFILE</h5>
@@ -320,26 +315,8 @@ function MyProfile() {
                     </div>
                   </form>
                 </div>
-                <div className="col-md-4 bs p-4">
-                <h5 className="mt-1">INFO</h5>
-                    <hr></hr>
-                    <b>Info</b>
-                    <br></br>
-                    <b>Total Orders : 0</b>
-                    <hr></hr>
-                    <b>Last Added address</b>
-                    <p>395, 395 Street 37, PWD Housing Society Sector C PWD Society, Islamabad, Islamabad Capital Territory, Pakistan</p>
-                    <hr></hr>
-                    <b className="fs-5">Referral Info</b>
-                    <br></br>
-                    <b className="fs-6">Total Earned: $0</b>
-                    <br></br>
-                    <b className="fs-6">Total Spent: $0</b>
-                    <br></br>
-                    <b className="fs-6">Pending credit: $0</b>
-                </div>
               </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>

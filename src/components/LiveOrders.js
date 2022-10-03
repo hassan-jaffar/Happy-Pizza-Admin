@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {Howl, Howler} from 'howler';
+import { Howl, Howler } from "howler";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LiveOrders.css";
-import ping from "../audioclip/ping-82822.mp3"
+import ping from "../audioclip/ping-82822.mp3";
 import Navbar from "./Navbar";
 
 function LiveOrders() {
   const [info, setInfo] = useState([]);
   const getstatus = localStorage.getItem("status");
   var sound = new Howl({
-    src: [ping]
+    src: [ping],
   });
-  
-  
 
   useEffect(() => {
     async function fetchData() {
@@ -22,16 +20,14 @@ function LiveOrders() {
           await axios.get("http://localhost:5000/api/admin/getliveorders")
         ).data;
 
-        const count = await (await axios.get("http://localhost:5000/api/admin/getliveorderscount")).data;
+        const count = await (
+          await axios.get("http://localhost:5000/api/admin/getliveorderscount")
+        ).data;
         setInfo(data.data);
-         
-      if(count.data === "true")
-        {
 
-          sound.play()
+        if (count.data === "true") {
+          sound.play();
         }
-        
-      
       } catch (error) {
         console.log(error);
       }
@@ -42,15 +38,13 @@ function LiveOrders() {
     }, 5000);
   }, []);
 
-  
-
   async function update() {
     try {
       const data = await (
         await axios.get("http://localhost:5000/api/admin/getliveorders")
       ).data;
       setInfo(data.data);
-      
+
       console.log(data.data);
     } catch (error) {
       console.log(error);
@@ -99,496 +93,541 @@ function LiveOrders() {
     <>
       <Navbar />
       <div className="container-fluid">
-        <div></div>
         <div className="row flex-nowrap">
-        <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
+          <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
-                {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (
+                {getstatus === "true" &&
+                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
-                ) : JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 ? (
+                ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  2 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
-                ): (<>
-                Owner
-                </>)}
+                ) : (
+                  <>Owner</>
+                )}
               </h5>
               <ul
                 className="nav nav-tabs mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
               >
-                {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
-                  <li className="nav-item">
-                  <Link to="/home" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-house"></i>
-                    <span className="ms-1 d-none d-sm-inline">Dashboard</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/liveorders"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-bag-shopping"></i>
-                    <span className="ms-1 d-none d-sm-inline">
-                      {" "}
-                      Live Orders
-                    </span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/orders"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-chart-line"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Orders</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/customers"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-user"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Customers</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/menu" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-book"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Menu</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/setting"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-gear"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Setting</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <div className="accordion" id="accordionExample">
-                    <div className="accordion-item" style={{ border: "none" }}>
-                      <h2 className="accordion-header" id="headingTwo">
-                        <button
-                          className="accordion-button collapsed boldtext align-middle "
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseTwo"
-                          aria-expanded="false"
-                          aria-controls="collapseTwo"
-                          style={{ padding: "1rem" }}
-                        >
-                          <i className="fa-solid fa-arrows-to-dot"></i>
-                          <span className="ms-1">Marketing</span>
-                        </button>
-                      </h2>
-                      <div
-                        id="collapseTwo"
-                        className="accordion-collapse collapse"
-                        aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample"
+                {getstatus === "true" &&
+                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  1 ? (
+                  <>
+                    <li className="nav-item">
+                      <Link
+                        to="/home"
+                        className="nav-link align-middle sidebartag"
                       >
-                        <div className="accordion-body">
-                          <li>
-                            <Link
-                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
-                              to="/coupon"
+                        <i className="fa-solid fa-house"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          Dashboard
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/liveorders"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-bag-shopping"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          {" "}
+                          Live Orders
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/orders"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-chart-line"></i>
+                        <span className="ms-1 d-none d-sm-inline"> Orders</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/customers"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-user"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          {" "}
+                          Customers
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/menu"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-book"></i>
+                        <span className="ms-1 d-none d-sm-inline"> Menu</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/setting"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-gear"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          {" "}
+                          Setting
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <div className="accordion" id="accordionExample">
+                        <div
+                          className="accordion-item"
+                          style={{ border: "none" }}
+                        >
+                          <h2 className="accordion-header" id="headingTwo">
+                            <button
+                              className="accordion-button collapsed boldtext align-middle "
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseTwo"
+                              aria-expanded="false"
+                              aria-controls="collapseTwo"
+                              style={{ padding: "1rem" }}
                             >
-                              <i className="fa-solid fa-tag btnicon"></i>
-                              Discounts
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
-                              to="/bulksms"
-                            >
-                              <i className="fa-solid fa-message btnicon"></i>
-                              Bulk SMS
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              className="dropdown-item nav-link align-middle sidemenuitems boldtext "
-                              to="/share"
-                            >
-                              <i className="fa-solid fa-share btnicon"></i>
-                              Share
-                            </Link>
-                          </li>
+                              <i className="fa-solid fa-arrows-to-dot"></i>
+                              <span className="ms-1">Marketing</span>
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseTwo"
+                            className="accordion-collapse collapse"
+                            aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div className="accordion-body">
+                              <li>
+                                <Link
+                                  className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                                  to="/coupon"
+                                >
+                                  <i className="fa-solid fa-tag btnicon"></i>
+                                  Discounts
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                                  to="/bulksms"
+                                >
+                                  <i className="fa-solid fa-message btnicon"></i>
+                                  Bulk SMS
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  className="dropdown-item nav-link align-middle sidemenuitems boldtext "
+                                  to="/share"
+                                >
+                                  <i className="fa-solid fa-share btnicon"></i>
+                                  Share
+                                </Link>
+                              </li>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/change-password"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-lock-open"></i>
-                    <span className="ms-1 d-none d-sm-inline">Password</span>
-                  </Link>
-                </li>
-                </>):(<>
-                  <li className="nav-item">
-                  <Link to="/home" className="nav-link align-middle sidebartag">
-                    <i className="fa-solid fa-house"></i>
-                    <span className="ms-1 d-none d-sm-inline">Dashboard</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/orders"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-chart-line"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Orders</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/resturant"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-utensils"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Resturants</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/pages"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-file"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Pages</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/report"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i class="fas fa-chart-bar"></i>
-                    <span className="ms-1 d-none d-sm-inline"> Report</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/change-password"
-                    className="nav-link align-middle sidebartag"
-                  >
-                    <i className="fa-solid fa-lock-open"></i>
-                    <span className="ms-1 d-none d-sm-inline">Password</span>
-                  </Link>
-                </li>
-
-                </>)}
-                
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/change-password"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-lock-open"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          Password
+                        </span>
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link
+                        to="/home"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-house"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          Dashboard
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/orders"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-chart-line"></i>
+                        <span className="ms-1 d-none d-sm-inline"> Orders</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/resturant"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i class="fas fa-utensils"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          {" "}
+                          Resturants
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/pages"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i class="fas fa-file"></i>
+                        <span className="ms-1 d-none d-sm-inline"> Pages</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/report"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i class="fas fa-chart-bar"></i>
+                        <span className="ms-1 d-none d-sm-inline"> Report</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        to="/change-password"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-lock-open"></i>
+                        <span className="ms-1 d-none d-sm-inline">
+                          Password
+                        </span>
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
           <div className="col-lg-9">
-            <h1
-              style={{
-                marginTop: "30px",
-                marginBottom: "30px",
-                fontWeight: "normal",
-              }}
-            >
-              LIVE ORDERS
-            </h1>
-            <div className="row">
-              <div className="col-4">
-                <div className="card cardattributes">
-                  <div className="card-header titleheader">
-                    <h4 className="card-title ">New Orders</h4>
-                  </div>
-                  <div className="card-body bordersofcard">
-                    {info &&
-                      info.map((items) => {
-                        return (
-                          <>
-                            {items.Orderstatus === "1" ? (
-                              <>
-                                <div
-                                  class="accordion"
-                                  id={`accordion${items.cart_Id}`}
-                                >
-                                  {/* Div start */}
+            <div className="container mt-5">
+              <h1
+                style={{
+                  marginTop: "30px",
+                  marginBottom: "30px",
+                  fontWeight: "normal",
+                }}
+              >
+                LIVE ORDERS
+              </h1>
+
+              {/* start of cards for desktop view */}
+              <div className="row desktopCard">
+                <div className="col-4">
+                  <div className="card cardattributes">
+                    <div className="card-header titleheader">
+                      <h4 className="card-title ">New Orders</h4>
+                    </div>
+                    <div className="card-body bordersofcard">
+                      {info &&
+                        info.map((items) => {
+                          return (
+                            <>
+                              {items.Orderstatus === "1" ? (
+                                <>
                                   <div
-                                    class="accordion-item accitem"
-                                    key={`${items.cart_Id}`}
+                                    class="accordion"
+                                    id={`accordion${items.cart_Id}`}
                                   >
-                                    <h2
-                                      class="accordion-header cursor"
-                                      id={`heading${items.cart_Id}`}
-                                      data-bs-toggle="collapse"
-                                      data-bs-target={`#collapse${items.cart_Id}`}
-                                      aria-expanded="true"
-                                      aria-controls={`#collapse${items.cart_Id}`}
+                                    {/* Div start */}
+                                    <div
+                                      class="accordion-item accitem"
+                                      key={`${items.cart_Id}`}
                                     >
-                                      <div className="row justify-content-center align-items-center">
-                                        <div className="col-md-2 imghead">
-                                          <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
-                                            width={28}
-                                            height={28}
-                                          />
+                                      <h2
+                                        class="accordion-header cursor"
+                                        id={`heading${items.cart_Id}`}
+                                        data-bs-toggle="collapse"
+                                        data-bs-target={`#collapse${items.cart_Id}`}
+                                        aria-expanded="true"
+                                        aria-controls={`#collapse${items.cart_Id}`}
+                                      >
+                                        <div className="row justify-content-center align-items-center">
+                                          <div className="col-md-2 imghead">
+                                            <img
+                                              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
+                                              width={28}
+                                              height={28}
+                                            />
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketext">
+                                              # -001
+                                            </h6>
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketexts">
+                                              unpaid
+                                            </h6>
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketexts">
+                                              Delivery
+                                            </h6>
+                                          </div>
                                         </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketext"># -001</h6>
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketexts">
-                                            unpaid
-                                          </h6>
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketexts">
-                                            Delivery
-                                          </h6>
+                                      </h2>
+                                      <div
+                                        id={`collapse${items.cart_Id}`}
+                                        class="accordion-collapse collapse show"
+                                        aria-labelledby={`heading${items.ID}`}
+                                        data-bs-parent={`accordion${items.cart_Id}`}
+                                      >
+                                        <div class="accordion-body">
+                                          <h2 className="emailformat">
+                                            {items.name}
+                                          </h2>
+                                          <h2 className="addresstime">
+                                            <span></span>House No: {items.house}
+                                            , {items.flat},{items.street},
+                                            {items.postcode},{items.town}
+                                          </h2>
+                                          {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
+                                          <div className="row btnrow">
+                                            <div className="col-md-6">
+                                              <button
+                                                type="button"
+                                                className="btn actionbtns"
+                                                onClick={() => {
+                                                  add(
+                                                    items.cart_Id,
+                                                    items.Orderstatus
+                                                  );
+                                                }}
+                                              >
+                                                Accept
+                                              </button>
+                                            </div>
+                                            <div className="col-md-6">
+                                              <button
+                                                type="button"
+                                                className="btn actionbtns"
+                                                onClick={() => {
+                                                  reject(
+                                                    items.cart_Id,
+                                                    items.Orderstatus
+                                                  );
+                                                }}
+                                              >
+                                                Reject
+                                              </button>
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
-                                    </h2>
-                                    <div
-                                      id={`collapse${items.cart_Id}`}
-                                      class="accordion-collapse collapse show"
-                                      aria-labelledby={`heading${items.ID}`}
-                                      data-bs-parent={`accordion${items.cart_Id}`}
-                                    >
-                                      <div class="accordion-body">
-                                        <h2 className="emailformat">
-                                          {items.name}
-                                        </h2>
-                                        <h2 className="addresstime">
-                                          <span></span>House No: {items.house},{" "}
-                                          {items.flat},{items.street},
-                                          {items.postcode},{items.town}
-                                        </h2>
-                                        {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
-                                        <div className="row btnrow">
-                                          <div className="col-md-6">
-                                            <button
-                                              type="button"
-                                              className="btn actionbtns"
-                                              onClick={() => {
-                                                add(
-                                                  items.cart_Id,
-                                                  items.Orderstatus
-                                                );
-                                              }}
-                                            >
-                                              Accept
-                                            </button>
+                                    </div>
+                                    {/* Div close */}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-4">
+                  <div className="card cardattributes">
+                    <div className="card-header titleheaderaccepted">
+                      <h4 className="card-title">Accepted/Cooking</h4>
+                    </div>
+                    <div className="card-body bordersofcard">
+                      {info &&
+                        info.map((items) => {
+                          return (
+                            <>
+                              {items.Orderstatus === "2" ? (
+                                <>
+                                  <div
+                                    class="accordion"
+                                    id={`accordion${items.cart_Id}`}
+                                  >
+                                    <div class="accordion-item accitem">
+                                      <h2
+                                        class="accordion-header cursor"
+                                        id={`heading${items.cart_Id}`}
+                                        data-bs-toggle="collapse"
+                                        data-bs-target={`#collapse${items.cart_Id}`}
+                                        aria-expanded="true"
+                                        aria-controls={`#collapse${items.cart_Id}`}
+                                      >
+                                        <div className="row justify-content-center align-items-center">
+                                          <div className="col-md-2 imghead">
+                                            <img
+                                              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
+                                              width={28}
+                                              height={28}
+                                            />
                                           </div>
-                                          <div className="col-md-6">
-                                            <button
-                                              type="button"
-                                              className="btn actionbtns"
-                                              onClick={() => {
-                                                reject(
-                                                  items.cart_Id,
-                                                  items.Orderstatus
-                                                );
-                                              }}
-                                            >
-                                              Reject
-                                            </button>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketext">
+                                              # -001
+                                            </h6>
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketexts">
+                                              unpaid
+                                            </h6>
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketexts">
+                                              Delivery
+                                            </h6>
+                                          </div>
+                                        </div>
+                                      </h2>
+                                      <div
+                                        id="collapseOne"
+                                        class="accordion-collapse collapse show"
+                                        aria-labelledby={`heading${items.ID}`}
+                                        data-bs-parent={`accordion${items.cart_Id}`}
+                                      >
+                                        <div class="accordion-body">
+                                          <h2 className="emailformat">
+                                            {items.name}
+                                          </h2>
+                                          <h2 className="addresstime">
+                                            <span></span>House No: {items.house}
+                                            , {items.flat},{items.street},
+                                            {items.postcode},{items.town}
+                                          </h2>
+                                          {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
+                                          <div className="row btnrow">
+                                            <div className="col-md-6">
+                                              <button
+                                                type="button"
+                                                className="btn actionbtns"
+                                                onClick={() => {
+                                                  add(
+                                                    items.cart_Id,
+                                                    items.Orderstatus
+                                                  );
+                                                }}
+                                              >
+                                                Prepaid
+                                              </button>
+                                            </div>
+                                            <div className="col-md-6">
+                                              <button
+                                                type="button"
+                                                className="btn actionbtns"
+                                                onClick={() => {
+                                                  reject(
+                                                    items.cart_Id,
+                                                    items.Orderstatus
+                                                  );
+                                                }}
+                                              >
+                                                Assigned to driver
+                                              </button>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                  {/* Div close */}
-                                </div>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </>
-                        );
-                      })}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-4">
-                <div className="card cardattributes">
-                  <div className="card-header titleheaderaccepted">
-                    <h4 className="card-title">Accepted/Cooking</h4>
-                  </div>
-                  <div className="card-body bordersofcard">
-                    {info &&
-                      info.map((items) => {
-                        return (
-                          <>
-                            {items.Orderstatus === "2" ? (
-                              <>
-                              
-                                <div
-                                  class="accordion"
-                                  id={`accordion${items.cart_Id}`}
-                                >
-                                  <div class="accordion-item accitem">
-                                    <h2
-                                      class="accordion-header cursor"
-                                      id={`heading${items.cart_Id}`}
-                                      data-bs-toggle="collapse"
-                                      data-bs-target={`#collapse${items.cart_Id}`}
-                                      aria-expanded="true"
-                                      aria-controls={`#collapse${items.cart_Id}`}
-                                    >
-                                      <div className="row justify-content-center align-items-center">
-                                        <div className="col-md-2 imghead">
-                                          <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
-                                            width={28}
-                                            height={28}
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketext"># -001</h6>
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketexts">
-                                            unpaid
-                                          </h6>
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketexts">
-                                            Delivery
-                                          </h6>
-                                        </div>
-                                      </div>
-                                    </h2>
-                                    <div
-                                      id="collapseOne"
-                                      class="accordion-collapse collapse show"
-                                      aria-labelledby={`heading${items.ID}`}
-                                      data-bs-parent={`accordion${items.cart_Id}`}
-                                    >
-                                      <div class="accordion-body">
-                                        <h2 className="emailformat">
-                                          {items.name}
-                                        </h2>
-                                        <h2 className="addresstime">
-                                          <span></span>House No: {items.house},{" "}
-                                          {items.flat},{items.street},
-                                          {items.postcode},{items.town}
-                                        </h2>
-                                        {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
-                                        <div className="row btnrow">
-                                          <div className="col-md-6">
-                                            <button
-                                              type="button"
-                                              className="btn actionbtns"
-                                              onClick={() => {
-                                                add(
-                                                  items.cart_Id,
-                                                  items.Orderstatus
-                                                );
-                                              }}
-                                            >
-                                              Prepaid
-                                            </button>
+
+                <div className="col-4">
+                  <div className="card cardattributes">
+                    <div className="card-header titleheadercompleted">
+                      <h4 className="card-title ">Completed</h4>
+                    </div>
+                    <div className="card-body bordersofcard">
+                      {info &&
+                        info.map((items) => {
+                          return (
+                            <>
+                              {items.Orderstatus === "3" ? (
+                                <>
+                                  <div
+                                    class="accordion"
+                                    id={`accordion${items.cart_Id}`}
+                                  >
+                                    <div class="accordion-item accitem">
+                                      <h2
+                                        class="accordion-header cursor"
+                                        id={`heading${items.cart_Id}`}
+                                        data-bs-toggle="collapse"
+                                        data-bs-target={`#collapse${items.cart_Id}`}
+                                        aria-expanded="true"
+                                        aria-controls={`#collapse${items.cart_Id}`}
+                                      >
+                                        <div className="row justify-content-center align-items-center">
+                                          <div className="col-md-2 imghead">
+                                            <img
+                                              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
+                                              width={28}
+                                              height={28}
+                                            />
                                           </div>
-                                          <div className="col-md-6">
-                                            <button
-                                              type="button"
-                                              className="btn actionbtns"
-                                              onClick={() => {
-                                                reject(
-                                                  items.cart_Id,
-                                                  items.Orderstatus
-                                                );
-                                              }}
-                                            >
-                                              Assigned to driver
-                                            </button>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketext">
+                                              # -001
+                                            </h6>
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketexts">
+                                              unpaid
+                                            </h6>
+                                          </div>
+                                          <div className="col-md-3">
+                                            <h6 className="Stroketexts">
+                                              Delivery
+                                            </h6>
                                           </div>
                                         </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </>
-                        );
-                      })}
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className="card cardattributes">
-                  <div className="card-header titleheadercompleted">
-                    <h4 className="card-title ">Completed</h4>
-                  </div>
-                  <div className="card-body bordersofcard">
-                    {info &&
-                      info.map((items) => {
-                        return (
-                          <>
-                            {items.Orderstatus === "3" ? (
-                              <>
-                                <div
-                                  class="accordion"
-                                  id={`accordion${items.cart_Id}`}
-                                >
-                                  <div class="accordion-item accitem">
-                                    <h2
-                                      class="accordion-header cursor"
-                                      id={`heading${items.cart_Id}`}
-                                      data-bs-toggle="collapse"
-                                      data-bs-target={`#collapse${items.cart_Id}`}
-                                      aria-expanded="true"
-                                      aria-controls={`#collapse${items.cart_Id}`}
-                                    >
-                                      <div className="row justify-content-center align-items-center">
-                                        <div className="col-md-2 imghead">
-                                          <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
-                                            width={28}
-                                            height={28}
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketext"># -001</h6>
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketexts">
-                                            unpaid
-                                          </h6>
-                                        </div>
-                                        <div className="col-md-3">
-                                          <h6 className="Stroketexts">
-                                            Delivery
-                                          </h6>
-                                        </div>
-                                      </div>
-                                    </h2>
-                                    <div
-                                      id="collapseOne"
-                                      class="accordion-collapse collapse show"
-                                      aria-labelledby={`heading${items.ID}`}
-                                      data-bs-parent={`accordion${items.cart_Id}`}
-                                    >
-                                      <div class="accordion-body">
-                                        <h2 className="emailformat">
-                                          {items.name}
-                                        </h2>
-                                        <h2 className="addresstime">
-                                          <span></span>House No: {items.house},{" "}
-                                          {items.flat},{items.street},
-                                          {items.postcode},{items.town}
-                                        </h2>
-                                        {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
-                                        {/* <div className="row btnrow">
+                                      </h2>
+                                      <div
+                                        id="collapseOne"
+                                        class="accordion-collapse collapse show"
+                                        aria-labelledby={`heading${items.ID}`}
+                                        data-bs-parent={`accordion${items.cart_Id}`}
+                                      >
+                                        <div class="accordion-body">
+                                          <h2 className="emailformat">
+                                            {items.name}
+                                          </h2>
+                                          <h2 className="addresstime">
+                                            <span></span>House No: {items.house}
+                                            , {items.flat},{items.street},
+                                            {items.postcode},{items.town}
+                                          </h2>
+                                          {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
+                                          {/* <div className="row btnrow">
                                           <div className="col-md-6">
                                             <button
                                               type="button"
@@ -618,20 +657,447 @@ function LiveOrders() {
                                             </button>
                                           </div>
                                         </div> */}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </>
-                        );
-                      })}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
               </div>
+              {/* end of cards for desktop view */}
+
+              {/* start of cards for mobile view */}
+
+              <ul
+                class="nav nav-tabs tabOrder text-decoration-none"
+                id="myTab"
+                role="tablist"
+              >
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="home-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#home-tab-pane"
+                    type="button"
+                    role="tab"
+                    aria-controls="home-tab-pane"
+                    aria-selected="true"
+                  >
+                    New Orders
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="profile-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#profile-tab-pane"
+                    type="button"
+                    role="tab"
+                    aria-controls="profile-tab-pane"
+                    aria-selected="false"
+                  >
+                    Accepted/Cooking
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="contact-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#contact-tab-pane"
+                    type="button"
+                    role="tab"
+                    aria-controls="contact-tab-pane"
+                    aria-selected="false"
+                  >
+                    Completed
+                  </button>
+                </li>
+              </ul>
+              <div className="row tabCard">
+                <div class="tab-content" id="myTabContent">
+                  <div
+                    class="tab-pane fade show active"
+                    id="home-tab-pane"
+                    role="tabpanel"
+                    aria-labelledby="home-tab"
+                    tabindex="0"
+                  >
+                    <div className="col">
+                      <div className="card cardattributes">
+                        <div className="card-header titleheader">
+                          <h4 className="card-title ">New Orders</h4>
+                        </div>
+                        <div className="card-body bordersofcard">
+                          {info &&
+                            info.map((items) => {
+                              return (
+                                <>
+                                  {items.Orderstatus === "1" ? (
+                                    <>
+                                      <div
+                                        class="accordion"
+                                        id={`accordion${items.cart_Id}`}
+                                      >
+                                        {/* Div start */}
+                                        <div
+                                          class="accordion-item accitem"
+                                          key={`${items.cart_Id}`}
+                                        >
+                                          <h2
+                                            class="accordion-header cursor"
+                                            id={`heading${items.cart_Id}`}
+                                            data-bs-toggle="collapse"
+                                            data-bs-target={`#collapse${items.cart_Id}`}
+                                            aria-expanded="true"
+                                            aria-controls={`#collapse${items.cart_Id}`}
+                                          >
+                                            <div className="row justify-content-center align-items-center">
+                                              <div className="col-md-2 imghead">
+                                                <img
+                                                  src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
+                                                  width={28}
+                                                  height={28}
+                                                />
+                                              </div>
+                                              <div className="col-md-3">
+                                                <h6 className="Stroketext">
+                                                  # -001
+                                                </h6>
+                                              </div>
+                                              <div className="col-md-3">
+                                                <h6 className="Stroketexts">
+                                                  unpaid
+                                                </h6>
+                                              </div>
+                                              <div className="col-md-3">
+                                                <h6 className="Stroketexts">
+                                                  Delivery
+                                                </h6>
+                                              </div>
+                                            </div>
+                                          </h2>
+                                          <div
+                                            id={`collapse${items.cart_Id}`}
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby={`heading${items.ID}`}
+                                            data-bs-parent={`accordion${items.cart_Id}`}
+                                          >
+                                            <div class="accordion-body">
+                                              <h2 className="emailformat">
+                                                {items.name}
+                                              </h2>
+                                              <h2 className="addresstime">
+                                                <span></span>House No:{" "}
+                                                {items.house}, {items.flat},
+                                                {items.street},{items.postcode},
+                                                {items.town}
+                                              </h2>
+                                              {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
+                                              <div className="row btnrow">
+                                                <div className="col-md-6">
+                                                  <button
+                                                    type="button"
+                                                    className="btn actionbtns"
+                                                    onClick={() => {
+                                                      add(
+                                                        items.cart_Id,
+                                                        items.Orderstatus
+                                                      );
+                                                    }}
+                                                  >
+                                                    Accept
+                                                  </button>
+                                                </div>
+                                                <div className="col-md-6">
+                                                  <button
+                                                    type="button"
+                                                    className="btn actionbtns"
+                                                    onClick={() => {
+                                                      reject(
+                                                        items.cart_Id,
+                                                        items.Orderstatus
+                                                      );
+                                                    }}
+                                                  >
+                                                    Reject
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        {/* Div close */}
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="profile-tab-pane"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab"
+                    tabindex="0"
+                  >
+                    <div className="col">
+                      <div className="card cardattributes">
+                        <div className="card-header titleheaderaccepted">
+                          <h4 className="card-title">Accepted/Cooking</h4>
+                        </div>
+                        <div className="card-body bordersofcard">
+                          {info &&
+                            info.map((items) => {
+                              return (
+                                <>
+                                  {items.Orderstatus === "2" ? (
+                                    <>
+                                      <div
+                                        class="accordion"
+                                        id={`accordion${items.cart_Id}`}
+                                      >
+                                        <div class="accordion-item accitem">
+                                          <h2
+                                            class="accordion-header cursor"
+                                            id={`heading${items.cart_Id}`}
+                                            data-bs-toggle="collapse"
+                                            data-bs-target={`#collapse${items.cart_Id}`}
+                                            aria-expanded="true"
+                                            aria-controls={`#collapse${items.cart_Id}`}
+                                          >
+                                            <div className="row justify-content-center align-items-center">
+                                              <div className="col-md-2 imghead">
+                                                <img
+                                                  src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
+                                                  width={28}
+                                                  height={28}
+                                                />
+                                              </div>
+                                              <div className="col-md-3">
+                                                <h6 className="Stroketext">
+                                                  # -001
+                                                </h6>
+                                              </div>
+                                              <div className="col-md-3">
+                                                <h6 className="Stroketexts">
+                                                  unpaid
+                                                </h6>
+                                              </div>
+                                              <div className="col-md-3">
+                                                <h6 className="Stroketexts">
+                                                  Delivery
+                                                </h6>
+                                              </div>
+                                            </div>
+                                          </h2>
+                                          <div
+                                            id="collapseOne"
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby={`heading${items.ID}`}
+                                            data-bs-parent={`accordion${items.cart_Id}`}
+                                          >
+                                            <div class="accordion-body">
+                                              <h2 className="emailformat">
+                                                {items.name}
+                                              </h2>
+                                              <h2 className="addresstime">
+                                                <span></span>House No:{" "}
+                                                {items.house}, {items.flat},
+                                                {items.street},{items.postcode},
+                                                {items.town}
+                                              </h2>
+                                              {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
+                                              <div className="row btnrow">
+                                                <div className="col-md-6">
+                                                  <button
+                                                    type="button"
+                                                    className="btn actionbtns"
+                                                    onClick={() => {
+                                                      add(
+                                                        items.cart_Id,
+                                                        items.Orderstatus
+                                                      );
+                                                    }}
+                                                  >
+                                                    Prepaid
+                                                  </button>
+                                                </div>
+                                                <div className="col-md-6">
+                                                  <button
+                                                    type="button"
+                                                    className="btn actionbtns"
+                                                    onClick={() => {
+                                                      reject(
+                                                        items.cart_Id,
+                                                        items.Orderstatus
+                                                      );
+                                                    }}
+                                                  >
+                                                    Assigned to driver
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="contact-tab-pane"
+                    role="tabpanel"
+                    aria-labelledby="contact-tab"
+                    tabindex="0"
+                  >
+                    <div className="col">
+                      <div className="card cardattributes">
+                        <div className="card-header titleheadercompleted">
+                          <h4 className="card-title ">Completed</h4>
+                        </div>
+                        <div className="card-body bordersofcard">
+                          {info &&
+                            info.map((items) => {
+                              return (
+                                <>
+                                  {items.Orderstatus === "3" ? (
+                                    <>
+                                      <div
+                                        class="accordion"
+                                        id={`accordion${items.cart_Id}`}
+                                      >
+                                        <div class="accordion-item accitem">
+                                          <h2
+                                            class="accordion-header cursor"
+                                            id={`heading${items.cart_Id}`}
+                                            data-bs-toggle="collapse"
+                                            data-bs-target={`#collapse${items.cart_Id}`}
+                                            aria-expanded="true"
+                                            aria-controls={`#collapse${items.cart_Id}`}
+                                          >
+                                            <div className="row justify-content-center align-items-center">
+                                              <div className="col-md-2 imghead">
+                                                <img
+                                                  src="https://upload.wikimedia.org/wikipedia/commons/4/41/Red_circle.gif?20210202002436"
+                                                  width={28}
+                                                  height={28}
+                                                />
+                                              </div>
+                                              <div className="row">
+                                                <div className="col">
+                                                  <h6 className="Stroketext">
+                                                    # -001
+                                                  </h6>
+                                                </div>
+                                              </div>
+                                              <div className="row">
+                                                <div className="col">
+                                                  <h6 className="Stroketexts">
+                                                    unpaid
+                                                  </h6>
+                                                </div>
+                                              </div>
+                                              <div className="row">
+                                                <div className="col">
+                                                  <h6 className="Stroketexts">
+                                                    Delivery
+                                                  </h6>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </h2>
+                                          <div
+                                            id="collapseOne"
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby={`heading${items.ID}`}
+                                            data-bs-parent={`accordion${items.cart_Id}`}
+                                          >
+                                            <div class="accordion-body">
+                                              <h2 className="emailformat">
+                                                {items.name}
+                                              </h2>
+                                              <h2 className="addresstime">
+                                                <span></span>House No:{" "}
+                                                {items.house}, {items.flat},
+                                                {items.street},{items.postcode},
+                                                {items.town}
+                                              </h2>
+                                              {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
+                                              {/* <div className="row btnrow">
+                                          <div className="col-md-6">
+                                            <button
+                                              type="button"
+                                              className="btn actionbtns"
+                                              onClick={() => {
+                                                add(
+                                                  items.cart_Id,
+                                                  items.Orderstatus
+                                                );
+                                              }}
+                                            >
+                                              Accept
+                                            </button>
+                                          </div>
+                                          <div className="col-md-6">
+                                            <button
+                                              type="button"
+                                              className="btn actionbtns"
+                                              onClick={() => {
+                                                reject(
+                                                  items.cart_Id,
+                                                  items.Orderstatus
+                                                );
+                                              }}
+                                            >
+                                              Reject
+                                            </button>
+                                          </div>
+                                        </div> */}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* end of cards for mobile view */}
             </div>
           </div>
         </div>

@@ -60,7 +60,7 @@ function Configuration() {
             required
           />
           <div className="container mt-5 text-center">
-            <button className="btn btn-info py-2 w-25" onClick={register} >Save</button>
+            <button className="btn btn-info py-2" onClick={register} >Save</button>
           </div>
         </div>
       </div>
