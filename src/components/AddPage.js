@@ -18,12 +18,12 @@ function AddPage() {
   const [data, setData] = React.useState('');
   const handleSubmit = (event) => {
       event.preventDefault();
-      // Define your onSubmit function here
-      // ...
+      alert(title)
   };
 
   const inputHandler = (event, editor) => {
-      console.log(parse(editor.getData()).props.children);
+    setdescription(editor.getData());
+    // alert(parse(editor.getData()).props.children);
       // Define your onSubmit function here
       // ...
       // for example, setData() here
@@ -36,29 +36,28 @@ function AddPage() {
       description,
       status
     }
-    alert(description)
 
-    // try {
+    try {
 
       // setloading(true)
-      // const result = await axios.post("http://localhost:5000/api/superadmin/addpage",details).data;
-      // console.log(result)
+      const result = await axios.post("http://localhost:5000/api/superadmin/addpage",details).data;
+      console.log(result)
       // toast.success("Registration Successfull")
       // setloading(true)
-      // setInterval(() => {
-      //   window.location.href = "/pages"
-      // }, 2000);
+      setInterval(() => {
+        window.location.href = "/pages"
+      }, 2000);
 
-      // settitle('');
-      // setdescription('');
+      settitle('');
+      setdescription('');
 
 
 
-  // } catch (error) {
-  //     console.log(error);
+  } catch (error) {
+      console.log(error);
       // toast.warn("Something went wrong!")
       // setloading(true)
-  // }
+  }
   }
 
   async function edit() {
@@ -67,12 +66,13 @@ function AddPage() {
       updatetitle,
       updatedescription
     }
+    alert(updatedescription)
 
-    try {
-      const result = await axios.post("http://localhost:5000/api/superadmin/editpage",details).data; 
-    } catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const result = await axios.post("http://localhost:5000/api/superadmin/editpage",details).data; 
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   useEffect(() => {
@@ -331,8 +331,16 @@ function AddPage() {
                           Content
                         </label>
                         <CKEditor
+                        id="inputText"
+                        editor={ClassicEditor}
+                        value={updatedescription}
                         
-                        onChange={(e)=>{ }} />
+                        onChange={inputHandler}
+                        // value={updatetitle}
+                        //   onChange={(e)=>{setupdatetitle(e.target.value)}}
+                        // value={parse(updatedescription).props.children}
+                        
+                        />
                       </div>
                     </div>
                     <div className="row">
