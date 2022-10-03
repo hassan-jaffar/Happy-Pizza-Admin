@@ -1,10 +1,13 @@
 import React from "react";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import SettingsTable from "./SettingsTable";
 
 function Settings() {
   const getstatus = localStorage.getItem("status");
+  const {id} = useParams();
+
+
   return (
     <>
       <Navbar />

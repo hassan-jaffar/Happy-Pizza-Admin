@@ -201,100 +201,6 @@ function ResturantsTable() {
                                       color: "black",
                                     }}
                                   > */}
-<<<<<<< HEAD
-                                  <img
-                                    style={{ width: "56%", height: "auto" }}
-                                    src={item.image}
-                                    alt="...."
-                                  />
-                                  {/* {item.image} */}
-                                  {/* </Link> */}
-                                </td>
-                                <td>{item.owner_name}</td>
-                                <td>{item.owner_email}</td>
-                                <td>25 Sep 2022 02:02 PM</td>
-                                <td>
-                                  <span class="badge bg-info primary">
-                                    Active
-                                  </span>
-                                </td>
-                                <td>
-                                  {item.status === "true" ? (
-                                    <>
-                                      <span class="badge bg-info primary">
-                                        live
-                                      </span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <span class="badge bg-danger primary">
-                                        Not live
-                                      </span>
-                                    </>
-                                  )}
-                                </td>
-                                <td>
-                                  <div className="dropdown">
-                                    <button
-                                      type="button"
-                                      className="btn btn-outline-primary deactivatebtn blueclrname"
-                                      id="dropdownMenuButton"
-                                      data-bs-toggle="dropdown"
-                                      aria-haspopup="true"
-                                      aria-expanded="true"
-                                      // data-bs-container="body"
-                                      // data-bs-placement="bottom"
-                                      // data-bs-content="Deactivate"
-                                    >
-                                      <i className="fa-solid fa-ellipsis-vertical"></i>
-                                    </button>
-                                    <ul
-                                      class="dropdown-menu"
-                                      aria-labelledby="dropdownMenuButton"
-                                    >
-                                      <li className="dropdown-item">Edit</li>
-                                      <li className="dropdown-item">
-                                        Login as
-                                      </li>
-                                      {item.status === "true" ? (
-                                        <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          deactivate(item.ID);
-                                        }}
-                                      >
-                                        Deactivate
-                                      </li>
-                                      ):(
-                                        <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          activate(item.ID);
-                                        }}
-                                      >
-                                        Activate
-                                      </li>
-                                      )}
-
-                                     
-
-                                      <li
-                                        class="dropdown-item"
-                                        onClick={() => {
-                                          del(item.ID);
-                                        }}
-                                      >
-                                        <i className="fa-solid fa-ban btnicon"></i>
-                                        Delete
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </td>
-                              </tr>
-                            </>
-                          );
-                        })}
-=======
                                     <img
                                       style={{ width: "56%", height: "auto" }}
                                       src={item.image}
@@ -345,32 +251,39 @@ function ResturantsTable() {
                                         class="dropdown-menu"
                                         aria-labelledby="dropdownMenuButton"
                                       >
+                                        <Link to={`/editrestuurant/${item.ID}`}>
                                         <li className="dropdown-item">
                                           <i class="far fa-edit"></i>
                                           Edit
                                         </li>
+                                        </Link>
                                         <li className="dropdown-item">
                                           <i class="fas fa-sign-in-alt"></i>
                                           Login as
                                         </li>
+                                      {item.status === "true" ? (
                                         <li
-                                          className="dropdown-item"
-                                          onClick={() => {
-                                            deactivate(item.ID);
-                                          }}
-                                        >
-                                          <i class="far fa-times-circle"></i>
-                                          Deactivate
-                                        </li>
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                          deactivate(item.ID);
+                                        }}
+                                      >
+                                        <i class="far fa-times-circle"></i>
+                                        Deactivate
+                                      </li>
+                                      ):(
                                         <li
-                                          className="dropdown-item"
-                                          onClick={() => {
-                                            activate(item.ID);
-                                          }}
-                                        >
-                                          <i class="far fa-check-circle"></i>
-                                          Activate
-                                        </li>
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                          activate(item.ID);
+                                        }}
+                                      >
+                                        <i class="far fa-check-circle"></i>
+                                        Activate
+                                      </li>
+                                      )}
+
+                                      
                                         <li
                                           class="dropdown-item"
                                           onClick={() => {
@@ -390,7 +303,6 @@ function ResturantsTable() {
                       </tbody>
                     </table>
                   </div>
->>>>>>> 2b36be303ca35effb8d0af8abe98c850ad32df0e
 
                   <div
                     style={{ marginTop: "-150px" }}
