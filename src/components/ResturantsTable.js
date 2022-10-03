@@ -257,7 +257,8 @@ function ResturantsTable() {
                                       <li className="dropdown-item">
                                         Login as
                                       </li>
-                                      <li
+                                      {item.status === "true" ? (
+                                        <li
                                         className="dropdown-item"
                                         onClick={() => {
                                           deactivate(item.ID);
@@ -265,7 +266,8 @@ function ResturantsTable() {
                                       >
                                         Deactivate
                                       </li>
-                                      <li
+                                      ):(
+                                        <li
                                         className="dropdown-item"
                                         onClick={() => {
                                           activate(item.ID);
@@ -273,6 +275,10 @@ function ResturantsTable() {
                                       >
                                         Activate
                                       </li>
+                                      )}
+
+                                     
+
                                       <li
                                         class="dropdown-item"
                                         onClick={() => {

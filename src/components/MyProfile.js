@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function MyProfile() {
   const getstatus = localStorage.getItem("status");
+  const [name, setname] = useState(JSON.parse(localStorage.getItem("currentuser"))[0].name);
+  const [email, setemail] = useState(JSON.parse(localStorage.getItem("currentuser"))[0].email);
+  const [number, setnumber] = useState(JSON.parse(localStorage.getItem("currentuser"))[0].number);
+
+  async function updatecustomer(e){
+    const details = {
+      customer_Id:JSON.parse(localStorage.getItem('currentuser'))[0].customer_Id,
+      name,
+      email,
+      number
+    }
+    try {
+
+      // setloading(true)
+      const result = await axios.post("http://localhost:5000/api/admin/changepassword",details).data;
+      console.log(result)
+      // toast.success("Password has been changed")
+      // setloading(true)
+      setInterval(() => {
+        window.location.href = "/home"
+      }, 2000);
+
+      
+      setemail('');
+      setname('');
+      setnumber('');
+
+  } catch (error) {
+      console.log(error);
+      // toast.warn("Something went wrong!")
+      e.preventDefault()
+      // setloading(true)
+  }
+  }
 
   return (
     <>
@@ -270,6 +305,8 @@ function MyProfile() {
                         className="form-control"
                         id="validationCustom01"
                         placeholder="CNF Admin"
+                        value={name}
+                        onChange={(e)=>{setname(e.target.value)}}
                         required
                       />
                     </div>
@@ -282,6 +319,8 @@ function MyProfile() {
                         className="form-control"
                         id="validationCustom02"
                         placeholder="admin@clicknfeed.com"
+                        value={email}
+                        onChange={(e)=>{setemail(e.target.value)}}
                         required
                       />
                     </div>
@@ -300,11 +339,13 @@ function MyProfile() {
                           +44
                         </span>
                         <input
-                          type="number"
+                          type="tel"
                           className="form-control"
                           id="validationCustomUsername"
                           aria-describedby="inputGroupPrepend"
                           placeholder="Phone"
+                          value={number}
+                          onChange={(e)=>{setnumber(e.target.value)}}
                           required
                         />
                       </div>
@@ -314,6 +355,7 @@ function MyProfile() {
                       <button
                         className="btn btn-primary mt-3 me-4 mb-5"
                         type="submit"
+                        onClick={updatecustomer}
                       >
                         Update
                       </button>
