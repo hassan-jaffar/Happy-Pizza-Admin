@@ -22,6 +22,7 @@ function RestaurantManagement() {
   const [updateowner_phone, setupdateowner_phone] = useState("");
   const [updateowner_address, setupdateowner_address] = useState("")
   const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
 
 
   async function register() {
@@ -322,9 +323,11 @@ function RestaurantManagement() {
             value={updateowner_phone}
           />
           <div className="container mt-5 text-center">
+            {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 && (
             <button className="btn btn-info py-2" onClick={register}>
               Save
             </button>
+            )}
           </div>
         </div>
       </div>
