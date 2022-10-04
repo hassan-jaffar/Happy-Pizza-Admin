@@ -163,6 +163,10 @@ function MenuTable() {
     }
     fetchData();
   }, []);
+  function onchange(e){
+
+    setFile([...e.target.files[0]])
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -503,8 +507,8 @@ function MenuTable() {
                               class="form-control"
                               id="inputGroupFile02"
                               name="photo"
-                              // value={file}
-                              onClick={(e)=>{setFile(e.target.files.length)}}
+                              
+                              onChange={onchange}
                             />
                           </div>
                           <div className="text-center my-3">
