@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
 
 function RestaurantManagement() {
   const [name, setname] = useState("");
+  const [updatename, setupdatename] = useState("");
   const [description, setdescription] = useState("");
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
@@ -13,8 +15,14 @@ function RestaurantManagement() {
   const [average_order, setaverage_order] = useState("");
   const [time, settime] = useState();
   const [owner_name, setowner_name] = useState("");
+  const [updateowner_name, setupdateowner_name] = useState("");
   const [email, setemail] = useState("");
+  const [updateowner_email, setupdateowner_email] = useState("");
   const [owner_phone, setowner_phone] = useState("");
+  const [updateowner_phone, setupdateowner_phone] = useState("");
+  const [updateowner_address, setupdateowner_address] = useState("")
+  const {id} = useParams();
+
 
   async function register() {
     const details = {
@@ -59,6 +67,24 @@ function RestaurantManagement() {
       // setloading(true)
     }
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
+        ).data;
+        setupdatename(data.data['name']);
+        setupdateowner_name(data.data['owner_name']);
+        setupdateowner_email(data.data['owner_email']);
+        setupdateowner_phone(data.data['owner_phone']);
+        setupdateowner_address(data.data['owner_address']);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
   return (
     <>
       <ToastContainer />
@@ -75,7 +101,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Happy Pizza"
-            value={name}
+            value={updatename}
             onChange={(e) => {
               setname(e.target.value);
             }}
@@ -279,10 +305,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="Owner"
-            value={owner_name}
-            onChange={(e) => {
-              setowner_name(e.target.value);
-            }}
+            value={updateowner_name}
           />
           <label for="ownemail" className="mt-3">
             Owner Email :
@@ -292,10 +315,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="email"
             placeholder="dakfal@dsfkal"
-            value={email}
-            onChange={(e) => {
-              setemail(e.target.value);
-            }}
+            value={updateowner_email}
           />
           <label for="ownphone" className="mt-3">
             Owner Phone:
@@ -305,10 +325,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="xxxx-xxxxxxx"
-            value={owner_phone}
-            onChange={(e) => {
-              setowner_phone(e.target.value);
-            }}
+            value={updateowner_phone}
           />
           <div className="container mt-5 text-center">
             <button className="btn btn-info py-2" onClick={register}>

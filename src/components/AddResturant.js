@@ -47,13 +47,13 @@ function AddResturant() {
   async function register(){
     const details = {
       name,
-      description,
-      address,
-      phone,
-      charges,
-      minimum_order,
-      average_order,
-      time,
+      // description,
+      // address,
+      // phone,
+      // charges,
+      // minimum_order,
+      // average_order,
+      // time,
       owner_name,
       owner_email,
       owner_address,
@@ -63,7 +63,7 @@ function AddResturant() {
       secondary_color,
       app_name,
       delivery_min,
-      location_search,
+      // location_search,
       stripe_connect,
       enable_stripe,
       stripe_key,
@@ -86,6 +86,7 @@ function AddResturant() {
       otest_mode
     }
 
+
     try {
 
       // setloading(true)
@@ -93,11 +94,11 @@ function AddResturant() {
       console.log(result)
       // toast.success("Registration Successfull")
       // setloading(true)
-      // setInterval(() => {
-      //   window.location.href = "/resturant"
-      // }, 2000);
+      setInterval(() => {
+        window.location.href = "/resturant"
+      }, 2000);
 
-      alert("data has been entered")
+      // alert("data has been entered")
 
       setname("");
       setdescription("");
@@ -144,7 +145,7 @@ function AddResturant() {
       // toast.warn("Something went wrong!")
       // setloading(true)
   }
-  }
+  } 
 
   return (
     <>

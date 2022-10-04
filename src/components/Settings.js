@@ -1,11 +1,14 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Navbar from "./Navbar";
 import { Link,useParams } from "react-router-dom";
 import SettingsTable from "./SettingsTable";
+import axios from 'axios';
 
 function Settings() {
   const getstatus = localStorage.getItem("status");
   const {id} = useParams();
+
+
 
 
   return (
