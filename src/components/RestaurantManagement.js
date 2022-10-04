@@ -26,17 +26,14 @@ function RestaurantManagement() {
 
   async function register() {
     const details = {
-      name,
+      id,
       description,
       address,
       phone,
       charges,
       minimum_order,
       average_order,
-      time,
-      owner_name,
-      email,
-      owner_phone,
+      time
     };
 
     try {
@@ -50,14 +47,11 @@ function RestaurantManagement() {
       //   window.location.href = "/login"
       // }, 2000);
 
-      setname("");
-      setemail("");
+
       setaddress("");
       setaverage_order("");
       setdescription("");
       setminimum_order("");
-      setowner_name("");
-      setowner_phone("");
       settime("");
       setphone("");
       setcharges("");
