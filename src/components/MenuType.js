@@ -16,7 +16,7 @@ function MenuType() {
     }
     try {
       
-      const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
+      const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/menutype",details).data;
       console.log(result)
       toast.success("Data has been saved")
 

@@ -18,7 +18,7 @@ function LoyaltyScheme() {
     };
     try {
       const result = await axios.post(
-        "http://localhost:5000/api/setting/loyality",
+        "https://apinodejs.creativeparkingsolutions.com/api/setting/loyality",
         details
       ).data;
       console.log(result);

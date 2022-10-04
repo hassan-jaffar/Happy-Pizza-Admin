@@ -21,7 +21,7 @@ function ItemManagementTable() {
 
     try {
       const result = await axios.post(
-        `http://localhost:5000/api/admin/updateitemmanagement/${itemid}/${categoryid}`,
+        `https://apinodejs.creativeparkingsolutions.com/api/admin/updateitemmanagement/${itemid}/${categoryid}`,
         detail
       ).data;
       console.log(result);
@@ -41,7 +41,7 @@ function ItemManagementTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get(`http://localhost:5000/api/admin/getitemmanagement/${itemid}/${categoryid}`)
+          await axios.get(`https://apinodejs.creativeparkingsolutions.com/api/admin/getitemmanagement/${itemid}/${categoryid}`)
         ).data;
         setitem(data.data);
         console.log(item);

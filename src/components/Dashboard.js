@@ -18,19 +18,19 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getliveresturants"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getliveresturants"
           )
         ).data;
 
         const result = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/resturantcount"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/resturantcount"
           )
         ).data;
 
         const salevalume = await (
           await axios.get(
-            "http://localhost:5000/api/admin/salesvloume"
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/salesvloume"
           )
         ).data;
         setresturantData(data.data);
@@ -49,7 +49,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/admin/getorderlength"
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength"
           )
         ).data;
         setOrders(data.data);
@@ -65,7 +65,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/admin/getcustomerlength"
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength"
           )
         ).data;
         setcustomer(data.data);
@@ -81,7 +81,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/admin/getitemslength"
+            "https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength"
           )
         ).data;
         console.log(data.data);

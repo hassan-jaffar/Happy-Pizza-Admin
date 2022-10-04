@@ -17,7 +17,7 @@ function Pages() {
 
     try {
       const result = await axios.post(
-        `http://localhost:5000/api/superadmin/deletepage`,
+        `https://apinodejs.creativeparkingsolutions.com/api/superadmin/deletepage`,
         details
       ).data;
       setpage(result.data)
@@ -35,7 +35,7 @@ function Pages() {
 
   async function update(){
     try {
-      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallpages')).data
+      const data = await (await axios.get('https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallpages')).data
       setpage(data.data)
 
     } catch (error) {
@@ -53,7 +53,7 @@ function Pages() {
     try {
         const data = await (
           await axios.post(
-            "http://localhost:5000/api/superadmin/updatepagestatus",details
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/updatepagestatus",details
           )
         ).data;
         setpage(data.data);
@@ -68,7 +68,7 @@ function Pages() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getallpages"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallpages"
           )
         ).data;
         setpage(data.data);
