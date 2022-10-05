@@ -107,46 +107,46 @@ function MenuTable() {
   }
 
   async function addItem(category_id) {
-    var formData = new FormData();
-    formData.append("photo",file)
-    formData.append("title",title);
-    formData.append("description",description);
-    formData.append("price",price);
+    // var formData = new FormData();
+    // formData.append("photo",file)
+    // formData.append("title",title);
+    // formData.append("description",description);
+    // formData.append("price",price);
 
-    console.log(file)
-    // const user = {
-    //   category_id
-      // title,
-      // description,
-      // price,
-      // file
-    // };
+    // console.log('in')
+    const user = {
+      category_id,
+      title,
+      description,
+      price,
+      file
+    };
   //   const config = {
   //     headers:{
   //         "Content-Type":"multipart/form-data"
   //     }
   // }
     // alert(image)
-    // alert(file)
+    // alert(file)formData,config
 
-    // try {
-    //   const result = await axios.post(
-    //     " https://apinodejs.creativeparkingsolutions.com/api/admin/createitem ",
-    //     formData,config,user
-    //   ).data;
-    //   console.log(result);
-    //   update1();
-    //   toast.success("Item has been Added");
-    //   refCloseadd.current.click();
-    //   setName("");
-    //   setTitle("");
-    //   setPrice("");
-    //   setdescription("");
-    //   setFile("");
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.warn("Something went wrong try again!");
-    // }
+    try {
+      const result = await axios.post(
+        " https://apinodejs.creativeparkingsolutions.com/api/admin/createitem",
+        user
+      ).data;
+      console.log(result);
+      update1();
+      toast.success("Item has been Added");
+      refCloseadd.current.click();
+      setName("");
+      setTitle("");
+      setPrice("");
+      setdescription("");
+      setFile("");
+    } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong try again!");
+    }
   }
 
   useEffect(() => {
@@ -164,8 +164,8 @@ function MenuTable() {
     fetchData();
   }, []);
   function onchange(e){
-
-    setFile([...e.target.files[0]])
+    console.log(file)
+    setFile(e.target.files[0])
   }
 
   useEffect(() => {

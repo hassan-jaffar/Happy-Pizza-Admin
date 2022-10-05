@@ -94,9 +94,9 @@ function AddResturant() {
       console.log(result)
       // toast.success("Registration Successfull")
       // setloading(true)
-      setInterval(() => {
-        window.location.href = "/resturant"
-      }, 2000);
+      // setInterval(() => {
+      //   window.location.href = "/resturant"
+      // }, 2000);
 
       // alert("data has been entered")
 
