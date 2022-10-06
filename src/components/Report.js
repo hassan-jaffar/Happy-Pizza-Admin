@@ -5,6 +5,9 @@ import Navbar from "./Navbar";
 
 function Report() {
   const [orderReport, setorderReport] = useState([])
+  const [orderReport1, setorderReport1] = useState([])
+  const [type, settype] = useState("-- Select an option --");
+  const [duplicateorderReport, setduplicateorderReport] = useState([])
   const getstatus = localStorage.getItem("status");
 
   var orderData = [
@@ -30,6 +33,20 @@ function Report() {
     },
   ];
 
+  function filterByName(e) {
+    settype(e);
+
+    if (e !== "-- Select an option --") {
+
+      const tempresturants = duplicateorderReport.filter(
+        (Report) =>Report.ID === parseInt(e)
+      );
+      setorderReport(tempresturants);
+    } else {
+      setorderReport(orderReport1);
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -39,6 +56,8 @@ function Report() {
           )
         ).data;
         setorderReport(data.data);
+        setorderReport1(data.data);
+        setduplicateorderReport(data.data);
       } catch (error) {
         console.log(error, "err");
       }
@@ -260,11 +279,17 @@ function Report() {
                     <select
                       class="form-select"
                       aria-label="Default select example"
+                      value={type}
+                      onChange={(e) => {
+                        filterByName(e.target.value);
+                      }}
                     >
                       <option selected>-- Select an option --</option>
-                      <option value="1">Pontus Fish and Pizza</option>
-                      <option value="2">Golden Fry Sedgley</option>
-                      <option value="3">bkitchen</option>
+                      {orderReport1.length > 0 && orderReport1.map((report)=>{
+                        return <>
+                          <option value={report.ID}>{report.name}</option>
+                        </>
+                      })}
                     </select>
                   </div>
                   <div className="col-md-4 mt-3">
@@ -404,7 +429,7 @@ function Report() {
                       <tbody>
                         <tr>
                           <th scope="row">{report.cart_Id}</th>
-                          <td>{report.name}</td>
+                          <td>{report.cname}</td>
                           <td>{report.DateTime}</td>
                           <td>stripe</td>
                           <td>
