@@ -26,7 +26,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " https://apinodejs.creativeparkingsolutions.com/api/admin/createmenu",
+        " http://localhost:5000/api/admin/createmenu",
         user
       ).data;
       console.log(result);
@@ -42,7 +42,7 @@ function MenuTable() {
   async function update() {
     try {
       const data = await (
-        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallmenu")
+        await axios.get("http://localhost:5000/api/admin/getallmenu")
       ).data;
       setcategory(data.data);
       console.log(category);
@@ -58,7 +58,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " https://apinodejs.creativeparkingsolutions.com/api/admin/deletemenu",
+        " http://localhost:5000/api/admin/deletemenu",
         user
       ).data;
       console.log(result);
@@ -80,7 +80,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " https://apinodejs.creativeparkingsolutions.com/api/admin/updatemenu ",
+        " http://localhost:5000/api/admin/updatemenu ",
         user
       ).data;
       console.log(result);
@@ -97,7 +97,7 @@ function MenuTable() {
   async function update1() {
     try {
       const data = await (
-        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallitems")
+        await axios.get("http://localhost:5000/api/admin/getallitems")
       ).data;
       setItem(data.data);
       console.log(item);
@@ -106,33 +106,76 @@ function MenuTable() {
     }
   }
 
+  // async function addItem(category_id) {
+  //   // var formData = new FormData();
+  //   // formData.append("photo",file)
+  //   // formData.append("title",title);
+  //   // formData.append("description",description);
+  //   // formData.append("price",price);
+
+  //   // console.log('in')
+  //   const user = {
+  //     category_id,
+  //     title,
+  //     description,
+  //     price,
+  //     file
+  //   };
+  // //   const config = {
+  // //     headers:{
+  // //         "Content-Type":"multipart/form-data"
+  // //     }
+  // // }
+  //   // alert(image)
+  //   // alert(file)formData,config
+
+  //   try {
+  //     const result = await axios.post(
+  //       " http://localhost:5000/api/admin/createitem",
+  //       user
+  //     ).data;
+  //     console.log(result);
+  //     update1();
+  //     toast.success("Item has been Added");
+  //     refCloseadd.current.click();
+  //     setName("");
+  //     setTitle("");
+  //     setPrice("");
+  //     setdescription("");
+  //     setFile("");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.warn("Something went wrong try again!");
+  //   }
+  // }
+
   async function addItem(category_id) {
-    // var formData = new FormData();
-    // formData.append("photo",file)
+    var formData = new FormData();
+    formData.append("photo",file)
     // formData.append("title",title);
     // formData.append("description",description);
     // formData.append("price",price);
 
     // console.log('in')
-    const user = {
-      category_id,
-      title,
-      description,
-      price,
-      file
-    };
-  //   const config = {
-  //     headers:{
-  //         "Content-Type":"multipart/form-data"
-  //     }
-  // }
+    // const user = {
+    //   category_id,
+    //   title,
+    //   description,
+    //   price,
+    //   file
+    // };
+    const config = {
+      headers:{
+          "Content-Type":"multipart/form-data"
+      }
+  }
     // alert(image)
     // alert(file)formData,config
 
     try {
       const result = await axios.post(
-        " https://apinodejs.creativeparkingsolutions.com/api/admin/createitem",
-        user
+        " http://localhost:5000/api/admin/imageuploadcheck",
+        config,formData
       ).data;
       console.log(result);
       update1();
@@ -153,7 +196,7 @@ function MenuTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallmenu")
+          await axios.get("http://localhost:5000/api/admin/getallmenu")
         ).data;
         setcategory(data.data);
         console.log(category);
@@ -164,15 +207,16 @@ function MenuTable() {
     fetchData();
   }, []);
   function onchange(e){
-    console.log(file)
     setFile(e.target.files[0])
+    console.log(file)
+
   }
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallitems")
+          await axios.get("http://localhost:5000/api/admin/getallitems")
         ).data;
         setItem(data.data);
         console.log(item);

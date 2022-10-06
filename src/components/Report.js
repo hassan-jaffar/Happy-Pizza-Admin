@@ -35,7 +35,7 @@ function Report() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/orderreport"
+            "http://localhost:5000/api/superadmin/orderreport"
           )
         ).data;
         setorderReport(data.data);

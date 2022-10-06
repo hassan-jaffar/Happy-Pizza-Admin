@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 
 function ResturantsTable() {
   const [resturants, setresturants] = useState([]);
+  const [resturants1, setresturants1] = useState([]);
+  const [type, settype] = useState("-- Select an option --");
+  const [duplicateresturants, setduplicateresturants] = useState([])
 
   async function del(ID) {
     const info = {
@@ -14,7 +17,7 @@ function ResturantsTable() {
     try {
       const data = (
         await axios.post(
-          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/deleteresturant",
+          "http://localhost:5000/api/superadmin/deleteresturant",
           info
         )
       ).data;
@@ -31,7 +34,7 @@ function ResturantsTable() {
     try {
       const data = (
         await axios.post(
-          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/deactivateresturant",
+          "http://localhost:5000/api/superadmin/deactivateresturant",
           info
         )
       ).data;
@@ -48,7 +51,7 @@ function ResturantsTable() {
     try {
       const data = (
         await axios.post(
-          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/activateresturant",
+          "http://localhost:5000/api/superadmin/activateresturant",
           info
         )
       ).data;
@@ -61,7 +64,7 @@ function ResturantsTable() {
   async function update() {
     try {
       const data = await (
-        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallresturants")
+        await axios.get("http://localhost:5000/api/superadmin/getallresturants")
       ).data;
       setresturants(data.data);
     } catch (error) {
@@ -74,16 +77,32 @@ function ResturantsTable() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallresturants"
+            "http://localhost:5000/api/superadmin/getallresturants"
           )
         ).data;
         setresturants(data.data);
+        setresturants1(data.data);
+        setduplicateresturants(data.data);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+
+  function filterByName(e) {
+    settype(e);
+
+    if (e !== "-- Select an option --") {
+      // const temprooms = duplicateorders.filter(order=>order.ID===e)
+      const tempresturants = duplicateresturants.filter(
+        (resturants) =>resturants.ID === parseInt(e)
+      );
+      setresturants(tempresturants);
+    } else {
+      setresturants(resturants1);
+    }
+  }
   return (
     <>
       <div className="row justify-content-center">
@@ -119,11 +138,18 @@ function ResturantsTable() {
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          value={type}
+                          onChange={(e) => {
+                            filterByName(e.target.value);
+                          }}
                         >
                           <option selected>-- Select an option --</option>
-                          <option value="1">Pontus Fish and Pizza</option>
-                          <option value="2">Golden Fry Sedgley</option>
-                          <option value="3">bkitchen</option>
+                          {resturants1.length > 0 && resturants1.map((resturant)=>{
+                            return <>
+                            <option value={resturant.ID}>{resturant.name}</option>
+                            </>
+                          })}
+                          
                         </select>
                       </div>
                       <div class="col-md-4">

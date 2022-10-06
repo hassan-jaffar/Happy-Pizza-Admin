@@ -16,7 +16,7 @@ function ReferralScheme() {
     };
     try {
       const result = await axios.post(
-        "https://apinodejs.creativeparkingsolutions.com/api/setting/referral",
+        "http://localhost:5000/api/setting/referral",
         details
       ).data;
       console.log(result);

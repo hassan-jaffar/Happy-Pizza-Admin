@@ -33,7 +33,7 @@ function Dashboard() {
 
     try {
       const data = await (
-        await axios.post("https://apinodejs.creativeparkingsolutions.com/api/superadmin/openclose",details)
+        await axios.post("http://localhost:5000/api/superadmin/openclose",details)
       ).data;
 
       update4();
@@ -51,19 +51,19 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getliveresturants"
+            "http://localhost:5000/api/superadmin/getliveresturants"
           )
         ).data;
 
         const result = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/resturantcount"
+            "http://localhost:5000/api/superadmin/resturantcount"
           )
         ).data;
 
         const salevalume = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/admin/salesvloume"
+            "http://localhost:5000/api/admin/salesvloume"
           )
         ).data;
         setresturantData(data.data);
@@ -82,7 +82,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength"
+            "http://localhost:5000/api/admin/getorderlength"
           )
         ).data;
         setOrders(data.data);
@@ -98,7 +98,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength"
+            "http://localhost:5000/api/admin/getcustomerlength"
           )
         ).data;
         setcustomer(data.data);
@@ -114,7 +114,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength"
+            "http://localhost:5000/api/admin/getitemslength"
           )
         ).data;
         console.log(data.data);
@@ -134,7 +134,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.post(
-            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getopenclose",details
+            "http://localhost:5000/api/superadmin/getopenclose",details
           )
         ).data;
 
@@ -154,12 +154,12 @@ function Dashboard() {
     try {
       const data = await (
         await axios.post(
-          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getopenclose",details
+          "http://localhost:5000/api/superadmin/getopenclose",details
         )
       ).data;
 
       console.log(data)
-      setopeninfo(data.data);
+      setopeninfo(data.data[0]['online']);
     } catch (error) {
       console.log(error, "err");
     }

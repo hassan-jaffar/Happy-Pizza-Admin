@@ -17,11 +17,11 @@ function LiveOrders() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getliveorders")
+          await axios.get("http://localhost:5000/api/admin/getliveorders")
         ).data;
 
         const count = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getliveorderscount")
+          await axios.get("http://localhost:5000/api/admin/getliveorderscount")
         ).data;
         setInfo(data.data);
 
@@ -41,7 +41,7 @@ function LiveOrders() {
   async function update() {
     try {
       const data = await (
-        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getliveorders")
+        await axios.get("http://localhost:5000/api/admin/getliveorders")
       ).data;
       setInfo(data.data);
 
@@ -61,7 +61,7 @@ function LiveOrders() {
 
     try {
       const result = await axios.post(
-        "https://apinodejs.creativeparkingsolutions.com/api/admin/acceptorder",
+        "http://localhost:5000/api/admin/acceptorder",
         user
       ).data;
       console.log(result);
@@ -80,7 +80,7 @@ function LiveOrders() {
 
     try {
       const result = await axios.post(
-        "https://apinodejs.creativeparkingsolutions.com/api/admin/rejectorder",
+        "http://localhost:5000/api/admin/rejectorder",
         user
       ).data;
       console.log(result);

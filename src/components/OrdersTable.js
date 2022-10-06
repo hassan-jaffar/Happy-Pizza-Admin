@@ -81,11 +81,11 @@ function OrdersTable() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getallorders")
+          await axios.get("http://localhost:5000/api/admin/getallorders")
         ).data;
 
         const resturant = await (
-          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/superadmin/orderreport")
+          await axios.get("http://localhost:5000/api/superadmin/orderreport")
         ).data;
         setOrders(data.data);
         setduplicateorders(data.data);
