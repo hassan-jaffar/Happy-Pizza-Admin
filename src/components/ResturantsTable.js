@@ -7,6 +7,7 @@ function ResturantsTable() {
   const [resturants, setresturants] = useState([]);
   const [resturants1, setresturants1] = useState([]);
   const [type, settype] = useState("-- Select an option --");
+  const [show, setshow] = useState("-- Select an option --");
   const [duplicateresturants, setduplicateresturants] = useState([])
 
   async function del(ID) {
@@ -103,6 +104,20 @@ function ResturantsTable() {
       setresturants(resturants1);
     }
   }
+
+  function filterByType(e) {
+    setshow(e);
+
+    if (e === "false") {
+      const tempresturants = duplicateresturants.filter(
+        (resturants) =>resturants.status === e
+      );
+      setresturants(tempresturants);
+    }
+     else {
+      setresturants(resturants1);
+    }
+  }
   return (
     <>
       <div className="row justify-content-center">
@@ -159,10 +174,12 @@ function ResturantsTable() {
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          value={show}
+                          onChange={(e)=>{filterByType(e.target.value)}}
                         >
                           <option selected>-- Select an option --</option>
-                          <option value="1">All</option>
-                          <option value="2">Pending</option>
+                          <option value="true">All</option>
+                          <option value="false">Pending</option>
                         </select>
                       </div>
                       <div class="col-md-4">
