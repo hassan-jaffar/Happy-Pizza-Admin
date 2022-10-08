@@ -15,8 +15,8 @@ function OrdersTable() {
   const [duplicateorders, setduplicateorders] = useState([]);
   const [duplicateorderHistory, setduplicateorderHistory] = useState([]);
   const [type, settype] = useState("-- Select an option --");
-  const [fromdate, setfromdate] = useState(moment().format("MMMM Do YYYY, h:mm a"));
-  const [todate, settodate] = useState(moment().format("MMMM Do YYYY, h:mm a"));
+  const [fromdate, setfromdate] = useState();
+  const [todate, settodate] = useState();
   
   const getstatus = localStorage.getItem("status");
 
@@ -25,27 +25,28 @@ function OrdersTable() {
   }
 
   function filterByDate(dates) {
-    setfromdate(dates[0]);
-    settodate(dates[1]);
+    setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
+    settodate(moment(dates[1]).format("DD-MM-YYYY"));
 
-    alert(todate)
+    // alert(fromdate)
+    
 
-    var temp = []
-    var availablity = false;
-    for (let i = 0; i < orderHistory.length; i++) {
-      if (orderHistory.length > 0) {
-        if(!moment(orderHistory[i].DateTime).format('MMMM Do YYYY, h:mm a').isBetween(fromdate , todate)){
-          alert("Yes there are some")
-        }
-        else{
-          alert("testing fail")
-        }
-      }
-      else{
-        alert("In the else")
-      }
+    // var temp = []
+    // var availablity = false;
+    // for (let i = 0; i < orderHistory.length; i++) {
+    //   if (orderHistory.length < 0) {
+    //     if(moment(orderHistory[i].DateTime).format('MMMM Do YYYY').isBetween(fromdate , todate)){
+    //       alert("Yes there are some")
+    //     }
+    //     else{
+    //       alert("testing fail")
+    //     }
+    //   }
+    //   else{
+    //     alert("In the else")
+    //   }
       
-    }
+    // }
  
   }
 

@@ -28,6 +28,7 @@ function ResturantsTable() {
     }
   }
 
+
   async function deactivate(ID) {
     const info = {
       ID,

@@ -169,13 +169,14 @@ function MenuTable() {
           "Content-Type":"multipart/form-data"
       }
   }
+  console.log(file)
     // alert(image)
     // alert(file)formData,config
 
     try {
       const result = await axios.post(
         " http://localhost:5000/api/admin/imageuploadcheck",
-        config,formData
+        formData,config
       ).data;
       console.log(result);
       update1();
@@ -206,11 +207,11 @@ function MenuTable() {
     }
     fetchData();
   }, []);
-  function onchange(e){
-    setFile(e.target.files[0])
-    console.log(file)
+  // function onchange(e){
+  //   setFile(e.target.files[0])
+  //   console.log(e.target.files[0])
 
-  }
+  // }
 
   useEffect(() => {
     async function fetchData() {
@@ -549,10 +550,9 @@ function MenuTable() {
                             <input
                               type="file"
                               class="form-control"
-                              id="inputGroupFile02"
+                              id="photo"
                               name="photo"
-                              
-                              onChange={onchange}
+                              onChange={(e)=>{setFile(e.target.files[0])}}
                             />
                           </div>
                           <div className="text-center my-3">
