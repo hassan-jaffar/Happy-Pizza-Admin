@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function MenuTable() {
   const [category, setcategory] = useState([]);
-  const [categoryname, setname] = useState([]);
+  const [categoryID, setcategoryID] = useState('');
   const [item, setItem] = useState([]);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
@@ -106,59 +106,22 @@ function MenuTable() {
     }
   }
 
-  // async function addItem(category_id) {
-  //   // var formData = new FormData();
-  //   // formData.append("photo",file)
-  //   // formData.append("title",title);
-  //   // formData.append("description",description);
-  //   // formData.append("price",price);
-
-  //   // console.log('in')
-  //   const user = {
-  //     category_id,
-  //     title,
-  //     description,
-  //     price,
-  //     file
-  //   };
-  // //   const config = {
-  // //     headers:{
-  // //         "Content-Type":"multipart/form-data"
-  // //     }
-  // // }
-  //   // alert(image)
-  //   // alert(file)formData,config
-
-  //   try {
-  //     const result = await axios.post(
-  //       " http://localhost:5000/api/admin/createitem",
-  //       user
-  //     ).data;
-  //     console.log(result);
-  //     update1();
-  //     toast.success("Item has been Added");
-  //     refCloseadd.current.click();
-  //     setName("");
-  //     setTitle("");
-  //     setPrice("");
-  //     setdescription("");
-  //     setFile("");
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.warn("Something went wrong try again!");
-  //   }
-  // }
+  async function getID(category_id){
+    setcategoryID(category_id)
+  }
 
   async function addItem(category_id) {
+
     var formData = new FormData();
     formData.append("photo",file)
-    // formData.append("title",title);
-    // formData.append("description",description);
-    // formData.append("price",price);
+    console.log(formData.title)
+    formData.append("title",title);
+    formData.append("description",description);
+    formData.append("price",price);
+    formData.append("categoryID",categoryID)
 
-    // console.log('in')
     // const user = {
-    //   category_id,
+    //   category_id
     //   title,
     //   description,
     //   price,
@@ -169,14 +132,13 @@ function MenuTable() {
           "Content-Type":"multipart/form-data"
       }
   }
-  console.log(file)
     // alert(image)
     // alert(file)formData,config
 
     try {
       const result = await axios.post(
-        " http://localhost:5000/api/admin/imageuploadcheck",
-        formData,config
+        " http://localhost:5000/api/admin/createitem",
+        config,formData
       ).data;
       console.log(result);
       update1();
@@ -192,6 +154,37 @@ function MenuTable() {
       toast.warn("Something went wrong try again!");
     }
   }
+
+  // async function addItem(category_id) {
+  //   var formData = new FormData();
+  //   formData.append("photo",file)
+ 
+  //   const config = {
+  //     headers:{
+  //         "Content-Type":"multipart/form-data"
+  //     }
+  // }
+  // console.log(file)
+
+  //   try {
+  //     const result = await axios.post(
+  //       " http://localhost:5000/api/admin/imageuploadcheck",
+  //       formData,config
+  //     ).data;
+  //     console.log(result);
+  //     update1();
+  //     toast.success("Item has been Added");
+  //     refCloseadd.current.click();
+  //     setName("");
+  //     setTitle("");
+  //     setPrice("");
+  //     setdescription("");
+  //     setFile("");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.warn("Something went wrong try again!");
+  //   }
+  // }
 
   useEffect(() => {
     async function fetchData() {
@@ -290,6 +283,7 @@ function MenuTable() {
                           type="checkbox"
                           id="flexSwitchCheckDefault"
                         />
+                        
                       </div>
                     </div>
                   </div>
@@ -346,6 +340,7 @@ function MenuTable() {
                                   data-bs-toggle="modal"
                                   data-bs-target={`#additemModal${categorys.ID}`}
                                   className="btn btn-info menu-buttons"
+                                  onClick={()=>{getID(categorys.ID)}}
                                 >
                                   <i className="fa-solid fa-plus"></i>
                                 </button>
@@ -476,6 +471,7 @@ function MenuTable() {
                     className="modal fade"
                     id={`additemModal${categorys.ID}`}
                     tabindex="-1"
+                    // data-id={`${categorys.ID}`}
                     aria-labelledby="additemModalLabel"
                     aria-hidden="true"
                     data-bs-backdrop="static"
@@ -530,7 +526,7 @@ function MenuTable() {
                               setPrice(e.target.value);
                             }}
                           />
-                          <input type="hidden" name="" id="" value={categorys.ID}/>
+                          <input type="hidden" name="categoryID" id="categoryID" value={categoryID}/>
                           <div className="form-check form-switch my-3">
                             <div className="row justify-content-between">
                               <label
@@ -563,6 +559,7 @@ function MenuTable() {
                               // value={file}
                             />
                           </div>
+                          <input type="hidden" id="categoryid" name="categoryid" value={categorys.ID} />
                         </div>
                         <div className="modal-footer">
                           <button
