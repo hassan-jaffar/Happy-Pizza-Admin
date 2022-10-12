@@ -110,16 +110,16 @@ function MenuTable() {
     setcategoryID(category_id)
   }
 
-  async function addItem(category_id) {
+  async function addItem() {
 
-    var formData = new FormData();
+   var formData = new FormData();
     formData.append("photo",file)
-    console.log(formData.title)
+    
     formData.append("title",title);
     formData.append("description",description);
     formData.append("price",price);
     formData.append("categoryID",categoryID)
-
+console.log(formData);
     // const user = {
     //   category_id
     //   title,
@@ -138,7 +138,7 @@ function MenuTable() {
     try {
       const result = await axios.post(
         " http://localhost:5000/api/admin/createitem",
-        config,formData
+       formData, config
       ).data;
       console.log(result);
       update1();

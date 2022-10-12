@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 import moment from "moment";
+import ReactPaginate from 'react-paginate';
 const { RangePicker } = DatePicker;
 
 function OrdersTable() {
@@ -17,16 +18,49 @@ function OrdersTable() {
   const [type, settype] = useState("-- Select an option --");
   const [fromdate, setfromdate] = useState();
   const [todate, settodate] = useState();
+  const [filter,setFilter]=React.useState([]);
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
   
   const getstatus = localStorage.getItem("status");
 
   async function searchByName() {
     // alert("you have searched")
   }
-
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 6) % orderHistory.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  useEffect(() => {
+    // Fetch orderHistory from another resources.
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(orderHistory.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(orderHistory.length / 6));
+  }, [itemOffset, 6]);
   function filterByDate(dates) {
     setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
     settodate(moment(dates[1]).format("DD-MM-YYYY"));
+   
+    if(dates[0],dates[1]){
+      const temporders = duplicateorderHistory.filter(
+        (order) => {
+          console.log(Date.parse(dates[0]._d)
+            ,Date.parse(order.DateTime),Date.parse(dates[1]._d)
+            )
+          return Date.parse(dates[0]._d)<Date.parse(order.DateTime)&&Date.parse(dates[1]._d)>Date.parse(order.DateTime)}
+      );
+      setorderHistory(temporders);
+
+      console.log(temporders);
+      // setOrders(temporders);
+    }
 
     // alert(fromdate)
     
@@ -324,6 +358,15 @@ function OrdersTable() {
                   })}
               </tbody>
             </table>
+            <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
           </div>
 </>):(<>
   <div className="mx-4 bs ps-4 pt-4 mb-5">
@@ -413,7 +456,7 @@ function OrdersTable() {
               </table>
             </div>
 
-            <div className="d-flex justify-content-end mt-4 me-5 pb-4">
+            {/* <div className="d-flex justify-content-end mt-4 me-5 pb-4">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
@@ -443,7 +486,8 @@ function OrdersTable() {
                   </li>
                 </ul>
               </nav>
-            </div>
+            </div> */}
+ 
           </div>
 </>)}
 
