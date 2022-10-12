@@ -48,7 +48,7 @@ function OrdersTable() {
     setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
     settodate(moment(dates[1]).format("DD-MM-YYYY"));
    
-    if(dates[0],dates[1]){
+    if(dates[0] && dates[1]){
       const temporders = duplicateorderHistory.filter(
         (order) => {
           console.log(Date.parse(dates[0]._d)
@@ -60,6 +60,53 @@ function OrdersTable() {
 
       console.log(temporders);
       // setOrders(temporders);
+    }
+    else{
+      setorderHistory(orderHistory)
+    }
+
+    // alert(fromdate)
+    
+
+    // var temp = []
+    // var availablity = false;
+    // for (let i = 0; i < orderHistory.length; i++) {
+    //   if (orderHistory.length < 0) {
+    //     if(moment(orderHistory[i].DateTime).format('MMMM Do YYYY').isBetween(fromdate , todate)){
+    //       alert("Yes there are some")
+    //     }
+    //     else{
+    //       alert("testing fail")
+    //     }
+    //   }
+    //   else{
+    //     alert("In the else")
+    //   }
+      
+    // }
+ 
+  }
+
+
+  function filterByDate2(dates) {
+    setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
+    settodate(moment(dates[1]).format("DD-MM-YYYY"));
+   
+    if(dates[0] && dates[1]){
+      const temporders = duplicateorders.filter(
+        (order) => {
+          console.log(Date.parse(dates[0]._d)
+            ,Date.parse(order.DateTime),Date.parse(dates[1]._d)
+            )
+          return Date.parse(dates[0]._d)<Date.parse(order.DateTime)&&Date.parse(dates[1]._d)>Date.parse(order.DateTime)}
+      );
+      setOrders(temporders);
+
+      console.log(temporders);
+      // setOrders(temporders);
+    }
+    else{
+      setOrders(orders)
     }
 
     // alert(fromdate)
@@ -187,7 +234,8 @@ function OrdersTable() {
               >
                 <div className="accordion-body text-start my-3">
                   <div className="row">
-                    <div className="col-md-4">
+                    { getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
+                      <div className="col-md-4">
                       <label for="daterange" className="me-1 my-1 boldtext">
                         Date Range
                       </label>
@@ -198,10 +246,9 @@ function OrdersTable() {
                   /> */}
                       <RangePicker
                         format="DD-MM-YYYY"
-                        onChange={filterByDate}
+                        onChange={filterByDate2}
                       />
                     </div>
-                    { getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
                       <div className="col-md-4">
                       <label
                         for="customerfilter"
@@ -241,6 +288,20 @@ function OrdersTable() {
                       </select>
                     </div>
                     </>):(<>
+                      <div className="col-md-4">
+                      <label for="daterange" className="me-1 my-1 boldtext">
+                        Date Range
+                      </label>
+                      {/* <input
+                    id="daterange"
+                    className="me-1 my-1 py-1"
+                    placeholder="Start Date"
+                  /> */}
+                      <RangePicker
+                        format="DD-MM-YYYY"
+                        onChange={filterByDate}
+                      />
+                    </div>
                       <div className="col-md-4">
                       <label
                         for="customerfilter"

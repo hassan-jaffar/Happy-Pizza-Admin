@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.css";
+import moment from "moment";
+const { RangePicker } = DatePicker;
 
 function Report() {
   const [orderReport, setorderReport] = useState([])
   const [orderReport1, setorderReport1] = useState([])
   const [type, settype] = useState("-- Select an option --");
   const [duplicateorderReport, setduplicateorderReport] = useState([])
+  const [fromdate, setfromdate] = useState();
+  const [todate, settodate] = useState();
   const getstatus = localStorage.getItem("status");
 
   var orderData = [
@@ -45,6 +51,49 @@ function Report() {
     } else {
       setorderReport(orderReport1);
     }
+  }
+
+  function filterByDate(dates) {
+    setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
+    settodate(moment(dates[1]).format("DD-MM-YYYY"));
+   
+    if(dates[0] && dates[1]){
+      const temporders = duplicateorderReport.filter(
+        (order) => {
+          console.log(Date.parse(dates[0]._d)
+            ,Date.parse(order.DateTime),Date.parse(dates[1]._d)
+            )
+          return Date.parse(dates[0]._d)<Date.parse(order.DateTime)&&Date.parse(dates[1]._d)>Date.parse(order.DateTime)}
+      );
+      setorderReport(temporders);
+
+      console.log(temporders);
+      // setOrders(temporders);
+    }
+    else{
+      setorderReport(orderReport)
+    }
+
+    // alert(fromdate)
+    
+
+    // var temp = []
+    // var availablity = false;
+    // for (let i = 0; i < orderHistory.length; i++) {
+    //   if (orderHistory.length < 0) {
+    //     if(moment(orderHistory[i].DateTime).format('MMMM Do YYYY').isBetween(fromdate , todate)){
+    //       alert("Yes there are some")
+    //     }
+    //     else{
+    //       alert("testing fail")
+    //     }
+    //   }
+    //   else{
+    //     alert("In the else")
+    //   }
+      
+    // }
+ 
   }
 
   useEffect(() => {
@@ -311,15 +360,19 @@ function Report() {
                       Date Range
                     </label>
                     <div className="row g-0">
-                      <div className="col-5">
-                        <input
+                      <div className="col-10">
+                        {/* <input
                           type="date"
                           className="form-control"
                           placeholder="Username"
                           aria-label="Username"
-                        />
+                        /> */}
+                        <RangePicker
+                        format="DD-MM-YYYY"
+                        onChange={filterByDate}
+                      />
                       </div>
-                      <div className="col-2 text-center mt-2">
+                      {/* <div className="col-2 text-center mt-2">
                         <span>To</span>
                       </div>
                       <div className="col-5">
@@ -330,7 +383,7 @@ function Report() {
                           placeholder="Server"
                           aria-label="Server"
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 
@@ -430,7 +483,7 @@ function Report() {
                         <tr>
                           <th scope="row">{report.cart_Id}</th>
                           <td>{report.cname}</td>
-                          <td>{report.DateTime}</td>
+                          <td>{moment(report.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
                           <td>stripe</td>
                           <td>
                           {report.Orderstatus === "1" ? (
