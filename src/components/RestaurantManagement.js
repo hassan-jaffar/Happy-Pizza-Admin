@@ -21,26 +21,49 @@ function RestaurantManagement() {
   const [owner_phone, setowner_phone] = useState("");
   const [updateowner_phone, setupdateowner_phone] = useState("");
   const [updateowner_address, setupdateowner_address] = useState("")
+  const [file, setfile] = useState("")
+  const [cimage, setcimage] = useState("")
+  const [rimage, setrimage] = useState("")
   const {id} = useParams();
   const getstatus = localStorage.getItem("status");
 
 
   async function register() {
-    const details = {
-      id,
-      description,
-      address,
-      phone,
-      charges,
-      minimum_order,
-      average_order,
-      time
-    };
+    var formData = new FormData();
+    formData.append("description",description);
+    formData.append("id",id);
+    formData.append("address",address);
+    formData.append("phone",phone);
+    formData.append("charges",charges);
+    formData.append("minimum_order",minimum_order);
+    formData.append("average_order",average_order);
+    formData.append("time",time);
+    formData.append("photo",file);
+    formData.append("cimage",cimage);
+    formData.append("rimage",rimage);
+
+    const config = {
+      headers:{
+          "Content-Type":"multipart/form-data"
+      }
+  }
+
+
+    // const details = {
+    //   id,
+    //   description,
+    //   address,
+    //   phone,
+    //   charges,
+    //   minimum_order,
+    //   average_order,
+    //   time
+    // };
 
     try {
       const result = await axios.post(
         "http://localhost:5000/api/setting/resturantmanagement",
-        details
+        formData, config
       ).data;
       console.log(result);
       toast.success("Registration Successfull");
@@ -91,6 +114,7 @@ function RestaurantManagement() {
         const data = await (
           await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
         ).data;
+        update();
         setupdatename(data.data['name']);
         setupdateowner_name(data.data['owner_name']);
         setupdateowner_email(data.data['owner_email']);
@@ -103,7 +127,7 @@ function RestaurantManagement() {
         setphone(data.data['phone']);
         setcharges(data.data['charges']);
         settime(data.data['time']);
-        update();
+        
       } catch (error) {
         console.log(error);
       }
@@ -116,7 +140,9 @@ function RestaurantManagement() {
       <h6 className="px-1">RESTAURANT MANAGEMENT</h6>
       <hr />
       <br />
+      <form enctype="multipart/form-data">
       <div className="row">
+      
         <div className="col-md-6 px-3">
           <label for="rstname" className="mt-3">
             Restaurant Name:
@@ -139,6 +165,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="yummy, taco, fast food, wraps"
+            name="description"
             value={description}
             onChange={(e) => {
               setdescription(e.target.value);
@@ -152,6 +179,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="lahore, pakistan"
+            name="address"
             value={address}
             onChange={(e) => {
               setaddress(e.target.value);
@@ -165,6 +193,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="text"
             placeholder="xxxx-xxxxxxx"
+            name="phone"
             value={phone}
             onChange={(e) => {
               setphone(e.target.value);
@@ -178,6 +207,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="number"
             placeholder="0.00"
+            name="charges"
             value={charges}
             onChange={(e) => {
               setcharges(e.target.value);
@@ -227,6 +257,7 @@ function RestaurantManagement() {
             className="form-control my-2 py-2"
             type="number"
             placeholder="10"
+            name="minimum_order"
             value={minimum_order}
             onChange={(e) => {
               setminimum_order(e.target.value);
@@ -238,6 +269,7 @@ function RestaurantManagement() {
           <select
             className="form-select"
             aria-label="Default select example"
+            name="average_order"
             value={average_order}
             onChange={(e) => {
               setaverage_order(e.target.value);
@@ -292,7 +324,11 @@ function RestaurantManagement() {
             <label for="formFile" className="form-label">
               Restaurant Image:
             </label>
-            <input className="form-control" type="file" id="formFile" />
+            <input className="form-control" type="file" id="formFile" name="photo"
+            onChange={(e)=>{
+              setfile(e.target.files[0])
+            }}
+            />
             <img
               src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
               className="settingimg"
@@ -303,13 +339,21 @@ function RestaurantManagement() {
             <label for="formFile2" className="form-label">
               Restaurant Cover Image:
             </label>
-            <input className="form-control" type="file" id="formFile2" />
+            <input className="form-control" type="file" id="formFile2" name="cimage" 
+            onChange={(e)=>{
+              setcimage(e.target.files[0])
+            }}
+            />
           </div>
           <div className="my-3">
             <label for="formFile3" className="form-label">
               Restaurant Receipt Image:
             </label>
-            <input className="form-control" type="file" id="formFile3" />
+            <input className="form-control" type="file" id="formFile3" name="rimage" 
+            onChange={(e)=>{
+              setrimage(e.target.files[0])
+            }}
+            />
             <img
               src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
               className="settingimg"
@@ -317,6 +361,7 @@ function RestaurantManagement() {
             />
           </div>
         </div>
+        
       </div>
       <hr />
       <div className="row">
@@ -352,6 +397,10 @@ function RestaurantManagement() {
             placeholder="xxxx-xxxxxxx"
             value={updateowner_phone}
           />
+          <input
+          type="hidden"
+          name="id"
+          value={id} />
           <div className="container mt-5 text-center">
             {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 && (
             <button className="btn btn-info py-2" onClick={register}>
@@ -361,6 +410,7 @@ function RestaurantManagement() {
           </div>
         </div>
       </div>
+      </form>
     </>
   );
 }
