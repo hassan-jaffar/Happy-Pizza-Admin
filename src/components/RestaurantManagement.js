@@ -63,6 +63,28 @@ function RestaurantManagement() {
     }
   }
 
+  async function update(){
+    try {
+      const data = await (
+        await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
+      ).data;
+      setupdatename(data.data['name']);
+      setupdateowner_name(data.data['owner_name']);
+      setupdateowner_email(data.data['owner_email']);
+      setupdateowner_phone(data.data['owner_phone']);
+      setupdateowner_address(data.data['owner_address']);
+      setminimum_order(data.data['minimum_order']);
+      setaverage_order(data.data['average_order']);
+      setdescription(data.data['description']);
+      setaddress(data.data['address']);
+      setphone(data.data['phone']);
+      setcharges(data.data['charges']);
+      settime(data.data['time']);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -74,6 +96,14 @@ function RestaurantManagement() {
         setupdateowner_email(data.data['owner_email']);
         setupdateowner_phone(data.data['owner_phone']);
         setupdateowner_address(data.data['owner_address']);
+        setminimum_order(data.data['minimum_order']);
+        setaverage_order(data.data['average_order']);
+        setdescription(data.data['description']);
+        setaddress(data.data['address']);
+        setphone(data.data['phone']);
+        setcharges(data.data['charges']);
+        settime(data.data['time']);
+        update();
       } catch (error) {
         console.log(error);
       }
