@@ -28,6 +28,7 @@ function RestaurantManagement() {
   const getstatus = localStorage.getItem("status");
 
 
+
   async function register() {
     var formData = new FormData();
     formData.append("description",description);
@@ -109,30 +110,59 @@ function RestaurantManagement() {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await (
-          await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
-        ).data;
-        update();
-        setupdatename(data.data['name']);
-        setupdateowner_name(data.data['owner_name']);
-        setupdateowner_email(data.data['owner_email']);
-        setupdateowner_phone(data.data['owner_phone']);
-        setupdateowner_address(data.data['owner_address']);
-        setminimum_order(data.data['minimum_order']);
-        setaverage_order(data.data['average_order']);
-        setdescription(data.data['description']);
-        setaddress(data.data['address']);
-        setphone(data.data['phone']);
-        setcharges(data.data['charges']);
-        settime(data.data['time']);
-        
-      } catch (error) {
-        console.log(error);
+    if (getstatus === "true") {
+      const cid = JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID;
+      async function fetchData() {
+        try {
+          const data = await (
+            await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${cid}`)
+          ).data;
+          update();
+          setupdatename(data.data['name']);
+          setupdateowner_name(data.data['owner_name']);
+          setupdateowner_email(data.data['owner_email']);
+          setupdateowner_phone(data.data['owner_phone']);
+          setupdateowner_address(data.data['owner_address']);
+          setminimum_order(data.data['minimum_order']);
+          setaverage_order(data.data['average_order']);
+          setdescription(data.data['description']);
+          setaddress(data.data['address']);
+          setphone(data.data['phone']);
+          setcharges(data.data['charges']);
+          settime(data.data['time']);
+          
+        } catch (error) {
+          console.log(error);
+        }
       }
+      fetchData();
+    } else {
+      async function fetchData() {
+        try {
+          const data = await (
+            await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
+          ).data;
+          update();
+          setupdatename(data.data['name']);
+          setupdateowner_name(data.data['owner_name']);
+          setupdateowner_email(data.data['owner_email']);
+          setupdateowner_phone(data.data['owner_phone']);
+          setupdateowner_address(data.data['owner_address']);
+          setminimum_order(data.data['minimum_order']);
+          setaverage_order(data.data['average_order']);
+          setdescription(data.data['description']);
+          setaddress(data.data['address']);
+          setphone(data.data['phone']);
+          setcharges(data.data['charges']);
+          settime(data.data['time']);
+          
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchData();
     }
-    fetchData();
+
   }, [])
   return (
     <>
@@ -402,11 +432,9 @@ function RestaurantManagement() {
           name="id"
           value={id} />
           <div className="container mt-5 text-center">
-            {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 && (
             <button className="btn btn-info py-2" onClick={register}>
               Save
             </button>
-            )}
           </div>
         </div>
       </div>
