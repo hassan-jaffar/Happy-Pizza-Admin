@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 function OpenClose() {
+  const [online, setonline] = useState(false);
+  const [offline, setoffline] = useState(false);
+  const [statment, setstatment] = useState("Statement");
+  const [to, setto] = useState("Date to");
+  const [from, setfrom] = useState("Date from");
+  const id = JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID;
+
+  async function open(){
+    const details = {
+      online,
+      offline,
+      statment,
+      to,
+      from,
+      id
+    }
+
+    try {
+      const data = await (
+        await axios.post("http://localhost:5000/api/superadmin/openclose",details)
+      ).data;
+
+      setstatment("");
+      setto("");
+      setfrom("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <h6 className="px-1">OPEN/CLOSE</h6>
@@ -23,6 +55,7 @@ function OpenClose() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault1"
+                  onChange={(e)=>{setonline(e.target.checked)}}
                 />
                 <label className="form-check-label" for="flexRadioDefault1">
                   Online (as usual)
@@ -47,6 +80,7 @@ function OpenClose() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
+                  onChange={(e)=>{setoffline(e.target.checked)}}
                 />
                 <label className="form-check-label" for="flexRadioDefault3">
                   Offline For The Whole Day
@@ -87,6 +121,7 @@ function OpenClose() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault2"
+                  onChange={(e)=>{setoffline(e.target.checked)}}
                 />
                 <label className="form-check-label" for="flexRadioDefault2">
                   Offline Until
@@ -129,7 +164,7 @@ function OpenClose() {
         </div>
       </div>
       <div className="container mt-5 text-center">
-        <button className="btn btn-info py-2">Save</button>
+        <button className="btn btn-info py-2" onClick={open}>Save</button>
       </div>
     </>
   );
