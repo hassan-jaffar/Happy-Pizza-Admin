@@ -381,12 +381,19 @@ function Dashboard() {
 
                   {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 && (<>
                     <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
-                  <h6>
-                    <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
-                    <i class="fa-sharp fa-solid fa-circle-xmark checkiconclr text-danger"></i>
-                  </h6>
-                  {openinfo === "true" ?(<h1 className="boldtext">Your Restaurant is Open!</h1>):(
+                  {openinfo === "true" ?(
+                    <>
+                                    <h6>
+                                    <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
+                                                      </h6>
+                  <h1 className="boldtext">Your Restaurant is Open!</h1>
+                  </>):(
+                    <>
+                    <h6>
+                      <i class="fa-sharp fa-solid fa-circle-xmark checkiconclr text-danger"></i>
+                    </h6>
                     <h1 className="boldtext">Your Restaurant is Closed!</h1>
+                    </>
                   )}
                   
                   <button
