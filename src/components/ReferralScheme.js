@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -7,12 +8,14 @@ function ReferralScheme() {
   const [status, setStatus] = useState(false);
   const [new_customer, setnew_customer] = useState("");
   const [existing_customer, setexisting_customer] = useState("");
+  const {id} = useParams();
 
   async function register() {
     const details = {
       status,
       new_customer,
       existing_customer,
+      id
     };
     try {
       const result = await axios.post(
