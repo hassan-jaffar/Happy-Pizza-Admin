@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 function AddResturant() {
   const [name, setname] = useState("");
-  const [description, setdescription] = useState("");
-  const [address, setaddress] = useState("");
-  const [phone, setphone] = useState("");
-  const [charges, setcharges] = useState("");
-  const [minimum_order, setminimum_order] = useState("");
-  const [average_order, setaverage_order] = useState("");
-  const [time, settime] = useState("")
+  const [description, setdescription] = useState("this is a temporary desc");
+  const [address, setaddress] = useState("this is a temporary address");
+  const [phone, setphone] = useState("this is a tempoarary phone");
+  const [charges, setcharges] = useState("23");
+  const [minimum_order, setminimum_order] = useState("10");
+  const [average_order, setaverage_order] = useState("10");
+  const [time, settime] = useState("20")
   const [owner_name, setowner_name] = useState("");
   const [owner_email, setowner_email] = useState("");
   const [owner_address, setowner_address] = useState("");
@@ -20,8 +20,8 @@ function AddResturant() {
   const [primary_color, setprimary_color] = useState("");
   const [secondary_color, setsecondary_color] = useState("");
   const [app_name, setapp_name] = useState("");
-  const [delivery_min, setdelivery_min] = useState("");
-  const [location_search, setlocation_search] = useState("");
+  const [delivery_min, setdelivery_min] = useState("23");
+  const [location_search, setlocation_search] = useState("This is a temporary location search");
   const [stripe_connect, setstripe_connect] = useState("");
   const [enable_stripe, setenable_stripe] = useState("");
   const [stripe_key, setstripe_key] = useState("");
@@ -35,8 +35,8 @@ function AddResturant() {
   const [fclient_secret, setfclient_secret] = useState("");
   const [fclient_redirect, setfclient_redirect] = useState("");
   const [app_id, setapp_id] = useState("");
-  const [rapi_key, setrapi_key] = useState("");
-  const [sms, setsms] = useState("");
+  const [rapi_key, setrapi_key] = useState("Rapi key");
+  const [sms, setsms] = useState("This is a temporary sms");
   const [optomany_enabled, setoptomany_enabled] = useState("");
   const [oclient_id, setoclient_id] = useState("");
   const [oclient_secret, setoclient_secret] = useState("");
@@ -47,13 +47,13 @@ function AddResturant() {
   async function register(){
     const details = {
       name,
-      description,
-      address,
-      phone,
-      charges,
-      minimum_order,
-      average_order,
-      time,
+      // description,
+      // address,
+      // phone,
+      // charges,
+      // minimum_order,
+      // average_order,
+      // time,
       owner_name,
       owner_email,
       owner_address,
@@ -63,7 +63,7 @@ function AddResturant() {
       secondary_color,
       app_name,
       delivery_min,
-      location_search,
+      // location_search,
       stripe_connect,
       enable_stripe,
       stripe_key,
@@ -86,6 +86,7 @@ function AddResturant() {
       otest_mode
     }
 
+
     try {
 
       // setloading(true)
@@ -93,9 +94,11 @@ function AddResturant() {
       console.log(result)
       // toast.success("Registration Successfull")
       // setloading(true)
-      setInterval(() => {
-        window.location.href = "/resturant"
-      }, 2000);
+      // setInterval(() => {
+      //   window.location.href = "/resturant"
+      // }, 2000);
+
+      // alert("data has been entered")
 
       setname("");
       setdescription("");
@@ -138,11 +141,11 @@ function AddResturant() {
 
 
   } catch (error) {
-      console.log(error);
+      alert(error);
       // toast.warn("Something went wrong!")
       // setloading(true)
   }
-  }
+  } 
 
   return (
     <>
@@ -756,8 +759,8 @@ function AddResturant() {
                               className="form-control"
                               id="validationCustom23"
                               placeholder="eb4528f5-4304-474b-be8a-99997d9036d5"
-                              value={optomany_enabled}
-                              onChange={(e)=>{setoptomany_enabled(e.target.value)}}
+                              value={oterminal_id}
+                              onChange={(e)=>{setoterminal_id(e.target.value)}}
                               required
                             />
                           </div>

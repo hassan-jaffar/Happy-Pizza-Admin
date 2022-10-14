@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
@@ -7,11 +7,44 @@ import Navbar from "./Navbar";
 function Dashboard() {
   const [resturantData, setresturantData] = useState([])
   const getstatus = localStorage.getItem("status");
+  const id = JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID;
   const [orders, setOrders] = useState();
   const [customer, setcustomer] = useState();
   const [item, setitem] = useState();
   const [resturantcount, setresturantcount] = useState([])
   const [sales, setsales] = useState([])
+  const [online, setonline] = useState(false);
+  const [offline, setoffline] = useState(false);
+  const [statment, setstatment] = useState("Statement");
+  const [to, setto] = useState("Date to");
+  const [from, setfrom] = useState("Date from");
+  const [openinfo, setopeninfo] = useState("")
+  const refCloseadd = useRef(null);
+
+  async function open(){
+    const details = {
+      online,
+      offline,
+      statment,
+      to,
+      from,
+      id
+    }
+
+    try {
+      const data = await (
+        await axios.post("http://localhost:5000/api/superadmin/openclose",details)
+      ).data;
+
+      update4();
+      refCloseadd.current.click();
+      setstatment("");
+      setto("");
+      setfrom("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -92,6 +125,45 @@ function Dashboard() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const details = {
+        id
+      }
+      try {
+        const data = await (
+          await axios.post(
+            "http://localhost:5000/api/superadmin/getopenclose",details
+          )
+        ).data;
+
+        console.log(data)
+        setopeninfo(data.data);
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
+
+  async function update4(){
+    const details = {
+      id
+    }
+    try {
+      const data = await (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/getopenclose",details
+        )
+      ).data;
+
+      console.log(data)
+      setopeninfo(data.data[0]['online']);
+    } catch (error) {
+      console.log(error, "err");
+    }
+  }
 
   let total = 0;
   // for (const product of order) {
@@ -312,7 +384,10 @@ function Dashboard() {
                   <h6>
                     <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
                   </h6>
-                  <h1 className="boldtext">Your Restaurant is Open!</h1>
+                  {openinfo === "true" ?(<h1 className="boldtext">Your Restaurant is Open!</h1>):(
+                    <h1 className="boldtext">Your Restaurant is Closed!</h1>
+                  )}
+                  
                   <button
                     type="button"
                     className="btn btn-light mlauto editpencilbtn bs"
@@ -371,6 +446,7 @@ function Dashboard() {
                                       type="radio"
                                       name="flexRadioDefault"
                                       id="flexRadioDefault1"
+                                      onChange={(e)=>{setonline(e.target.checked)}}
                                     />
                                     <label
                                       className="form-check-label"
@@ -401,6 +477,7 @@ function Dashboard() {
                                       type="radio"
                                       name="flexRadioDefault"
                                       id="flexRadioDefault3"
+                                      onChange={(e)=>{setoffline(e.target.checked)}}
                                     />
                                     <label
                                       className="form-check-label"
@@ -447,6 +524,7 @@ function Dashboard() {
                                       type="radio"
                                       name="flexRadioDefault"
                                       id="flexRadioDefault2"
+                                      onChange={(e)=>{setoffline(e.target.checked)}}
                                     />
                                     <label
                                       className="form-check-label"
@@ -496,6 +574,7 @@ function Dashboard() {
                           <button
                             type="button"
                             className="btn btn-info mt-2 d-block w-100"
+                            onClick={open}
                           >
                             Save
                           </button>
@@ -505,6 +584,7 @@ function Dashboard() {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal"
+                            ref={refCloseadd}
                           >
                             Close
                           </button>

@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 
 function ResturantsTable() {
   const [resturants, setresturants] = useState([]);
+  const [resturants1, setresturants1] = useState([]);
+  const [type, settype] = useState("-- Select an option --");
+  const [show, setshow] = useState("-- Select an option --");
+  const [duplicateresturants, setduplicateresturants] = useState([])
 
   async function del(ID) {
     const info = {
@@ -23,6 +27,7 @@ function ResturantsTable() {
       console.log(error);
     }
   }
+
 
   async function deactivate(ID) {
     const info = {
@@ -78,12 +83,42 @@ function ResturantsTable() {
           )
         ).data;
         setresturants(data.data);
+        setresturants1(data.data);
+        setduplicateresturants(data.data);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+
+  function filterByName(e) {
+    settype(e);
+
+    if (e !== "-- Select an option --") {
+      // const temprooms = duplicateorders.filter(order=>order.ID===e)
+      const tempresturants = duplicateresturants.filter(
+        (resturants) =>resturants.ID === parseInt(e)
+      );
+      setresturants(tempresturants);
+    } else {
+      setresturants(resturants1);
+    }
+  }
+
+  function filterByType(e) {
+    setshow(e);
+
+    if (e === "false") {
+      const tempresturants = duplicateresturants.filter(
+        (resturants) =>resturants.status === e
+      );
+      setresturants(tempresturants);
+    }
+     else {
+      setresturants(resturants1);
+    }
+  }
   return (
     <>
       <div className="row justify-content-center">
@@ -119,11 +154,18 @@ function ResturantsTable() {
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          value={type}
+                          onChange={(e) => {
+                            filterByName(e.target.value);
+                          }}
                         >
                           <option selected>-- Select an option --</option>
-                          <option value="1">Pontus Fish and Pizza</option>
-                          <option value="2">Golden Fry Sedgley</option>
-                          <option value="3">bkitchen</option>
+                          {resturants1.length > 0 && resturants1.map((resturant)=>{
+                            return <>
+                            <option value={resturant.ID}>{resturant.name}</option>
+                            </>
+                          })}
+                          
                         </select>
                       </div>
                       <div class="col-md-4">
@@ -133,10 +175,12 @@ function ResturantsTable() {
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          value={show}
+                          onChange={(e)=>{filterByType(e.target.value)}}
                         >
                           <option selected>-- Select an option --</option>
-                          <option value="1">All</option>
-                          <option value="2">Pending</option>
+                          <option value="true">All</option>
+                          <option value="false">Pending</option>
                         </select>
                       </div>
                       <div class="col-md-4">
@@ -251,32 +295,39 @@ function ResturantsTable() {
                                         class="dropdown-menu"
                                         aria-labelledby="dropdownMenuButton"
                                       >
+                                        <Link to={`/editrestuurant/${item.ID}`}>
                                         <li className="dropdown-item">
                                           <i class="far fa-edit"></i>
                                           Edit
                                         </li>
+                                        </Link>
                                         <li className="dropdown-item">
                                           <i class="fas fa-sign-in-alt"></i>
                                           Login as
                                         </li>
+                                      {item.status === "true" ? (
                                         <li
-                                          className="dropdown-item"
-                                          onClick={() => {
-                                            deactivate(item.ID);
-                                          }}
-                                        >
-                                          <i class="far fa-times-circle"></i>
-                                          Deactivate
-                                        </li>
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                          deactivate(item.ID);
+                                        }}
+                                      >
+                                        <i class="far fa-times-circle"></i>
+                                        Deactivate
+                                      </li>
+                                      ):(
                                         <li
-                                          className="dropdown-item"
-                                          onClick={() => {
-                                            activate(item.ID);
-                                          }}
-                                        >
-                                          <i class="far fa-check-circle"></i>
-                                          Activate
-                                        </li>
+                                        className="dropdown-item"
+                                        onClick={() => {
+                                          activate(item.ID);
+                                        }}
+                                      >
+                                        <i class="far fa-check-circle"></i>
+                                        Activate
+                                      </li>
+                                      )}
+
+                                      
                                         <li
                                           class="dropdown-item"
                                           onClick={() => {
