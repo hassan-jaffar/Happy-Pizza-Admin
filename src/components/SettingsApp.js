@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 function SettingsApp() {
@@ -13,7 +14,7 @@ function SettingsApp() {
   const [standard_print, setstandard_print] = useState("On order received")
   const [main_print, setmain_print] = useState("We accept the order")
   const [kitchen_print, setkitchen_print] = useState("We accept the order")
-
+  const {id} = useParams();
   async function register() {
     const details = {
       title,
@@ -24,7 +25,8 @@ function SettingsApp() {
       kitchen_printer,
       standard_print,
       main_print,
-      kitchen_print
+      kitchen_print,
+      id
     }
 
     try {
@@ -53,6 +55,7 @@ function SettingsApp() {
   }
   return (
     <>
+    <ToastContainer />
       <h6 className="px-1">APPS</h6>
       <hr />
       <br />
