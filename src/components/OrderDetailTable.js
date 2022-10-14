@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link,useParams } from "react-router-dom";
+import moment from "moment";
 
 function OrderDetailTable() {
   const [orders, setOrders] = useState([]);
@@ -128,7 +129,7 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>ORDER INFO</h6>
                 <hr />
-                <p>Invoice ID: {orders.ID}</p>
+                <p>Invoice ID: {orders.cart_Id}</p>
                 <p>Delivery method: Delivery</p>
                 <p>Time slot: 7:36 PM - 8:06 PM</p>
                 <p>Payment method: STRIPE</p>
@@ -179,7 +180,7 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>CUSTOMER INFORMATION</h6>
                 <hr />
-                <p>Name: {orders.name}</p>
+                <p>Name: {orders.cname}</p>
                 <p>Email: {orders.email}</p>
                 <p>
                   Address: House No: {orders.house}, {orders.street}, {orders.postcode},
@@ -190,18 +191,17 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>RESTAURANT INFORMATION</h6>
                 <hr />
-                <p>Golden Fry Sedgley</p>
-                <p>3 Alderwood Precinct</p>
-                <p>01902597575</p>
+                <p>{orders.name}</p>
+                <p>{orders.address}</p>
+                <p>{orders.phone}</p>
               </div>
             </div>
             <div className="col-md-4 py-4 px-4">
-              <div className="orderdetailcards bs br my-5 px-3 py-4">
-              <h6 className="mb-3">ACTIONS</h6>
                 {info.map((item)=>{
                   return <>
                 {item.Orderstatus === "1" ? (<>
-                  
+                  <div className="orderdetailcards bs br my-5 px-3 py-4">
+              <h6 className="mb-3">ACTIONS</h6>
                 <hr />
                 <button className="btn btn-primary me-2" onClick={() => {
                                                 add(
@@ -215,9 +215,10 @@ function OrderDetailTable() {
                                                   item.Orderstatus
                                                 );
                                               }}>Reject</button>
-
+                </div>
                 </>): item.Orderstatus === "2" ? (<>
-                  
+                  <div className="orderdetailcards bs br my-5 px-3 py-4">
+              <h6 className="mb-3">ACTIONS</h6>
                 <hr />
                 <button className="btn btn-primary me-2" onClick={() => {
                                                 add(
@@ -231,15 +232,13 @@ function OrderDetailTable() {
                                                   item.Orderstatus
                                                 );
                                               }}>Assign to deliver</button>
+                                              </div>
                 </>):(<>
                   
                 </>)}
                   
                   </>
                 })}
-
-
-              </div>
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>FINANCE</h6>
                 <hr />
@@ -306,17 +305,41 @@ function OrderDetailTable() {
                             </div>
                             <div class="text-right">
                               <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>02 Sep 2022
-                                06:23 PM
+                                <i class="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
                             </div>
                           </div>
                           <h6 class="text-sm mt-1 mb-0">
-                            Status from: Rhodri Williams
+                            Status from: {orders.cname}
                           </h6>
                         </div>
                       </div>
-                      <div class="timeline-block">
+                      {orders.Orderstatus === "3" ? (<>
+                        <div class="timeline-block">
+                        <span class="timeline-step badge bg-success">
+                          <i class="fa fa-regular fa-bell"></i>
+                        </span>
+                        <div class="timeline-content">
+                          <div class="d-flex justify-content-between pt-1">
+                            <div>
+                              <span class="text-muted text-sm font-weight-bold">
+                                Completed by resturant
+                              </span>
+                            </div>
+                            {/* <div class="text-right">
+                              <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                                06:23 PM
+                              </small>
+                            </div> */}
+                          </div>
+                          <h6 class="text-sm mt-1 mb-0">
+                            Status from: {orders.owner_name}
+                          </h6>
+                        </div>
+                      </div>
+                      </>): orders.Orderstatus === "1" ? (<>
+                        <div class="timeline-block">
                         <span class="timeline-step badge bg-success">
                           <i class="fa fa-regular fa-bell"></i>
                         </span>
@@ -329,17 +352,15 @@ function OrderDetailTable() {
                             </div>
                             <div class="text-right">
                               <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>02 Sep 2022
-                                06:23 PM
+                                <i class="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
                             </div>
                           </div>
-                          <h6 class="text-sm mt-1 mb-0">
-                            Status from: CNF Admin
-                          </h6>
+                          {/* <h6 class="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6> */}
                         </div>
                       </div>
-                      <div class="timeline-block">
+                      </>):  orders.Orderstatus === "2" ? (<>
+                        <div class="timeline-block">
                         <span class="timeline-step badge bg-success">
                           <i class="fa fa-regular fa-bell"></i>
                         </span>
@@ -347,19 +368,45 @@ function OrderDetailTable() {
                           <div class="d-flex justify-content-between pt-1">
                             <div>
                               <span class="text-muted text-sm font-weight-bold">
-                                Accepted by restaurant
+                                Accepted by resturant
                               </span>
                             </div>
-                            <div class="text-right">
+                            {/* <div class="text-right">
                               <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>02 Sep 2022
-                                06:46 PM
+                                <i class="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
-                            </div>
+                            </div> */}
                           </div>
-                          <h6 class="text-sm mt-1 mb-0">Status from: Owner3</h6>
+                          <h6 class="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6>
                         </div>
                       </div>
+                      </>):(<>
+                        <div class="timeline-block">
+                        <span class="timeline-step badge bg-success">
+                          <i class="fa fa-regular fa-bell"></i>
+                        </span>
+                        <div class="timeline-content">
+                          <div class="d-flex justify-content-between pt-1">
+                            <div>
+                              <span class="text-muted text-sm font-weight-bold">
+                                Rejected by resturant
+                              </span>
+                            </div>
+                            {/* <div class="text-right">
+                              <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                                06:23 PM
+                              </small>
+                            </div> */}
+                          </div>
+                          <h6 class="text-sm mt-1 mb-0">
+                            Status from: {orders.owner_name}
+                          </h6>
+                        </div>
+                      </div>
+                      </>)}
+
+
                     </div>
                   </div>
                 </div>
