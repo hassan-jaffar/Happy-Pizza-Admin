@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
@@ -15,78 +15,87 @@ function SigninPage() {
       email,
       password
     }
-  
-      try {
 
-        // setloading(true)
-        const result = (await axios.post('http://localhost:5000/api/admin/loginadmin', user)).data;
-        console.log(result.data)
+    try {
 
-        localStorage.setItem('currentuser', JSON.stringify(result.data));
-       
-        if(result.data[0].customer_Id!=null)
-        {
+      // setloading(true)
+      const result = (await axios.post('http://localhost:5000/api/admin/loginadmin', user)).data;
+      console.log(result.data)
 
-          localStorage.setItem('status','true');
-        }
-        else
-        {
+      localStorage.setItem('currentuser', JSON.stringify(result.data));
 
+      if (result.data[0].customer_Id != null) {
 
-          localStorage.setItem('status','false');
-        }
-
-        
-        toast.success("Login Successfull")
-        setInterval(() => {
-          window.location.href = "/home"
-        }, 2000);
-        // setloading(false)
-
-        setemail('');
-        setpassword('');
-
+        localStorage.setItem('status', 'true');
       }
-     catch (error) {
-        console.log(error);
-        toast.warn("Invalid credentials")
-        // setloading(false)
+      else {
+
+
+        localStorage.setItem('status', 'false');
       }
+
+
+      toast.success("Login Successfull")
+      setInterval(() => {
+        window.location.href = "/home"
+      }, 2000);
+      // setloading(false)
+
+      setemail('');
+      setpassword('');
+
+    }
+    catch (error) {
+      console.log(error);
+      toast.warn("Invalid credentials")
+      // setloading(false)
+    }
 
   }
   return (
     <>
-        <ToastContainer />
+      <ToastContainer />
+
       <div className="scrolling-off">
         <div className="row justify-content-center gx-0">
+
+
           <div className="col-md-4 text-center mt-2 responsiveness">
-          <Link to="/">
+            <Link to="/">
               <img
                 className="menuimg"
                 src="https://www.happyspizzaburger.co.uk/uploads/restorants/198031cc-1875-4d54-8945-8135a96f353a_large.jpg"
               />
             </Link>
-            <h3 className="boldtext my-3">WELCOME BACK</h3>
+            <h5 className="fw-bolder my-4 spaceWelcome">WELCOME BACK</h5>
             <form>
-              <div className="my-5 ms-5 me-2 text-start centeredItems responsiveness">
-                <label for="emailad">Email Address</label>
+              <div className="my-5 ms-5 text-start centeredItems responsiveness">
+                <label for="emailad" className='mb-2'>Email Address</label>
                 <input
                   id="emailad"
                   type="email"
-                  className="form-control mb-4"
+                  className="form-control mb-4 inputWidth"
                   placeholder="Email"
-                  value={email} 
-              onChange={(e) => { setemail(e.target.value) }}
+                  value={email}
+                  onChange={(e) => { setemail(e.target.value) }}
                   required
                 />
-                <label for="password">Password</label>
+                <div className='row mb-2'>
+                  <div className='col-6'>
+                    <label for="password">Password</label>
+
+                  </div>
+                  <div className='col-6 forgotText'>
+                    <Link to="/" className='text-muted'>Forgot your password?</Link>
+                  </div>
+                </div>
                 <input
                   id="password"
                   type="password"
-                  className="form-control mb-4"
+                  className="form-control inputWidth"
                   placeholder="Password"
-                  value={password} 
-              onChange={(e) => { setpassword(e.target.value) }}
+                  value={password}
+                  onChange={(e) => { setpassword(e.target.value) }}
                   required
                 />
                 <div class="form-check mt-5">
@@ -100,28 +109,33 @@ function SigninPage() {
                   </label>
                 </div>
               </div>
+              <div style={{marginTop: '-15px'}} className='container'>
+                <div className="mb-5 row">
+                  <div className='col-12'>
+                    <button
+                      className="btn btnSignColor signinbtn"
+                      onClick={Login}
+                    >
+                      SIGN IN
+                    </button>
+                  </div>
+                  <div className='col-12 mt-4'>
+                    <button className="btn btn-light signinbtn btnGoogle">
+                      <i class="fa-brands fa-google text-danger fs-4"></i> GOOGLE
+                    </button>
+                  </div>
+                  <div className='col-12 mt-4'><button className="btn btn-light signinbtn btnFb">
+                    <i class="fa-brands fa-square-facebook text-primary fs-4"></i> FACEBOOK
+                  </button></div>
 
-              <div className="mb-5">
-                <button
-                  className="btn btn-primary signinbtn"
-                  onClick={Login}
-                >
-                  SIGN IN
-                </button>
-                <button className="btn btn-light signinbtn">
-                  <i class="fa-brands fa-google"></i> GOOGLE
-                </button>
-                <button className="btn btn-light signinbtn">
-                  <i class="fa-brands fa-square-facebook"></i> FACEBOOK
-                </button>
+                </div>
               </div>
             </form>
           </div>
           <div className="col-md-8 responsiveness">
             <img
               className="signinimg"
-              src="https://goldenfrysedgley.co.uk/admin2/img/photos/bg1.webp"
-            />
+              src="https://goldenfrysedgley.co.uk/admin2/img/photos/bg1.webp" />
           </div>
         </div>
       </div>
