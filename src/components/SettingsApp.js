@@ -15,43 +15,84 @@ function SettingsApp() {
   const [main_print, setmain_print] = useState("We accept the order")
   const [kitchen_print, setkitchen_print] = useState("We accept the order")
   const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
+
   async function register() {
-    const details = {
-      title,
-      description,
-      api_key,
-      main_printer,
-      standard_printer,
-      kitchen_printer,
-      standard_print,
-      main_print,
-      kitchen_print,
-      id
+    if(getstatus === "true"){
+      const details = {
+        title,
+        description,
+        api_key,
+        main_printer,
+        standard_printer,
+        kitchen_printer,
+        standard_print,
+        main_print,
+        kitchen_print,
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
+      try {
+
+        const result = await axios.post("http://localhost:5000/api/setting/apps",details).data;
+        console.log(result)
+        toast.success("Data has been saved")
+  
+        settitle("");
+        setdescription("");
+        setapi_key("");
+        setmain_printer("");
+        setstandard_printer("");
+        setkitchen_printer("");
+        setstandard_print("On order received");
+        setmain_print("We accept the order");
+        setkitchen_print("We accept the order")
+  
+  
+  
+    } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+  
+    }
+    }
+    else{
+      const details = {
+        title,
+        description,
+        api_key,
+        main_printer,
+        standard_printer,
+        kitchen_printer,
+        standard_print,
+        main_print,
+        kitchen_print,
+        id
+      }
+      try {
+
+        const result = await axios.post("http://localhost:5000/api/setting/apps",details).data;
+        console.log(result)
+        toast.success("Data has been saved")
+  
+        settitle("");
+        setdescription("");
+        setapi_key("");
+        setmain_printer("");
+        setstandard_printer("");
+        setkitchen_printer("");
+        setstandard_print("On order received");
+        setmain_print("We accept the order");
+        setkitchen_print("We accept the order")
+  
+  
+  
+    } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+  
+    }
     }
 
-    try {
-
-      const result = await axios.post("http://localhost:5000/api/setting/apps",details).data;
-      console.log(result)
-      toast.success("Data has been saved")
-
-      settitle("");
-      setdescription("");
-      setapi_key("");
-      setmain_printer("");
-      setstandard_printer("");
-      setkitchen_printer("");
-      setstandard_print("On order received");
-      setmain_print("We accept the order");
-      setkitchen_print("We accept the order")
-
-
-
-  } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong!")
-
-  }
   }
   return (
     <>

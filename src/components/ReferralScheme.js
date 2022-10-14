@@ -9,29 +9,56 @@ function ReferralScheme() {
   const [new_customer, setnew_customer] = useState("");
   const [existing_customer, setexisting_customer] = useState("");
   const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
 
   async function register() {
-    const details = {
-      status,
-      new_customer,
-      existing_customer,
-      id
-    };
-    try {
-      const result = await axios.post(
-        "http://localhost:5000/api/setting/referral",
-        details
-      ).data;
-      console.log(result);
-      toast.success("Data has been saved");
-
-      setStatus(false);
-      setnew_customer("");
-      setexisting_customer("");
-    } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong!");
+    if (getstatus === "true") {
+      const details = {
+        status,
+        new_customer,
+        existing_customer,
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      };
+      try {
+        const result = await axios.post(
+          "http://localhost:5000/api/setting/referral",
+          details
+        ).data;
+        console.log(result);
+        toast.success("Data has been saved");
+  
+        setStatus(false);
+        setnew_customer("");
+        setexisting_customer("");
+      } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!");
+      }
     }
+    else{
+      const details = {
+        status,
+        new_customer,
+        existing_customer,
+        id
+      };
+      try {
+        const result = await axios.post(
+          "http://localhost:5000/api/setting/referral",
+          details
+        ).data;
+        console.log(result);
+        toast.success("Data has been saved");
+  
+        setStatus(false);
+        setnew_customer("");
+        setexisting_customer("");
+      } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!");
+      }
+    }
+
   }
   return (
     <>

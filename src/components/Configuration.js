@@ -8,29 +8,56 @@ function Configuration() {
   const [order_time, setorder_time] = useState("");
   const [otp, setotp] = useState("")
   const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
 
   async function register(){
-    const details = {
-      order_time,
-      otp,
-      id
+    if (getstatus === "true") {
+      const details = {
+        order_time,
+        otp,
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
+      try {
+  
+        const result = await axios.post("http://localhost:5000/api/setting/config",details).data;
+        console.log(result)
+        toast.success("Data has been saved")
+  
+        setorder_time("")
+        setotp("")
+  
+  
+  
+    } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+  
     }
-    try {
+    }
+    else{
+      const details = {
+        order_time,
+        otp,
+        id
+      }
+      try {
+  
+        const result = await axios.post("http://localhost:5000/api/setting/config",details).data;
+        console.log(result)
+        toast.success("Data has been saved")
+  
+        setorder_time("")
+        setotp("")
+  
+  
+  
+    } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+  
+    }
+    }
 
-      const result = await axios.post("http://localhost:5000/api/setting/config",details).data;
-      console.log(result)
-      toast.success("Data has been saved")
-
-      setorder_time("")
-      setotp("")
-
-
-
-  } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong!")
-
-  }
   }
   return (
     <>

@@ -9,31 +9,60 @@ function MenuType() {
   const [uppercase, setuppercase] = useState(false)
   const [capitalized, setcapitalized] = useState(false)
   const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
 
   async function register(){
-    const details = {
-      lowercase,
-      uppercase,
-      capitalized,
-      id
+    if(getstatus === "true"){
+      const details = {
+        lowercase,
+        uppercase,
+        capitalized,
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
+      try {
+        
+        const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
+        console.log(result)
+        toast.success("Data has been saved")
+  
+        setlowercase(false)
+        setuppercase(false)
+        setcapitalized(true)
+  
+  
+  
+    } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+  
     }
-    try {
-      
-      const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
-      console.log(result)
-      toast.success("Data has been saved")
+    }
+    else{
+      const details = {
+        lowercase,
+        uppercase,
+        capitalized,
+        id
+      }
+      try {
+        
+        const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
+        console.log(result)
+        toast.success("Data has been saved")
+  
+        setlowercase(false)
+        setuppercase(false)
+        setcapitalized(true)
+  
+  
+  
+    } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+  
+    }
+    }
 
-      setlowercase(false)
-      setuppercase(false)
-      setcapitalized(true)
-
-
-
-  } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong!")
-
-  }
   }
   return (
     <>

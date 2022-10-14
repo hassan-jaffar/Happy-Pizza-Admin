@@ -10,31 +10,60 @@ function LoyaltyScheme() {
   const [points, setpoints] = useState("");
   const [currency_points, setCurrency_points] = useState("");
   const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
 
   async function register() {
-    const details = {
-      status,
-      redeem,
-      points,
-      currency_points,
-      id
-    };
-    try {
-      const result = await axios.post(
-        "http://localhost:5000/api/setting/loyality",
-        details
-      ).data;
-      console.log(result);
-      toast.success("Data has been saved");
-
-      setStatus(false);
-      setCurrency_points("");
-      setpoints("");
-      setredeem("");
-    } catch (error) {
-      console.log(error);
-      toast.warn("Something went wrong!");
+    if (getstatus === "true") {
+      const details = {
+        status,
+        redeem,
+        points,
+        currency_points,
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      };
+      try {
+        const result = await axios.post(
+          "http://localhost:5000/api/setting/loyality",
+          details
+        ).data;
+        console.log(result);
+        toast.success("Data has been saved");
+  
+        setStatus(false);
+        setCurrency_points("");
+        setpoints("");
+        setredeem("");
+      } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!");
+      }
     }
+    else{
+      const details = {
+        status,
+        redeem,
+        points,
+        currency_points,
+        id
+      };
+      try {
+        const result = await axios.post(
+          "http://localhost:5000/api/setting/loyality",
+          details
+        ).data;
+        console.log(result);
+        toast.success("Data has been saved");
+  
+        setStatus(false);
+        setCurrency_points("");
+        setpoints("");
+        setredeem("");
+      } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!");
+      }
+    }
+
   }
   return (
     <>

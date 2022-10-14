@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 function OpenClose() {
@@ -8,29 +9,55 @@ function OpenClose() {
   const [statment, setstatment] = useState("Statement");
   const [to, setto] = useState("Date to");
   const [from, setfrom] = useState("Date from");
-  const id = JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID;
+  const {id} = useParams();
+  const getstatus = localStorage.getItem("status");
 
   async function open(){
-    const details = {
-      online,
-      offline,
-      statment,
-      to,
-      from,
-      id
+    if(getstatus === true){
+      const details = {
+        online,
+        offline,
+        statment,
+        to,
+        from,
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
+  
+      try {
+        const data = await (
+          await axios.post("http://localhost:5000/api/superadmin/openclose",details)
+        ).data;
+  
+        setstatment("");
+        setto("");
+        setfrom("");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
+      const details = {
+        online,
+        offline,
+        statment,
+        to,
+        from,
+        id
+      }
+  
+      try {
+        const data = await (
+          await axios.post("http://localhost:5000/api/superadmin/openclose",details)
+        ).data;
+  
+        setstatment("");
+        setto("");
+        setfrom("");
+      } catch (error) {
+        console.log(error);
+      }
     }
 
-    try {
-      const data = await (
-        await axios.post("http://localhost:5000/api/superadmin/openclose",details)
-      ).data;
-
-      setstatment("");
-      setto("");
-      setfrom("");
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   return (
