@@ -1,18 +1,21 @@
 import React,{useState} from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 function MenuType() {
   const [lowercase, setlowercase] = useState(false)
   const [uppercase, setuppercase] = useState(false)
   const [capitalized, setcapitalized] = useState(false)
+  const {id} = useParams();
 
   async function register(){
     const details = {
       lowercase,
       uppercase,
-      capitalized
+      capitalized,
+      id
     }
     try {
       
@@ -34,6 +37,7 @@ function MenuType() {
   }
   return (
     <>
+    <ToastContainer />
       <h6 className="px-1">MENU TYPE</h6>
       <hr />
       <br />
