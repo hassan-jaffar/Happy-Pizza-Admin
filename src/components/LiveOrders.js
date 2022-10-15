@@ -15,13 +15,16 @@ function LiveOrders() {
 
   useEffect(() => {
     async function fetchData() {
+      const detail={
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
       try {
         const data = await (
           await axios.get("http://localhost:5000/api/admin/getliveorders")
         ).data;
 
         const count = await (
-          await axios.get("http://localhost:5000/api/admin/getliveorderscount")
+          await axios.post("http://localhost:5000/api/admin/getliveorderscount",detail)
         ).data;
         setInfo(data.data);
 
