@@ -161,9 +161,12 @@ function OrdersTable() {
   console.log(orders)
   useEffect(() => {
     async function fetchData() {
+      const detail={
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getallorders")
+          await axios.post("http://localhost:5000/api/admin/getallorders",detail)
         ).data;
 
         const resturant = await (

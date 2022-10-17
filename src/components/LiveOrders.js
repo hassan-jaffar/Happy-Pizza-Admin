@@ -9,6 +9,7 @@ import Navbar from "./Navbar";
 function LiveOrders() {
   const [info, setInfo] = useState([]);
   const getstatus = localStorage.getItem("status");
+
   var sound = new Howl({
     src: [ping],
   });
@@ -20,7 +21,7 @@ function LiveOrders() {
       }
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getliveorders")
+          await axios.post("http://localhost:5000/api/admin/getliveorders",detail)
         ).data;
 
         const count = await (
