@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios"
 import "./Navbar.css"
 
 function Navbar() {
@@ -8,6 +9,20 @@ function Navbar() {
     localStorage.setItem("status", "false");
     localStorage.removeItem("currentuser");
     window.location.href = "/";
+  }
+  async function closeshift(){
+    const details = {
+      id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+    }
+
+    try {
+      const data = await (
+        await axios.post("http://localhost:5000/api/superadmin/closeshift",details)
+      ).data;
+
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <>
@@ -329,12 +344,15 @@ function Navbar() {
                           Menu
                         </button>
                       </Link>
-                      <Link to="/change-password">
-                        <button className="btn btn-light userdditem dropdown-item pinkbg">
+                      {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 && (<>
+                        {/* <Link to="/change-password"> */}
+                        <button className="btn btn-light userdditem dropdown-item pinkbg" onClick={closeshift}>
                           <i className="fa-solid fa-lock btnicon"></i>Close
                           Shift
                         </button>
-                      </Link>
+                      {/* </Link> */}
+                      </>)}
+
                     </li>
                     <li>
                       <hr className="dropdown-divider" />

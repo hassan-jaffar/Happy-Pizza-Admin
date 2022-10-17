@@ -517,6 +517,18 @@ function OrdersTable() {
                     </tbody>
                   );
                 })}
+                <hr />
+                <tfoot>
+                <ReactPaginate
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+              />
+                </tfoot>
               </table>
             </div>
 
