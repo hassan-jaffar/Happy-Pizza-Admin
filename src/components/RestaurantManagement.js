@@ -31,17 +31,18 @@ function RestaurantManagement() {
 
   async function register() {
     var formData = new FormData();
-    formData.append("description",description);
-    formData.append("id",id);
-    formData.append("address",address);
-    formData.append("phone",phone);
-    formData.append("charges",charges);
-    formData.append("minimum_order",minimum_order);
-    formData.append("average_order",average_order);
-    formData.append("time",time);
-    formData.append("photo",file);
-    formData.append("cimage",cimage);
-    formData.append("rimage",rimage);
+      formData.append("description",description);
+      formData.append("id",id);
+      formData.append("address",address);
+      formData.append("phone",phone);
+      formData.append("charges",charges);
+      formData.append("minimum_order",minimum_order);
+      formData.append("average_order",average_order);
+      formData.append("time",time);
+      formData.append("photo",file);
+      formData.append("cimage",cimage);
+      formData.append("rimage",rimage);
+   
 
     const config = {
       headers:{
@@ -430,7 +431,8 @@ function RestaurantManagement() {
           <input
           type="hidden"
           name="id"
-          value={id} />
+          // value={JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 ? (id) : (rid)} />
+          value={id}/>
           <div className="container mt-5 text-center">
             <button className="btn btn-info py-2" onClick={register}>
               Save
