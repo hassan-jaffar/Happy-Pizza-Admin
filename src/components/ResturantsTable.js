@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Orders.css";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ResturantsTable() {
   const [resturants, setresturants] = useState([]);
@@ -74,6 +76,36 @@ function ResturantsTable() {
     }
   }
 
+  // Login as function
+  async function loginas(id){
+    const detail = {
+      id
+    }
+    try {
+      const data = await (
+        await axios.post("http://localhost:5000/api/superadmin/loginas",detail)
+      ).data;
+      
+      if(data.loginas === "false"){
+      toast.warn(data.message)
+      }
+
+      if (data.loginas === "true") {
+        localStorage.removeItem("currentuser");
+        localStorage.removeItem("status");
+        localStorage.setItem('currentuser', JSON.stringify(data.data));
+        localStorage.setItem('status', 'true');
+
+        window.location.href = "/home"
+
+      }
+      
+    } catch (error) {
+      console.log(error)
+      toast.warn(error.response.data.message)
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -121,6 +153,7 @@ function ResturantsTable() {
   }
   return (
     <>
+    <ToastContainer />
       <div className="row justify-content-center">
         <div className="col-md-12 text-center">
           <div className="container mt-5">
@@ -303,7 +336,7 @@ function ResturantsTable() {
                                           Edit
                                         </li>
                                         </Link>
-                                        <li className="dropdown-item">
+                                        <li className="dropdown-item" onClick={()=>{loginas(item.ID)}}>
                                           <i className="fas fa-sign-in-alt"></i>
                                           Login as
                                         </li>
