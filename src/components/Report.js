@@ -66,8 +66,6 @@ function Report() {
           return Date.parse(dates[0]._d)<Date.parse(order.DateTime)&&Date.parse(dates[1]._d)>Date.parse(order.DateTime)}
       );
       setorderReport(temporders);
-
-      console.log(temporders);
       // setOrders(temporders);
     }
     else{
@@ -274,7 +272,7 @@ function Report() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
                 </li>
@@ -283,7 +281,7 @@ function Report() {
                     to="/pages"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
@@ -292,7 +290,7 @@ function Report() {
                     to="/report"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>
@@ -322,41 +320,43 @@ function Report() {
               <div className="container bs">
                 <div className="row">
                   <div className="col-md-4 mt-3">
-                    <label for="exampleInputEmail1" class="form-label">
+                    <label htmlFor="exampleInputEmail1" className="form-label">
                       Filter by Restaurant
                     </label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
+                      defaultValue={"-- Select an option --"}
                       value={type}
                       onChange={(e) => {
                         filterByName(e.target.value);
                       }}
                     >
-                      <option selected>-- Select an option --</option>
+                      <option>-- Select an option --</option>
                       {orderReport1.length > 0 && orderReport1.map((report)=>{
                         return <>
-                          <option value={report.ID}>{report.name}</option>
+                          <option key={report.ID} value={report.ID}>{report.name}</option>
                         </>
                       })}
                     </select>
                   </div>
                   <div className="col-md-4 mt-3">
-                    <label for="exampleInputEmail1" class="form-label">
+                    <label htmlFor="exampleInputEmail1" className="form-label">
                       Payment Method
                     </label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
+                      defaultValue={"-- Select an option --"}
                     >
-                      <option selected>-- Select an option --</option>
+                      <option >-- Select an option --</option>
                       <option value="1">All</option>
                       <option value="2">COD</option>
                       <option value="3">STRIPE</option>
                     </select>
                   </div>
                   <div className="col-md-4 mt-3">
-                    <label for="exampleInputEmail1" class="form-label">
+                    <label htmlFor="exampleInputEmail1" className="form-label">
                       Date Range
                     </label>
                     <div className="row g-0">
@@ -411,7 +411,7 @@ function Report() {
               <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                 {orderData.map((data) => {
                   return (
-                    <div className="col">
+                    <div key={data.value} className="col">
                       <Link
                         to="/"
                         style={{ textDecoration: "none" }}
@@ -460,7 +460,7 @@ function Report() {
 
                 <div className="row">
                   <div className="table-responsive">
-                  <table class="table">
+                  <table className="table">
                   <thead>
                     <tr>
                       <th scope="col">
@@ -480,7 +480,7 @@ function Report() {
                   {orderReport.map((report) => {
                     return (
                       <tbody>
-                        <tr>
+                        <tr key={report.cart_Id}>
                           <th scope="row">{report.cart_Id}</th>
                           <td>{report.cname}</td>
                           <td>{moment(report.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
@@ -512,29 +512,29 @@ function Report() {
                 <div className="row">
                   <div className="col d-flex justify-content-end mt-4 mb-4">
                     <nav aria-label="Page navigation example">
-                      <ul class="pagination">
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                      <ul className="pagination">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             Previous
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             1
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             2
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             3
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             Next
                           </a>
                         </li>

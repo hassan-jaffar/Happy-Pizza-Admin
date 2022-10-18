@@ -73,7 +73,7 @@ function ItemManagementTable() {
           <br />
           <div className="row">
             <div className="col-md-12">
-              <label for="itemname">Item Name</label>
+              <label htmlFor="itemname">Item Name</label>
               <input
                 id="itemname"
                 type="text"
@@ -82,7 +82,7 @@ function ItemManagementTable() {
                 value={item.Title}
                 onChange={(e) => { setitem(e.target.value); setTitle(e.target.value) }}
               />
-              <label for="description">Item Description</label>
+              <label htmlFor="description">Item Description</label>
               <textarea
                 id="description"
                 className="form-control mt-2 mb-5"
@@ -91,7 +91,7 @@ function ItemManagementTable() {
                 value={item.Description}
                 onChange={(e) => { setitem(e.target.value); setDescription(e.target.value) }}
               />
-              <label for="price">Item Price</label>
+              <label htmlFor="price">Item Price</label>
               <input
                 id="price"
                 className="form-control mt-2 mb-5 py-3"
@@ -99,7 +99,7 @@ function ItemManagementTable() {
                 value={item.Price}
                 onChange={(e) => { setitem(e.target.value); setPrice(e.target.value) }}
               />
-              <label for="vat">
+              <label htmlFor="vat">
                 VAT Percentage (calculated into item price)
               </label>
               <input
@@ -111,7 +111,7 @@ function ItemManagementTable() {
                 <div className="row justify-content-between my-3">
                   <label
                     className="form-check-label"
-                    for="flexSwitchCheckDefault"
+                    htmlFor="flexSwitchCheckDefault"
                   >
                     Discountable
                   </label>
@@ -124,7 +124,7 @@ function ItemManagementTable() {
                 <div className="row justify-content-between my-3">
                   <label
                     className="form-check-label"
-                    for="flexSwitchCheckDefault"
+                    htmlFor="flexSwitchCheckDefault"
                   >
                     Item Available
                   </label>
@@ -137,7 +137,7 @@ function ItemManagementTable() {
                 <div className="row justify-content-between my-3">
                   <label
                     className="form-check-label"
-                    for="flexSwitchCheckDefault"
+                    htmlFor="flexSwitchCheckDefault"
                   >
                     Enable Variant
                   </label>
@@ -148,8 +148,8 @@ function ItemManagementTable() {
                   />
                 </div>
               </div>
-              <div class="input-group my-3">
-                <input type="file" class="form-control" id="inputGroupFile02" />
+              <div className="input-group my-3">
+                <input type="file" className="form-control" id="inputGroupFile02" />
               </div>
               <div className="text-center my-4">
                 <img className="managementimg" src="" />
@@ -158,7 +158,7 @@ function ItemManagementTable() {
               <div className="w-25">
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="sunday">
+                    <label className="form-check-label" htmlFor="sunday">
                       Sunday
                     </label>
                     <input
@@ -170,7 +170,7 @@ function ItemManagementTable() {
                 </div>
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="monday">
+                    <label className="form-check-label" htmlFor="monday">
                       Monday
                     </label>
                     <input
@@ -182,7 +182,7 @@ function ItemManagementTable() {
                 </div>
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="tuesday">
+                    <label className="form-check-label" htmlFor="tuesday">
                       Tuesday
                     </label>
                     <input
@@ -194,7 +194,7 @@ function ItemManagementTable() {
                 </div>
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="wednesday">
+                    <label className="form-check-label" htmlFor="wednesday">
                       Wednesday
                     </label>
                     <input
@@ -206,7 +206,7 @@ function ItemManagementTable() {
                 </div>
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="thursday">
+                    <label className="form-check-label" htmlFor="thursday">
                       Thursday
                     </label>
                     <input
@@ -218,7 +218,7 @@ function ItemManagementTable() {
                 </div>
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="friday">
+                    <label className="form-check-label" htmlFor="friday">
                       Friday
                     </label>
                     <input
@@ -230,7 +230,7 @@ function ItemManagementTable() {
                 </div>
                 <div className="form-check form-switch my-3">
                   <div className="row justify-content-between">
-                    <label className="form-check-label" for="saturday">
+                    <label className="form-check-label" htmlFor="saturday">
                       Saturday
                     </label>
                     <input

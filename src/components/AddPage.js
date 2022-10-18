@@ -248,7 +248,7 @@ function AddPage() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
                 </li>
@@ -257,7 +257,7 @@ function AddPage() {
                     to="/pages"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
@@ -266,7 +266,7 @@ function AddPage() {
                     to="/report"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>
@@ -300,7 +300,7 @@ function AddPage() {
                         <h6>PAGES INFORMATION</h6>
                       </div>
                       <div className="col-6 text-end mt-5">
-                        <Link to='/pages'><button type="button" class="btn btn-primary">
+                        <Link to='/pages'><button type="button" className="btn btn-primary">
                           BACK TO PAGES
                         </button></Link>
                       </div>
@@ -312,7 +312,7 @@ function AddPage() {
                         <input
                           style={{ padding: "20px" }}
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           placeholder="Title"
                           aria-label="Username"
                           aria-describedby="basic-addon1"
@@ -325,8 +325,8 @@ function AddPage() {
                     <div className="row">
                       <div className="col-12 mt-3 mb-5">
                         <label
-                          for="exampleFormControlInput1"
-                          class="form-label text-muted"
+                          htmlFor="exampleFormControlInput1"
+                          className="form-label text-muted"
                         >
                           Content
                         </label>
@@ -345,7 +345,7 @@ function AddPage() {
                     </div>
                     <div className="row">
                         <div className="col text-end mb-4">
-                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" class="btn" onClick={edit}>Save</button>
+                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" className="btn" onClick={edit}>Save</button>
                         </div>
                     </div>
                   </div>
@@ -368,7 +368,7 @@ function AddPage() {
                         <h6>PAGES INFORMATION</h6>
                       </div>
                       <div className="col-6 text-end mt-5">
-                        <Link to='/pages'><button type="button" class="btn btn-primary">
+                        <Link to='/pages'><button type="button" className="btn btn-primary">
                           BACK TO PAGES
                         </button></Link>
                       </div>
@@ -380,7 +380,7 @@ function AddPage() {
                         <input
                           style={{ padding: "20px" }}
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           placeholder="Title"
                           aria-label="Username"
                           aria-describedby="basic-addon1"
@@ -393,8 +393,8 @@ function AddPage() {
                     <div className="row">
                       <div className="col-12 mt-3 mb-5">
                         <label
-                          for="exampleFormControlInput1"
-                          class="form-label text-muted"
+                          htmlFor="exampleFormControlInput1"
+                          className="form-label text-muted"
                         >
                           Content
                         </label>
@@ -407,7 +407,7 @@ function AddPage() {
                     </div>
                     <div className="row">
                         <div className="col text-end mb-4">
-                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" class="btn" onClick={add}>Save</button>
+                        <button style={{ backgroundColor: '#4650DD', color: 'white' }} type="button" className="btn" onClick={add}>Save</button>
                         </div>
                     </div>
                   </div>

@@ -84,7 +84,7 @@ function OpenClose() {
                   id="flexRadioDefault1"
                   onChange={(e)=>{setonline(e.target.checked)}}
                 />
-                <label className="form-check-label" for="flexRadioDefault1">
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Online (as usual)
                 </label>
               </div>
@@ -109,7 +109,7 @@ function OpenClose() {
                   id="flexRadioDefault3"
                   onChange={(e)=>{setoffline(e.target.checked)}}
                 />
-                <label className="form-check-label" for="flexRadioDefault3">
+                <label className="form-check-label" htmlFor="flexRadioDefault3">
                   Offline For The Whole Day
                 </label>
               </div>
@@ -150,7 +150,7 @@ function OpenClose() {
                   id="flexRadioDefault2"
                   onChange={(e)=>{setoffline(e.target.checked)}}
                 />
-                <label className="form-check-label" for="flexRadioDefault2">
+                <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Offline Until
                 </label>
               </div>

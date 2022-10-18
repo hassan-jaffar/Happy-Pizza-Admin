@@ -21,7 +21,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Monday
               </label>
@@ -142,7 +142,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Tuesday
               </label>
@@ -263,7 +263,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Wednesday
               </label>
@@ -384,7 +384,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Thursday
               </label>
@@ -505,7 +505,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Friday
               </label>
@@ -626,7 +626,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Saturday
               </label>
@@ -747,7 +747,7 @@ function WorkingHours() {
               />
               <label
                 className="form-check-label boldtext"
-                for="flexCheckDefault"
+                htmlFor="flexCheckDefault"
               >
                 Sunday
               </label>

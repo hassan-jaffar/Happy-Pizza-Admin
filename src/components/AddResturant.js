@@ -308,7 +308,7 @@ function AddResturant() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
                 </li>
@@ -317,7 +317,7 @@ function AddResturant() {
                     to="/pages"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
@@ -326,7 +326,7 @@ function AddResturant() {
                     to="/report"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>
@@ -371,7 +371,7 @@ function AddResturant() {
                     {/* form start here  */}
                     <form className="needs-validation" novalidate>
                       <div className="col-12">
-                        <label for="validationCustom01" className="form-label">
+                        <label htmlFor="validationCustom01" className="form-label">
                           Restaurant Name
                         </label>
                         <input
@@ -391,7 +391,7 @@ function AddResturant() {
 
                         <p className="boldtext">Owner information</p>
 
-                        <label for="validationCustom02" className="form-label">
+                        <label htmlFor="validationCustom02" className="form-label">
                           Name
                         </label>
                         <input
@@ -405,7 +405,7 @@ function AddResturant() {
                         />
 
                         <label
-                          for="validationCustom03"
+                          htmlFor="validationCustom03"
                           className="form-label mt-3"
                         >
                           Owner Email
@@ -421,7 +421,7 @@ function AddResturant() {
                         />
 
                         <label
-                          for="validationCustom04"
+                          htmlFor="validationCustom04"
                           className="form-label mt-3"
                         >
                           Owner Address
@@ -437,7 +437,7 @@ function AddResturant() {
                         />
 
                         <label
-                          for="validationCustom05"
+                          htmlFor="validationCustom05"
                           className="form-label mt-3"
                         >
                           Owner Phone
@@ -459,7 +459,7 @@ function AddResturant() {
                         <div className="row">
                           <div className="col-md-6">
                             <label
-                              for="validationCustom06"
+                              htmlFor="validationCustom06"
                               className="form-label"
                             >
                               Restaurant Domain
@@ -476,7 +476,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6">
                             <label
-                              for="validationCustom07"
+                              htmlFor="validationCustom07"
                               className="form-label"
                             >
                               Facebook Client ID
@@ -493,7 +493,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom08"
+                              htmlFor="validationCustom08"
                               className="form-label"
                             >
                               Primary Color
@@ -510,7 +510,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom09"
+                              htmlFor="validationCustom09"
                               className="form-label"
                             >
                               Facebook Client Secret
@@ -528,7 +528,7 @@ function AddResturant() {
 
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom10"
+                              htmlFor="validationCustom10"
                               className="form-label"
                             >
                               Secondary Color
@@ -545,7 +545,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom11"
+                              htmlFor="validationCustom11"
                               className="form-label"
                             >
                               Facebook Redirect
@@ -562,7 +562,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom12"
+                              htmlFor="validationCustom12"
                               className="form-label"
                             >
                               App Name
@@ -579,7 +579,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom13"
+                              htmlFor="validationCustom13"
                               className="form-label"
                             >
                               Onesignal App ID
@@ -596,7 +596,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom14"
+                              htmlFor="validationCustom14"
                               className="form-label"
                             >
                               Deleivery Intervals in Mins
@@ -613,7 +613,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom15"
+                              htmlFor="validationCustom15"
                               className="form-label"
                             >
                               Onesignal Rest API Key
@@ -630,7 +630,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom16"
+                              htmlFor="validationCustom16"
                               className="form-label"
                             >
                               Enable Stripe Connect
@@ -647,7 +647,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom17"
+                              htmlFor="validationCustom17"
                               className="form-label"
                             >
                               Optomany Enabled
@@ -664,7 +664,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom18"
+                              htmlFor="validationCustom18"
                               className="form-label"
                             >
                               Enable Stripe
@@ -681,7 +681,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom19"
+                              htmlFor="validationCustom19"
                               className="form-label"
                             >
                               Optomany Client ID
@@ -698,7 +698,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom20"
+                              htmlFor="validationCustom20"
                               className="form-label"
                             >
                               Stripe Key
@@ -715,7 +715,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom21"
+                              htmlFor="validationCustom21"
                               className="form-label"
                             >
                               Optomany Client Secret
@@ -732,7 +732,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom22"
+                              htmlFor="validationCustom22"
                               className="form-label"
                             >
                               Stripe Secret
@@ -749,7 +749,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom23"
+                              htmlFor="validationCustom23"
                               className="form-label"
                             >
                               Optomany Terminal ID
@@ -766,7 +766,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom24"
+                              htmlFor="validationCustom24"
                               className="form-label"
                             >
                               Google Maps API Key
@@ -783,7 +783,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom25"
+                              htmlFor="validationCustom25"
                               className="form-label"
                             >
                               Optomany Test Mode
@@ -800,7 +800,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom26"
+                              htmlFor="validationCustom26"
                               className="form-label"
                             >
                               Google Analytics
@@ -817,7 +817,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom27"
+                              htmlFor="validationCustom27"
                               className="form-label"
                             >
                               Google Client ID
@@ -834,7 +834,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom28"
+                              htmlFor="validationCustom28"
                               className="form-label"
                             >
                               Google Client Secret
@@ -851,7 +851,7 @@ function AddResturant() {
                           </div>
                           <div className="col-md-6 mt-3">
                             <label
-                              for="validationCustom29"
+                              htmlFor="validationCustom29"
                               className="form-label"
                             >
                               Google Redirect
@@ -866,8 +866,8 @@ function AddResturant() {
                               required
                             />
                           </div>
-                          <div class="col-12 text-end mt-3">
-                            <button class="btn btn-primary" type="submit" onClick={register}>
+                          <div className="col-12 text-end mt-3">
+                            <button className="btn btn-primary" type="submit" onClick={register}>
                               Save
                             </button>
                           </div>

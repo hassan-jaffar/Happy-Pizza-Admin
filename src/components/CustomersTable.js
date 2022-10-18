@@ -93,8 +93,8 @@ function CustomersTable() {
                     >
                       <i className="fa-solid fa-ellipsis-vertical"></i>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li class="dropdown-item" onClick={()=>{del(customer.customer_Id)}}><i className="fa-solid fa-ban btnicon"></i>Delete</li>
+                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li className="dropdown-item" onClick={()=>{del(customer.customer_Id)}}><i className="fa-solid fa-ban btnicon"></i>Delete</li>
   </ul>
   </div>
                   </td>

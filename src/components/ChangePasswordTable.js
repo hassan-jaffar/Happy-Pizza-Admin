@@ -20,7 +20,6 @@ function ChangePasswordTable() {
 
         // setloading(true)
         const result = await axios.post("http://localhost:5000/api/admin/changepassword",details).data;
-        console.log(result)
         toast.success("Password has been changed")
         // setloading(true)
         setInterval(() => {

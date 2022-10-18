@@ -18,7 +18,7 @@ function OrdersTable() {
   const [type, settype] = useState("-- Select an option --");
   const [fromdate, setfromdate] = useState();
   const [todate, settodate] = useState();
-  const [filter,setFilter]=React.useState([]);
+  // const [filter,setFilter]=React.useState([]);
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   // Here we use item offsets; we could also use page offsets
@@ -58,7 +58,7 @@ function OrdersTable() {
       );
       setorderHistory(temporders);
 
-      console.log(temporders);
+      
       // setOrders(temporders);
     }
     else{
@@ -102,7 +102,7 @@ function OrdersTable() {
       );
       setOrders(temporders);
 
-      console.log(temporders);
+      
       // setOrders(temporders);
     }
     else{
@@ -158,7 +158,7 @@ function OrdersTable() {
     }
   }
 
-  console.log(orders)
+  
   useEffect(() => {
     async function fetchData() {
       const detail={
@@ -239,7 +239,7 @@ function OrdersTable() {
                   <div className="row">
                     { getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (<>
                       <div className="col-md-4">
-                      <label for="daterange" className="me-1 my-1 boldtext">
+                      <label htmlFor="daterange" className="me-1 my-1 boldtext">
                         Date Range
                       </label>
                       {/* <input
@@ -254,7 +254,7 @@ function OrdersTable() {
                     </div>
                       <div className="col-md-4">
                       <label
-                        for="customerfilter"
+                        htmlFor="customerfilter"
                         className="boldtext ms-2 my-1"
                       >
                         Filter by Customer:
@@ -281,7 +281,7 @@ function OrdersTable() {
 
                             return (
                               <>
-                                <option value={order.cart_Id}>{order.name}</option>
+                                <option key={order.cart_Id} value={order.cart_Id}>{order.name}</option>
                               </>
                             );
                           })}
@@ -292,7 +292,7 @@ function OrdersTable() {
                     </div>
                     </>):(<>
                       <div className="col-md-4">
-                      <label for="daterange" className="me-1 my-1 boldtext">
+                      <label htmlFor="daterange" className="me-1 my-1 boldtext">
                         Date Range
                       </label>
                       {/* <input
@@ -307,7 +307,7 @@ function OrdersTable() {
                     </div>
                       <div className="col-md-4">
                       <label
-                        for="customerfilter"
+                        htmlFor="customerfilter"
                         className="boldtext ms-2 my-1"
                       >
                         Filter by Restaurant:
@@ -316,12 +316,13 @@ function OrdersTable() {
                         id="customerfilter"
                         className="form-select mx-1 py-1"
                         aria-label="Default select example"
+                        defaultValue={"-- Select an option --"}
                         value={type}
                         onChange={(e) => {
                           filterByRestaurant(e.target.value);
                         }}
                       >
-                        <option value="-- Select an option --" selected>
+                        <option value="-- Select an option --">
                             -- Select an option --
                           </option>
                         {orderHistory1.length > 0 &&
@@ -329,7 +330,7 @@ function OrdersTable() {
 
                             return (
                               <>
-                                <option value={order.cart_Id}>{order.name}</option>
+                                <option key={order.cart_Id} value={order.cart_Id}>{order.name}</option>
                               </>
                             );
                           })}
@@ -346,7 +347,7 @@ function OrdersTable() {
                       </button>
                       <button
                         className="btn btn-primary my-1 mx-1"
-                        onClick={searchByName()}
+                        onClick={()=>{searchByName()}}
                       >
                         Search
                       </button>
@@ -375,9 +376,9 @@ function OrdersTable() {
                   orders.map((order) => {
                     return (
                       <>
-                        <tr>
+                        <tr key={order.cart_Id}>
                           <th scope="row">
-                            <span class="badge text-bg-info info">
+                            <span className="badge text-bg-info info">
                               {order.cart_Id}
                             </span>
                           </th>
@@ -393,12 +394,12 @@ function OrdersTable() {
                           </td>
                           <td>{moment(order.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
                           <td>
-                            <span class="badge text-bg-primary primary">
+                            <span className="badge text-bg-primary primary">
                               collection
                             </span>
                           </td>
                           <td>
-                            <span class="badge text-bg-info info">
+                            <span className="badge text-bg-info info">
                               {order.Orderstatus === "1" ? (
                                 <>Pending</>
                               ) : order.Orderstatus === "2" ? (
@@ -411,7 +412,7 @@ function OrdersTable() {
                             </span>
                           </td>
                           <td>
-                            <span class="badge text-bg-primary primary">
+                            <span className="badge text-bg-primary primary">
                               cod(unpaid)
                             </span>
                           </td>
@@ -437,7 +438,7 @@ function OrdersTable() {
             <h6>ORDERS HISTORY</h6>
             <hr></hr>
             <div className="table-responsive">
-              <table class="table align-middle">
+              <table className="table align-middle">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
@@ -449,15 +450,15 @@ function OrdersTable() {
                     <th scope="col">Total</th>
                   </tr>
                 </thead>
-
+                <tbody>
                 {orderHistory.map((history) => {
                   return (
-                    <tbody>
-                      <tr>
+                    
+                      <tr key={history.cart_Id}>
                         <th scope="row">
                           <Link
                               to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
-                            <span class="badge bg-primary idHover">{history.cart_Id}</span>
+                            <span className="badge bg-primary idHover">{history.cart_Id}</span>
                           </Link>
                         </th>
                         <th>
@@ -478,7 +479,7 @@ function OrdersTable() {
                         <td>
                           <Link
                               to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
-                            <span class="badge bg-primary">
+                            <span className="badge bg-primary">
                               Delivery
                             </span>
                           </Link>
@@ -486,7 +487,7 @@ function OrdersTable() {
                         <td>
                           <Link
                               to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
-                            <span class="badge bg-info">
+                            <span className="badge bg-info">
                             {history.Orderstatus === "1" ? (
                                 <>Pending</>
                               ) : history.Orderstatus === "2" ? (
@@ -502,7 +503,7 @@ function OrdersTable() {
                         <td>
                           <Link
                               to={`/order-detail/${history.cart_Id}/${history.customer_Id}`}>
-                            <span class="badge bg-primary">
+                            <span className="badge bg-primary">
                             cod(unpaid)
                             </span>
                           </Link>
@@ -514,12 +515,26 @@ function OrdersTable() {
                           </Link>
                         </td>
                       </tr>
-                    </tbody>
+                    
                   );
                 })}
-                <hr />
-                <tfoot>
-                <ReactPaginate
+                </tbody>
+                {/* <hr /> */}
+                {/* <tfoot> */}
+                {/* <ReactPaginate
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+              /> */}
+                {/* </tfoot> */}
+              </table>
+            </div>
+            <hr />
+                            <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
                 onPageChange={handlePageClick}
@@ -528,35 +543,32 @@ function OrdersTable() {
                 previousLabel="< previous"
                 renderOnZeroPageCount={null}
               />
-                </tfoot>
-              </table>
-            </div>
 
             {/* <div className="d-flex justify-content-end mt-4 me-5 pb-4">
               <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       Previous
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       1
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       2
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       3
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       Next
                     </a>
                   </li>

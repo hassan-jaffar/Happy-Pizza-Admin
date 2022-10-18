@@ -64,7 +64,7 @@ function DeliveryArea() {
           aria-labelledby="delivery-zones-tab"
         >
           <div className="container my-4 py-4 px-5 bs br">
-            <label for="redeem" className="">
+            <label htmlFor="redeem" className="">
               Excluded Postal Codes
             </label>
             <input

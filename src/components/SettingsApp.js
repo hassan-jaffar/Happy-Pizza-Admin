@@ -104,7 +104,7 @@ function SettingsApp() {
         <div className="col-md-12">
           <h1 className="boldtext">Impressum</h1>
           <hr />
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Title of Impressum:
           </label>
           <input
@@ -115,7 +115,7 @@ function SettingsApp() {
             value={title}
             onChange={(e)=>{settitle(e.target.value)}}
           />
-          <label for="impressum" className="mt-3">
+          <label htmlFor="impressum" className="mt-3">
             Impressum:
           </label>
           <textarea
@@ -128,7 +128,7 @@ function SettingsApp() {
           />
           <h1 className="boldtext mt-5">Print Node</h1>
           <hr />
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Print Node API Key:
           </label>
           <input
@@ -139,7 +139,7 @@ function SettingsApp() {
             value={api_key}
             onChange={(e)=>{setapi_key(e.target.value)}}
           />
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Main Thermal Printer ID:
           </label>
           <input
@@ -150,7 +150,7 @@ function SettingsApp() {
             value={main_printer}
             onChange={(e)=>{setmain_printer(e.target.value)}}
           />
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Kitchen Thermal Printer ID:
           </label>
           <input
@@ -161,7 +161,7 @@ function SettingsApp() {
             value={kitchen_printer}
             onChange={(e)=>{setkitchen_printer(e.target.value)}}
           />
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Standard Printer ID:
           </label>
           <input
@@ -172,7 +172,7 @@ function SettingsApp() {
             value={standard_printer}
             onChange={(e)=>{setstandard_printer(e.target.value)}}
           />
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Print A4 Standard order when:
           </label>
           <select className="form-select" aria-label="Default select example" value={standard_print} onChange={(e)=>{setstandard_print(e.target.value)}}>
@@ -181,7 +181,7 @@ function SettingsApp() {
               On order received
             </option>
           </select>
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Print on main thermal printer when:
           </label>
           <select className="form-select" aria-label="Default select example" value={main_print} onChange={(e)=>{setmain_print(e.target.value)}}>
@@ -190,7 +190,7 @@ function SettingsApp() {
             </option>
             <option value="On order received">On order received</option>
           </select>
-          <label for="titleimpress" className="mt-3">
+          <label htmlFor="titleimpress" className="mt-3">
             Print on kitchen thermal printer when:
           </label>
           <select className="form-select" aria-label="Default select example" value={kitchen_print} onChange={(e)=>{setkitchen_print(e.target.value)}}>

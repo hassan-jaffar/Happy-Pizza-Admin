@@ -283,7 +283,7 @@ function LiveOrders() {
                         to="/resturant"
                         className="nav-link align-middle sidebartag"
                       >
-                        <i class="fas fa-utensils"></i>
+                        <i className="fas fa-utensils"></i>
                         <span className="ms-1 d-none d-sm-inline">
                           {" "}
                           Resturants
@@ -295,7 +295,7 @@ function LiveOrders() {
                         to="/pages"
                         className="nav-link align-middle sidebartag"
                       >
-                        <i class="fas fa-file"></i>
+                        <i className="fas fa-file"></i>
                         <span className="ms-1 d-none d-sm-inline"> Pages</span>
                       </Link>
                     </li>
@@ -304,7 +304,7 @@ function LiveOrders() {
                         to="/report"
                         className="nav-link align-middle sidebartag"
                       >
-                        <i class="fas fa-chart-bar"></i>
+                        <i className="fas fa-chart-bar"></i>
                         <span className="ms-1 d-none d-sm-inline"> Report</span>
                       </Link>
                     </li>
@@ -351,16 +351,16 @@ function LiveOrders() {
                               {items.Orderstatus === "1" ? (
                                 <>
                                   <div
-                                    class="accordion"
+                                    className="accordion"
                                     id={`accordion${items.cart_Id}`}
                                   >
                                     {/* Div start */}
                                     <div
-                                      class="accordion-item accitem"
+                                      className="accordion-item accitem"
                                       key={`${items.cart_Id}`}
                                     >
                                       <h2
-                                        class="accordion-header cursor"
+                                        className="accordion-header cursor"
                                         id={`heading${items.cart_Id}`}
                                         data-bs-toggle="collapse"
                                         data-bs-target={`#collapse${items.cart_Id}`}
@@ -394,11 +394,11 @@ function LiveOrders() {
                                       </h2>
                                       <div
                                         id={`collapse${items.cart_Id}`}
-                                        class="accordion-collapse collapse show"
+                                        className="accordion-collapse collapse show"
                                         aria-labelledby={`heading${items.ID}`}
                                         data-bs-parent={`accordion${items.cart_Id}`}
                                       >
-                                        <div class="accordion-body">
+                                        <div className="accordion-body">
                                           <h2 className="emailformat">
                                             {items.name}
                                           </h2>
@@ -467,12 +467,12 @@ function LiveOrders() {
                               {items.Orderstatus === "2" ? (
                                 <>
                                   <div
-                                    class="accordion"
+                                    className="accordion"
                                     id={`accordion${items.cart_Id}`}
                                   >
-                                    <div class="accordion-item accitem">
+                                    <div className="accordion-item accitem">
                                       <h2
-                                        class="accordion-header cursor"
+                                        className="accordion-header cursor"
                                         id={`heading${items.cart_Id}`}
                                         data-bs-toggle="collapse"
                                         data-bs-target={`#collapse${items.cart_Id}`}
@@ -506,11 +506,11 @@ function LiveOrders() {
                                       </h2>
                                       <div
                                         id="collapseOne"
-                                        class="accordion-collapse collapse show"
+                                        className="accordion-collapse collapse show"
                                         aria-labelledby={`heading${items.ID}`}
                                         data-bs-parent={`accordion${items.cart_Id}`}
                                       >
-                                        <div class="accordion-body">
+                                        <div className="accordion-body">
                                           <h2 className="emailformat">
                                             {items.name}
                                           </h2>
@@ -578,12 +578,12 @@ function LiveOrders() {
                               {items.Orderstatus === "3" ? (
                                 <>
                                   <div
-                                    class="accordion"
+                                    className="accordion"
                                     id={`accordion${items.cart_Id}`}
                                   >
-                                    <div class="accordion-item accitem">
+                                    <div className="accordion-item accitem">
                                       <h2
-                                        class="accordion-header cursor"
+                                        className="accordion-header cursor"
                                         id={`heading${items.cart_Id}`}
                                         data-bs-toggle="collapse"
                                         data-bs-target={`#collapse${items.cart_Id}`}
@@ -617,11 +617,11 @@ function LiveOrders() {
                                       </h2>
                                       <div
                                         id="collapseOne"
-                                        class="accordion-collapse collapse show"
+                                        className="accordion-collapse collapse show"
                                         aria-labelledby={`heading${items.ID}`}
                                         data-bs-parent={`accordion${items.cart_Id}`}
                                       >
-                                        <div class="accordion-body">
+                                        <div className="accordion-body">
                                           <h2 className="emailformat">
                                             {items.name}
                                           </h2>
@@ -681,13 +681,13 @@ function LiveOrders() {
               {/* start of cards for mobile view */}
 
               <ul
-                class="nav nav-tabs tabOrder text-decoration-none"
+                className="nav nav-tabs tabOrder text-decoration-none"
                 id="myTab"
                 role="tablist"
               >
-                <li class="nav-item" role="presentation">
+                <li className="nav-item" role="presentation">
                   <button
-                    class="nav-link active"
+                    className="nav-link active"
                     id="home-tab"
                     data-bs-toggle="tab"
                     data-bs-target="#home-tab-pane"
@@ -699,9 +699,9 @@ function LiveOrders() {
                     New Orders
                   </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li className="nav-item" role="presentation">
                   <button
-                    class="nav-link"
+                    className="nav-link"
                     id="profile-tab"
                     data-bs-toggle="tab"
                     data-bs-target="#profile-tab-pane"
@@ -713,9 +713,9 @@ function LiveOrders() {
                     Accepted/Cooking
                   </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li className="nav-item" role="presentation">
                   <button
-                    class="nav-link"
+                    className="nav-link"
                     id="contact-tab"
                     data-bs-toggle="tab"
                     data-bs-target="#contact-tab-pane"
@@ -729,13 +729,13 @@ function LiveOrders() {
                 </li>
               </ul>
               <div className="row tabCard">
-                <div class="tab-content" id="myTabContent">
+                <div className="tab-content" id="myTabContent">
                   <div
-                    class="tab-pane fade show active"
+                    className="tab-pane fade show active"
                     id="home-tab-pane"
                     role="tabpanel"
                     aria-labelledby="home-tab"
-                    tabindex="0"
+                    tabIndex="0"
                   >
                     <div className="col">
                       <div className="card cardattributes">
@@ -750,16 +750,16 @@ function LiveOrders() {
                                   {items.Orderstatus === "1" ? (
                                     <>
                                       <div
-                                        class="accordion"
+                                        className="accordion"
                                         id={`accordion${items.cart_Id}`}
                                       >
                                         {/* Div start */}
                                         <div
-                                          class="accordion-item accitem"
+                                          className="accordion-item accitem"
                                           key={`${items.cart_Id}`}
                                         >
                                           <h2
-                                            class="accordion-header cursor"
+                                            className="accordion-header cursor"
                                             id={`heading${items.cart_Id}`}
                                             data-bs-toggle="collapse"
                                             data-bs-target={`#collapse${items.cart_Id}`}
@@ -793,11 +793,11 @@ function LiveOrders() {
                                           </h2>
                                           <div
                                             id={`collapse${items.cart_Id}`}
-                                            class="accordion-collapse collapse show"
+                                            className="accordion-collapse collapse show"
                                             aria-labelledby={`heading${items.ID}`}
                                             data-bs-parent={`accordion${items.cart_Id}`}
                                           >
-                                            <div class="accordion-body">
+                                            <div className="accordion-body">
                                               <h2 className="emailformat">
                                                 {items.name}
                                               </h2>
@@ -855,11 +855,11 @@ function LiveOrders() {
                     </div>
                   </div>
                   <div
-                    class="tab-pane fade"
+                    className="tab-pane fade"
                     id="profile-tab-pane"
                     role="tabpanel"
                     aria-labelledby="profile-tab"
-                    tabindex="0"
+                    tabIndex="0"
                   >
                     <div className="col">
                       <div className="card cardattributes">
@@ -874,12 +874,12 @@ function LiveOrders() {
                                   {items.Orderstatus === "2" ? (
                                     <>
                                       <div
-                                        class="accordion"
+                                        className="accordion"
                                         id={`accordion${items.cart_Id}`}
                                       >
-                                        <div class="accordion-item accitem">
+                                        <div className="accordion-item accitem">
                                           <h2
-                                            class="accordion-header cursor"
+                                            className="accordion-header cursor"
                                             id={`heading${items.cart_Id}`}
                                             data-bs-toggle="collapse"
                                             data-bs-target={`#collapse${items.cart_Id}`}
@@ -913,11 +913,11 @@ function LiveOrders() {
                                           </h2>
                                           <div
                                             id="collapseOne"
-                                            class="accordion-collapse collapse show"
+                                            className="accordion-collapse collapse show"
                                             aria-labelledby={`heading${items.ID}`}
                                             data-bs-parent={`accordion${items.cart_Id}`}
                                           >
-                                            <div class="accordion-body">
+                                            <div className="accordion-body">
                                               <h2 className="emailformat">
                                                 {items.name}
                                               </h2>
@@ -974,11 +974,11 @@ function LiveOrders() {
                     </div>
                   </div>
                   <div
-                    class="tab-pane fade"
+                    className="tab-pane fade"
                     id="contact-tab-pane"
                     role="tabpanel"
                     aria-labelledby="contact-tab"
-                    tabindex="0"
+                    tabIndex="0"
                   >
                     <div className="col">
                       <div className="card cardattributes">
@@ -993,12 +993,12 @@ function LiveOrders() {
                                   {items.Orderstatus === "3" ? (
                                     <>
                                       <div
-                                        class="accordion"
+                                        className="accordion"
                                         id={`accordion${items.cart_Id}`}
                                       >
-                                        <div class="accordion-item accitem">
+                                        <div className="accordion-item accitem">
                                           <h2
-                                            class="accordion-header cursor"
+                                            className="accordion-header cursor"
                                             id={`heading${items.cart_Id}`}
                                             data-bs-toggle="collapse"
                                             data-bs-target={`#collapse${items.cart_Id}`}
@@ -1038,11 +1038,11 @@ function LiveOrders() {
                                           </h2>
                                           <div
                                             id="collapseOne"
-                                            class="accordion-collapse collapse show"
+                                            className="accordion-collapse collapse show"
                                             aria-labelledby={`heading${items.ID}`}
                                             data-bs-parent={`accordion${items.cart_Id}`}
                                           >
-                                            <div class="accordion-body">
+                                            <div className="accordion-body">
                                               <h2 className="emailformat">
                                                 {items.name}
                                               </h2>

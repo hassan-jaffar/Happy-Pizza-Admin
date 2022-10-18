@@ -284,122 +284,122 @@ function OrderDetailTable() {
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>STATUS HISTORY</h6>
                 <hr />
-                <div class="card-body">
-                  <div class="card-body">
+                <div className="card-body">
+                  <div className="card-body">
                     <div
-                      class="timeline timeline-one-side"
+                      className="timeline timeline-one-side"
                       id="status-history"
                       data-timeline-content="axis"
                       data-timeline-axis-style="dashed"
                     >
-                      <div class="timeline-block">
-                        <span class="timeline-step badge bg-success">
-                          <i class="fa fa-regular fa-bell"></i>
+                      <div className="timeline-block">
+                        <span className="timeline-step badge bg-success">
+                          <i className="fa fa-regular fa-bell"></i>
                         </span>
-                        <div class="timeline-content">
-                          <div class="d-flex justify-content-between pt-1">
+                        <div className="timeline-content">
+                          <div className="d-flex justify-content-between pt-1">
                             <div>
-                              <span class="text-muted text-sm font-weight-bold">
+                              <span className="text-muted text-sm font-weight-bold">
                                 Just created
                               </span>
                             </div>
-                            <div class="text-right">
-                              <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
+                            <div className="text-right">
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
                             </div>
                           </div>
-                          <h6 class="text-sm mt-1 mb-0">
+                          <h6 className="text-sm mt-1 mb-0">
                             Status from: {orders.cname}
                           </h6>
                         </div>
                       </div>
                       {orders.Orderstatus === "3" ? (<>
-                        <div class="timeline-block">
-                        <span class="timeline-step badge bg-success">
-                          <i class="fa fa-regular fa-bell"></i>
+                        <div className="timeline-block">
+                        <span className="timeline-step badge bg-success">
+                          <i className="fa fa-regular fa-bell"></i>
                         </span>
-                        <div class="timeline-content">
-                          <div class="d-flex justify-content-between pt-1">
+                        <div className="timeline-content">
+                          <div className="d-flex justify-content-between pt-1">
                             <div>
-                              <span class="text-muted text-sm font-weight-bold">
+                              <span className="text-muted text-sm font-weight-bold">
                                 Completed by resturant
                               </span>
                             </div>
-                            {/* <div class="text-right">
-                              <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                            {/* <div className="text-right">
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>02 Sep 2022
                                 06:23 PM
                               </small>
                             </div> */}
                           </div>
-                          <h6 class="text-sm mt-1 mb-0">
+                          <h6 className="text-sm mt-1 mb-0">
                             Status from: {orders.owner_name}
                           </h6>
                         </div>
                       </div>
                       </>): orders.Orderstatus === "1" ? (<>
-                        <div class="timeline-block">
-                        <span class="timeline-step badge bg-success">
-                          <i class="fa fa-regular fa-bell"></i>
+                        <div className="timeline-block">
+                        <span className="timeline-step badge bg-success">
+                          <i className="fa fa-regular fa-bell"></i>
                         </span>
-                        <div class="timeline-content">
-                          <div class="d-flex justify-content-between pt-1">
+                        <div className="timeline-content">
+                          <div className="d-flex justify-content-between pt-1">
                             <div>
-                              <span class="text-muted text-sm font-weight-bold">
+                              <span className="text-muted text-sm font-weight-bold">
                                 Pending
                               </span>
                             </div>
-                            <div class="text-right">
-                              <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
+                            <div className="text-right">
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
                             </div>
                           </div>
-                          {/* <h6 class="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6> */}
+                          {/* <h6 className="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6> */}
                         </div>
                       </div>
                       </>):  orders.Orderstatus === "2" ? (<>
-                        <div class="timeline-block">
-                        <span class="timeline-step badge bg-success">
-                          <i class="fa fa-regular fa-bell"></i>
+                        <div className="timeline-block">
+                        <span className="timeline-step badge bg-success">
+                          <i className="fa fa-regular fa-bell"></i>
                         </span>
-                        <div class="timeline-content">
-                          <div class="d-flex justify-content-between pt-1">
+                        <div className="timeline-content">
+                          <div className="d-flex justify-content-between pt-1">
                             <div>
-                              <span class="text-muted text-sm font-weight-bold">
+                              <span className="text-muted text-sm font-weight-bold">
                                 Accepted by resturant
                               </span>
                             </div>
-                            {/* <div class="text-right">
-                              <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
+                            {/* <div className="text-right">
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
                             </div> */}
                           </div>
-                          <h6 class="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6>
+                          <h6 className="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6>
                         </div>
                       </div>
                       </>):(<>
-                        <div class="timeline-block">
-                        <span class="timeline-step badge bg-success">
-                          <i class="fa fa-regular fa-bell"></i>
+                        <div className="timeline-block">
+                        <span className="timeline-step badge bg-success">
+                          <i className="fa fa-regular fa-bell"></i>
                         </span>
-                        <div class="timeline-content">
-                          <div class="d-flex justify-content-between pt-1">
+                        <div className="timeline-content">
+                          <div className="d-flex justify-content-between pt-1">
                             <div>
-                              <span class="text-muted text-sm font-weight-bold">
+                              <span className="text-muted text-sm font-weight-bold">
                                 Rejected by resturant
                               </span>
                             </div>
-                            {/* <div class="text-right">
-                              <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i>02 Sep 2022
+                            {/* <div className="text-right">
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>02 Sep 2022
                                 06:23 PM
                               </small>
                             </div> */}
                           </div>
-                          <h6 class="text-sm mt-1 mb-0">
+                          <h6 className="text-sm mt-1 mb-0">
                             Status from: {orders.owner_name}
                           </h6>
                         </div>

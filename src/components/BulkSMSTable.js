@@ -14,7 +14,7 @@ function BulkSMSTable() {
           <hr />
           <br />
           <div className="form-check form-switch">
-            <label className="form-check-label" for="flexSwitchCheckDefault">
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
               SELECT ALL
             </label>
             <input
@@ -23,19 +23,19 @@ function BulkSMSTable() {
               id="flexSwitchCheckDefault"
             />
           </div>
-          <div class="my-5">
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="my-5">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               Select Customers
             </label>
             <input
               type="email"
-              class="form-control smscustomer"
+              className="form-control smscustomer"
               id="exampleFormControlInput1"
             />
           </div>
-          <div class="my-5">
+          <div className="my-5">
             <textarea
-              class="form-control"
+              className="form-control"
               id="exampleFormControlTextarea1"
               rows="9"
               placeholder="Type Message Here..."

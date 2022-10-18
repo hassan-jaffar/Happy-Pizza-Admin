@@ -80,7 +80,7 @@ function MenuType() {
             checked={uppercase}
             onChange={(e)=>{setuppercase(e.target.checked)}}
           />
-          <label className="form-check-label" for="flexRadioDefault1">
+          <label className="form-check-label" htmlFor="flexRadioDefault1">
             Uppercase
           </label>
         </div>
@@ -93,7 +93,7 @@ function MenuType() {
             checked={lowercase}
             onChange={(e)=>{setlowercase(e.target.checked)}}
           />
-          <label className="form-check-label" for="flexRadioDefault3">
+          <label className="form-check-label" htmlFor="flexRadioDefault3">
             Lowercase
           </label>
         </div>
@@ -108,7 +108,7 @@ function MenuType() {
             
             }}
           />
-          <label className="form-check-label" for="flexRadioDefault2">
+          <label className="form-check-label" htmlFor="flexRadioDefault2">
             Capitalized
           </label>
         </div>

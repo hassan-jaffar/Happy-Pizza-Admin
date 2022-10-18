@@ -164,7 +164,7 @@ function Resturants() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
                 </li>
@@ -173,7 +173,7 @@ function Resturants() {
                     to="/pages"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
@@ -182,7 +182,7 @@ function Resturants() {
                     to="/report"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>

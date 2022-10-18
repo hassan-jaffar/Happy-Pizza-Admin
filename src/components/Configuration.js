@@ -67,7 +67,7 @@ function Configuration() {
       <br />
       <div className="row">
         <div className="col-md-12">
-          <label for="pre-order">Pre Order Time (in mins)</label>
+          <label htmlFor="pre-order">Pre Order Time (in mins)</label>
           <input
             id="pre-order"
             className="form-control my-2 py-2 w-50"
@@ -77,7 +77,7 @@ function Configuration() {
             onChange={(e)=>{setorder_time(e.target.value)}}
             required
           />
-          <label for="otp" className="boldtext mt-4">
+          <label htmlFor="otp" className="boldtext mt-4">
             Customer OTP Verification
           </label>
           <input

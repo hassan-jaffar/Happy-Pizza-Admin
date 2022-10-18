@@ -231,7 +231,7 @@ function MyProfile() {
                         to="/resturant"
                         className="nav-link align-middle sidebartag"
                       >
-                        <i class="fas fa-utensils"></i>
+                        <i className="fas fa-utensils"></i>
                         <span className="ms-1 d-none d-sm-inline">
                           {" "}
                           Resturants
@@ -243,7 +243,7 @@ function MyProfile() {
                         to="/pages"
                         className="nav-link align-middle sidebartag"
                       >
-                        <i class="fas fa-file"></i>
+                        <i className="fas fa-file"></i>
                         <span className="ms-1 d-none d-sm-inline"> Pages</span>
                       </Link>
                     </li>
@@ -252,7 +252,7 @@ function MyProfile() {
                         to="/report"
                         className="nav-link align-middle sidebartag"
                       >
-                        <i class="fas fa-chart-bar"></i>
+                        <i className="fas fa-chart-bar"></i>
                         <span className="ms-1 d-none d-sm-inline"> Report</span>
                       </Link>
                     </li>
@@ -283,7 +283,7 @@ function MyProfile() {
                     </div>
                     <div className="col-6 text-end">
                       <Link to="/home"></Link>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" className="btn btn-primary">
                         Cart
                       </button>
                     </div>
@@ -292,7 +292,7 @@ function MyProfile() {
 
                   <form className="row g-3 needs-validation" novalidate>
                     <div className="col-12">
-                      <label for="validationCustom01" className="form-label">
+                      <label htmlFor="validationCustom01" className="form-label">
                         First name
                       </label>
                       <input
@@ -306,7 +306,7 @@ function MyProfile() {
                       />
                     </div>
                     <div className="col-12">
-                      <label for="validationCustom02" className="form-label">
+                      <label htmlFor="validationCustom02" className="form-label">
                         Email
                       </label>
                       <input
@@ -321,7 +321,7 @@ function MyProfile() {
                     </div>
                     <div className="col-12">
                       <label
-                        for="validationCustomUsername"
+                        htmlFor="validationCustomUsername"
                         className="form-label"
                       >
                         Phone

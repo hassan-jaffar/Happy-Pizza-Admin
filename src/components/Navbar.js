@@ -44,7 +44,7 @@ function Navbar() {
 
           <div
             className="offcanvas offcanvas-start"
-            tabindex="-1"
+            tabIndex="-1"
             id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel"
           >
@@ -220,7 +220,7 @@ function Navbar() {
                     to="/resturant"
                     className="nav-link align-middle sidemenuitems"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-5 "> Resturants</span>
                   </Link>
                 </li>
@@ -229,7 +229,7 @@ function Navbar() {
                     to="/pages"
                     className="nav-link align-middle sidemenuitems"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-5 "> Pages</span>
                   </Link>
                 </li>
@@ -238,7 +238,7 @@ function Navbar() {
                     to="/report"
                     className="nav-link align-middle sidemenuitems"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-5 "> Report</span>
                   </Link>
                 </li>

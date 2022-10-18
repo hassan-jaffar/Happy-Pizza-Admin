@@ -76,7 +76,7 @@ function LoyaltyScheme() {
           <p className="boldtext">Loyalty Scheme</p>
           <div className="row">
             <div className="col-6">
-              <label className="form-check-label" for="loyalty">
+              <label className="form-check-label" htmlFor="loyalty">
                 Loyalty Status
               </label>
             </div>
@@ -93,7 +93,7 @@ function LoyaltyScheme() {
               />
             </div>
           </div>
-          <label for="redeem" className="mt-3">
+          <label htmlFor="redeem" className="mt-3">
             Redeem At:
           </label>
           <input
@@ -106,7 +106,7 @@ function LoyaltyScheme() {
               setredeem(e.target.value);
             }}
           />
-          <label for="currency" className="mt-3">
+          <label htmlFor="currency" className="mt-3">
             Points Per Unit Currency:
           </label>
           <input
@@ -119,7 +119,7 @@ function LoyaltyScheme() {
               setpoints(e.target.value);
             }}
           />
-          <label for="perunit" className="mt-3">
+          <label htmlFor="perunit" className="mt-3">
             Per Unit Currency Points:
           </label>
           <input

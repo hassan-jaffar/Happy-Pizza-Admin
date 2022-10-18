@@ -22,7 +22,7 @@ function AddCouponTable() {
 
           <div className="row my-2">
             <div className="col-md-3">
-              <label for="namee">Name</label>
+              <label htmlFor="namee">Name</label>
               <input
                 className="form-control"
                 id="namee"
@@ -30,7 +30,7 @@ function AddCouponTable() {
               />
             </div>
             <div className="col-md-3">
-              <label for="type">Type</label>
+              <label htmlFor="type">Type</label>
               <input
                 className="form-control"
                 id="type"
@@ -38,7 +38,7 @@ function AddCouponTable() {
               />
             </div>
             <div className="col-md-3">
-              <label for="price">Price</label>
+              <label htmlFor="price">Price</label>
               <input
                 className="form-control"
                 id="price"
@@ -46,7 +46,7 @@ function AddCouponTable() {
               />
             </div>
             <div className="col-md-3">
-              <label for="percent">Price</label>
+              <label htmlFor="percent">Price</label>
               <input
                 className="form-control"
                 id="percent"
@@ -57,7 +57,7 @@ function AddCouponTable() {
 
           <div className="row my-5">
             <div className="col-md-3">
-            <label for="fromdate">Active From</label>
+            <label htmlFor="fromdate">Active From</label>
               <input
                 className="form-control"
                 id="fromdate"
@@ -65,7 +65,7 @@ function AddCouponTable() {
               />
             </div>
             <div className="col-md-3">
-            <label for="todate">Active To</label>
+            <label htmlFor="todate">Active To</label>
               <input
                 className="form-control"
                 id="todate"
@@ -73,7 +73,7 @@ function AddCouponTable() {
               />
             </div>
             <div className="col-md-3">
-            <label for="limit">Limit Number</label>
+            <label htmlFor="limit">Limit Number</label>
               <input
                 className="form-control"
                 id="limit"

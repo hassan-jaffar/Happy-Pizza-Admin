@@ -243,7 +243,7 @@ console.log(formData);
               id="newcategory"
               data-bs-backdrop="static"
               data-bs-keyboard="false"
-              tabindex="-1"
+              tabIndex="-1"
               aria-labelledby="newcategoryLabel"
               aria-hidden="true"
             >
@@ -274,7 +274,7 @@ console.log(formData);
                       <div className="row justify-content-between">
                         <label
                           className="form-check-label"
-                          for="flexSwitchCheckDefault"
+                          htmlFor="flexSwitchCheckDefault"
                         >
                           Discountable
                         </label>
@@ -470,7 +470,7 @@ console.log(formData);
                   <div
                     className="modal fade"
                     id={`additemModal${categorys.ID}`}
-                    tabindex="-1"
+                    tabIndex="-1"
                     // data-id={`${categorys.ID}`}
                     aria-labelledby="additemModalLabel"
                     aria-hidden="true"
@@ -531,7 +531,7 @@ console.log(formData);
                             <div className="row justify-content-between">
                               <label
                                 className="form-check-label"
-                                for="flexSwitchCheckDefault"
+                                htmlFor="flexSwitchCheckDefault"
                               >
                                 Discountable
                               </label>
@@ -542,10 +542,10 @@ console.log(formData);
                               />
                             </div>
                           </div>
-                          <div class="input-group my-3">
+                          <div className="input-group my-3">
                             <input
                               type="file"
-                              class="form-control"
+                              className="form-control"
                               id="photo"
                               name="photo"
                               onChange={(e)=>{setFile(e.target.files[0])}}
@@ -588,7 +588,7 @@ console.log(formData);
                   <div
                     className="modal fade"
                     id={`edititemModal${categorys.ID}`}
-                    tabindex="-1"
+                    tabIndex="-1"
                     aria-labelledby="edititemModalLabel"
                     aria-hidden="true"
                     data-bs-backdrop="static"
@@ -635,7 +635,7 @@ console.log(formData);
                             <div className="row justify-content-between">
                               <label
                                 className="form-check-label"
-                                for="flexSwitchCheckDefault"
+                                htmlFor="flexSwitchCheckDefault"
                               >
                                 Discountable
                               </label>
@@ -649,7 +649,7 @@ console.log(formData);
                           <h4 className="mt-3 mb-2 boldtext">Available Days</h4>
                           <div className="form-check form-switch my-2">
                             <div className="row justify-content-between">
-                              <label className="form-check-label" for="sunday">
+                              <label className="form-check-label" htmlFor="sunday">
                                 Sunday
                               </label>
                               <input
@@ -661,7 +661,7 @@ console.log(formData);
                           </div>
                           <div className="form-check form-switch my-2">
                             <div className="row justify-content-between">
-                              <label className="form-check-label" for="monday">
+                              <label className="form-check-label" htmlFor="monday">
                                 Monday
                               </label>
                               <input
@@ -673,7 +673,7 @@ console.log(formData);
                           </div>
                           <div className="form-check form-switch my-2">
                             <div className="row justify-content-between">
-                              <label className="form-check-label" for="tuesday">
+                              <label className="form-check-label" htmlFor="tuesday">
                                 Tuesday
                               </label>
                               <input
@@ -687,7 +687,7 @@ console.log(formData);
                             <div className="row justify-content-between">
                               <label
                                 className="form-check-label"
-                                for="wednesday"
+                                htmlFor="wednesday"
                               >
                                 Wednesday
                               </label>
@@ -702,7 +702,7 @@ console.log(formData);
                             <div className="row justify-content-between">
                               <label
                                 className="form-check-label"
-                                for="thursday"
+                                htmlFor="thursday"
                               >
                                 Thursday
                               </label>
@@ -715,7 +715,7 @@ console.log(formData);
                           </div>
                           <div className="form-check form-switch my-2">
                             <div className="row justify-content-between">
-                              <label className="form-check-label" for="friday">
+                              <label className="form-check-label" htmlFor="friday">
                                 Friday
                               </label>
                               <input
@@ -729,7 +729,7 @@ console.log(formData);
                             <div className="row justify-content-between">
                               <label
                                 className="form-check-label"
-                                for="saturday"
+                                htmlFor="saturday"
                               >
                                 Saturday
                               </label>
@@ -767,7 +767,7 @@ console.log(formData);
                   <div
                     className="modal fade"
                     id="addimgModal"
-                    tabindex="-1"
+                    tabIndex="-1"
                     aria-labelledby="addimgModalLabel"
                     aria-hidden="true"
                     data-bs-backdrop="static"
@@ -790,10 +790,10 @@ console.log(formData);
                           ></button>
                         </div>
                         <div className="modal-body">
-                          <div class="input-group my-3">
+                          <div className="input-group my-3">
                             <input
                               type="file"
-                              class="form-control"
+                              className="form-control"
                               id="inputGroupFile02"
                             />
                           </div>

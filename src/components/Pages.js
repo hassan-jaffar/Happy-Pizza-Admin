@@ -236,7 +236,7 @@ function Pages() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
                 </li>
@@ -245,7 +245,7 @@ function Pages() {
                     to="/pages"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
@@ -254,7 +254,7 @@ function Pages() {
                     to="/report"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>
@@ -287,14 +287,14 @@ function Pages() {
                         <h6>PAGES</h6>
                       </div>
                       <div className="col-6 text-end mt-5">
-                        <Link to='/addpage'><button type="button" class="btn btn-primary">
+                        <Link to='/addpage'><button type="button" className="btn btn-primary">
                           ADD PAGE
                         </button></Link>
                       </div>
                       <hr style={{ padding: "0px" }} className="mt-4"></hr>
                     </div>
 
-                    <table class="table">
+                    <table className="table">
                       <thead>
                         <tr>
                           <th style={{ width: "50%" }} scope="col">
@@ -314,15 +314,15 @@ function Pages() {
                       {page && page.map((pages) => {
                         return (
                           <tbody>
-                            <tr>
+                            <tr key={pages.ID}>
                               <td >{pages.title}</td>
                               <td>
                                 <Link to={`/addpage/${pages.ID}`}>Click for details</Link>
                               </td>
                               <td>
-                                <div class="form-check form-switch">
+                                <div className="form-check form-switch">
                                   <input
-                                    class="form-check-input"
+                                    className="form-check-input"
                                     type="checkbox"
                                     role="switch"
                                     id="flexSwitchCheckChecked"
@@ -346,10 +346,10 @@ function Pages() {
                                     <i className="fa-solid fa-ellipsis-vertical"></i>
                                   </button>
                                   <ul
-                                    class="dropdown-menu"
+                                    className="dropdown-menu"
                                     aria-labelledby="dropdownMenuButton"
                                   >
-                                    <li class="dropdown-item" onClick={()=>{del(pages.ID)}}>
+                                    <li className="dropdown-item" onClick={()=>{del(pages.ID)}}>
                                       <i className="fa-solid fa-ban btnicon"></i>
                                       Delete
                                     </li>
@@ -365,29 +365,29 @@ function Pages() {
                     <div className="row">
                       <div className="col mb-4 mt-4 d-flex justify-content-end">
                         <nav aria-label="Page navigation example">
-                          <ul class="pagination">
-                            <li class="page-item">
-                              <a class="page-link" href="#">
+                          <ul className="pagination">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
                                 Previous
                               </a>
                             </li>
-                            <li class="page-item">
-                              <a class="page-link" href="#">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
                                 1
                               </a>
                             </li>
-                            <li class="page-item">
-                              <a class="page-link" href="#">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
                                 2
                               </a>
                             </li>
-                            <li class="page-item">
-                              <a class="page-link" href="#">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
                                 3
                               </a>
                             </li>
-                            <li class="page-item">
-                              <a class="page-link" href="#">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
                                 Next
                               </a>
                             </li>

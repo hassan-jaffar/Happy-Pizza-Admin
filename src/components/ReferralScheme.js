@@ -72,7 +72,7 @@ function ReferralScheme() {
 
           <div className="row">
             <div className="col-6">
-              <label className="form-check-label" for="referral">
+              <label className="form-check-label" htmlFor="referral">
                 Referral Status
               </label>
             </div>
@@ -89,7 +89,7 @@ function ReferralScheme() {
               />
             </div>
           </div>
-          <label for="referee" className="mt-3">
+          <label htmlFor="referee" className="mt-3">
             Referee (New Customer):
           </label>
           <input
@@ -102,7 +102,7 @@ function ReferralScheme() {
               setnew_customer(e.target.value);
             }}
           />
-          <label for="referrer" className="mt-3">
+          <label htmlFor="referrer" className="mt-3">
             Referrer (Existing Customer):
           </label>
           <input

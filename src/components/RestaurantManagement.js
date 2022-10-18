@@ -175,7 +175,7 @@ function RestaurantManagement() {
       <div className="row">
       
         <div className="col-md-6 px-3">
-          <label for="rstname" className="mt-3">
+          <label htmlFor="rstname" className="mt-3">
             Restaurant Name:
           </label>
           <input
@@ -188,7 +188,7 @@ function RestaurantManagement() {
               setname(e.target.value);
             }}
           />
-          <label for="rstdescription" className="mt-3">
+          <label htmlFor="rstdescription" className="mt-3">
             Restaurant Description:
           </label>
           <input
@@ -202,7 +202,7 @@ function RestaurantManagement() {
               setdescription(e.target.value);
             }}
           />
-          <label for="rstaddress" className="mt-3">
+          <label htmlFor="rstaddress" className="mt-3">
             Restaurant Address:
           </label>
           <input
@@ -216,7 +216,7 @@ function RestaurantManagement() {
               setaddress(e.target.value);
             }}
           />
-          <label for="rstphone" className="mt-3">
+          <label htmlFor="rstphone" className="mt-3">
             Restaurant Phone:
           </label>
           <input
@@ -230,7 +230,7 @@ function RestaurantManagement() {
               setphone(e.target.value);
             }}
           />
-          <label for="servicecharges" className="mt-3">
+          <label htmlFor="servicecharges" className="mt-3">
             Service Charges:
           </label>
           <input
@@ -246,7 +246,7 @@ function RestaurantManagement() {
           />
           <div className="row mt-4">
             <div className="col-6">
-              <label className="form-check-label" for="cod">
+              <label className="form-check-label" htmlFor="cod">
                 Cash on Delivery
               </label>
             </div>
@@ -256,7 +256,7 @@ function RestaurantManagement() {
           </div>
           <div className="row">
             <div className="col-6">
-              <label className="form-check-label" for="pickup">
+              <label className="form-check-label" htmlFor="pickup">
                 Pickup
               </label>
             </div>
@@ -266,7 +266,7 @@ function RestaurantManagement() {
           </div>
           <div className="row">
             <div className="col-6">
-              <label className="form-check-label" for="delivery">
+              <label className="form-check-label" htmlFor="delivery">
                 Delivery
               </label>
             </div>
@@ -280,7 +280,7 @@ function RestaurantManagement() {
           </div>
         </div>
         <div className="col-md-6 px-3">
-          <label for="minimumorder" className="mt-3">
+          <label htmlFor="minimumorder" className="mt-3">
             Minimum Order:
           </label>
           <input
@@ -294,7 +294,7 @@ function RestaurantManagement() {
               setminimum_order(e.target.value);
             }}
           />
-          <label for="avgtime" className="mt-3">
+          <label htmlFor="avgtime" className="mt-3">
             Average Order Prepare Time in minutes:
           </label>
           <select
@@ -323,7 +323,7 @@ function RestaurantManagement() {
             <option value="90">90</option>
             <option value="120">120</option>
           </select>
-          <label for="timeslots" className="mt-3">
+          <label htmlFor="timeslots" className="mt-3">
             Time Slots seperated in minutes:
           </label>
           <select
@@ -352,7 +352,7 @@ function RestaurantManagement() {
             <option value="120">120</option>
           </select>
           <div className="my-3">
-            <label for="formFile" className="form-label">
+            <label htmlFor="formFile" className="form-label">
               Restaurant Image:
             </label>
             <input className="form-control" type="file" id="formFile" name="photo"
@@ -367,7 +367,7 @@ function RestaurantManagement() {
             />
           </div>
           <div className="my-3">
-            <label for="formFile2" className="form-label">
+            <label htmlFor="formFile2" className="form-label">
               Restaurant Cover Image:
             </label>
             <input className="form-control" type="file" id="formFile2" name="cimage" 
@@ -377,7 +377,7 @@ function RestaurantManagement() {
             />
           </div>
           <div className="my-3">
-            <label for="formFile3" className="form-label">
+            <label htmlFor="formFile3" className="form-label">
               Restaurant Receipt Image:
             </label>
             <input className="form-control" type="file" id="formFile3" name="rimage" 
@@ -398,7 +398,7 @@ function RestaurantManagement() {
       <div className="row">
         <div className="col-md-12 px-3">
           <h5 className="boldtext">Owner Information</h5>
-          <label for="ownname" className="mt-3">
+          <label htmlFor="ownname" className="mt-3">
             Own Name:
           </label>
           <input
@@ -408,7 +408,7 @@ function RestaurantManagement() {
             placeholder="Owner"
             value={updateowner_name}
           />
-          <label for="ownemail" className="mt-3">
+          <label htmlFor="ownemail" className="mt-3">
             Owner Email :
           </label>
           <input
@@ -418,7 +418,7 @@ function RestaurantManagement() {
             placeholder="dakfal@dsfkal"
             value={updateowner_email}
           />
-          <label for="ownphone" className="mt-3">
+          <label htmlFor="ownphone" className="mt-3">
             Owner Phone:
           </label>
           <input

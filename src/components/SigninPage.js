@@ -70,7 +70,7 @@ function SigninPage() {
             <h5 className="fw-bolder my-4 spaceWelcome">WELCOME BACK</h5>
             <form>
               <div className="my-5 ms-5 text-start centeredItems responsiveness">
-                <label for="emailad" className='mb-2'>Email Address</label>
+                <label htmlFor="emailad" className='mb-2'>Email Address</label>
                 <input
                   id="emailad"
                   type="email"
@@ -82,7 +82,7 @@ function SigninPage() {
                 />
                 <div className='row mb-2'>
                   <div className='col-6'>
-                    <label for="password">Password</label>
+                    <label htmlFor="password">Password</label>
 
                   </div>
                   <div className='col-6 forgotText'>
@@ -98,13 +98,13 @@ function SigninPage() {
                   onChange={(e) => { setpassword(e.target.value) }}
                   required
                 />
-                <div class="form-check mt-5">
+                <div className="form-check mt-5">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="checkbox"
                     id="checkbox"
                   />
-                  <label class="form-check-label" for="checkbox">
+                  <label className="form-check-label" htmlFor="checkbox">
                     Remember Me
                   </label>
                 </div>
@@ -121,11 +121,11 @@ function SigninPage() {
                   </div>
                   <div className='col-12 mt-4'>
                     <button className="btn btn-light signinbtn btnGoogle">
-                      <i class="fa-brands fa-google text-danger fs-4"></i> GOOGLE
+                      <i className="fa-brands fa-google text-danger fs-4"></i> GOOGLE
                     </button>
                   </div>
                   <div className='col-12 mt-4'><button className="btn btn-light signinbtn btnFb">
-                    <i class="fa-brands fa-square-facebook text-primary fs-4"></i> FACEBOOK
+                    <i className="fa-brands fa-square-facebook text-primary fs-4"></i> FACEBOOK
                   </button></div>
 
                 </div>

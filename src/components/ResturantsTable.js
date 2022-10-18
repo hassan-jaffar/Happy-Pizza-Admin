@@ -146,44 +146,46 @@ function ResturantsTable() {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body text-start my-3">
-                    <div class="row text-start">
-                      <div class="col-md-4">
-                        <label for="daterange" className="me-1 my-1">
+                    <div className="row text-start">
+                      <div className="col-md-4">
+                        <label htmlFor="daterange" className="me-1 my-1">
                           Filter by Restaurant
                         </label>
                         <select
-                          class="form-select"
+                          className="form-select"
                           aria-label="Default select example"
+                          defaultValue={"-- Select an option --"}
                           value={type}
                           onChange={(e) => {
                             filterByName(e.target.value);
                           }}
                         >
-                          <option selected>-- Select an option --</option>
+                          <option>-- Select an option --</option>
                           {resturants1.length > 0 && resturants1.map((resturant)=>{
                             return <>
-                            <option value={resturant.ID}>{resturant.name}</option>
+                            <option key={resturant.ID} value={resturant.ID}>{resturant.name}</option>
                             </>
                           })}
                           
                         </select>
                       </div>
-                      <div class="col-md-4">
-                        <label for="daterange" className="me-1 my-1">
+                      <div className="col-md-4">
+                        <label htmlFor="daterange" className="me-1 my-1">
                           Show
                         </label>
                         <select
-                          class="form-select"
+                          className="form-select"
                           aria-label="Default select example"
+                          defaultValue={"-- Select an option --"}
                           value={show}
                           onChange={(e)=>{filterByType(e.target.value)}}
                         >
-                          <option selected>-- Select an option --</option>
+                          <option >-- Select an option --</option>
                           <option value="true">All</option>
                           <option value="false">Pending</option>
                         </select>
                       </div>
-                      <div class="col-md-4">
+                      <div className="col-md-4">
                         {" "}
                         <div style={{ marginTop: "29px" }}>
                           <button className="btn btn-primary my-1 mx-1">
@@ -234,7 +236,7 @@ function ResturantsTable() {
                           resturants.map((item) => {
                             return (
                               <>
-                                <tr>
+                                <tr key={item.name}>
                                   <th scope="row">{item.name}</th>
 
                                   <td style={{ width: "16%" }}>
@@ -257,20 +259,20 @@ function ResturantsTable() {
                                   <td>{item.owner_email}</td>
                                   <td>25 Sep 2022 02:02 PM</td>
                                   <td>
-                                    <span class="badge bg-info primary">
+                                    <span className="badge bg-info primary">
                                       Active
                                     </span>
                                   </td>
                                   <td>
                                     {item.status === "true" ? (
                                       <>
-                                        <span class="badge bg-info primary">
+                                        <span className="badge bg-info primary">
                                           live
                                         </span>
                                       </>
                                     ) : (
                                       <>
-                                        <span class="badge bg-danger primary">
+                                        <span className="badge bg-danger primary">
                                           Not live
                                         </span>
                                       </>
@@ -292,17 +294,17 @@ function ResturantsTable() {
                                         <i className="fa-solid fa-ellipsis-vertical"></i>
                                       </button>
                                       <ul
-                                        class="dropdown-menu"
+                                        className="dropdown-menu"
                                         aria-labelledby="dropdownMenuButton"
                                       >
                                         <Link to={`/editrestuurant/${item.ID}`}>
                                         <li className="dropdown-item">
-                                          <i class="far fa-edit"></i>
+                                          <i className="far fa-edit"></i>
                                           Edit
                                         </li>
                                         </Link>
                                         <li className="dropdown-item">
-                                          <i class="fas fa-sign-in-alt"></i>
+                                          <i className="fas fa-sign-in-alt"></i>
                                           Login as
                                         </li>
                                       {item.status === "true" ? (
@@ -312,7 +314,7 @@ function ResturantsTable() {
                                           deactivate(item.ID);
                                         }}
                                       >
-                                        <i class="far fa-times-circle"></i>
+                                        <i className="far fa-times-circle"></i>
                                         Deactivate
                                       </li>
                                       ):(
@@ -322,20 +324,20 @@ function ResturantsTable() {
                                           activate(item.ID);
                                         }}
                                       >
-                                        <i class="far fa-check-circle"></i>
+                                        <i className="far fa-check-circle"></i>
                                         Activate
                                       </li>
                                       )}
 
                                       
                                         <li
-                                          class="dropdown-item"
+                                          className="dropdown-item"
                                           onClick={() => {
                                             del(item.ID);
                                           }}
                                         >
                                           {/* <i className="fa-solid fa-ban btnicon"></i> */}
-                                          <i class="fas fa-trash-alt"></i>Delete
+                                          <i className="fas fa-trash-alt"></i>Delete
                                         </li>
                                       </ul>
                                     </div>
@@ -353,29 +355,29 @@ function ResturantsTable() {
                     className="d-flex justify-content-end me-5"
                   >
                     <nav aria-label="Page navigation example">
-                      <ul class="pagination">
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                      <ul className="pagination">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             Previous
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             1
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             2
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             3
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             Next
                           </a>
                         </li>

@@ -69,7 +69,7 @@ function RegisterPage() {
             <h3 className="boldtext my-3">SIGN UP</h3>
             <form>
               <div className="my-5 ms-5 me-2 text-start centeredRegItems">
-                <label for="namee">Name</label>
+                <label htmlFor="namee">Name</label>
                 <input
                   id="namee"
                   type="text"
@@ -79,7 +79,7 @@ function RegisterPage() {
                   onChange={(e) => { setname(e.target.value) }}
                   required
                 />
-                <label for="emailad">Email Address</label>
+                <label htmlFor="emailad">Email Address</label>
                 <input
                   id="emailad"
                   type="email"
@@ -89,7 +89,7 @@ function RegisterPage() {
               onChange={(e) => { setemail(e.target.value) }}
                   required
                 />
-                <label for="phoneno">Phone</label>
+                <label htmlFor="phoneno">Phone</label>
                 <input
                   id="phoneno"
                   type="tel"
@@ -99,7 +99,7 @@ function RegisterPage() {
               onChange={(e) => { setnumber(e.target.value) }}
                   required
                 />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   id="password"
                   type="password"
@@ -109,7 +109,7 @@ function RegisterPage() {
                   onChange={(e) => { setpassword(e.target.value) }}
                   required
                 />
-                <label for="cpassword">Confirm Password</label>
+                <label htmlFor="cpassword">Confirm Password</label>
                 <input
                   id="cpassword"
                   type="password"
@@ -144,10 +144,10 @@ function RegisterPage() {
                   SIGN IN
                 </button>
                 <button className="btn btn-light registerbtn">
-                  <i class="fa-brands fa-google"></i> GOOGLE
+                  <i className="fa-brands fa-google"></i> GOOGLE
                 </button>
                 <button className="btn btn-light registerbtn">
-                  <i class="fa-brands fa-square-facebook"></i> FACEBOOK
+                  <i className="fa-brands fa-square-facebook"></i> FACEBOOK
                 </button>
               </div>
             </form>

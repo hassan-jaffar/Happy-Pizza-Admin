@@ -117,7 +117,7 @@ function Dashboard() {
             "http://localhost:5000/api/admin/getitemslength"
           )
         ).data;
-        console.log(data.data);
+        
         setitem(data.data);
       } catch (error) {
         console.log(error, "err");
@@ -138,7 +138,7 @@ function Dashboard() {
           )
         ).data;
 
-        console.log(data)
+       
         setopeninfo(data.data);
       } catch (error) {
         console.log(error, "err");
@@ -158,7 +158,7 @@ function Dashboard() {
         )
       ).data;
 
-      console.log(data)
+      
       setopeninfo(data.data[0]['online']);
     } catch (error) {
       console.log(error, "err");
@@ -337,7 +337,7 @@ function Dashboard() {
                     to="/resturant"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-utensils"></i>
+                    <i className="fas fa-utensils"></i>
                     <span className="ms-1 d-none d-sm-inline"> Resturants</span>
                   </Link>
                 </li>
@@ -346,7 +346,7 @@ function Dashboard() {
                     to="/pages"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-file"></i>
+                    <i className="fas fa-file"></i>
                     <span className="ms-1 d-none d-sm-inline"> Pages</span>
                   </Link>
                 </li>
@@ -355,7 +355,7 @@ function Dashboard() {
                     to="/report"
                     className="nav-link align-middle sidebartag"
                   >
-                    <i class="fas fa-chart-bar"></i>
+                    <i className="fas fa-chart-bar"></i>
                     <span className="ms-1 d-none d-sm-inline"> Report</span>
                   </Link>
                 </li>
@@ -390,7 +390,7 @@ function Dashboard() {
                   </>):(
                     <>
                     <h6>
-                      <i class="fa-sharp fa-solid fa-circle-xmark checkiconclr text-danger"></i>
+                      <i className="fa-sharp fa-solid fa-circle-xmark checkiconclr text-danger"></i>
                     </h6>
                     <h1 className="boldtext">Your Restaurant is Closed!</h1>
                     </>
@@ -408,7 +408,7 @@ function Dashboard() {
                   <div
                     className="modal fade"
                     id="exampleModal"
-                    tabindex="-1"
+                    tabIndex="-1"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
                     data-bs-backdrop="static"
@@ -458,7 +458,7 @@ function Dashboard() {
                                     />
                                     <label
                                       className="form-check-label"
-                                      for="flexRadioDefault1"
+                                      htmlFor="flexRadioDefault1"
                                     >
                                       Online (as usual)
                                     </label>
@@ -489,7 +489,7 @@ function Dashboard() {
                                     />
                                     <label
                                       className="form-check-label"
-                                      for="flexRadioDefault3"
+                                      htmlFor="flexRadioDefault3"
                                     >
                                       Offline For The Whole Day
                                     </label>
@@ -503,9 +503,9 @@ function Dashboard() {
                                 data-bs-parent="#accordionFlushExample"
                               >
                                 <div className="accordion-body">
-                                  <div class="mb-3">
+                                  <div className="mb-3">
                                     <textarea
-                                      class="form-control"
+                                      className="form-control"
                                       id="exampleFormControlTextarea1"
                                       rows="3"
                                     ></textarea>
@@ -536,7 +536,7 @@ function Dashboard() {
                                     />
                                     <label
                                       className="form-check-label"
-                                      for="flexRadioDefault2"
+                                      htmlFor="flexRadioDefault2"
                                     >
                                       Offline Until
                                     </label>
@@ -550,9 +550,9 @@ function Dashboard() {
                                 data-bs-parent="#accordionFlushExample"
                               >
                                 <div className="accordion-body">
-                                  <div class="mb-3">
+                                  <div className="mb-3">
                                     <textarea
-                                      class="form-control"
+                                      className="form-control"
                                       id="exampleFormControlTextarea1"
                                       rows="3"
                                     ></textarea>
@@ -560,17 +560,17 @@ function Dashboard() {
                                   <label className="mb-1 mt-2 boldtext">
                                     DateRange
                                   </label>
-                                  <div class="input-group mb-3">
+                                  <div className="input-group mb-3">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder=""
                                       aria-label=""
                                     />
-                                    <span class="input-group-text">To</span>
+                                    <span className="input-group-text">To</span>
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder=""
                                       aria-label=""
                                     />
@@ -677,7 +677,7 @@ function Dashboard() {
                         {" "}
                         <i
                           style={{ color: "#DD3948" }}
-                          class="fas fa-clock"
+                          className="fas fa-clock"
                         ></i>
                       </h4>
                     </div>
@@ -701,7 +701,7 @@ function Dashboard() {
                         {" "}
                         <i
                           style={{ color: "#1975FD" }}
-                          class="fas fa-book-open"
+                          className="fas fa-book-open"
                         ></i>
                       </h4>
                     </div>
@@ -725,7 +725,7 @@ function Dashboard() {
                         {" "}
                         <i
                           style={{ color: "#4650DD" }}
-                          class="far fa-bookmark"
+                          className="far fa-bookmark"
                         ></i>
                       </h4>
                     </div>
@@ -749,7 +749,7 @@ function Dashboard() {
                         {" "}
                         <i
                           style={{ color: "#3FB95B" }}
-                          class="fas fa-globe-americas"
+                          className="fas fa-globe-americas"
                         ></i>
                       </h4>
                     </div>
@@ -779,7 +779,7 @@ function Dashboard() {
                 <div className="col d-flex justify-content-end">
                   <select
                     style={{ width: "70px" }}
-                    class="form-select form-select-sm"
+                    className="form-select form-select-sm"
                     aria-label=".form-select-sm example"
                   >
                     {/* <option selected>Open this select menu</option> */}
@@ -792,8 +792,8 @@ function Dashboard() {
               </div>
 
               {/* start of maping information of resturant */}
-              <div class="row mt-2">
-                <table class="table">
+              <div className="row mt-2">
+                <table className="table">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -805,7 +805,7 @@ function Dashboard() {
                     return (
                       <>
                         <tbody>
-                          <tr>
+                          <tr key={restData.ID}>
                             <td>{restData.ID}</td>
                             <td>{restData.name}</td>
                             <td><p className="liveStatus">{restData.status === "true" && (<>Live</>)}</p></td>
@@ -824,29 +824,29 @@ function Dashboard() {
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                   <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="#">
+                    <ul className="pagination">
+                      <li className="page-item">
+                        <a className="page-link" href="#">
                           Previous
                         </a>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
+                      <li className="page-item">
+                        <a className="page-link" href="#">
                           1
                         </a>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
+                      <li className="page-item">
+                        <a className="page-link" href="#">
                           2
                         </a>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
+                      <li className="page-item">
+                        <a className="page-link" href="#">
                           3
                         </a>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
+                      <li className="page-item">
+                        <a className="page-link" href="#">
                           Next
                         </a>
                       </li>
@@ -870,17 +870,19 @@ function Dashboard() {
               </div>
               <div className="col-12">
                 <div className="mapouter">
-                  <div class="gmap_canvas">
+                  <div className="gmap_canvas">
                     <iframe
                       style={{ height: "400px" }}
                       className="gmap_iframe"
+                      title="myFrame"
                       width="100%"
-                      frameborder="0"
+                      frameBorder="0"
                       scrolling="no"
-                      marginheight="0"
-                      marginwidth="0"
+                      marginHeight="0"
+                      marginWidth="0"
                       src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
+                      
+                    />
                     <a href="https://mcpenation.com/">Resturants</a>
                   </div>
                 </div>
