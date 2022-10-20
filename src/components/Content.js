@@ -10,6 +10,9 @@ import { useParams } from "react-router-dom";
 function Content() {
 
   const {id} = useParams();
+     // For Gallery
+  const [link, setlink] = useState("");
+  const [image, setimage] = useState("");
 
   // For Timings / CKEditor
   const [description, setdescription] = useState("")
@@ -35,6 +38,33 @@ function Content() {
       console.log(error)
       toast.warn(error.response.data.message)
     }
+ 
+  }
+
+  // For gallery
+  async function gallerysave(){
+    var formData = new FormData();
+    formData.append("id",id)
+    formData.append("link",link);
+    formData.append("image",image);
+
+    const config = {
+      headers:{
+          "Content-Type":"multipart/form-data"
+      }
+  }
+
+    try {
+      const result = await axios.post("http://localhost:5000/api/setting/addgallery",formData, config).data;
+      console.log(result.message)
+      toast.success("Data has been inserted")
+      setimage("")
+      setlink("")
+    } catch (error) {
+      console.log(error)
+      toast.warn("Something went wrong")
+    }
+
   }
 
   return (
@@ -533,6 +563,9 @@ function Content() {
               class="form-control"
               id="validationCustomUsername"
               aria-describedby="inputGroupPrepend"
+              name="link"
+              value={link}
+              onChange={(e)=>{setlink(e.target.value)}}
               required
             />
           </div>
@@ -548,9 +581,13 @@ function Content() {
               class="form-control"
               id="validationCustomUsername"
               aria-describedby="inputGroupPrepend"
+              name="image"
+              onChange={(e)=>{setimage(e.target.files[0])}}
               required
             />
           </div>
+
+          <input type="hidden" value={id} name="id" />
         </div>
 
         <div className="col-md-12 text-center mt-3">
@@ -558,7 +595,7 @@ function Content() {
         </div>
 
         <div className="container mt-3 text-center">
-          <button className="btn btn-info w-100">Save</button>
+          <button className="btn btn-info w-100" onClick={gallerysave}>Save</button>
         </div>
         <hr style={{ padding: "0px" }} className="mt-4" />
       </div>
