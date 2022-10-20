@@ -2,8 +2,14 @@ import React,{useState,useEffect} from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from "react-router-dom";
+
 
 function Content() {
+
+  const {id} = useParams();
 
   // For Timings / CKEditor
   const [description, setdescription] = useState("")
@@ -17,19 +23,23 @@ function Content() {
 
   async function add(){
     const detail = {
-      id:JSON.parse(localStorage.getItem('currentuser'))[0].resturant_ID,
+      id,
       description
     }
     try {
       const result = await axios.post("http://localhost:5000/api/setting/addtimings",detail).data;
-      console.log(result.data)
+      console.log(result.message)
+      toast.success("Data has been inserted")
+      setdescription("")
     } catch (error) {
-      console.log(error,"err")
+      console.log(error)
+      toast.warn(error.response.data.message)
     }
   }
 
   return (
     <>
+    <ToastContainer />
       <h6 className="px-1">CONTENT</h6>
       <hr />
       <br />
