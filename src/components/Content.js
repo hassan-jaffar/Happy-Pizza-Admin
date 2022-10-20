@@ -1,8 +1,33 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from 'axios';
 
 function Content() {
+
+  // For Timings / CKEditor
+  const [description, setdescription] = useState("")
+  const inputHandler = (event, editor) => {
+    setdescription(editor.getData());
+    // alert(parse(editor.getData()).props.children);
+      // Define your onSubmit function here
+      // ...
+      // for example, setData() here
+  };
+
+  async function add(){
+    const detail = {
+      id:JSON.parse(localStorage.getItem('currentuser'))[0].resturant_ID,
+      description
+    }
+    try {
+      const result = await axios.post("http://localhost:5000/api/setting/addtimings",detail).data;
+      console.log(result.data)
+    } catch (error) {
+      console.log(error,"err")
+    }
+  }
+
   return (
     <>
       <h6 className="px-1">CONTENT</h6>
@@ -14,9 +39,9 @@ function Content() {
             <h6 className="px-1 pt-4">TIMINGS</h6>
             <hr />
             <br />
-            <CKEditor id="inputText" editor={ClassicEditor} />
+            <CKEditor id="inputText" editor={ClassicEditor} onChange={inputHandler} />
             <div className="container mt-5 text-center">
-              <button className="btn btn-info py-2">Save</button>
+              <button className="btn btn-info py-2" onClick={add}>Save</button>
             </div>
           </div>
         </div>
