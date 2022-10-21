@@ -1,5 +1,8 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
+import moment from "moment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CustomersTable() {
   const [customers, setCustomers] = useState([])
@@ -12,13 +15,14 @@ function CustomersTable() {
     try {
       const data = (await axios.post('http://localhost:5000/api/user/deletecustomer', info)).data
       update()
-      // toast.success("Address successfully deactivated.")
+      toast.success("Customer has been deleted");
       // window.location.reload();
       // console.log(data.data)
 
 
     } catch (error) {
       console.log(error)
+      toast.warn("Something went wrong");
     }
   }
 
@@ -48,6 +52,7 @@ function CustomersTable() {
   
   return (
     <>
+    <ToastContainer />
       <div className="row justify-content-center">
         <div className="col-md-12 text-center">
           <h1 className="my-5 mx-4 responsiveness text-start">CUSTOMERS</h1>
@@ -78,7 +83,7 @@ function CustomersTable() {
                   <tr>
                   <th scope="row" className="blueclrname">{customer.name}</th>
                   <td className="blueclrname">{customer.email}</td>
-                  <td>26 Sep 2021 05:50 PM</td>
+                  <td>{moment(customer.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
                   <td>£0.00</td>
                   <td>---</td>
                   <td>
