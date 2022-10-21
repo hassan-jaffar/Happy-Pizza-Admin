@@ -27,7 +27,7 @@ function MenuType() {
   
         setlowercase(false)
         setuppercase(false)
-        setcapitalized(true)
+        setcapitalized(false)
   
   
   
