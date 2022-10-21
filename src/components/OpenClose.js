@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function OpenClose() {
@@ -10,58 +12,38 @@ function OpenClose() {
   const [to, setto] = useState("Date to");
   const [from, setfrom] = useState("Date from");
   const {id} = useParams();
-  const getstatus = localStorage.getItem("status");
+  // const getstatus = localStorage.getItem("status");
 
   async function open(){
-    if(getstatus === true){
-      const details = {
-        online,
-        offline,
-        statment,
-        to,
-        from,
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
-      }
-  
-      try {
-        const data = await (
-          await axios.post("http://localhost:5000/api/superadmin/openclose",details)
-        ).data;
-  
-        setstatment("");
-        setto("");
-        setfrom("");
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    else{
-      const details = {
-        online,
-        offline,
-        statment,
-        to,
-        from,
-        id
-      }
-  
-      try {
-        const data = await (
-          await axios.post("http://localhost:5000/api/superadmin/openclose",details)
-        ).data;
-  
-        setstatment("");
-        setto("");
-        setfrom("");
-      } catch (error) {
-        console.log(error);
-      }
+    const details = {
+      online,
+      offline,
+      statment,
+      to,
+      from,
+      id
     }
 
+    try {
+      const data = await (
+        await axios.post("http://localhost:5000/api/superadmin/openclose",details)
+      ).data;
+      toast.success("Data has been saved")
+
+      setonline(false)
+      setoffline(false)
+      setstatment("");
+      setto("");
+      setfrom("");
+    } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong")
+    }
   }
 
   return (
     <>
+    <ToastContainer />
       <h6 className="px-1">OPEN/CLOSE</h6>
       <hr />
       <br />

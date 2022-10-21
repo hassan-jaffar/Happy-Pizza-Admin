@@ -38,6 +38,8 @@ function Dashboard() {
 
       update4();
       refCloseadd.current.click();
+      setonline(false)
+      setoffline(false)
       setstatment("");
       setto("");
       setfrom("");
