@@ -332,20 +332,21 @@ function Navbar() {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/setting">
+                      <Link to="/resturant">
                         <button className="btn btn-light userdditem dropdown-item">
                           Restaurant
                         </button>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/menu">
+
+                      {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 && (<>
+                        {/* <Link to="/change-password"> */}
+                        <Link to="/menu">
                         <button className="btn btn-light userdditem dropdown-item">
                           Menu
                         </button>
                       </Link>
-                      {getstatus === "true" && JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 && (<>
-                        {/* <Link to="/change-password"> */}
                         <button className="btn btn-light userdditem dropdown-item pinkbg" onClick={closeshift}>
                           <i className="fa-solid fa-lock btnicon"></i>Close
                           Shift

@@ -4,6 +4,7 @@ import "./Orders.css";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from "moment";
 
 function ResturantsTable() {
   const [resturants, setresturants] = useState([]);
@@ -290,7 +291,7 @@ function ResturantsTable() {
                                   </td>
                                   <td>{item.owner_name}</td>
                                   <td>{item.owner_email}</td>
-                                  <td>25 Sep 2022 02:02 PM</td>
+                                  <td>{moment(item.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
                                   <td>
                                     <span className="badge bg-info primary">
                                       Active

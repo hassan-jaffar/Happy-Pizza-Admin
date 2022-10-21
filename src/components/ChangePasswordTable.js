@@ -61,6 +61,7 @@ function ChangePasswordTable() {
           <hr />
           <br />
           <input
+          type="password"
             id="password"
             className="form-control mb-4 px-4 py-3"
             placeholder="Current Password"
@@ -69,6 +70,7 @@ function ChangePasswordTable() {
 
           />
           <input
+          type="password"
             id="npassword"
             className="form-control mb-4 px-4 py-3"
             placeholder="New Password"
@@ -76,6 +78,7 @@ function ChangePasswordTable() {
             onChange={(e)=>{setnew_password(e.target.value)}}
           />
           <input
+          type="password"
             id="cpassword"
             className="form-control mb-4 px-4 py-3"
             placeholder="Confirm New Password"

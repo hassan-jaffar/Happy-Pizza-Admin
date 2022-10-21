@@ -282,10 +282,11 @@ function MyProfile() {
                       <h5 className="mt-1">USER PROFILE</h5>
                     </div>
                     <div className="col-6 text-end">
-                      <Link to="/home"></Link>
+                      <Link to="/home">
                       <button type="button" className="btn btn-primary">
                         Cart
                       </button>
+                      </Link>
                     </div>
                     <hr style={{ padding: "0" }} className="mt-3"></hr>
                   </div>

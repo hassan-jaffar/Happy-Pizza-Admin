@@ -61,9 +61,9 @@ function Report() {
       const temporders = duplicateorderReport.filter(
         (order) => {
           console.log(Date.parse(dates[0]._d)
-            ,Date.parse(order.DateTime),Date.parse(dates[1]._d)
+            ,Date.parse(order.datetime),Date.parse(dates[1]._d)
             )
-          return Date.parse(dates[0]._d)<Date.parse(order.DateTime)&&Date.parse(dates[1]._d)>Date.parse(order.DateTime)}
+          return Date.parse(dates[0]._d)<Date.parse(order.datetime)&&Date.parse(dates[1]._d)>Date.parse(order.datetime)}
       );
       setorderReport(temporders);
       // setOrders(temporders);
@@ -483,7 +483,7 @@ function Report() {
                         <tr key={report.cart_Id}>
                           <th scope="row">{report.cart_Id}</th>
                           <td>{report.cname}</td>
-                          <td>{moment(report.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
+                          <td>{moment(report.datetime).format('MMMM Do YYYY, h:mm a')}</td>
                           <td>stripe</td>
                           <td>
                           {report.Orderstatus === "1" ? (
