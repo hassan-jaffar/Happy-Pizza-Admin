@@ -76,7 +76,7 @@ function Settings() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="/setting"
+                    to={`/setting/${JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID}`}
                     className="nav-link align-middle sidebartag"
                   >
                     <i className="fa-solid fa-gear"></i>
