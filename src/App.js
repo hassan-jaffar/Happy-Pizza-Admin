@@ -21,12 +21,17 @@ import Pages from "./components/Pages";
 import AddPage from "./components/AddPage";
 import Report from "./components/Report";
 import MyProfile from "./components/MyProfile";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+import Translations from "./components/Translations";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<SigninPage />}></Route>
+        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
+        <Route path="/resetpassword" element={<ResetPassword />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/resturant" element={<Resturants />}></Route>
         <Route path="/addresturant" element={<AddResturant />}></Route>
@@ -48,6 +53,7 @@ function App() {
         <Route path="/pages" element={<Pages />}></Route>
         <Route path="/addpage" element={<AddPage />}></Route>
         <Route path="/report" element={<Report />}></Route>
+        <Route path="/translations" element={<Translations />}></Route>
         <Route path="/profile" element={<MyProfile />}></Route>
         <Route
           path="*"

@@ -86,7 +86,7 @@ function SigninPage() {
 
                   </div>
                   <div className='col-6 forgotText'>
-                    <Link to="/" className='text-muted'>Forgot your password?</Link>
+                    <Link to="/forgotpassword" className='text-muted'>Forgot your password?</Link>
                   </div>
                 </div>
                 <input
