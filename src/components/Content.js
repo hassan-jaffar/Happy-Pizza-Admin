@@ -56,7 +56,7 @@ function Content() {
   };
 
   // For content 
-  async function addcontent(){
+  async function addcontent(e){
     var formData = new FormData();
     formData.append("id",id)
     formData.append("frontendtemplate",frontendtemplate)
@@ -102,7 +102,6 @@ function Content() {
      formData, config
     ).data;
     console.log(result);
-   
     toast.success("Content has been added");
 
   } catch (error) {
@@ -231,8 +230,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="menu"
-                  onChange={(e)=>{setmenu(e.target.value)}}
-                  value={menu}
+                  onChange={(e)=>{setmenu(e.target.files[0])}}
+                  // value={menu}
                   required
                 />
               </div>
@@ -248,8 +247,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="banner1"
-                  value={banner1}
-                  onChange={(e)=>{setbanner1(e.target.value)}}
+                  // value={banner1}
+                  onChange={(e)=>{setbanner1(e.target.files[0])}}
                   required
                 />
               </div>
@@ -286,8 +285,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="banner2"
-                  value={banner2}
-                  onChange={(e)=>{setbanner2(e.target.value)}}
+                  // value={banner2}
+                  onChange={(e)=>{setbanner2(e.target.files[0])}}
                   required
                 />
               </div>
@@ -303,8 +302,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="banner3"
-                  value={banner3}
-                  onChange={(e)=>{setbanner3(e.target.value)}}
+                  // value={banner3}
+                  onChange={(e)=>{setbanner3(e.target.files[0])}}
                   required
                 />
               </div>
@@ -341,8 +340,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="banner4"
-                  value={banner4}
-                  onChange={(e)=>{setbanner4(e.target.value)}}
+                  // value={banner4}
+                  onChange={(e)=>{setbanner4(e.target.files[0])}}
                   required
                 />
               </div>
@@ -358,8 +357,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="banner5"
-                  onChange={(e)=>{setbanner5(e.target.value)}}
-                  value={banner5}
+                  onChange={(e)=>{setbanner5(e.target.files[0])}}
+                  // value={banner5}
                   required
                 />
               </div>
@@ -396,8 +395,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="box1icon"
-                  value={box1icon}
-                  onChange={(e)=>{setbox1icon(e.target.value)}}
+                  // value={box1icon}
+                  onChange={(e)=>{setbox1icon(e.target.files[0])}}
                   required
                 />
               </div>
@@ -413,8 +412,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="box2icon"
-                  value={box2icon}
-                  onChange={(e)=>{setbox2icon(e.target.value)}}
+                  // value={box2icon}
+                  onChange={(e)=>{setbox2icon(e.target.files[0])}}
                   required
                 />
               </div>
@@ -451,8 +450,8 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="box3icon"
-                  value={box3icon}
-                  onChange={(e)=>{setbox3icon(e.target.value)}}
+                  // value={box3icon}
+                  onChange={(e)=>{setbox3icon(e.target.files[0])}}
                   required
                 />
               </div>
@@ -711,7 +710,7 @@ function Content() {
             </div>
           </div>
           <div class="col-12 mt-3">
-            <button class="btn btn-info" type="submit">
+            <button class="btn btn-info" type="submit" onClick={addcontent}>
               Save
             </button>
           </div>
