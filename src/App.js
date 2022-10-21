@@ -24,6 +24,9 @@ import MyProfile from "./components/MyProfile";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Translations from "./components/Translations";
+import Languages from "./components/Languages";
+import AddLanguage from "./components/AddLanguage";
+import AddTranslation from "./AddTranslation";
 
 function App() {
   return (
@@ -54,6 +57,9 @@ function App() {
         <Route path="/addpage" element={<AddPage />}></Route>
         <Route path="/report" element={<Report />}></Route>
         <Route path="/translations" element={<Translations />}></Route>
+        <Route path="/languages" element={<Languages />}></Route>
+        <Route path="/addlanguage" element={<AddLanguage />}></Route>
+        <Route path="/addtranslation" element={<AddTranslation />}></Route>
         <Route path="/profile" element={<MyProfile />}></Route>
         <Route
           path="*"

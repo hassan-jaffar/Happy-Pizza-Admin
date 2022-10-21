@@ -39,9 +39,10 @@ function Translations() {
           </div>
         </div>
       </nav>
+
       <div className="row mt-5 px-5 responsiveness">
         <div className="col-md-2">
-          <h3>Translation</h3>
+          <h5>Translation</h5>
         </div>
         <div className="col-md-4">
           <form className="d-flex">
@@ -90,10 +91,63 @@ function Translations() {
           </li>
         </div>
         <div className="col-md-1">
+        <Link to="/addtranslation">
           <button className="btn btn-light w-100">
             <i className="fa-solid fa-plus me-2"></i>Add
           </button>
+          </Link>
         </div>
+      </div>
+
+      <div className="table-responsive mt-5">
+        <table className="table mt-2 mb-5 mx-4 bs">
+          <thead>
+            <tr>
+              <th scope="col">GROUP/SINGLE</th>
+              <th scope="col">KEY</th>
+              <th scope="col">EN</th>
+              <th scope="col">EN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">auth</th>
+              <td>failed</td>
+              <td>"These credentials do not match our records"</td>
+              <td>
+                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "These
+                credentials do not match our records"
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">auth</th>
+              <td>failed</td>
+              <td>"These credentials do not match our records"</td>
+              <td>
+                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "These
+                credentials do not match our records"
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">auth</th>
+              <td>failed</td>
+              <td>"These credentials do not match our records"</td>
+              <td>
+                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "These
+                credentials do not match our records"
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">auth</th>
+              <td>failed</td>
+              <td>"These credentials do not match our records"</td>
+              <td>
+                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "These
+                credentials do not match our records"
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </>
   );
