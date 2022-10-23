@@ -1,9 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddLanguage() {
+  const [name, setname] = useState("");
+  const [locale, setlocale] = useState("")
+
+  async function save(){
+    const details = {
+      id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
+      name,
+      locale
+    }
+    try {
+      const result = await (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/addlanguage",
+          details
+        )
+      ).data
+      toast.success("Language has been added")
+      setname("");
+      setlocale("");
+      
+    } catch (error) {
+      console.log(error)
+      toast.warn("Something went wrong! Please try again later")
+    }
+  }
   return (
     <>
+    <ToastContainer />
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary responsiveness">
         <div className="container-fluid">
           <button
@@ -54,6 +83,8 @@ function AddLanguage() {
             type="text"
             className="form-control mb-4"
             placeholder=""
+            value={name}
+            onChange={(e)=>{setname(e.target.value)}}
             required
           />
           <label htmlFor="localelang" className="mb-2">
@@ -64,10 +95,12 @@ function AddLanguage() {
             type="text"
             className="form-control mb-4"
             placeholder=""
+            value={locale}
+            onChange={(e)=>{setlocale(e.target.value)}}
             required
           />
           <hr />
-          <button className="btn btnSignColor">Save</button>
+          <button className="btn btnSignColor" onClick={save}>Save</button>
           <hr/>
             </div>
         </div>
