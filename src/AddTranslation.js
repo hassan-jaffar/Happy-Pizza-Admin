@@ -1,9 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddTranslation() {
+  const [groupvalidation, setgroupvalidation] = useState("")
+  const [keyinvalid, setkeyinvalid] = useState("")
+  const [value, setvalue] = useState("")
+  const [namespace, setnamespace] = useState("")
+
+  async function save(){
+    const details = {
+      id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
+      groupvalidation,
+      keyinvalid,
+      value,
+      namespace
+    } 
+    try {
+      const result = await (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/addtranslation",
+          details
+        )
+      ).data
+      toast.success("Translation has been added")
+
+      setgroupvalidation("");
+      setkeyinvalid("");
+      setvalue("");
+      setnamespace("");
+    } catch (error) {
+      console.log(error)
+      toast.warn("Something went wrong! Please try again later")
+    }
+
+  }
   return (
     <>
+     <ToastContainer />
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary responsiveness">
         <div className="container-fluid">
           <button
@@ -54,6 +90,8 @@ function AddTranslation() {
                 type="text"
                 className="form-control mb-4"
                 placeholder="e.g validation"
+                value={groupvalidation}
+                onChange={(e)=>{setgroupvalidation(e.target.value)}}
               />
               <label htmlFor="key" className="mb-2">
                 KEY
@@ -63,6 +101,8 @@ function AddTranslation() {
                 type="text"
                 className="form-control mb-4"
                 placeholder="e.g invalid_key"
+                value={keyinvalid}
+                onChange={(e)=>{setkeyinvalid(e.target.value)}}
                 required
               />
               <label htmlFor="value" className="mb-2">
@@ -73,6 +113,8 @@ function AddTranslation() {
                 type="text"
                 className="form-control mb-4"
                 placeholder="e.g keys must be single string"
+                value={value}
+                onChange={(e)=>{setvalue(e.target.value)}}
                 required
               />
               <Link to="/addtranslation">Toggle advanced options</Link>
@@ -85,9 +127,11 @@ function AddTranslation() {
                 type="text"
                 className="form-control mb-4"
                 placeholder="e.g my_package"
+                value={namespace}
+                onChange={(e)=>{setnamespace(e.target.value)}}
               />
               <hr />
-              <button className="btn btnSignColor">Save</button>
+              <button className="btn btnSignColor" onClick={save}>Save</button>
               <hr />
             </div>
           </div>
