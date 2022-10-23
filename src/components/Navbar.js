@@ -20,6 +20,8 @@ function Navbar() {
         await axios.post("http://localhost:5000/api/superadmin/closeshift",details)
       ).data;
 
+      window.location.reload()
+
     } catch (error) {
       console.log(error);
     }
