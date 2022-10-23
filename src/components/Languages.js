@@ -1,7 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from'axios';
 
 function Languages() {
+  const [language, setlanguage] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const details = {
+          id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        }
+        const data = await (
+          await axios.post(
+            "http://localhost:5000/api/superadmin/getlanguage",
+            details
+          )
+        ).data;
+
+        setlanguage(data.data)
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary responsiveness">
@@ -63,11 +86,16 @@ function Languages() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">en</th>
-              <td><Link to="/translations">en</Link></td>
+            {language && language.map((type)=>{
+              return <>
+              <tr>
+              <th scope="row">{type.name}</th>
+              <td><Link to="/translations">{type.locale}</Link></td>
             </tr>
-            <tr>
+            </>
+            })}
+            
+            {/* <tr>
             <th scope="row">en</th>
             <td><Link to="/translations">en</Link></td>
             </tr>
@@ -78,7 +106,7 @@ function Languages() {
             <tr>
             <th scope="row">en</th>
             <td><Link to="/translations">en</Link></td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
