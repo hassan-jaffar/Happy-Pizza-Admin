@@ -4,6 +4,22 @@ import axios from 'axios';
 
 function Translations() {
   const [translation, settranslation] = useState([])
+  // const [translation2, settranslation2] = useState([])
+  // const [type, settype] = useState("-- Select an option --");
+
+  // function filterByLanguage(e) {
+  //   settype(e);
+
+  //   if (e !== "-- Select an option --") {
+  //     // const temprooms = duplicateorders.filter(order=>order.ID===e)
+  //     const temporders = translation.filter(
+  //       (order) => order.cart_Id === parseInt(e)
+  //     );
+  //     settranslation(temporders);
+  //   } else {
+  //     settranslation(translation2);
+  //   }
+  // }
 
   useEffect(() => {
     async function fetchData() {
@@ -82,15 +98,14 @@ function Translations() {
             <button
               className="btn btn-light dropdown-toggle w-100"
               id="dropdown"
-              role="button"
+              // role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               Language
             </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdown">
+            <ul className="dropdown-menu" aria-labelledby="dropdown" >
               <li className="dropdown-item">EN</li>
-              <li className="dropdown-item">Another language</li>
             </ul>
           </li>
         </div>
