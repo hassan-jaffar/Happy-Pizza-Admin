@@ -132,8 +132,8 @@ function Dashboard() {
             details
           )
         ).data;
-
-        setopeninfo(data.data);
+        
+        setopeninfo(data.data[0]['online']);
       } catch (error) {
         console.log(error, "err");
       }
