@@ -1,7 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function Translations() {
+  const [translation, settranslation] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const details = {
+          id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        }
+        const data = await (
+          await axios.post(
+            "http://localhost:5000/api/superadmin/getlanguage",
+            details
+          )
+        ).data;
+
+        settranslation(data.data)
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary responsiveness">
@@ -110,7 +133,20 @@ function Translations() {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {translation && translation.map((type)=>{
+              return <>
+              <tr>
+              <th scope="row">{type.groupvalidation}</th>
+              <td>{type.keyinvalid}</td>
+              <td>"{type.value}"</td>
+              <td>
+                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "{type.value}"
+              </td>
+            </tr>
+              </>
+            }) }
+            
+            {/* <tr>
               <th scope="row">auth</th>
               <td>failed</td>
               <td>"These credentials do not match our records"</td>
@@ -136,16 +172,7 @@ function Translations() {
                 <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "These
                 credentials do not match our records"
               </td>
-            </tr>
-            <tr>
-              <th scope="row">auth</th>
-              <td>failed</td>
-              <td>"These credentials do not match our records"</td>
-              <td>
-                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "These
-                credentials do not match our records"
-              </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
