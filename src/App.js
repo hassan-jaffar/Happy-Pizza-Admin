@@ -26,7 +26,10 @@ import ResetPassword from "./components/ResetPassword";
 import Translations from "./components/Translations";
 import Languages from "./components/Languages";
 import AddLanguage from "./components/AddLanguage";
-import AddTranslation from "./AddTranslation";
+import AddTranslation from "./components/AddTranslation";
+import Ranks from "./components/Ranks";
+import AddRank from "./components/AddRank";
+import EditRank from "./components/EditRank";
 
 function App() {
   return (
@@ -61,6 +64,9 @@ function App() {
         <Route path="/addlanguage" element={<AddLanguage />}></Route>
         <Route path="/addtranslation" element={<AddTranslation />}></Route>
         <Route path="/profile" element={<MyProfile />}></Route>
+        <Route path="/ranks" element={<Ranks />}></Route>
+        <Route path="/addrank" element={<AddRank />}></Route>
+        <Route path="/editrank" element={<EditRank />}></Route>
         <Route
           path="*"
           element={

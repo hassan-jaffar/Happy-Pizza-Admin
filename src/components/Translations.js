@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 function Translations() {
-  const [translation, settranslation] = useState([])
+  const [translation, settranslation] = useState([]);
   // const [translation2, settranslation2] = useState([])
   // const [type, settype] = useState("-- Select an option --");
 
@@ -25,8 +25,8 @@ function Translations() {
     async function fetchData() {
       try {
         const details = {
-          id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
-        }
+          id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
+        };
         const data = await (
           await axios.post(
             "http://localhost:5000/api/superadmin/gettranslation",
@@ -34,7 +34,7 @@ function Translations() {
           )
         ).data;
 
-        settranslation(data.data)
+        settranslation(data.data);
       } catch (error) {
         console.log(error, "err");
       }
@@ -94,45 +94,20 @@ function Translations() {
           </form>
         </div>
         <div className="col-md-2">
-          <li className="dropdown">
-            <button
-              className="btn btn-light dropdown-toggle w-100"
-              id="dropdown"
-              // role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Language
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdown" >
-              <li className="dropdown-item">EN</li>
-            </ul>
-          </li>
+          <select name="language" id="language" className="w-100" style={{height: '100%'}}>
+            <option value="en">EN</option>
+          </select>
         </div>
         <div className="col-md-3">
-          <li className="dropdown">
-            <button
-              className="btn btn-light dropdown-toggle w-100"
-              id="ndropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              ---
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="ndropdown">
-              <li className="dropdown-item">item</li>
-              <li className="dropdown-item">Another item</li>
-              <li className="dropdown-item">Another item</li>
-              <li className="dropdown-item">Another item</li>
-            </ul>
-          </li>
+          <select name="---" id="---" className="w-100" style={{height: '100%'}}>
+            <option value="---">---</option>
+          </select>
         </div>
         <div className="col-md-1">
-        <Link to="/addtranslation">
-          <button className="btn btn-light w-100">
-            <i className="fa-solid fa-plus me-2"></i>Add
-          </button>
+          <Link to="/addtranslation">
+            <button className="btn btn-light w-100">
+              <i className="fa-solid fa-plus me-2"></i>Add
+            </button>
           </Link>
         </div>
       </div>
@@ -148,19 +123,25 @@ function Translations() {
             </tr>
           </thead>
           <tbody>
-            {translation && translation.map((type)=>{
-              return <>
-              <tr>
-              <th scope="row">{type.groupvalidation}</th>
-              <td>{type.keyinvalid}</td>
-              <td>"{type.value}"</td>
-              <td>
-                <Link to="/translations" style={{color: "black"}}><i className="fa-solid fa-pencil me-2"></i></Link> "{type.value}"
-              </td>
-            </tr>
-              </>
-            }) }
-            
+            {translation &&
+              translation.map((type) => {
+                return (
+                  <>
+                    <tr>
+                      <th scope="row">{type.groupvalidation}</th>
+                      <td>{type.keyinvalid}</td>
+                      <td>"{type.value}"</td>
+                      <td>
+                        <Link to="/translations" style={{ color: "black" }}>
+                          <i className="fa-solid fa-pencil me-2"></i>
+                        </Link>{" "}
+                        "{type.value}"
+                      </td>
+                    </tr>
+                  </>
+                );
+              })}
+
             {/* <tr>
               <th scope="row">auth</th>
               <td>failed</td>
