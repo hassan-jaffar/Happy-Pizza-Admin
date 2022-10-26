@@ -321,9 +321,9 @@ function Ranks() {
                           <tr>
                             <th scope="row">{type.ID}</th>
                             <td>{type.name}</td>
-                            <td>{type.value}</td>
+                            <td>{type.value1}</td>
                             <td>
-                              {type.status === "true" ? (<span className="badge text-bg-info info">
+                              {type.status1 === "true" ? (<span className="badge text-bg-info info">
                                 Active
                               </span>
                               ):(

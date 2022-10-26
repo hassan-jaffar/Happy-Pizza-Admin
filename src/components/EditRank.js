@@ -49,8 +49,8 @@ function EditRank() {
 
         setrank(data.data)
         setname(data.data['name'])
-        setvalue(data.data['value'])
-        setstatus(data.data['status'] === "true" ? (true):(false))
+        setvalue(data.data['value1'])
+        setstatus(data.data['status1'] === "true" ? (true):(false))
       } catch (error) {
         console.log(error, "err");
       }
