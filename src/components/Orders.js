@@ -195,6 +195,15 @@ function Orders() {
                     </li>
                     <li className="nav-item">
                       <Link
+                        to="/ranks"
+                        className="nav-link align-middle sidebartag"
+                      >
+                        <i className="fa-solid fa-star"></i>
+                        <span className="ms-1 d-none d-sm-inline"> Ranks</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
                         to="/resturant"
                         className="nav-link align-middle sidebartag"
                       >

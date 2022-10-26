@@ -32,7 +32,7 @@ function Ranks() {
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
-          <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
+        <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
@@ -92,6 +92,7 @@ function Ranks() {
                       >
                         <i className="fa-solid fa-user"></i>
                         <span className="ms-1 d-none d-sm-inline">
+                          {" "}
                           Customers
                         </span>
                       </Link>
@@ -114,7 +115,10 @@ function Ranks() {
                         className="nav-link align-middle sidebartag"
                       >
                         <i className="fa-solid fa-gear"></i>
-                        <span className="ms-1 d-none d-sm-inline">Setting</span>
+                        <span className="ms-1 d-none d-sm-inline">
+                          {" "}
+                          Setting
+                        </span>
                       </Link>
                     </li>
                     <li className="nav-item">
