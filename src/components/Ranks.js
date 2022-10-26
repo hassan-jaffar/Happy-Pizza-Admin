@@ -5,6 +5,28 @@ import { Link } from "react-router-dom";
 
 function Ranks() {
   const getstatus = localStorage.getItem("status");
+  const [rank, setrank] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const details = {
+          id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        }
+        const data = await (
+          await axios.post(
+            "http://localhost:5000/api/superadmin/getranks",
+            details
+          )
+        ).data;
+
+        setrank(data.data)
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <Navbar />
@@ -290,17 +312,25 @@ function Ranks() {
                           </tr>
                         </thead>
                         <tbody>
+                          {rank.map((type)=>{
+                            return <>
                           <tr>
-                            <th scope="row">1</th>
-                            <td>Silver</td>
-                            <td>10</td>
+                            <th scope="row">{type.ID}</th>
+                            <td>{type.name}</td>
+                            <td>{type.value}</td>
                             <td>
-                              <span className="badge text-bg-info info">
+                              {type.status === "true" ? (<span className="badge text-bg-info info">
                                 Active
                               </span>
+                              ):(
+                                <span className="badge bg-danger info">
+                               Not Active
+                              </span>
+                              )}
+                              
                             </td>
                             <td>
-                              <Link to="/editrank"><button
+                              <Link to={`/editrank/${type.ID}`}><button
                                 className="btn btn-info btn-sm"
                                 style={{ color: "white" }}
                               >
@@ -308,42 +338,10 @@ function Ranks() {
                               </button></Link>
                             </td>
                           </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Gold</td>
-                            <td>20</td>
-                            <td>
-                              <span className="badge text-bg-info info">
-                                Active
-                              </span>
-                            </td>
-                            <td>
-                            <Link to="/editrank"><button
-                                className="btn btn-info btn-sm"
-                                style={{ color: "white" }}
-                              >
-                                Edit
-                              </button></Link>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Diamond</td>
-                            <td>100</td>
-                            <td>
-                              <span className="badge text-bg-info info">
-                                Active
-                              </span>
-                            </td>
-                            <td>
-                            <Link to="/editrank"><button
-                                className="btn btn-info btn-sm"
-                                style={{ color: "white" }}
-                              >
-                                Edit
-                              </button></Link>
-                            </td>
-                          </tr>
+                           
+                            </>
+                          })}
+                          
                         </tbody>
                       </table>
                     </div>

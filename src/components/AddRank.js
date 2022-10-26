@@ -2,11 +2,42 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddRank() {
   const getstatus = localStorage.getItem("status");
+  const [name, setname] = useState("");
+  const [value, setvalue] = useState("");
+  const [status, setstatus] = useState(false);
+
+  async function save(){
+    const details = {
+      id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
+      name,
+      value,
+      status
+    }
+    try {
+      const result = await (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/addrank",
+          details
+        )
+      ).data
+      toast.success("Rank has been added")
+      setname("");
+      setvalue("")
+      setstatus(false);
+      
+    } catch (error) {
+      console.log(error)
+      toast.warn("Something went wrong! Please try again later")
+    }
+  }
   return (
     <>
+    <ToastContainer />
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
@@ -285,6 +316,8 @@ function AddRank() {
                       type="text"
                       className="form-control mb-4"
                       placeholder="Rank Name"
+                      value={name}
+                      onChange={(e)=>{setname(e.target.value)}}
                     />
                     <label htmlFor="defaultval" className="mb-2">
                       Default Value
@@ -294,17 +327,21 @@ function AddRank() {
                       type="text"
                       className="form-control mb-4"
                       placeholder="Default Value"
+                      value={value}
+                      onChange={(e)=>{setvalue(e.target.value)}}
                     />
                     <div class="form-check form-switch">
                       <input
                         class="form-check-input"
                         type="checkbox"
                         id="flexSwitchCheckChecked"
+                        value={status}
+                        onChange={(e)=>{setstatus(e.target.checked)}}
                       />
                     </div>
                     <br />
                     <br /> <br />
-                    <button className="btn btnSignColor">Save</button>
+                    <button className="btn btnSignColor" onClick={save}>Save</button>
                   </div>
                 </div>
               </div>

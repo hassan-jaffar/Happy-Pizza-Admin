@@ -66,7 +66,7 @@ function App() {
         <Route path="/profile" element={<MyProfile />}></Route>
         <Route path="/ranks" element={<Ranks />}></Route>
         <Route path="/addrank" element={<AddRank />}></Route>
-        <Route path="/editrank" element={<EditRank />}></Route>
+        <Route path="/editrank/:id" element={<EditRank />}></Route>
         <Route
           path="*"
           element={

@@ -1,12 +1,65 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditRank() {
   const getstatus = localStorage.getItem("status");
+  const [rank, setrank] = useState([])
+  const [name, setname] = useState("");
+  const [value, setvalue] = useState("");
+  const [status, setstatus] = useState(false);
+  const {id} = useParams()
+
+  async function save(){
+    const details = {
+      id,
+      name,
+      value,
+      status
+    }
+    try {
+      const result = await (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/editrank",
+          details
+        )
+      ).data
+      toast.success("Rank has been updated")
+      setInterval(() => {
+        window.location.href="/ranks"
+      }, 2000);
+      
+    } catch (error) {
+      console.log(error)
+      toast.warn("Something went wrong! Please try again later")
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await (
+          await axios.get(
+            `http://localhost:5000/api/superadmin/geteditrank/${id}`
+          )
+        ).data;
+
+        setrank(data.data)
+        setname(data.data['name'])
+        setvalue(data.data['value'])
+        setstatus(data.data['status'] === "true" ? (true):(false))
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <>
+    <ToastContainer />
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
@@ -286,6 +339,8 @@ function EditRank() {
                       type="text"
                       className="form-control mb-4"
                       placeholder="Rank Name ()"
+                      value={name}
+                      onChange={(e)=>{setname(e.target.value)}}
                     />
                     <label htmlFor="defaultval" className="mb-2">
                       Default Value
@@ -295,6 +350,8 @@ function EditRank() {
                       type="text"
                       className="form-control mb-4"
                       placeholder="Default Value ()"
+                      value={value}
+                      onChange={(e)=>{setvalue(e.target.value)}}
                     />
                     <br />
                     <div class="form-check form-switch">
@@ -302,12 +359,14 @@ function EditRank() {
                         class="form-check-input"
                         type="checkbox"
                         id="flexSwitchCheckChecked"
+                        checked={status}
+                        onChange={(e)=>{setstatus(e.target.checked)}}
                       />
                     </div>
                     <br />
                     <br />
                     <br/>
-                    <button className="btn btnSignColor">Save</button>
+                    <button className="btn btnSignColor" onClick={save}>Save</button>
                   </div>
                 </div>
               </div>
