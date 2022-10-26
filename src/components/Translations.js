@@ -4,28 +4,28 @@ import axios from "axios";
 
 function Translations() {
   const [translation, settranslation] = useState([]);
-  // const [translation2, settranslation2] = useState([])
-  // const [type, settype] = useState("-- Select an option --");
+  const [translation2, settranslation2] = useState([])
+  const [type, settype] = useState("-----");
 
-  // function filterByLanguage(e) {
-  //   settype(e);
+  function filterByGroup(e) {
+    settype(e);
 
-  //   if (e !== "-- Select an option --") {
-  //     // const temprooms = duplicateorders.filter(order=>order.ID===e)
-  //     const temporders = translation.filter(
-  //       (order) => order.cart_Id === parseInt(e)
-  //     );
-  //     settranslation(temporders);
-  //   } else {
-  //     settranslation(translation2);
-  //   }
-  // }
+    if (e !== "-----") {
+      // const temprooms = duplicateorders.filter(order=>order.ID===e)
+      const temporders = translation.filter(
+        (order) => order.ID === parseInt(e)
+      );
+      settranslation(temporders);
+    } else {
+      settranslation(translation2);
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
       try {
         const details = {
-          id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
+          id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
         };
         const data = await (
           await axios.post(
@@ -35,6 +35,7 @@ function Translations() {
         ).data;
 
         settranslation(data.data);
+        settranslation2(data.data);
       } catch (error) {
         console.log(error, "err");
       }
@@ -94,13 +95,23 @@ function Translations() {
           </form>
         </div>
         <div className="col-md-2">
-          <select name="language" id="language" className="w-100" style={{height: '100%'}}>
+          <select name="language" value={type} id="language" className="w-100" style={{height: '100%'}}>
+            <option value="-----">-----</option>
             <option value="en">EN</option>
           </select>
         </div>
         <div className="col-md-3">
-          <select name="---" id="---" className="w-100" style={{height: '100%'}}>
+          <select name="---" id="---" value={type}
+                          onChange={(e) => {
+                            filterByGroup(e.target.value);
+                          }} className="w-100" style={{height: '100%'}}>
             <option value="---">---</option>
+            {translation2.map((type)=>{
+              return <>
+              <option value={type.ID}>{type.groupvalidation}</option>
+              </>
+            })}
+            
           </select>
         </div>
         <div className="col-md-1">
