@@ -1,10 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 function ResetPassword() {
+  const {email} = useParams();
+  const [password, setpassword] = useState("");
+  const [cpassword, setcpassword] = useState("");
+
+  async function register(){
+    if (password === cpassword) {
+        const user = {
+            email,
+            password
+        };
+
+        try {
+
+            // setloading(true)
+            const result = await axios.post(`http://localhost:5000/api/superadmin/resetpassword/${email}`,user).data;
+            console.log(result)
+            toast.success("Password change Successfull")
+            // setloading(true)
+            setInterval(() => {
+              window.location.href = "/"
+            }, 2000);
+
+        } catch (error) {
+            console.log(error);
+            toast.warn("Something went wrong!")
+            // setloading(true)
+        }
+    }
+    else{
+        alert("Password is not matched");
+    }
+}
   return (
     <>
       <ToastContainer />
@@ -16,6 +48,7 @@ function ResetPassword() {
               <img
                 className="menuimg"
                 src="https://www.happyspizzaburger.co.uk/uploads/restorants/198031cc-1875-4d54-8945-8135a96f353a_large.jpg"
+                alt=".."
               />
             </Link>
             <h5 className="fw-bolder my-4 spaceWelcome">RESET PASSWORD</h5>
@@ -29,8 +62,7 @@ function ResetPassword() {
                   type="email"
                   className="form-control mb-4 inputWidth"
                   placeholder="Email"
-                  //value={email}
-                  //onChange={(e) => { setemail(e.target.value) }}
+                  value={email}
                   required
                 />
                 <label htmlFor="newpassword" className="mb-2">
@@ -41,8 +73,8 @@ function ResetPassword() {
                   type="password"
                   className="form-control mb-4 inputWidth"
                   placeholder="New Password"
-                  //value={email}
-                  //onChange={(e) => { setemail(e.target.value) }}
+                  value={password}
+                  onChange={(e) => { setpassword(e.target.value) }}
                   required
                 />
                 <label htmlFor="cnewpassword" className="mb-2">
@@ -53,8 +85,8 @@ function ResetPassword() {
                   type="password"
                   className="form-control mb-4 inputWidth"
                   placeholder="Confirm Password"
-                  //value={email}
-                  //onChange={(e) => { setemail(e.target.value) }}
+                  value={cpassword}
+                  onChange={(e) => { setcpassword(e.target.value) }}
                   required
                 />
               </div>
@@ -63,7 +95,7 @@ function ResetPassword() {
                   <div className="col-12">
                     <button
                       className="btn btnSignColor signinbtn"
-                      //onClick={Login}
+                      onClick={register}
                     >
                       RESET PASSWORD
                     </button>

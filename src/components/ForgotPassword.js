@@ -5,6 +5,26 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 function ForgotPassword() {
+  const [email, setemail] = useState("")
+
+  async function save(){
+    const details = {
+      email
+    }
+    try {
+      const result = await (
+        await axios.post(
+          "http://localhost:5000/api/superadmin/forgetpassword",
+          details
+        )
+      ).data
+      toast.success("Email is send.Please check your email")
+
+    } catch (error) {
+      console.log(error)
+      toast.warn("Something went wrong! Please try again later")
+    }
+  }
   return (
     <>
       <ToastContainer />
@@ -29,22 +49,22 @@ function ForgotPassword() {
                   type="email"
                   className="form-control mb-4 inputWidth"
                   placeholder="Email"
-                  //value={email}
-                  //onChange={(e) => { setemail(e.target.value) }}
-                  //required
+                  value={email}
+                  onChange={(e) => { setemail(e.target.value) }}
+                  required
                 />
               </div>
               <div style={{marginTop: '-15px'}} className='container'>
                 <div className="mb-5 row">
                   <div className='col-12'>
-                  <Link to="/resetpassword">
+                  {/* <Link to="/resetpassword"> */}
                     <button
                       className="btn btnSignColor signinbtn"
-                      //onClick={Login}
+                      onClick={save}
                     >
                       SEND PASSWORD RESET LINK
                     </button>
-                    </Link>
+                    {/* </Link> */}
                     <p className="mt-3">Back to <Link to="/">Login</Link></p>
                   </div>
 
