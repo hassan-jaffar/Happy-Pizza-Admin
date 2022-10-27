@@ -49,9 +49,13 @@ function OrdersTable() {
     console.log(10,orderHistory.length / 6);
   }, [itemOffset,orders]);
   function filterByDate(dates) {
+    
+    if (dates) {
+      
+   
     setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
     settodate(moment(dates[1]).format("DD-MM-YYYY"));
-   
+
     if(dates[0] && dates[1]){
       const temporders = duplicateorderHistory.filter(
         (order) => {
@@ -66,9 +70,17 @@ function OrdersTable() {
       // setOrders(temporders);
     }
     else{
-      setorderHistory(orderHistory)
-    }
+      const endOffset = itemOffset + 6;
+      console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+      setorderHistory(duplicateorderHistory.slice(itemOffset, endOffset));
 
+    }
+  } else {
+    console.log(dates)
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setorderHistory(duplicateorderHistory.slice(itemOffset, endOffset));
+  }
     // alert(fromdate)
     
 

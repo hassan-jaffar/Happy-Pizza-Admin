@@ -26,7 +26,7 @@ function Dashboard() {
   const refCloseadd = useRef(null);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "" // Add your API key
+    googleMapsApiKey: "AIzaSyAenQY3RYwkA56eDMWZbIPUC1oJeCIR3c4" // Add your API key
   });
 
   async function location(e){
