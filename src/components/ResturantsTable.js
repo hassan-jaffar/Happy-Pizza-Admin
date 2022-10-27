@@ -4,6 +4,7 @@ import "./Orders.css";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReactPaginate from 'react-paginate';
 import moment from "moment";
 
 function ResturantsTable() {
@@ -12,6 +13,28 @@ function ResturantsTable() {
   const [type, settype] = useState("-- Select an option --");
   const [show, setshow] = useState("-- Select an option --");
   const [duplicateresturants, setduplicateresturants] = useState([])
+  const [duplicateresturants1, setduplicateresturants1] = useState([])
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 6) % duplicateresturants1.length;
+    console.log(`event selected ${event.selected * 6}`)
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  useEffect(() => {
+    // Fetch orderHistory from another resources.
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setresturants(duplicateresturants1.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(duplicateresturants1.length / 6));
+  }, [itemOffset,resturants]);
 
   async function del(ID) {
     const info = {
@@ -118,6 +141,7 @@ function ResturantsTable() {
         setresturants(data.data);
         setresturants1(data.data);
         setduplicateresturants(data.data);
+        setduplicateresturants1(data.data);
       } catch (error) {
         console.log(error);
       }
@@ -388,7 +412,7 @@ function ResturantsTable() {
                     style={{ marginTop: "-150px" }}
                     className="d-flex justify-content-end me-5"
                   >
-                    <nav aria-label="Page navigation example">
+                    {/* <nav aria-label="Page navigation example">
                       <ul className="pagination">
                         <li className="page-item">
                           <a className="page-link" href="#">
@@ -416,7 +440,31 @@ function ResturantsTable() {
                           </a>
                         </li>
                       </ul>
-                    </nav>
+                    </nav> */}
+                                <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< Previous"
+                renderOnZeroPageCount={null}
+         
+                marginPagesDisplayed={2}
+          
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+             
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+             
+              />
                   </div>
 
                 </div>
