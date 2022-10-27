@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
 import Navbar from "./Navbar";
+import { type } from "@testing-library/user-event/dist/type";
+import { useLoadScript } from "@react-google-maps/api"; 
+import Map from "./Map";
 
 function Dashboard() {
   const [resturantData, setresturantData] = useState([]);
@@ -19,7 +22,16 @@ function Dashboard() {
   const [to, setto] = useState("Date to");
   const [from, setfrom] = useState("Date from");
   const [openinfo, setopeninfo] = useState("");
+  const [map, setmap] = useState([])
   const refCloseadd = useRef(null);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "" // Add your API key
+  });
+
+  async function location(e){
+    alert(e)
+  }
 
   async function open() {
     const details = {
@@ -64,12 +76,22 @@ function Dashboard() {
           await axios.get("http://localhost:5000/api/superadmin/resturantcount")
         ).data;
 
+        const detail = await (
+          await axios.get(
+            "http://localhost:5000/api/superadmin/getreattiemap"
+          )
+        ).data;
+
         const salevalume = await (
           await axios.get("http://localhost:5000/api/admin/salesvloume")
         ).data;
+
+        
         setresturantData(data.data);
         setresturantcount(result.data);
         setsales(salevalume.data);
+        setmap(detail.data)
+        console.log(map.map((type)=>`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${type.latitude},${type.longitude}&h1=es;&output=embed`))
       } catch (error) {
         console.log(error, "err");
       }
@@ -951,7 +973,7 @@ function Dashboard() {
                     <div className="col-12">
                       <div className="mapouter">
                         <div className="gmap_canvas">
-                          <iframe
+                          {/* <iframe
                             style={{ height: "400px" }}
                             className="gmap_iframe"
                             title="myFrame"
@@ -960,9 +982,11 @@ function Dashboard() {
                             scrolling="no"
                             marginHeight="0"
                             marginWidth="0"
-                            src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                          />
-                          <a href="https://mcpenation.com/">Resturants</a>
+                            onClick={location}
+                            src={`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${map[0].latitude},${map[0].longitude}&h1=es;&output=embed`}
+                          /> */}
+                              {isLoaded ? <Map /> : null}
+                                        <a href="https://mcpenation.com/">Resturants</a>
                         </div>
                       </div>
                     </div>

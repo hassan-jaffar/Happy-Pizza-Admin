@@ -2,3 +2,10 @@ html {
     overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
 } 
+#container {
+    /* margin: 1rem; */
+  }
+  
+  .items {
+    margin-bottom: 1rem;
+  }

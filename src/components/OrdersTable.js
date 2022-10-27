@@ -30,8 +30,10 @@ function OrdersTable() {
   async function searchByName() {
     // alert("you have searched")
   }
+  console.log(duplicateorderHistory.length)
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * 6) % orderHistory.length;
+    const newOffset = (event.selected * 6) % duplicateorderHistory.length;
+    console.log(`event selected ${event.selected * 6}`)
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -41,9 +43,11 @@ function OrdersTable() {
     // Fetch orderHistory from another resources.
     const endOffset = itemOffset + 6;
     console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(orderHistory.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(orderHistory.length / 6));
-  }, [itemOffset, 6]);
+    setorderHistory(duplicateorderHistory.slice(itemOffset, endOffset));
+    console.log(10,orderHistory);
+    setPageCount(Math.ceil(duplicateorderHistory.length / 6));
+    console.log(10,orderHistory.length / 6);
+  }, [itemOffset,orders]);
   function filterByDate(dates) {
     setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
     settodate(moment(dates[1]).format("DD-MM-YYYY"));
@@ -534,15 +538,31 @@ function OrdersTable() {
               </table>
             </div>
             <hr />
-                            <ReactPaginate
+            <ReactPaginate
                 breakLabel="..."
-                nextLabel="next >"
+                nextLabel="Next >"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
                 pageCount={pageCount}
-                previousLabel="< previous"
+                previousLabel="< Previous"
                 renderOnZeroPageCount={null}
+         
+                marginPagesDisplayed={2}
+          
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+             
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+             
               />
+                         
 
             {/* <div className="d-flex justify-content-end mt-4 me-5 pb-4">
               <nav aria-label="Page navigation example">
@@ -578,8 +598,6 @@ function OrdersTable() {
  
           </div>
 </>)}
-
-
 
         </div>
       </div>
