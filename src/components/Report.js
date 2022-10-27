@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 import moment from "moment";
+import ReactPaginate from 'react-paginate';
 const { RangePicker } = DatePicker;
 
 function Report() {
@@ -15,6 +16,27 @@ function Report() {
   const [fromdate, setfromdate] = useState();
   const [todate, settodate] = useState();
   const getstatus = localStorage.getItem("status");
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 6) % duplicateorderReport.length;
+    console.log(`event selected ${event.selected * 6}`)
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  useEffect(() => {
+    // Fetch orderHistory from another resources.
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setorderReport(duplicateorderReport.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(duplicateorderReport.length / 6));
+  }, [itemOffset,orderReport]);
 
   var orderData = [
     {
@@ -566,7 +588,7 @@ function Report() {
 
                 <div className="row">
                   <div className="col d-flex justify-content-end mt-4 mb-4">
-                    <nav aria-label="Page navigation example">
+                    {/* <nav aria-label="Page navigation example">
                       <ul className="pagination">
                         <li className="page-item">
                           <a className="page-link" href="#">
@@ -594,7 +616,31 @@ function Report() {
                           </a>
                         </li>
                       </ul>
-                    </nav>
+                    </nav> */}
+                                                    <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< Previous"
+                renderOnZeroPageCount={null}
+         
+                marginPagesDisplayed={2}
+          
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+             
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+             
+              />
                   </div>
                 </div>
               </div>
