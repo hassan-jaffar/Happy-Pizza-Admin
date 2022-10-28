@@ -31,6 +31,8 @@ function OrdersTable() {
     // alert("you have searched")
   }
   console.log(duplicateorderHistory.length)
+
+  // for orderHistory pagination
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 6) % duplicateorderHistory.length;
     console.log(`event selected ${event.selected * 6}`)
@@ -46,6 +48,25 @@ function OrdersTable() {
     setorderHistory(duplicateorderHistory.slice(itemOffset, endOffset));
     console.log(10,orderHistory);
     setPageCount(Math.ceil(duplicateorderHistory.length / 6));
+    console.log(10,orderHistory.length / 6);
+  }, [itemOffset,orders]);
+
+  // For order pagination
+  const handlePageClick1 = (event) => {
+    const newOffset = (event.selected * 6) % duplicateorders.length;
+    console.log(`event selected ${event.selected * 6}`)
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  useEffect(() => {
+    // Fetch orderHistory from another resources.
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setOrders(duplicateorders.slice(itemOffset, endOffset));
+    console.log(10,orderHistory);
+    setPageCount(Math.ceil(duplicateorders.length / 6));
     console.log(10,orderHistory.length / 6);
   }, [itemOffset,orders]);
   function filterByDate(dates) {
@@ -437,17 +458,41 @@ function OrdersTable() {
                       </>
                     );
                   })}
+                  
               </tbody>
+              <div className="row">
+              <div className="col-md-4"></div>
+              <div className="col-md-4"></div>
+              <div className="col-md-4">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next >"
+                onPageChange={handlePageClick1}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< Previous"
+                renderOnZeroPageCount={null}
+         
+                marginPagesDisplayed={2}
+          
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+             
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+             
+              />
+              </div>
+            </div>
             </table>
-            <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+
+
           </div>
 </>):(<>
   <div className="mx-4 bs ps-4 pt-4 mb-5">
