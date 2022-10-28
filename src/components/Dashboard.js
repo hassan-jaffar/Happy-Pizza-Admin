@@ -24,6 +24,7 @@ function Dashboard() {
   const [to, setto] = useState("Date to");
   const [from, setfrom] = useState("Date from");
   const [openinfo, setopeninfo] = useState("");
+  const [salesvloumeresturant, setsalesvloumeresturant] = useState([])
   const [map, setmap] = useState([])
   const refCloseadd = useRef(null);
   const [currentItems, setCurrentItems] = useState(null);
@@ -88,6 +89,10 @@ function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
+      
+      const id = {
+        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
       try {
         const data = await (
           await axios.get(
@@ -109,11 +114,16 @@ function Dashboard() {
           await axios.get("http://localhost:5000/api/admin/salesvloume")
         ).data;
 
+        const salesvloumeresturant1 = await (
+          await axios.post("http://localhost:5000/api/admin/salesvloumeresturant",id)
+        ).data;
+
         
         setresturantData(data.data);
         setduplicateresturant(data.data);
         setresturantcount(result.data);
         setsales(salevalume.data);
+        setsalesvloumeresturant(salesvloumeresturant1.data);
         setmap(detail.data)
         console.log(map.map((type)=>`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${type.latitude},${type.longitude}&h1=es;&output=embed`))
       } catch (error) {
@@ -216,6 +226,19 @@ function Dashboard() {
   }
 
   let roundoff = total.toFixed(3);
+
+
+  let total1 = 0;
+  // for (const product of order) {
+  //     const productTotal = product.price;
+  //     total = total + productTotal;
+  // }
+  for (var i = 0; i < salesvloumeresturant.length; i++) {
+    let productTotal = salesvloumeresturant[i].total;
+    total = total + parseFloat(productTotal);
+  }
+
+  let roundoff1 = total.toFixed(3);
 
   return (
     <>
@@ -793,7 +816,7 @@ function Dashboard() {
                           </h4>
                         </div>
                       </div>
-                      <h4 className="boldtext cardinfoclr">${roundoff}</h4>
+                      <h4 className="boldtext cardinfoclr">${roundoff1}</h4>
                       <h6>(days)</h6>
                     </div>
                   </Link>
