@@ -21,7 +21,7 @@ function ResturantsTable() {
   const [itemOffset, setItemOffset] = useState(0);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * 6) % duplicateresturants1.length;
+    const newOffset = (event.selected * 6) % duplicateresturants.length;
     console.log(`event selected ${event.selected * 6}`)
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
@@ -32,8 +32,8 @@ function ResturantsTable() {
     // Fetch orderHistory from another resources.
     const endOffset = itemOffset + 6;
     console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
-    setresturants(duplicateresturants1.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(duplicateresturants1.length / 6));
+    setresturants(duplicateresturants.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(duplicateresturants.length / 6));
   }, [itemOffset,resturants]);
 
   async function del(ID) {

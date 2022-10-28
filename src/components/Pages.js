@@ -445,35 +445,30 @@ function Pages() {
 
                     <div className="row">
                       <div className="col mb-4 mt-4 d-flex justify-content-end">
-                        <nav aria-label="Page navigation example">
-                          <ul className="pagination">
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Previous
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                1
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                2
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                3
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
+                      <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< Previous"
+                renderOnZeroPageCount={null}
+         
+                marginPagesDisplayed={2}
+          
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+             
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+             
+              />
                       </div>
                     </div>
                   </div>
