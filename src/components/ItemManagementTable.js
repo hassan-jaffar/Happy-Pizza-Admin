@@ -11,18 +11,62 @@ function ItemManagementTable() {
   const [title, setTitle] = useState("")
   const [Description, setDescription] = useState("")
   const [Price, setPrice] = useState("")
+  const [discountableitem, setdiscountableitem] = useState(false)
+  const [available, setavailable] = useState(true)
+  const [variant, setvariant] = useState(false)
+  const [sunday, setsunday] = useState(true)
+  const [monday, setmonday] = useState(true)
+  const [tuesday, settuesday] = useState(true)
+  const [wednesday, setwednesday] = useState(true)
+  const [thursday, setthursday] = useState(true)
+  const [friday, setfriday] = useState(true)
+  const [saturday, setsaturday] = useState(true)
+  const [file,setFile] = useState("");
 
   async function handleUpdate() {
-    const detail ={
-      title,
-      Description,
-      Price
-    }
+    // const detail ={
+    //   title,
+    //   Description,
+    //   Price,
+    //   discountableitem,
+    //   available,
+    //   variant,
+    //   sunday,
+    //   monday,
+    //   tuesday,
+    //   wednesday,
+    //   thursday,
+    //   friday,
+    //   saturday,
+    //   file
+    // }
+
+    var formData = new FormData();
+    formData.append("photo",file)
+    formData.append("title",title);
+    formData.append("Description",Description);
+    formData.append("Price",Price);
+    formData.append("available",available)
+    formData.append("discountableitem",discountableitem)
+    formData.append("variant",variant)
+    formData.append("sunday",sunday)
+    formData.append("monday",monday)
+    formData.append("tuesday",tuesday)
+    formData.append("wednesday",wednesday)
+    formData.append("friday",friday)
+    formData.append("saturday",saturday)
+
+    const config = {
+      headers:{
+          "Content-Type":"multipart/form-data"
+      }
+  }
 
     try {
       const result = await axios.post(
         `http://localhost:5000/api/admin/updateitemmanagement/${itemid}/${categoryid}`,
-        detail
+               formData, config
+
       ).data;
       console.log(result);
       toast.success("Item has been updated")
@@ -44,6 +88,17 @@ function ItemManagementTable() {
           await axios.get(`http://localhost:5000/api/admin/getitemmanagement/${itemid}/${categoryid}`)
         ).data;
         setitem(data.data);
+        setdiscountableitem(data.data[0]['discountableitem'] === 'true' ? (true):(false));
+        setavailable(data.data[0]['available'] === 'true' ? (true):(false));
+        setvariant(data.data[0]['variant'] === 'true' ? (true):(false));
+        setsunday(data.data[0]['sunday'] === 'true' ? (true):(false));
+        setmonday(data.data[0]['monday'] === 'true' ? (true):(false));
+        settuesday(data.data[0]['tuesday'] === 'true' ? (true):(false));
+        setwednesday(data.data[0]['wednesday'] === 'true' ? (true):(false));
+        setthursday(data.data[0]['thursday'] === 'true' ? (true):(false));
+        setfriday(data.data[0]['friday'] === 'true' ? (true):(false));
+        setsaturday(data.data[0]['saturday'] === 'true' ? (true):(false));
+        setFile(data.data[0]['Image'] === 'true' ? (true):(false));
         console.log(item);
       } catch (error) {
         console.log(error);
@@ -76,6 +131,7 @@ function ItemManagementTable() {
               <label htmlFor="itemname">Item Name</label>
               <input
                 id="itemname"
+                name="title"
                 type="text"
                 className="form-control mt-2 mb-5 py-3"
                 // placeholder={`${item.Title}`}
@@ -88,6 +144,7 @@ function ItemManagementTable() {
                 className="form-control mt-2 mb-5"
                 placeholder="Item Description..."
                 rows="5"
+                name="Description"
                 value={item.Description}
                 onChange={(e) => { setitem(e.target.value); setDescription(e.target.value) }}
               />
@@ -95,6 +152,7 @@ function ItemManagementTable() {
               <input
                 id="price"
                 className="form-control mt-2 mb-5 py-3"
+                name="Price"
                 placeholder="Item Price..."
                 value={item.Price}
                 onChange={(e) => { setitem(e.target.value); setPrice(e.target.value) }}
@@ -106,6 +164,7 @@ function ItemManagementTable() {
                 id="vat"
                 className="form-control mt-2 mb-5 py-3"
                 placeholder="Item VAT Percentage..."
+                value={item.vat}
               />
               <div className="form-check form-switch my-5">
                 <div className="row justify-content-between my-3">
@@ -119,6 +178,9 @@ function ItemManagementTable() {
                     className="form-check-input"
                     type="checkbox"
                     id="flexSwitchCheckDefault"
+                    name="discountableitem"
+                    value={discountableitem}
+                    onChange={(e)=>{setdiscountableitem(e.target.checked)}}
                   />
                 </div>
                 <div className="row justify-content-between my-3">
@@ -132,6 +194,9 @@ function ItemManagementTable() {
                     className="form-check-input"
                     type="checkbox"
                     id="flexSwitchCheckDefault"
+                    name="available"
+                    checked={available}
+                    onChange={(e)=>{setavailable(e.target.checked)}}
                   />
                 </div>
                 <div className="row justify-content-between my-3">
@@ -145,14 +210,22 @@ function ItemManagementTable() {
                     className="form-check-input"
                     type="checkbox"
                     id="flexSwitchCheckDefault"
+                    value={variant}
+                    name="variant"
+                    onChange={(e)=>{setvariant(e.target.checked)}}
                   />
                 </div>
               </div>
               <div className="input-group my-3">
-                <input type="file" className="form-control" id="inputGroupFile02" />
+                <input type="file" 
+                className="form-control" 
+                id="photo"
+                name="photo"
+                onChange={(e)=>{setFile(e.target.files[0])}}
+                 />
               </div>
               <div className="text-center my-4">
-                <img className="managementimg" src="" />
+                <img className="managementimg" src={file} alt="..." />
               </div>
               <h4 className="mt-5 mb-2 boldtext">Available Days</h4>
               <div className="w-25">
@@ -165,6 +238,9 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="sunday"
+                      name="sunday"
+                      checked={sunday}
+                      onChange={(e)=>{setsunday(e.target.checked)}}
                     />
                   </div>
                 </div>
@@ -177,6 +253,11 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="monday"
+                      name="monday"
+                      checked={monday}
+                      onChange={(e)=>{
+                        setmonday(e.target.checked)
+                      }}
                     />
                   </div>
                 </div>
@@ -189,6 +270,9 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="tuesday"
+                      name="tuesday"
+                      checked={tuesday}
+                      onChange={(e)=>{settuesday(e.target.checked)}}
                     />
                   </div>
                 </div>
@@ -201,6 +285,9 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="wednesday"
+                      name="wednesday"
+                      checked={wednesday}
+                      onChange={(e)=>{setwednesday(e.target.checked)}}
                     />
                   </div>
                 </div>
@@ -213,6 +300,9 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="thursday"
+                      name="thursday"
+                      checked={thursday}
+                      onChange={(e)=>{setthursday(e.target.checked)}}
                     />
                   </div>
                 </div>
@@ -225,6 +315,9 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="friday"
+                      name="friday"
+                      checked={friday}
+                      onChange={(e)=>{setfriday(e.target.checked)}}
                     />
                   </div>
                 </div>
@@ -237,6 +330,9 @@ function ItemManagementTable() {
                       className="form-check-input"
                       type="checkbox"
                       id="saturday"
+                      name="saturday"
+                      checked={saturday}
+                      onChange={(e)=>{setsaturday(e.target.checked)}}
                     />
                   </div>
                 </div>
