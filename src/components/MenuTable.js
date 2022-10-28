@@ -18,10 +18,22 @@ function MenuTable() {
   const refCloseedit = useRef(null);
   const refCloseimage = useRef(null);
   const refClosecategory = useRef(null);
+  const [discountable, setdiscountable] = useState(false)
+  const [editdiscountable, seteditdiscountable] = useState(false)
+  const [discountableitem, setdiscountableitem] = useState(false)
+  const [sunday, setsunday] = useState(false);
+  const [monday, setmonday] = useState(false);
+  const [tuesday, settuesday] = useState(false);
+  const [wednesday, setwednesday] = useState(false);
+  const [thursday, setthursday] = useState(false);
+  const [friday, setfriday] = useState(false);
+  const [saturday, setsaturday] = useState(false);
+
 
   async function add() {
     const user = {
       name,
+      discountable
     };
 
     try {
@@ -76,6 +88,14 @@ function MenuTable() {
     const user = {
       ID,
       title,
+      editdiscountable,
+      sunday,
+      monday,
+      tuesday,
+      wednesday,
+      thursday,
+      friday,
+      saturday
     };
 
     try {
@@ -119,6 +139,7 @@ function MenuTable() {
     formData.append("description",description);
     formData.append("price",price);
     formData.append("categoryID",categoryID)
+    formData.append("discountableitem",discountableitem)
 console.log(formData);
     // const user = {
     //   category_id
@@ -282,6 +303,7 @@ console.log(formData);
                           className="form-check-input"
                           type="checkbox"
                           id="flexSwitchCheckDefault"
+                          onChange={(e)=>{setdiscountable(e.target.checked)}}
                         />
                         
                       </div>
@@ -531,14 +553,16 @@ console.log(formData);
                             <div className="row justify-content-between">
                               <label
                                 className="form-check-label"
-                                htmlFor="flexSwitchCheckDefault"
+                                htmlFor="discountableitem"
                               >
                                 Discountable
                               </label>
                               <input
                                 className="form-check-input"
                                 type="checkbox"
-                                id="flexSwitchCheckDefault"
+                                name="discountableitem"
+                                id="discountableitem"
+                                onChange={(e)=>{setdiscountableitem(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -643,6 +667,17 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="flexSwitchCheckDefault"
+                                checked={categorys.discountable === "True" && true}
+                                onChange={(e) => {
+                                  setcategory(
+                                    category.map((val) =>
+                                      val.ID === categorys.ID
+                                        ? { ...val, discountable: e.target.checked }
+                                        : val
+                                    )
+                                  );
+                                  seteditdiscountable(e.target.checked);
+                                }}
                               />
                             </div>
                           </div>
@@ -656,6 +691,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="sunday"
+                                onChange={(e)=>{setsunday(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -668,6 +704,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="monday"
+                                onChange={(e)=>{setmonday(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -680,6 +717,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="tuesday"
+                                onChange={(e)=>{settuesday(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -695,6 +733,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="wednesday"
+                                onChange={(e)=>{setwednesday(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -710,6 +749,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="thursday"
+                                onChange={(e)=>{setthursday(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -722,6 +762,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="friday"
+                                onChange={(e)=>{setfriday(e.target.checked)}}
                               />
                             </div>
                           </div>
@@ -737,6 +778,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="saturday"
+                                onChange={(e)=>{setsaturday(e.target.checked)}}
                               />
                             </div>
                           </div>
