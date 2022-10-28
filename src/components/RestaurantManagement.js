@@ -24,6 +24,9 @@ function RestaurantManagement() {
   const [file, setfile] = useState("")
   const [cimage, setcimage] = useState("")
   const [rimage, setrimage] = useState("")
+  const [cash, setcash] = useState(false)
+  const [pickup, setpickup] = useState(false)
+  const [delivery, setdelivery] = useState(false)
   const {id} = useParams();
   const getstatus = localStorage.getItem("status");
 
@@ -42,6 +45,9 @@ function RestaurantManagement() {
       formData.append("photo",file);
       formData.append("cimage",cimage);
       formData.append("rimage",rimage);
+      formData.append("cash",cash);
+      formData.append("pickup",pickup);
+      formData.append("delivery",delivery);
    
 
     const config = {
@@ -105,6 +111,12 @@ function RestaurantManagement() {
       setphone(data.data['phone']);
       setcharges(data.data['charges']);
       settime(data.data['time']);
+      setfile(data.data['image']);
+      setcimage(data.data['cimage']);
+      setrimage(data.data['rimage']);
+      setcash(data.data['cash'] === 'true' ? (true):(false));
+      setpickup(data.data['pickup'] === 'true' ? (true) :(false));
+      setdelivery(data.data['delivery'] === 'true' ? (true):(false));
     } catch (error) {
       console.log(error);
     }
@@ -251,7 +263,7 @@ function RestaurantManagement() {
               </label>
             </div>
             <div className="col-6 form-check form-switch">
-              <input className="form-check-input" type="checkbox" id="cod" />
+              <input className="form-check-input" type="checkbox" id="cod" name="cash" value={cash} onChange={(e)=>{setcash(e.target.checked)}} />
             </div>
           </div>
           <div className="row">
@@ -261,7 +273,7 @@ function RestaurantManagement() {
               </label>
             </div>
             <div className="col-6 form-check form-switch">
-              <input className="form-check-input" type="checkbox" id="pickup" />
+              <input className="form-check-input" type="checkbox" id="pickup" name="pickup" value={pickup} onChange={(e)=>{setpickup(e.target.checked)}} />
             </div>
           </div>
           <div className="row">
@@ -275,6 +287,7 @@ function RestaurantManagement() {
                 className="form-check-input"
                 type="checkbox"
                 id="delivery"
+                name="delivery" value={delivery} onChange={(e)=>{setdelivery(e.target.checked)}}
               />
             </div>
           </div>
@@ -361,9 +374,10 @@ function RestaurantManagement() {
             }}
             />
             <img
-              src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
+              src={file}
+              // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
               className="settingimg"
-              alt=".."
+              alt="404 not found"
             />
           </div>
           <div className="my-3">
@@ -386,7 +400,8 @@ function RestaurantManagement() {
             }}
             />
             <img
-              src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
+              src={rimage}
+              // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
               className="settingimg"
               alt=".."
             />
