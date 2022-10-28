@@ -5,6 +5,7 @@ import "./Dashboard.css";
 import Navbar from "./Navbar";
 import ReactPaginate from 'react-paginate';
 import { type } from "@testing-library/user-event/dist/type";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 import Map from "./Map";
 
@@ -49,9 +50,10 @@ function Dashboard() {
     setPageCount(Math.ceil(duplicateresturant.length / 6));
   }, [itemOffset,resturantData]);
 
-  // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: "AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0" // Add your API key
-  // });
+  const { isLoaded } = useJsApiLoader({
+    id:'AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0',
+    googleMapsApiKey:"AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0"
+  })
 
   async function location(e){
     alert(e)
@@ -1027,7 +1029,7 @@ function Dashboard() {
                             onClick={location}
                             src={`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${map[0].latitude},${map[0].longitude}&h1=es;&output=embed`}
                           /> */}
-               {/* <Map /> */}
+               <Map isLoaded={isLoaded} />
                                         {/* <a href="https://mcpenation.com/">Resturants</a> */}
                         </div>
                       </div>

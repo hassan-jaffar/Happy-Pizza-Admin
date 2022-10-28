@@ -4,7 +4,9 @@ import "./Orders.css";
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
+import Map from "./Map";
 import moment from "moment";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import ReactPaginate from 'react-paginate';
 const { RangePicker } = DatePicker;
 
@@ -31,6 +33,10 @@ function OrdersTable() {
     // alert("you have searched")
   }
   console.log(duplicateorderHistory.length)
+  const { isLoaded } = useJsApiLoader({
+    id:'AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0',
+    googleMapsApiKey:"AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0"
+  })
 
   // for orderHistory pagination
   const handlePageClick = (event) => {
@@ -658,6 +664,7 @@ function OrdersTable() {
 
         </div>
       </div>
+      <Map isLoaded={isLoaded}/>
     </>
   );
 }

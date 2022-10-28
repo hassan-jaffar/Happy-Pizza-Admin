@@ -157,7 +157,8 @@ function ResturantsTable() {
       const tempresturants = duplicateresturants.filter(
         (resturants) =>resturants.ID === parseInt(e)
       );
-      setresturants(tempresturants);
+      console.log(tempresturants);
+      // setresturants(tempresturants);
     } else {
       setresturants(resturants1);
     }
