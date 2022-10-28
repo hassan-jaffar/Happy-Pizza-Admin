@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
 import Navbar from "./Navbar";
+import ReactPaginate from 'react-paginate';
 import { type } from "@testing-library/user-event/dist/type";
-import { useLoadScript } from "@react-google-maps/api"; 
+
 import Map from "./Map";
 
 function Dashboard() {
   const [resturantData, setresturantData] = useState([]);
+  const [duplicateresturant, setduplicateresturant] = useState([])
   const getstatus = localStorage.getItem("status");
   const id = JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID;
   const [orders, setOrders] = useState();
@@ -24,10 +26,31 @@ function Dashboard() {
   const [openinfo, setopeninfo] = useState("");
   const [map, setmap] = useState([])
   const refCloseadd = useRef(null);
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyAenQY3RYwkA56eDMWZbIPUC1oJeCIR3c4" // Add your API key
-  });
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 6) % duplicateresturant.length;
+    console.log(`event selected ${event.selected * 6}`)
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  useEffect(() => {
+    // Fetch orderHistory from another resources.
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setresturantData(duplicateresturant.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(duplicateresturant.length / 6));
+  }, [itemOffset,resturantData]);
+
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: "AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0" // Add your API key
+  // });
 
   async function location(e){
     alert(e)
@@ -88,6 +111,7 @@ function Dashboard() {
 
         
         setresturantData(data.data);
+        setduplicateresturant(data.data);
         setresturantcount(result.data);
         setsales(salevalume.data);
         setmap(detail.data)
@@ -922,35 +946,30 @@ function Dashboard() {
                         </p>
                       </div>
                       <div className="col-6 d-flex justify-content-end">
-                        <nav aria-label="Page navigation example">
-                          <ul className="pagination">
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Previous
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                1
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                2
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                3
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
+                      <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< Previous"
+                renderOnZeroPageCount={null}
+         
+                marginPagesDisplayed={2}
+          
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+             
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+             
+              />
                       </div>
                     </div>
                   </div>
@@ -985,8 +1004,8 @@ function Dashboard() {
                             onClick={location}
                             src={`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${map[0].latitude},${map[0].longitude}&h1=es;&output=embed`}
                           /> */}
-                              {isLoaded ? <Map /> : null}
-                                        <a href="https://mcpenation.com/">Resturants</a>
+               {/* <Map /> */}
+                                        {/* <a href="https://mcpenation.com/">Resturants</a> */}
                         </div>
                       </div>
                     </div>

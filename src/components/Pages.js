@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 
 function Pages() {
   const [page, setpage] = useState([]);
+  const [duplicatepage, setduplicatepage] = useState([]);
   const getstatus = localStorage.getItem("status");
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 6) % duplicatepage.length;
+    console.log(`event selected ${event.selected * 6}`)
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  useEffect(() => {
+    // Fetch orderHistory from another resources.
+    const endOffset = itemOffset + 6;
+    console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
+    setpage(duplicatepage.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(duplicatepage.length / 6));
+  }, [itemOffset,page]);
   // const [status, setstatus] = useState("");
 
   // const [status2, setstatus2] = useState(true);
@@ -37,6 +60,7 @@ function Pages() {
     try {
       const data = await (await axios.get('http://localhost:5000/api/superadmin/getallpages')).data
       setpage(data.data)
+       setduplicatepage(data.data);
 
     } catch (error) {
       console.log(error);
@@ -57,6 +81,7 @@ function Pages() {
           )
         ).data;
         setpage(data.data);
+       
         update()
     } catch (error) {
       console.log(error)
@@ -72,6 +97,7 @@ function Pages() {
           )
         ).data;
         setpage(data.data);
+        setduplicatepage(data.data);
       } catch (error) {
         console.log(error, "err");
       }

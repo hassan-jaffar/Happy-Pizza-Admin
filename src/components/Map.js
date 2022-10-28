@@ -1,6 +1,16 @@
 import React, { useState } from "react";
-import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import GoogleMapReact from 'google-map-react';
 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+
+const defaultProps = {
+  center: {
+    lat: 10.99835602,
+    lng: 77.01502627
+  },
+  zoom: 11
+};
 const markers = [
   {
     id: 1,
@@ -38,28 +48,41 @@ function Map() {
     const bounds = new window.google.maps.LatLngBounds();
     markers.forEach(({ position }) => bounds.extend(position));
     map.fitBounds(bounds);
+  console.log("ddd"+markers[0].position.lat);
   };
 
   return (
-    <GoogleMap
-      onLoad={handleOnLoad}
-      onClick={() => setActiveMarker(null)}
-      mapContainerStyle={{ width: "100vw", height: "100vh" }}
+    <div style={{ height: '100vh', width: '100%' }}>
+    <GoogleMapReact
+      bootstrapURLKeys={{ key: "AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0" }}
+      defaultCenter={defaultProps.center}
+      defaultZoom={defaultProps.zoom}
     >
-      {markers.map(({ id, name, position }) => (
-        <Marker
-          key={id}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
-        >
-          {activeMarker === id ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
-            </InfoWindow>
-          ) : null}
-        </Marker>
-      ))}
-    </GoogleMap>
+    
+    </GoogleMapReact>
+  </div>
+    // <GoogleMap
+
+    
+    //   onLoad={handleOnLoad}
+    //   onClick={() => setActiveMarker(null)}
+    //   mapContainerStyle={{ width: "100vw", height: "100vh" }}
+    // >
+    //   {markers.map(({ id, name, position }) => (
+        
+    //     <Marker
+    //       key={id}
+    //       position={position}
+    //       onClick={() => handleActiveMarker(id)}
+    //     >
+    //       {activeMarker === id ? (
+    //         <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+    //           <div>{name}</div>
+    //         </InfoWindow>
+    //       ) : null}
+    //     </Marker>
+    //   ))}
+    // </GoogleMap>
   );
 }
 
