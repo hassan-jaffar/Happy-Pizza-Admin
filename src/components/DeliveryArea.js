@@ -1,6 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function DeliveryArea() {
+  const [showBtn, setshowBtn] = useState(true)
+  const [showForm, setshowForm] = useState(false)
+
+  // form states start
+  const [name, setname] = useState("")
+  const [discount, setdiscount] = useState("")
+  const [delivery, setdelivery] = useState("")
+  const [delay, setdelay] = useState("")
+  const [radius, setradius] = useState("")
+  const [active, setactive] = useState(true)
+  // form states end
+
+  async function save(e) {
+
+    const details = {
+      name,
+      discount,
+      delivery,
+      delay,
+      radius,
+      active,
+      resturant_ID: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+    }
+    console.log(details)
+    try {
+      const result = await axios.post("http://localhost:5000/api/setting/addzone", details).data;
+      setname('');
+      setdiscount("");
+      setdelay('');
+      setdelivery('');
+      setradius('');
+      setactive(true);
+    } catch (error) {
+      console.log(error)
+    }
+    e.preventDefault();
+  }
+
+
+  function disableBtn() {
+    setshowBtn(false)
+    // alert("Clicked")
+  }
+  function showAddBtn() {
+    setshowBtn(true)
+    setshowForm(false)
+  }
   return (
     <>
       <h6 className="px-1">DELIVERY AREA</h6>
@@ -87,10 +135,99 @@ function DeliveryArea() {
                 ></iframe>
               </div>
               <div className="col-md-4">
-                <button className="btn btn-light my-5 bs w-100">zone1</button>
-                <button className="btn btn-primary mb-5">
-                  Add another zone
-                </button>
+                {/* <button className="btn btn-light my-5 bs w-100">zone1</button> */}
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item my-4 bs w-100">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Zone 1
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <form>
+                          <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label">Zone Name</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                          </div>
+                          <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label">Discount</label>
+                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                          </div>
+                          <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label">Delivery Fee</label>
+                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                          </div>
+                          <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label">Delay Time</label>
+                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                          </div>
+                          <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label">Radius (In Miles)</label>
+                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                          </div>
+                          <div className="mb-3 form-check">
+                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                            <label className="form-check-label" for="exampleCheck1">Active</label>
+                          </div>
+                          <div className="row">
+                            <div className="col-md-5">
+                              <button type="submit" className="btn btn-danger" onClick={() => showAddBtn()}>Remove</button>
+                            </div>
+                            <div className="col-md-5">
+                              <button type="submit" className="btn btn-primary">Upgrade</button>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                {showBtn === true && showForm === false ? <>
+
+                  <button onClick={() => disableBtn()} className="btn btn-primary mb-5">
+                    Add another zone
+                  </button>
+                </> : <>
+                  {/* <form> */}
+                  <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Zone Name</label>
+                    <input type="text" value={name} onChange={(e) => { setname(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                  </div>
+                  <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Discount</label>
+                    <input type="number" value={discount} onChange={(e) => { setdiscount(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                  </div>
+                  <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Delivery Fee</label>
+                    <input type="number" value={delivery} onChange={(e) => { setdelivery(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                  </div>
+                  <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Delay Time</label>
+                    <input type="number" value={delay} onChange={(e) => { setdelay(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                  </div>
+                  <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Radius (In Miles)</label>
+                    <input type="number" value={radius} onChange={(e) => { setradius(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                  </div>
+                  <div className="mb-3 form-check">
+                    <input type="checkbox" className="form-check-input" id="exampleCheck1" checked={active} onChange={(e) => { setactive(e.target.checked) }} />
+                    <label className="form-check-label" for="exampleCheck1">Active</label>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <button type="submit" className="btn btn-danger" onClick={() => showAddBtn()}>Cancel</button>
+                    </div>
+                    <div className="col-md-4">
+                      <button className="btn btn-primary" onClick={() => save()}>Save</button>
+                    </div>
+                  </div>
+
+                  {/* </form> */}
+                </>}
+
               </div>
             </div>
           </div>
