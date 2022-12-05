@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function DeliveryArea() {
   const [showBtn, setshowBtn] = useState(true)
   const [showForm, setshowForm] = useState(false)
+  const [zone, setzone] = useState([]);
 
   // form states start
   const [name, setname] = useState("")
@@ -40,7 +41,6 @@ function DeliveryArea() {
     e.preventDefault();
   }
 
-
   function disableBtn() {
     setshowBtn(false)
     // alert("Clicked")
@@ -49,6 +49,26 @@ function DeliveryArea() {
     setshowBtn(true)
     setshowForm(false)
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      const details = {
+        resturant_ID: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      }
+      try {
+        const data = await (
+          await axios.post(`http://localhost:5000/api/setting/showzones`, details)
+        ).data;
+        setzone(data.data)
+        // setupdatetitle(data.data['title']);
+        // setupdatedescription(data.data['description']);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+
   return (
     <>
       <h6 className="px-1">DELIVERY AREA</h6>
