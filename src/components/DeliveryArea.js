@@ -7,13 +7,22 @@ function DeliveryArea() {
   const [zone, setzone] = useState([]);
 
   // form states start
-  const [name, setname] = useState("")
+  const [name, setname] = useState({})
   const [discount, setdiscount] = useState("")
   const [delivery, setdelivery] = useState("")
   const [delay, setdelay] = useState("")
   const [radius, setradius] = useState("")
   const [active, setactive] = useState(true)
   // form states end
+
+  // Form Data getting by ID 
+  const [name1, setname1] = useState({})
+  const [discount1, setdiscount1] = useState("")
+  const [delivery1, setdelivery1] = useState("")
+  const [delay1, setdelay1] = useState("")
+  const [radius1, setradius1] = useState("")
+  const [active1, setactive1] = useState()
+  // Form Data getting by ID 
 
   async function save(e) {
 
@@ -48,6 +57,65 @@ function DeliveryArea() {
   function showAddBtn() {
     setshowBtn(true)
     setshowForm(false)
+  }
+
+  async function accordionClick(ID) {
+    try {
+      const result = await (await axios.post(`http://localhost:5000/api/setting/showzonebyid/${ID}`)).data;
+      setname1(result.data[0].name)
+      setdiscount1(result.data[0].discount);
+      setdelay1(result.data[0].delay);
+      setdelivery1(result.data[0].delivery);
+      setradius1(result.data[0].radius);
+      setactive1(result.data[0].active === true ? true : false);
+
+    } catch (error) {
+      console.log(error)
+    }
+    // alert(ID)
+  }
+
+  async function deletezone(ID) {
+    alert(ID)
+  }
+
+  async function updatezone(ID) {
+    const details = {
+      name1,
+      delay1,
+      delivery1,
+      radius1,
+      active1,
+      discount1,
+      ID
+    }
+    try {
+      const result = await axios.post("http://localhost:5000/api/setting/updatezone", details).data;
+      accordionClick(ID)
+      update()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function updateName(value) {
+    setname(value)
+  }
+
+  async function update() {
+    const details = {
+      resturant_ID: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+    }
+    try {
+      const data = await (
+        await axios.post(`http://localhost:5000/api/setting/showzones`, details)
+      ).data;
+      setzone(data.data)
+      // setupdatetitle(data.data['title']);
+      // setupdatedescription(data.data['description']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -156,55 +224,60 @@ function DeliveryArea() {
               </div>
               <div className="col-md-4">
                 {/* <button className="btn btn-light my-5 bs w-100">zone1</button> */}
-                <div class="accordion" id="accordionExample">
-                  <div class="accordion-item my-4 bs w-100">
-                    <h2 class="accordion-header" id="headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Zone 1
-                      </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <form>
-                          <div className="mb-3">
-                            <label for="exampleInputEmail1" className="form-label">Zone Name</label>
-                            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                          </div>
-                          <div className="mb-3">
-                            <label for="exampleInputEmail1" className="form-label">Discount</label>
-                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                          </div>
-                          <div className="mb-3">
-                            <label for="exampleInputEmail1" className="form-label">Delivery Fee</label>
-                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                          </div>
-                          <div className="mb-3">
-                            <label for="exampleInputEmail1" className="form-label">Delay Time</label>
-                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                          </div>
-                          <div className="mb-3">
-                            <label for="exampleInputEmail1" className="form-label">Radius (In Miles)</label>
-                            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                          </div>
-                          <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                            <label className="form-check-label" for="exampleCheck1">Active</label>
-                          </div>
-                          <div className="row">
-                            <div className="col-md-5">
-                              <button type="submit" className="btn btn-danger" onClick={() => showAddBtn()}>Remove</button>
+                {zone.map((zones) => {
+                  return <>
+                    <div class="accordion" id={`accordion${zones.ID}`} onClick={() => accordionClick(`${zones.ID}`)}>
+                      <div class="accordion-item my-4 bs w-100">
+                        <h2 class="accordion-header" id={`heading${zones.ID}`}>
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${zones.ID}`} aria-expanded="false" aria-controls={`collapse${zones.ID}`}>
+                            {zones.name}
+                          </button>
+                        </h2>
+                        <div id={`collapse${zones.ID}`} class="accordion-collapse collapse" aria-labelledby={`#heading${zones.ID}`} data-bs-parent={`#accordion${zones.ID}`}>
+                          <div class="accordion-body">
+                            {/* <form> */}
+                            <div className="mb-3">
+                              <label for="exampleInputEmail1" className="form-label">Zone Name</label>
+                              <input type="text" className="form-control" value={name1} onChange={(e) => { setname1(e.target.value) }} id="exampleInputEmail1" aria-describedby="emailHelp" />
                             </div>
-                            <div className="col-md-5">
-                              <button type="submit" className="btn btn-primary">Upgrade</button>
+                            <div className="mb-3">
+                              <label for="exampleInputEmail1" className="form-label">Discount</label>
+                              <input type="number" className="form-control" value={discount1} onChange={(e) => { setdiscount1(e.target.value) }} id="exampleInputEmail1" aria-describedby="emailHelp" />
                             </div>
-                          </div>
+                            <div className="mb-3">
+                              <label for="exampleInputEmail1" className="form-label">Delivery Fee</label>
+                              <input type="number" className="form-control" value={delivery1} onChange={(e) => { setdelivery1(e.target.value) }} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            </div>
+                            <div className="mb-3">
+                              <label for="exampleInputEmail1" className="form-label">Delay Time</label>
+                              <input type="number" className="form-control" value={delay1} onChnage={(e) => { setdelay1(e.target.value) }} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            </div>
+                            <div className="mb-3">
+                              <label for="exampleInputEmail1" className="form-label">Radius (In Miles)</label>
+                              <input type="number" className="form-control" value={radius1} onChange={(e) => { setradius1(e.target.value) }} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            </div>
+                            <div className="mb-3 form-check">
+                              <input type="checkbox" className="form-check-input" value={active1} checked={active1} onChange={(e) => { setactive1(e.target.value) }} id="exampleCheck1" />
+                              <label className="form-check-label" for="exampleCheck1">Active</label>
+                            </div>
+                            <div className="row">
+                              <div className="col-md-5">
+                                <button className="btn btn-danger" onClick={() => deletezone(`${zones.ID}`)}>Remove</button>
+                              </div>
+                              <div className="col-md-5">
+                                <button className="btn btn-primary" onClick={() => updatezone(`${zones.ID}`)}>Upgrade</button>
+                              </div>
+                            </div>
 
-                        </form>
+                            {/* </form> */}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                </div>
+                    </div>
+                  </>
+                })}
+
                 {showBtn === true && showForm === false ? <>
 
                   <button onClick={() => disableBtn()} className="btn btn-primary mb-5">
