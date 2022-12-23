@@ -54,7 +54,7 @@ function SigninPage() {
   }
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <div className="scrolling-off">
         <div className="row justify-content-center gx-0">
@@ -109,7 +109,7 @@ function SigninPage() {
                   </label>
                 </div>
               </div>
-              <div style={{marginTop: '-15px'}} className='container'>
+              <div style={{ marginTop: '-15px' }} className='container'>
                 <div className="mb-5 row">
                   <div className='col-12'>
                     <button
