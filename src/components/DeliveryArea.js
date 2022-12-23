@@ -7,7 +7,7 @@ function DeliveryArea() {
   const [zone, setzone] = useState([]);
 
   // form states start
-  const [name, setname] = useState({})
+  const [name, setname] = useState("")
   const [discount, setdiscount] = useState("")
   const [delivery, setdelivery] = useState("")
   const [delay, setdelay] = useState("")
@@ -67,7 +67,7 @@ function DeliveryArea() {
       setdelay1(result.data[0].delay);
       setdelivery1(result.data[0].delivery);
       setradius1(result.data[0].radius);
-      setactive1(result.data[0].active === true ? true : false);
+      setactive1(result.data[0].active === "true" ? true : false);
 
     } catch (error) {
       console.log(error)
@@ -76,7 +76,12 @@ function DeliveryArea() {
   }
 
   async function deletezone(ID) {
-    alert(ID)
+    try {
+      const result = await (await axios.post(`http://localhost:5000/api/setting/deletezone/${ID}`)).data;
+      update();
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function updatezone(ID) {
@@ -96,10 +101,6 @@ function DeliveryArea() {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  function updateName(value) {
-    setname(value)
   }
 
   async function update() {
@@ -257,7 +258,7 @@ function DeliveryArea() {
                               <input type="number" className="form-control" value={radius1} onChange={(e) => { setradius1(e.target.value) }} id="exampleInputEmail1" aria-describedby="emailHelp" />
                             </div>
                             <div className="mb-3 form-check">
-                              <input type="checkbox" className="form-check-input" value={active1} checked={active1} onChange={(e) => { setactive1(e.target.value) }} id="exampleCheck1" />
+                              <input type="checkbox" className="form-check-input" value={active1} checked={active1} onChange={(e) => { setactive1(e.target.checked) }} id="exampleCheck1" />
                               <label className="form-check-label" for="exampleCheck1">Active</label>
                             </div>
                             <div className="row">

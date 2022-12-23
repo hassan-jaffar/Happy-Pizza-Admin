@@ -9,9 +9,9 @@ function MyProfile() {
   const [email, setemail] = useState(JSON.parse(localStorage.getItem("currentuser"))[0].email);
   const [number, setnumber] = useState(JSON.parse(localStorage.getItem("currentuser"))[0].number);
 
-  async function updatecustomer(e){
+  async function updatecustomer(e) {
     const details = {
-      customer_Id:JSON.parse(localStorage.getItem('currentuser'))[0].customer_Id,
+      customer_Id: JSON.parse(localStorage.getItem('currentuser'))[0].customer_Id,
       name,
       email,
       number
@@ -19,7 +19,7 @@ function MyProfile() {
     try {
 
       // setloading(true)
-      const result = await axios.post("http://localhost:5000/api/admin/myprofile",details).data;
+      const result = await axios.post("http://localhost:5000/api/admin/myprofile", details).data;
       console.log(result)
       // toast.success("Password has been changed")
       // setloading(true)
@@ -27,18 +27,20 @@ function MyProfile() {
         window.location.href = "/home"
       }, 2000);
 
-      
+
       setemail('');
       setname('');
       setnumber('');
 
-  } catch (error) {
+    } catch (error) {
       console.log(error);
       // toast.warn("Something went wrong!")
       e.preventDefault()
       // setloading(true)
+    }
   }
-  }
+
+
 
   return (
     <>
@@ -50,7 +52,7 @@ function MyProfile() {
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -65,7 +67,7 @@ function MyProfile() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -273,8 +275,8 @@ function MyProfile() {
             </div>
           </div>
           <div className="col-lg-9">
-              <div className="container mt-5">
-                  <h1>USER PROFILE</h1>
+            <div className="container mt-5">
+              <h1>USER PROFILE</h1>
               <div className="row">
                 <div className="col-12 bs">
                   <div className="row p-4">
@@ -283,9 +285,9 @@ function MyProfile() {
                     </div>
                     <div className="col-6 text-end">
                       <Link to="/home">
-                      <button type="button" className="btn btn-primary">
-                        Cart
-                      </button>
+                        <button type="button" className="btn btn-primary">
+                          Cart
+                        </button>
                       </Link>
                     </div>
                     <hr style={{ padding: "0" }} className="mt-3"></hr>
@@ -302,7 +304,7 @@ function MyProfile() {
                         id="validationCustom01"
                         placeholder="CNF Admin"
                         value={name}
-                        onChange={(e)=>{setname(e.target.value)}}
+                        onChange={(e) => { setname(e.target.value) }}
                         required
                       />
                     </div>
@@ -316,7 +318,7 @@ function MyProfile() {
                         id="validationCustom02"
                         placeholder="admin@clicknfeed.com"
                         value={email}
-                        onChange={(e)=>{setemail(e.target.value)}}
+                        onChange={(e) => { setemail(e.target.value) }}
                         required
                       />
                     </div>
@@ -341,7 +343,7 @@ function MyProfile() {
                           aria-describedby="inputGroupPrepend"
                           placeholder="Phone"
                           value={number}
-                          onChange={(e)=>{setnumber(e.target.value)}}
+                          onChange={(e) => { setnumber(e.target.value) }}
                           required
                         />
                       </div>
@@ -359,7 +361,7 @@ function MyProfile() {
                   </form>
                 </div>
               </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
