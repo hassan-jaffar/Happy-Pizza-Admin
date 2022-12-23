@@ -21,10 +21,10 @@ function Dashboard() {
   const [sales, setsales] = useState([]);
   const [online, setonline] = useState(false);
   const [offline, setoffline] = useState(false);
-  const [statment, setstatment] = useState("Statement");
   const [to, setto] = useState("Date to");
   const [from, setfrom] = useState("Date from");
-  const [openinfo, setopeninfo] = useState("");
+  const [openinfo, setopeninfo] = useState([]);
+  const [statement, setstatement] = useState("");
   const [salesvloumeresturant, setsalesvloumeresturant] = useState([])
   const [map, setmap] = useState([])
   const refCloseadd = useRef(null);
@@ -48,14 +48,14 @@ function Dashboard() {
     console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
     setresturantData(duplicateresturant.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(duplicateresturant.length / 6));
-  }, [itemOffset,resturantData]);
+  }, [itemOffset, resturantData]);
 
   const { isLoaded } = useJsApiLoader({
-    id:'AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0',
-    googleMapsApiKey:"AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0"
+    id: 'AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0',
+    googleMapsApiKey: "AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0"
   })
 
-  async function location(e){
+  async function location(e) {
     alert(e)
   }
 
@@ -63,7 +63,7 @@ function Dashboard() {
     const details = {
       online,
       offline,
-      statment,
+      statement,
       to,
       from,
       id,
@@ -81,7 +81,7 @@ function Dashboard() {
       refCloseadd.current.click();
       setonline(false);
       setoffline(false);
-      setstatment("");
+      setstatement("");
       setto("");
       setfrom("");
     } catch (error) {
@@ -91,9 +91,9 @@ function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
-      
+
       const id = {
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
       }
       try {
         const data = await (
@@ -117,17 +117,17 @@ function Dashboard() {
         ).data;
 
         const salesvloumeresturant1 = await (
-          await axios.post("http://localhost:5000/api/admin/salesvloumeresturant",id)
+          await axios.post("http://localhost:5000/api/admin/salesvloumeresturant", id)
         ).data;
 
-        
+
         setresturantData(data.data);
         setduplicateresturant(data.data);
         setresturantcount(result.data);
         setsales(salevalume.data);
         setsalesvloumeresturant(salesvloumeresturant1.data);
         setmap(detail.data)
-        console.log(map.map((type)=>`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${type.latitude},${type.longitude}&h1=es;&output=embed`))
+        console.log(map.map((type) => `https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${type.latitude},${type.longitude}&h1=es;&output=embed`))
       } catch (error) {
         console.log(error, "err");
       }
@@ -181,7 +181,7 @@ function Dashboard() {
   useEffect(() => {
     async function fetchData() {
       const details = {
-        id,
+        id
       };
       try {
         const data = await (
@@ -190,8 +190,8 @@ function Dashboard() {
             details
           )
         ).data;
-        
-        setopeninfo(data.data[0]['online']);
+
+        setopeninfo(data.data[0]);
       } catch (error) {
         console.log(error, "err");
       }
@@ -251,7 +251,7 @@ function Dashboard() {
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -266,7 +266,7 @@ function Dashboard() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -323,10 +323,9 @@ function Dashboard() {
                     </li>
                     <li className="nav-item">
                       <Link
-                        to={`/setting/${
-                          JSON.parse(localStorage.getItem("currentuser"))[0]
-                            .resturant_ID
-                        }`}
+                        to={`/setting/${JSON.parse(localStorage.getItem("currentuser"))[0]
+                          .resturant_ID
+                          }`}
                         className="nav-link align-middle sidebartag"
                       >
                         <i className="fa-solid fa-gear"></i>
@@ -499,10 +498,10 @@ function Dashboard() {
 
                 {getstatus === "true" &&
                   JSON.parse(localStorage.getItem("currentuser"))[0].role ===
-                    1 && (
+                  1 && (
                     <>
                       <div className="openh1 my-5 mx-3 px-5 py-4 responsiveness">
-                        {openinfo === "true" ? (
+                        {openinfo.online === "true" ? (
                           <>
                             <h6>
                               <i className="fa-solid fa-circle-check me-3 checkiconclr"></i>
@@ -638,6 +637,8 @@ function Dashboard() {
                                             className="form-control"
                                             id="exampleFormControlTextarea1"
                                             rows="3"
+                                            value={statement}
+                                            onChange={(e) => { setstatement(e.target.value) }}
                                           ></textarea>
                                         </div>
                                       </div>
@@ -687,6 +688,8 @@ function Dashboard() {
                                             className="form-control"
                                             id="exampleFormControlTextarea1"
                                             rows="3"
+                                            value={statement}
+                                            onChnage={(e) => { setstatement(e.target.value) }}
                                           ></textarea>
                                         </div>
                                         <label className="mb-1 mt-2 boldtext">
@@ -741,7 +744,7 @@ function Dashboard() {
             </div>
 
             {getstatus === "true" &&
-            JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (
+              JSON.parse(localStorage.getItem("currentuser"))[0].role === 1 ? (
               <>
                 {/* start of 1st resturant analytics  */}
                 <div className="row justify-content-center cardsrow responsiveness">
@@ -971,30 +974,30 @@ function Dashboard() {
                         </p>
                       </div>
                       <div className="col-6 d-flex justify-content-end">
-                      <ReactPaginate
-                breakLabel="..."
-                nextLabel="Next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< Previous"
-                renderOnZeroPageCount={null}
-         
-                marginPagesDisplayed={2}
-          
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-             
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
-                containerClassName="pagination"
-                activeClassName="active"
-             
-              />
+                        <ReactPaginate
+                          breakLabel="..."
+                          nextLabel="Next >"
+                          onPageChange={handlePageClick}
+                          pageRangeDisplayed={5}
+                          pageCount={pageCount}
+                          previousLabel="< Previous"
+                          renderOnZeroPageCount={null}
+
+                          marginPagesDisplayed={2}
+
+                          pageClassName="page-item"
+                          pageLinkClassName="page-link"
+                          previousClassName="page-item"
+                          previousLinkClassName="page-link"
+                          nextClassName="page-item"
+                          nextLinkClassName="page-link"
+
+                          breakClassName="page-item"
+                          breakLinkClassName="page-link"
+                          containerClassName="pagination"
+                          activeClassName="active"
+
+                        />
                       </div>
                     </div>
                   </div>
@@ -1029,8 +1032,8 @@ function Dashboard() {
                             onClick={location}
                             src={`https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=${map[0].latitude},${map[0].longitude}&h1=es;&output=embed`}
                           /> */}
-               <Map isLoaded={isLoaded} />
-                                        {/* <a href="https://mcpenation.com/">Resturants</a> */}
+                          <Map isLoaded={isLoaded} />
+                          {/* <a href="https://mcpenation.com/">Resturants</a> */}
                         </div>
                       </div>
                     </div>
