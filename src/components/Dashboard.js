@@ -2,12 +2,16 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.css";
 import Navbar from "./Navbar";
 import ReactPaginate from 'react-paginate';
 import { type } from "@testing-library/user-event/dist/type";
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-
 import Map from "./Map";
+import moment from "moment";
+const { RangePicker } = DatePicker;
+
 
 function Dashboard() {
   const [resturantData, setresturantData] = useState([]);
@@ -54,6 +58,14 @@ function Dashboard() {
     id: 'AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0',
     googleMapsApiKey: "AIzaSyBPFym4hcICGvPCiwaShNyjf7653DV_e-0"
   })
+
+
+  async function RangePickerDate(dates) {
+    setfrom(moment(dates[0]).format("DD-MM-YYYY"));
+    setto(moment(dates[1]).format("DD-MM-YYYY"));
+  }
+
+  console.log(setto, "setto")
 
   async function location(e) {
     alert(e)
@@ -211,7 +223,7 @@ function Dashboard() {
         )
       ).data;
 
-      setopeninfo(data.data[0]["online"]);
+      setopeninfo(data.data[0]);
     } catch (error) {
       console.log(error, "err");
     }
@@ -696,20 +708,9 @@ function Dashboard() {
                                           DateRange
                                         </label>
                                         <div className="input-group mb-3">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder=""
-                                            aria-label=""
-                                          />
-                                          <span className="input-group-text">
-                                            To
-                                          </span>
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder=""
-                                            aria-label=""
+                                          <RangePicker
+                                            format="DD-MM-YYYY"
+                                            onChange={RangePickerDate}
                                           />
                                         </div>
                                       </div>
