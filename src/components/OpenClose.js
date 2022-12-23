@@ -3,22 +3,33 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.css";
+import moment from "moment";
+const { RangePicker } = DatePicker;
 
 
 function OpenClose() {
   const [online, setonline] = useState(false);
   const [offline, setoffline] = useState(false);
-  const [statment, setstatment] = useState("Statement");
-  const [to, setto] = useState("Date to");
-  const [from, setfrom] = useState("Date from");
-  const {id} = useParams();
+  const [statement, setstatement] = useState("");
+  const [to, setto] = useState("");
+  const [from, setfrom] = useState("");
+  const { id } = useParams();
+
   // const getstatus = localStorage.getItem("status");
 
-  async function open(){
+  async function RangePickerDate(dates) {
+    setfrom(moment(dates[0]).format("DD-MM-YYYY"));
+    setto(moment(dates[1]).format("DD-MM-YYYY"));
+
+  }
+
+  async function open() {
     const details = {
       online,
       offline,
-      statment,
+      statement,
       to,
       from,
       id
@@ -26,13 +37,13 @@ function OpenClose() {
 
     try {
       const data = await (
-        await axios.post("http://localhost:5000/api/superadmin/openclose",details)
+        await axios.post("http://localhost:5000/api/superadmin/openclose", details)
       ).data;
       toast.success("Data has been saved")
 
       setonline(false)
       setoffline(false)
-      setstatment("");
+      setstatement("");
       setto("");
       setfrom("");
     } catch (error) {
@@ -43,7 +54,7 @@ function OpenClose() {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <h6 className="px-1">OPEN/CLOSE</h6>
       <hr />
       <br />
@@ -64,7 +75,7 @@ function OpenClose() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault1"
-                  onChange={(e)=>{setonline(e.target.checked)}}
+                  onChange={(e) => { setonline(e.target.checked) }}
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Online (as usual)
@@ -89,7 +100,7 @@ function OpenClose() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
-                  onChange={(e)=>{setoffline(e.target.checked)}}
+                  onChange={(e) => { setoffline(e.target.checked) }}
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault3">
                   Offline For The Whole Day
@@ -109,6 +120,8 @@ function OpenClose() {
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
+                  value={statement}
+                  onChange={(e) => { setstatement(e.target.value) }}
                 ></textarea>
               </div>
             </div>
@@ -130,7 +143,7 @@ function OpenClose() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault2"
-                  onChange={(e)=>{setoffline(e.target.checked)}}
+                  onChange={(e) => { setoffline(e.target.checked) }}
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Offline Until
@@ -150,22 +163,15 @@ function OpenClose() {
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
+                  value={statement}
+                  onChange={(e) => { setstatement(e.target.value) }}
                 ></textarea>
               </div>
               <label className="mb-1 mt-2 boldtext">DateRange</label>
               <div className="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder=""
-                  aria-label=""
-                />
-                <span className="input-group-text">To</span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder=""
-                  aria-label=""
+                <RangePicker
+                  format="DD-MM-YYYY"
+                  onChange={RangePickerDate}
                 />
               </div>
             </div>
