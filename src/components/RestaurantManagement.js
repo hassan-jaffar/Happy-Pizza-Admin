@@ -32,7 +32,8 @@ function RestaurantManagement() {
 
 
 
-  async function register() {
+  async function register(e) {
+    e.preventDefault()
     var formData = new FormData();
     formData.append("description", description);
     formData.append("id", id);
@@ -49,7 +50,9 @@ function RestaurantManagement() {
     formData.append("pickup", pickup);
     formData.append("delivery", delivery);
 
-
+    for (const value of formData.values()) {
+      console.log(value);
+    }
     const config = {
       headers: {
         "Content-Type": "multipart/form-data"
@@ -449,7 +452,7 @@ function RestaurantManagement() {
               // value={JSON.parse(localStorage.getItem("currentuser"))[0].role === 2 ? (id) : (rid)} />
               value={id} />
             <div className="container mt-5 text-center">
-              <button className="btn btn-info py-2" onClick={register}>
+              <button type="submit" className="btn btn-info py-2" onClick={(e) => register(e)}>
                 Save
               </button>
             </div>
