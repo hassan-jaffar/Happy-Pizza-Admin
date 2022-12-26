@@ -8,12 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 function MenuTable() {
   const [category, setcategory] = useState([]);
   const [categoryID, setcategoryID] = useState('');
+  const [itemID, setitemID] = useState('');
   const [item, setItem] = useState([]);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
   const [price, setPrice] = useState("");
-  const [file,setFile] = useState("");
+  const [file, setFile] = useState("");
+  const [Editfile, setEditFile] = useState("");
   const refCloseadd = useRef(null);
   const refCloseedit = useRef(null);
   const refCloseimage = useRef(null);
@@ -126,21 +128,25 @@ function MenuTable() {
     }
   }
 
-  async function getID(category_id){
+  async function getID(category_id) {
     setcategoryID(category_id)
+  }
+
+  function ItemIdUpdate(ID) {
+    setitemID(ID)
   }
 
   async function addItem() {
 
-   var formData = new FormData();
-    formData.append("photo",file)
-    
-    formData.append("title",title);
-    formData.append("description",description);
-    formData.append("price",price);
-    formData.append("categoryID",categoryID)
-    formData.append("discountableitem",discountableitem)
-console.log(formData);
+    var formData = new FormData();
+    formData.append("photo", file)
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("categoryID", categoryID)
+    formData.append("discountableitem", discountableitem)
+    console.log(formData);
     // const user = {
     //   category_id
     //   title,
@@ -149,17 +155,17 @@ console.log(formData);
     //   file
     // };
     const config = {
-      headers:{
-          "Content-Type":"multipart/form-data"
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
-  }
+    }
     // alert(image)
     // alert(file)formData,config
 
     try {
       const result = await axios.post(
         " http://localhost:5000/api/admin/createitem",
-       formData, config
+        formData, config
       ).data;
       console.log(result);
       update1();
@@ -176,10 +182,37 @@ console.log(formData);
     }
   }
 
+  async function editItemImage() {
+    var formData = new FormData();
+    formData.append("photo2", Editfile)
+    formData.append("categoryID2", itemID)
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }
+
+    try {
+      const result = await axios.post(
+        " http://localhost:5000/api/admin/createitem",
+        formData, config
+      ).data;
+      console.log(result);
+      update1();
+      toast.success("Image has been updated");
+      refCloseimage.current.click();
+      setEditFile("");
+    } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong try again!");
+    }
+  }
+
   // async function addItem(category_id) {
   //   var formData = new FormData();
   //   formData.append("photo",file)
- 
+
   //   const config = {
   //     headers:{
   //         "Content-Type":"multipart/form-data"
@@ -303,9 +336,9 @@ console.log(formData);
                           className="form-check-input"
                           type="checkbox"
                           id="flexSwitchCheckDefault"
-                          onChange={(e)=>{setdiscountable(e.target.checked)}}
+                          onChange={(e) => { setdiscountable(e.target.checked) }}
                         />
-                        
+
                       </div>
                     </div>
                   </div>
@@ -357,40 +390,40 @@ console.log(formData);
                               <div className="menuresponsive"> {categorys.Name}</div>
                               <div className="row mlauto menuresponsive">
                                 <div className="col-md-12">
-                                <button
-                                  type="button"
-                                  data-bs-toggle="modal"
-                                  data-bs-target={`#additemModal${categorys.ID}`}
-                                  className="btn btn-info menu-buttons"
-                                  onClick={()=>{getID(categorys.ID)}}
-                                >
-                                  <i className="fa-solid fa-plus"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  data-bs-toggle="modal"
-                                  data-bs-target={`#edititemModal${categorys.ID}`}
-                                  className="btn btn-warning menu-buttons"
+                                  <button
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={`#additemModal${categorys.ID}`}
+                                    className="btn btn-info menu-buttons"
+                                    onClick={() => { getID(categorys.ID) }}
+                                  >
+                                    <i className="fa-solid fa-plus"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={`#edititemModal${categorys.ID}`}
+                                    className="btn btn-warning menu-buttons"
                                   // onClick={() => {
                                   //   edit(categorys.ID);
                                   // }}
-                                >
-                                  <i className="fa-solid fa-pencil"></i>
-                                </button>
-                                <button
-                                  className="btn btn-danger menu-buttons"
-                                  onClick={() => {
-                                    del(categorys.ID);
-                                  }}
-                                >
-                                  <i className="fa-solid fa-trash"></i>
-                                </button>
-                                <button className="btn btn-info menu-buttons">
-                                  <i className="fa-solid fa-arrow-down"></i>
-                                </button>
-                                <button className="btn btn-info menu-buttons">
-                                  <i className="fa-solid fa-arrow-up"></i>
-                                </button>
+                                  >
+                                    <i className="fa-solid fa-pencil"></i>
+                                  </button>
+                                  <button
+                                    className="btn btn-danger menu-buttons"
+                                    onClick={() => {
+                                      del(categorys.ID);
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-trash"></i>
+                                  </button>
+                                  <button className="btn btn-info menu-buttons">
+                                    <i className="fa-solid fa-arrow-down"></i>
+                                  </button>
+                                  <button className="btn btn-info menu-buttons">
+                                    <i className="fa-solid fa-arrow-up"></i>
+                                  </button>
                                 </div>
                               </div>
                             </button>
@@ -433,7 +466,7 @@ console.log(formData);
                                               <div className="col-6">
                                                 <p>
                                                   {items.Price !==
-                                                  "undefined" ? (
+                                                    "undefined" ? (
                                                     <p>
                                                       $ {items.Price}
                                                       <br />
@@ -449,7 +482,8 @@ console.log(formData);
                                                   className="btn btn-light"
                                                   type="button"
                                                   data-bs-toggle="modal"
-                                                  data-bs-target="#addimgModal"
+                                                  data-bs-target={`#addimgModal${items.ID}`}
+                                                  onClick={() => { ItemIdUpdate(items.ID) }}
                                                 >
                                                   <i className="fa-solid fa-camera"></i>
                                                 </button>
@@ -502,108 +536,108 @@ console.log(formData);
                     <div className="modal-dialog">
                       <div className="modal-content">
                         <form enctype="multipart/form-data">
-                        <div className="modal-header">
-                          <h5
-                            className="modal-title boldtext"
-                            id="additemModalLabel"
-                          >
-                            ADD NEW ITEM
-                          </h5>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          <input
-                            className="form-control mb-3"
-                            placeholder="Item Name..."
-                            name="title"
-                            id="title"
-                            value={title}
-                            onChange={(e) => {
-                              setTitle(e.target.value);
-                            }}
-                          />
-                          <textarea
-                            className="form-control my-3"
-                            placeholder="Item Description..."
-                            rows="3"
-                            name="description"
-                            id="description"
-                            value={description}
-                            onChange={(e) => {
-                              setdescription(e.target.value);
-                            }}
-                          />
-                          <input
-                            className="form-control my-3"
-                            placeholder="Item Price..."
-                            name="price"
-                            id="price"
-                            value={price}
-                            onChange={(e) => {
-                              setPrice(e.target.value);
-                            }}
-                          />
-                          <input type="hidden" name="categoryID" id="categoryID" value={categoryID}/>
-                          <div className="form-check form-switch my-3">
-                            <div className="row justify-content-between">
-                              <label
-                                className="form-check-label"
-                                htmlFor="discountableitem"
-                              >
-                                Discountable
-                              </label>
+                          <div className="modal-header">
+                            <h5
+                              className="modal-title boldtext"
+                              id="additemModalLabel"
+                            >
+                              ADD NEW ITEM
+                            </h5>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div className="modal-body">
+                            <input
+                              className="form-control mb-3"
+                              placeholder="Item Name..."
+                              name="title"
+                              id="title"
+                              value={title}
+                              onChange={(e) => {
+                                setTitle(e.target.value);
+                              }}
+                            />
+                            <textarea
+                              className="form-control my-3"
+                              placeholder="Item Description..."
+                              rows="3"
+                              name="description"
+                              id="description"
+                              value={description}
+                              onChange={(e) => {
+                                setdescription(e.target.value);
+                              }}
+                            />
+                            <input
+                              className="form-control my-3"
+                              placeholder="Item Price..."
+                              name="price"
+                              id="price"
+                              value={price}
+                              onChange={(e) => {
+                                setPrice(e.target.value);
+                              }}
+                            />
+                            <input type="hidden" name="categoryID" id="categoryID" value={categoryID} />
+                            <div className="form-check form-switch my-3">
+                              <div className="row justify-content-between">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="discountableitem"
+                                >
+                                  Discountable
+                                </label>
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  name="discountableitem"
+                                  id="discountableitem"
+                                  onChange={(e) => { setdiscountableitem(e.target.checked) }}
+                                />
+                              </div>
+                            </div>
+                            <div className="input-group my-3">
                               <input
-                                className="form-check-input"
-                                type="checkbox"
-                                name="discountableitem"
-                                id="discountableitem"
-                                onChange={(e)=>{setdiscountableitem(e.target.checked)}}
+                                type="file"
+                                className="form-control"
+                                id="photo"
+                                name="photo"
+                                onChange={(e) => { setFile(e.target.files[0]) }}
                               />
                             </div>
-                          </div>
-                          <div className="input-group my-3">
-                            <input
-                              type="file"
-                              className="form-control"
-                              id="photo"
-                              name="photo"
-                              onChange={(e)=>{setFile(e.target.files[0])}}
-                            />
-                          </div>
-                          <div className="text-center my-3">
-                            <img
-                              className="modal-img"
-                              src=""
-                              alt=".."
+                            <div className="text-center my-3">
+                              <img
+                                className="modal-img"
+                                src=""
+                                alt=".."
                               // value={file}
-                            />
+                              />
+                            </div>
+                            <input type="hidden" id="categoryid" name="categoryid" value={categorys.ID} />
                           </div>
-                          <input type="hidden" id="categoryid" name="categoryid" value={categorys.ID} />
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                            ref={refCloseadd}
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-primary"
-                            onClick={() => {
-                              addItem(categorys.ID);
-                            }}
-                          >
-                            Save
-                          </button>
-                        </div>
+                          <div className="modal-footer">
+                            <button
+                              type="button"
+                              className="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                              ref={refCloseadd}
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-primary"
+                              onClick={() => {
+                                addItem(categorys.ID);
+                              }}
+                            >
+                              Save
+                            </button>
+                          </div>
                         </form>
                       </div>
                     </div>
@@ -691,7 +725,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="sunday"
-                                onChange={(e)=>{setsunday(e.target.checked)}}
+                                onChange={(e) => { setsunday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -704,7 +738,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="monday"
-                                onChange={(e)=>{setmonday(e.target.checked)}}
+                                onChange={(e) => { setmonday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -717,7 +751,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="tuesday"
-                                onChange={(e)=>{settuesday(e.target.checked)}}
+                                onChange={(e) => { settuesday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -733,7 +767,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="wednesday"
-                                onChange={(e)=>{setwednesday(e.target.checked)}}
+                                onChange={(e) => { setwednesday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -749,7 +783,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="thursday"
-                                onChange={(e)=>{setthursday(e.target.checked)}}
+                                onChange={(e) => { setthursday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -762,7 +796,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="friday"
-                                onChange={(e)=>{setfriday(e.target.checked)}}
+                                onChange={(e) => { setfriday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -778,7 +812,7 @@ console.log(formData);
                                 className="form-check-input"
                                 type="checkbox"
                                 id="saturday"
-                                onChange={(e)=>{setsaturday(e.target.checked)}}
+                                onChange={(e) => { setsaturday(e.target.checked) }}
                               />
                             </div>
                           </div>
@@ -806,59 +840,77 @@ console.log(formData);
                     </div>
                   </div>
 
-                  <div
-                    className="modal fade"
-                    id="addimgModal"
-                    tabIndex="-1"
-                    aria-labelledby="addimgModalLabel"
-                    aria-hidden="true"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5
-                            className="modal-title boldtext"
-                            id="addimgModalLabel"
-                          >
-                            EDIT ITEM IMAGE
-                          </h5>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          <div className="input-group my-3">
-                            <input
-                              type="file"
-                              className="form-control"
-                              id="inputGroupFile02"
-                            />
-                          </div>
-                          <div className="text-center my-3">
-                            <img className="modal-img" src="" />
-                          </div>
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                            ref={refCloseimage}
-                          >
-                            Close
-                          </button>
-                          <button type="button" className="btn btn-primary">
-                            Save
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {item &&
+                    item.map((items) => {
+                      return (
+                        <>
+                          {items.category_id === categorys.ID ? (
+                            <>
+                              <div
+                                className="modal fade"
+                                id={`addimgModal${items.ID}`}
+                                tabIndex="-1"
+                                aria-labelledby="addimgModalLabel"
+                                aria-hidden="true"
+                                data-bs-backdrop="static"
+                                data-bs-keyboard="false"
+                              >
+                                <div className="modal-dialog">
+                                  <div className="modal-content">
+                                    <div className="modal-header">
+                                      <h5
+                                        className="modal-title boldtext"
+                                        id="addimgModalLabel"
+                                      >
+                                        EDIT ITEM IMAGE
+                                      </h5>
+                                      <button
+                                        type="button"
+                                        className="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                      ></button>
+                                    </div>
+                                    <div className="modal-body">
+                                      <div className="input-group my-3">
+                                        <input
+                                          type="file"
+                                          className="form-control"
+                                          id="photo2"
+                                          name="photo2"
+                                          onChange={(e) => { setEditFile(e.target.files[0]) }}
+                                        />
+                                      </div>
+                                      <div className="text-center my-3">
+                                        <img className="modal-img" src="" />
+                                      </div>
+                                      <input type="hidden" id="categoryid2" name="categoryid2" value={items.ID} />
+                                    </div>
+                                    <div className="modal-footer">
+                                      <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                        ref={refCloseimage}
+                                      >
+                                        Close
+                                      </button>
+                                      <button type="button" className="btn btn-primary" onClick={() => { editItemImage() }}>
+                                        Save
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                      );
+                    })}
+
+
                 </>
               );
             })}
