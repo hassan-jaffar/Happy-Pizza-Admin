@@ -8,7 +8,7 @@ function ReferralScheme() {
   const [status, setStatus] = useState(false);
   const [new_customer, setnew_customer] = useState("");
   const [existing_customer, setexisting_customer] = useState("");
-  const {id} = useParams();
+  const { id } = useParams();
   const getstatus = localStorage.getItem("status");
 
   async function register() {
@@ -17,16 +17,16 @@ function ReferralScheme() {
         status,
         new_customer,
         existing_customer,
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
       };
       try {
         const result = await axios.post(
-          "http://localhost:5000/api/setting/referral",
+          "https://apinodejs.creativeparkingsolutions.com/api/setting/referral",
           details
         ).data;
         console.log(result);
         toast.success("Data has been saved");
-  
+
         setStatus(false);
         setnew_customer("");
         setexisting_customer("");
@@ -35,7 +35,7 @@ function ReferralScheme() {
         toast.warn("Something went wrong!");
       }
     }
-    else{
+    else {
       const details = {
         status,
         new_customer,
@@ -44,12 +44,12 @@ function ReferralScheme() {
       };
       try {
         const result = await axios.post(
-          "http://localhost:5000/api/setting/referral",
+          "https://apinodejs.creativeparkingsolutions.com/api/setting/referral",
           details
         ).data;
         console.log(result);
         toast.success("Data has been saved");
-  
+
         setStatus(false);
         setnew_customer("");
         setexisting_customer("");

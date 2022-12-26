@@ -28,19 +28,19 @@ function Pages() {
     console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
     setpage(duplicatepage.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(duplicatepage.length / 6));
-  }, [itemOffset,page]);
+  }, [itemOffset, page]);
   // const [status, setstatus] = useState("");
 
   // const [status2, setstatus2] = useState(true);
 
-  async function del(ID){
+  async function del(ID) {
     const details = {
       ID
     }
 
     try {
       const result = await axios.post(
-        `http://localhost:5000/api/superadmin/deletepage`,
+        `https://apinodejs.creativeparkingsolutions.com/api/superadmin/deletepage`,
         details
       ).data;
       setpage(result.data)
@@ -56,18 +56,18 @@ function Pages() {
     }
   }
 
-  async function update(){
+  async function update() {
     try {
-      const data = await (await axios.get('http://localhost:5000/api/superadmin/getallpages')).data
+      const data = await (await axios.get('https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallpages')).data
       setpage(data.data)
-       setduplicatepage(data.data);
+      setduplicatepage(data.data);
 
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function change(ID,status) {
+  async function change(ID, status) {
 
     const details = {
       ID,
@@ -75,14 +75,14 @@ function Pages() {
     }
 
     try {
-        const data = await (
-          await axios.post(
-            "http://localhost:5000/api/superadmin/updatepagestatus",details
-          )
-        ).data;
-        setpage(data.data);
-       
-        update()
+      const data = await (
+        await axios.post(
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/updatepagestatus", details
+        )
+      ).data;
+      setpage(data.data);
+
+      update()
     } catch (error) {
       console.log(error)
     }
@@ -93,7 +93,7 @@ function Pages() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getallpages"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallpages"
           )
         ).data;
         setpage(data.data);
@@ -109,11 +109,11 @@ function Pages() {
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
-        <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
+          <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -128,7 +128,7 @@ function Pages() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -185,10 +185,9 @@ function Pages() {
                     </li>
                     <li className="nav-item">
                       <Link
-                        to={`/setting/${
-                          JSON.parse(localStorage.getItem("currentuser"))[0]
+                        to={`/setting/${JSON.parse(localStorage.getItem("currentuser"))[0]
                             .resturant_ID
-                        }`}
+                          }`}
                         className="nav-link align-middle sidebartag"
                       >
                         <i className="fa-solid fa-gear"></i>
@@ -407,10 +406,10 @@ function Pages() {
                                     type="checkbox"
                                     role="switch"
                                     id="flexSwitchCheckChecked"
-                                    checked={pages.status === "true" ? (true):(false)}
-                                    onChange={(e)=>{setpage(page.map((item)=>( {...item,status:JSON.stringify(e.target.checked)})));change(pages.ID,JSON.stringify(e.target.checked))}}
-                                    // onChange={(e)=>{change(pages.ID,e)}}
-                                    // onClick={()=>{change(pages.ID)}}
+                                    checked={pages.status === "true" ? (true) : (false)}
+                                    onChange={(e) => { setpage(page.map((item) => ({ ...item, status: JSON.stringify(e.target.checked) }))); change(pages.ID, JSON.stringify(e.target.checked)) }}
+                                  // onChange={(e)=>{change(pages.ID,e)}}
+                                  // onClick={()=>{change(pages.ID)}}
                                   />
                                 </div>
                               </td>
@@ -430,7 +429,7 @@ function Pages() {
                                     className="dropdown-menu"
                                     aria-labelledby="dropdownMenuButton"
                                   >
-                                    <li className="dropdown-item" onClick={()=>{del(pages.ID)}}>
+                                    <li className="dropdown-item" onClick={() => { del(pages.ID) }}>
                                       <i className="fa-solid fa-ban btnicon"></i>
                                       Delete
                                     </li>
@@ -445,30 +444,30 @@ function Pages() {
 
                     <div className="row">
                       <div className="col mb-4 mt-4 d-flex justify-content-end">
-                      <ReactPaginate
-                breakLabel="..."
-                nextLabel="Next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< Previous"
-                renderOnZeroPageCount={null}
-         
-                marginPagesDisplayed={2}
-          
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-             
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
-                containerClassName="pagination"
-                activeClassName="active"
-             
-              />
+                        <ReactPaginate
+                          breakLabel="..."
+                          nextLabel="Next >"
+                          onPageChange={handlePageClick}
+                          pageRangeDisplayed={5}
+                          pageCount={pageCount}
+                          previousLabel="< Previous"
+                          renderOnZeroPageCount={null}
+
+                          marginPagesDisplayed={2}
+
+                          pageClassName="page-item"
+                          pageLinkClassName="page-link"
+                          previousClassName="page-item"
+                          previousLinkClassName="page-link"
+                          nextClassName="page-item"
+                          nextLinkClassName="page-link"
+
+                          breakClassName="page-item"
+                          breakLinkClassName="page-link"
+                          containerClassName="pagination"
+                          activeClassName="active"
+
+                        />
                       </div>
                     </div>
                   </div>

@@ -11,11 +11,11 @@ function Ranks() {
     async function fetchData() {
       try {
         const details = {
-          id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+          id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
         }
         const data = await (
           await axios.post(
-            "http://localhost:5000/api/superadmin/getranks",
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getranks",
             details
           )
         ).data;
@@ -32,11 +32,11 @@ function Ranks() {
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
-        <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
+          <div className="col-auto col-lg-3 col-xl-2 px-sm-2 sidebar">
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -51,7 +51,7 @@ function Ranks() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -108,10 +108,9 @@ function Ranks() {
                     </li>
                     <li className="nav-item">
                       <Link
-                        to={`/setting/${
-                          JSON.parse(localStorage.getItem("currentuser"))[0]
+                        to={`/setting/${JSON.parse(localStorage.getItem("currentuser"))[0]
                             .resturant_ID
-                        }`}
+                          }`}
                         className="nav-link align-middle sidebartag"
                       >
                         <i className="fa-solid fa-gear"></i>
@@ -316,36 +315,36 @@ function Ranks() {
                           </tr>
                         </thead>
                         <tbody>
-                          {rank.map((type)=>{
+                          {rank.map((type) => {
                             return <>
-                          <tr>
-                            <th scope="row">{type.ID}</th>
-                            <td>{type.name}</td>
-                            <td>{type.value1}</td>
-                            <td>
-                              {type.status1 === "true" ? (<span className="badge text-bg-info info">
-                                Active
-                              </span>
-                              ):(
-                                <span className="badge bg-danger info">
-                               Not Active
-                              </span>
-                              )}
-                              
-                            </td>
-                            <td>
-                              <Link to={`/editrank/${type.ID}`}><button
-                                className="btn btn-info btn-sm"
-                                style={{ color: "white" }}
-                              >
-                                Edit
-                              </button></Link>
-                            </td>
-                          </tr>
-                           
+                              <tr>
+                                <th scope="row">{type.ID}</th>
+                                <td>{type.name}</td>
+                                <td>{type.value1}</td>
+                                <td>
+                                  {type.status1 === "true" ? (<span className="badge text-bg-info info">
+                                    Active
+                                  </span>
+                                  ) : (
+                                    <span className="badge bg-danger info">
+                                      Not Active
+                                    </span>
+                                  )}
+
+                                </td>
+                                <td>
+                                  <Link to={`/editrank/${type.ID}`}><button
+                                    className="btn btn-info btn-sm"
+                                    style={{ color: "white" }}
+                                  >
+                                    Edit
+                                  </button></Link>
+                                </td>
+                              </tr>
+
                             </>
                           })}
-                          
+
                         </tbody>
                       </table>
                     </div>

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { useParams } from "react-router-dom";
@@ -8,36 +8,36 @@ function MenuType() {
   const [lowercase, setlowercase] = useState(false)
   const [uppercase, setuppercase] = useState(false)
   const [capitalized, setcapitalized] = useState(false)
-  const {id} = useParams();
+  const { id } = useParams();
   const getstatus = localStorage.getItem("status");
 
-  async function register(){
-    if(getstatus === "true"){
+  async function register() {
+    if (getstatus === "true") {
       const details = {
         lowercase,
         uppercase,
         capitalized,
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
       }
       try {
-        
-        const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
+
+        const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/menutype", details).data;
         console.log(result)
         toast.success("Data has been saved")
-  
+
         setlowercase(false)
         setuppercase(false)
         setcapitalized(false)
-  
-  
-  
-    } catch (error) {
+
+
+
+      } catch (error) {
         console.log(error);
         toast.warn("Something went wrong!")
-  
+
+      }
     }
-    }
-    else{
+    else {
       const details = {
         lowercase,
         uppercase,
@@ -45,28 +45,28 @@ function MenuType() {
         id
       }
       try {
-        
-        const result = await axios.post("http://localhost:5000/api/setting/menutype",details).data;
+
+        const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/menutype", details).data;
         console.log(result)
         toast.success("Data has been saved")
-  
+
         setlowercase(false)
         setuppercase(false)
         setcapitalized(true)
-  
-  
-  
-    } catch (error) {
+
+
+
+      } catch (error) {
         console.log(error);
         toast.warn("Something went wrong!")
-  
-    }
+
+      }
     }
 
   }
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <h6 className="px-1">MENU TYPE</h6>
       <hr />
       <br />
@@ -78,7 +78,7 @@ function MenuType() {
             name="flexRadioDefault0"
             id="flexRadioDefault1"
             checked={uppercase}
-            onChange={(e)=>{setuppercase(e.target.checked)}}
+            onChange={(e) => { setuppercase(e.target.checked) }}
           />
           <label className="form-check-label" htmlFor="flexRadioDefault1">
             Uppercase
@@ -91,7 +91,7 @@ function MenuType() {
             name="flexRadioDefault0"
             id="flexRadioDefault3"
             checked={lowercase}
-            onChange={(e)=>{setlowercase(e.target.checked)}}
+            onChange={(e) => { setlowercase(e.target.checked) }}
           />
           <label className="form-check-label" htmlFor="flexRadioDefault3">
             Lowercase
@@ -104,8 +104,9 @@ function MenuType() {
             name="flexRadioDefault0"
             id="flexRadioDefault2"
             checked={capitalized}
-            onChange={(e)=>{setcapitalized(e.target.checked)
-            
+            onChange={(e) => {
+              setcapitalized(e.target.checked)
+
             }}
           />
           <label className="form-check-label" htmlFor="flexRadioDefault2">

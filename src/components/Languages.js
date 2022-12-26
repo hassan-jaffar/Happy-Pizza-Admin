@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from'axios';
+import axios from 'axios';
 
 function Languages() {
   const [language, setlanguage] = useState([])
@@ -9,11 +9,11 @@ function Languages() {
     async function fetchData() {
       try {
         const details = {
-          id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+          id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
         }
         const data = await (
           await axios.post(
-            "http://localhost:5000/api/superadmin/getlanguage",
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getlanguage",
             details
           )
         ).data;
@@ -69,10 +69,10 @@ function Languages() {
         </div>
 
         <div className="col-md-2">
-        <Link to="/addlanguage">
-          <button className="btn btn-outline-dark w-100">
-            <i className="fa-solid fa-plus me-2"></i>Add
-          </button>
+          <Link to="/addlanguage">
+            <button className="btn btn-outline-dark w-100">
+              <i className="fa-solid fa-plus me-2"></i>Add
+            </button>
           </Link>
         </div>
       </div>
@@ -86,15 +86,15 @@ function Languages() {
             </tr>
           </thead>
           <tbody>
-            {language && language.map((type)=>{
+            {language && language.map((type) => {
               return <>
-              <tr>
-              <th scope="row">{type.name}</th>
-              <td><Link to="/translations">{type.locale}</Link></td>
-            </tr>
-            </>
+                <tr>
+                  <th scope="row">{type.name}</th>
+                  <td><Link to="/translations">{type.locale}</Link></td>
+                </tr>
+              </>
             })}
-            
+
             {/* <tr>
             <th scope="row">en</th>
             <td><Link to="/translations">en</Link></td>

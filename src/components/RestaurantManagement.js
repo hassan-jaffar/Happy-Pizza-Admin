@@ -75,7 +75,7 @@ function RestaurantManagement() {
 
     try {
       const result = await axios.post(
-        "http://localhost:5000/api/setting/resturantmanagement",
+        "https://apinodejs.creativeparkingsolutions.com/api/setting/resturantmanagement",
         formData, config
       ).data;
       console.log(result);
@@ -102,7 +102,7 @@ function RestaurantManagement() {
   async function update() {
     try {
       const data = await (
-        await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
+        await axios.get(`https://apinodejs.creativeparkingsolutions.com/api/superadmin/geteditresturant/${id}`)
       ).data;
       setupdatename(data.data['name']);
       setupdateowner_name(data.data['owner_name']);
@@ -141,7 +141,7 @@ function RestaurantManagement() {
       async function fetchData() {
         try {
           const data = await (
-            await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${cid}`)
+            await axios.get(`https://apinodejs.creativeparkingsolutions.com/api/superadmin/geteditresturant/${cid}`)
           ).data;
           update();
           setupdatename(data.data['name']);
@@ -167,7 +167,7 @@ function RestaurantManagement() {
       async function fetchData() {
         try {
           const data = await (
-            await axios.get(`http://localhost:5000/api/superadmin/geteditresturant/${id}`)
+            await axios.get(`https://apinodejs.creativeparkingsolutions.com/api/superadmin/geteditresturant/${id}`)
           ).data;
           update();
           setupdatename(data.data['name']);
@@ -418,7 +418,7 @@ function RestaurantManagement() {
                 }}
               />
               <img
-                src={`http://localhost:5000${file}`}
+                src={`https://apinodejs.creativeparkingsolutions.com${file}`}
                 // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
                 className="settingimg"
                 alt="404 not found"
@@ -434,7 +434,7 @@ function RestaurantManagement() {
                 }}
               />
               <img
-                src={`http://localhost:5000${cimage}`}
+                src={`https://apinodejs.creativeparkingsolutions.com${cimage}`}
                 // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
                 className="settingimg"
                 alt="404 not found"
@@ -450,7 +450,7 @@ function RestaurantManagement() {
                 }}
               />
               <img
-                src={`http://localhost:5000${rimage}`}
+                src={`https://apinodejs.creativeparkingsolutions.com${rimage}`}
                 // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
                 className="settingimg"
                 alt="404 not found"

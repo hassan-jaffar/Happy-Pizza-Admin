@@ -5,38 +5,38 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 function ResetPassword() {
-  const {email} = useParams();
+  const { email } = useParams();
   const [password, setpassword] = useState("");
   const [cpassword, setcpassword] = useState("");
 
-  async function register(){
+  async function register() {
     if (password === cpassword) {
-        const user = {
-            email,
-            password
-        };
+      const user = {
+        email,
+        password
+      };
 
-        try {
+      try {
 
-            // setloading(true)
-            const result = await axios.post(`http://localhost:5000/api/superadmin/resetpassword/${email}`,user).data;
-            console.log(result)
-            toast.success("Password change Successfull")
-            // setloading(true)
-            setInterval(() => {
-              window.location.href = "/"
-            }, 2000);
+        // setloading(true)
+        const result = await axios.post(`https://apinodejs.creativeparkingsolutions.com/api/superadmin/resetpassword/${email}`, user).data;
+        console.log(result)
+        toast.success("Password change Successfull")
+        // setloading(true)
+        setInterval(() => {
+          window.location.href = "/"
+        }, 2000);
 
-        } catch (error) {
-            console.log(error);
-            toast.warn("Something went wrong!")
-            // setloading(true)
-        }
+      } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+        // setloading(true)
+      }
     }
-    else{
-        alert("Password is not matched");
+    else {
+      alert("Password is not matched");
     }
-}
+  }
   return (
     <>
       <ToastContainer />

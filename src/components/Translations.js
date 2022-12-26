@@ -29,7 +29,7 @@ function Translations() {
         };
         const data = await (
           await axios.post(
-            "http://localhost:5000/api/superadmin/gettranslation",
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/gettranslation",
             details
           )
         ).data;
@@ -95,23 +95,23 @@ function Translations() {
           </form>
         </div>
         <div className="col-md-2">
-          <select name="language" value={type} id="language" className="w-100" style={{height: '100%'}}>
+          <select name="language" value={type} id="language" className="w-100" style={{ height: '100%' }}>
             <option value="-----">-----</option>
             <option value="en">EN</option>
           </select>
         </div>
         <div className="col-md-3">
           <select name="---" id="---" value={type}
-                          onChange={(e) => {
-                            filterByGroup(e.target.value);
-                          }} className="w-100" style={{height: '100%'}}>
+            onChange={(e) => {
+              filterByGroup(e.target.value);
+            }} className="w-100" style={{ height: '100%' }}>
             <option value="---">---</option>
-            {translation2.map((type)=>{
+            {translation2.map((type) => {
               return <>
-              <option value={type.ID}>{type.groupvalidation}</option>
+                <option value={type.ID}>{type.groupvalidation}</option>
               </>
             })}
-            
+
           </select>
         </div>
         <div className="col-md-1">

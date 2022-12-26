@@ -7,14 +7,14 @@ import axios from 'axios';
 function ForgotPassword() {
   const [email, setemail] = useState("")
 
-  async function save(){
+  async function save() {
     const details = {
       email
     }
     try {
       const result = await (
         await axios.post(
-          "http://localhost:5000/api/superadmin/forgetpassword",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/forgetpassword",
           details
         )
       ).data
@@ -54,10 +54,10 @@ function ForgotPassword() {
                   required
                 />
               </div>
-              <div style={{marginTop: '-15px'}} className='container'>
+              <div style={{ marginTop: '-15px' }} className='container'>
                 <div className="mb-5 row">
                   <div className='col-12'>
-                  {/* <Link to="/resetpassword"> */}
+                    {/* <Link to="/resetpassword"> */}
                     <button
                       className="btn btnSignColor signinbtn"
                       onClick={save}

@@ -84,7 +84,7 @@ function Dashboard() {
     try {
       const data = await (
         await axios.post(
-          "http://localhost:5000/api/superadmin/openclose",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/openclose",
           details
         )
       ).data;
@@ -110,26 +110,26 @@ function Dashboard() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getliveresturants"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getliveresturants"
           )
         ).data;
 
         const result = await (
-          await axios.get("http://localhost:5000/api/superadmin/resturantcount")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/superadmin/resturantcount")
         ).data;
 
         const detail = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getreattiemap"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getreattiemap"
           )
         ).data;
 
         const salevalume = await (
-          await axios.get("http://localhost:5000/api/admin/salesvloume")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/salesvloume")
         ).data;
 
         const salesvloumeresturant1 = await (
-          await axios.post("http://localhost:5000/api/admin/salesvloumeresturant", id)
+          await axios.post("https://apinodejs.creativeparkingsolutions.com/api/admin/salesvloumeresturant", id)
         ).data;
 
 
@@ -151,7 +151,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getorderlength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getorderlength")
         ).data;
         setOrders(data.data);
       } catch (error) {
@@ -165,7 +165,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getcustomerlength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getcustomerlength")
         ).data;
         setcustomer(data.data);
       } catch (error) {
@@ -179,7 +179,7 @@ function Dashboard() {
     async function fetchData() {
       try {
         const data = await (
-          await axios.get("http://localhost:5000/api/admin/getitemslength")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/admin/getitemslength")
         ).data;
 
         setitem(data.data);
@@ -198,7 +198,7 @@ function Dashboard() {
       try {
         const data = await (
           await axios.post(
-            "http://localhost:5000/api/superadmin/getopenclose",
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getopenclose",
             details
           )
         ).data;
@@ -218,7 +218,7 @@ function Dashboard() {
     try {
       const data = await (
         await axios.post(
-          "http://localhost:5000/api/superadmin/getopenclose",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getopenclose",
           details
         )
       ).data;

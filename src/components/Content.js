@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from 'axios';
@@ -9,8 +9,8 @@ import { useParams } from "react-router-dom";
 
 function Content() {
 
-  const {id} = useParams();
-     // For Gallery
+  const { id } = useParams();
+  // For Gallery
   const [link, setlink] = useState("");
   const [image, setimage] = useState("");
 
@@ -50,76 +50,76 @@ function Content() {
   const inputHandler = (event, editor) => {
     setdescription(editor.getData());
     // alert(parse(editor.getData()).props.children);
-      // Define your onSubmit function here
-      // ...
-      // for example, setData() here
+    // Define your onSubmit function here
+    // ...
+    // for example, setData() here
   };
 
   // For content 
-  async function addcontent(e){
+  async function addcontent(e) {
     var formData = new FormData();
-    formData.append("id",id)
-    formData.append("frontendtemplate",frontendtemplate)
-    formData.append("fadmintemplate",fadmintemplate)
-    formData.append("pcolor",pcolor)
-    formData.append("scolor",scolor)
-    formData.append("title1",title1)
-    formData.append("title2",title2)
-    formData.append("description1",description1)
-    formData.append("bannertext1",bannertext1)
-    formData.append("box1title",box1title)
-    formData.append("box1link",box1link)
-    formData.append("box2description",box2description)
-    formData.append("box3title",box3title)
-    formData.append("box3link",box3link)
-    formData.append("box3link2",box3link2)
-    formData.append("description2",description2)
-    formData.append("bannertext2",bannertext2)
-    formData.append("box1description",box1description)
-    formData.append("box2title",box2title)
-    formData.append("box2link",box2link)
-    formData.append("box3description",box3description)
+    formData.append("id", id)
+    formData.append("frontendtemplate", frontendtemplate)
+    formData.append("fadmintemplate", fadmintemplate)
+    formData.append("pcolor", pcolor)
+    formData.append("scolor", scolor)
+    formData.append("title1", title1)
+    formData.append("title2", title2)
+    formData.append("description1", description1)
+    formData.append("bannertext1", bannertext1)
+    formData.append("box1title", box1title)
+    formData.append("box1link", box1link)
+    formData.append("box2description", box2description)
+    formData.append("box3title", box3title)
+    formData.append("box3link", box3link)
+    formData.append("box3link2", box3link2)
+    formData.append("description2", description2)
+    formData.append("bannertext2", bannertext2)
+    formData.append("box1description", box1description)
+    formData.append("box2title", box2title)
+    formData.append("box2link", box2link)
+    formData.append("box3description", box3description)
 
-    formData.append("menu",menu)
-    formData.append("banner1",banner1)
-    formData.append("banner2",banner2)
-    formData.append("banner3",banner3)
-    formData.append("banner4",banner4)
-    formData.append("banner5",banner5)
-    formData.append("box1icon",box1icon)
-    formData.append("box2icon",box2icon)
-    formData.append("box3icon",box3icon)
+    formData.append("menu", menu)
+    formData.append("banner1", banner1)
+    formData.append("banner2", banner2)
+    formData.append("banner3", banner3)
+    formData.append("banner4", banner4)
+    formData.append("banner5", banner5)
+    formData.append("box1icon", box1icon)
+    formData.append("box2icon", box2icon)
+    formData.append("box3icon", box3icon)
 
     const config = {
-      headers:{
-          "Content-Type":"multipart/form-data"
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
+    }
+
+    try {
+      const result = await axios.post(
+        " https://apinodejs.creativeparkingsolutions.com/api/setting/addcontent",
+        formData, config
+      ).data;
+      console.log(result);
+      toast.success("Content has been added");
+
+    } catch (error) {
+      console.log(error);
+      toast.warn("Something went wrong try again!");
+    }
+
+
+
   }
 
-  try {
-    const result = await axios.post(
-      " http://localhost:5000/api/setting/addcontent",
-     formData, config
-    ).data;
-    console.log(result);
-    toast.success("Content has been added");
-
-  } catch (error) {
-    console.log(error);
-    toast.warn("Something went wrong try again!");
-  }
-
-
-    
-  }
-
-  async function add(){
+  async function add() {
     const detail = {
       id,
       description
     }
     try {
-      const result = await axios.post("http://localhost:5000/api/setting/addtimings",detail).data;
+      const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/addtimings", detail).data;
       console.log(result.message)
       toast.success("Data has been inserted")
       setdescription("")
@@ -127,24 +127,24 @@ function Content() {
       console.log(error)
       toast.warn(error.response.data.message)
     }
- 
+
   }
 
   // For gallery
-  async function gallerysave(){
+  async function gallerysave() {
     var formData = new FormData();
-    formData.append("id",id)
-    formData.append("link",link);
-    formData.append("image",image);
+    formData.append("id", id)
+    formData.append("link", link);
+    formData.append("image", image);
 
     const config = {
-      headers:{
-          "Content-Type":"multipart/form-data"
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
-  }
+    }
 
     try {
-      const result = await axios.post("http://localhost:5000/api/setting/addgallery",formData, config).data;
+      const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/addgallery", formData, config).data;
       console.log(result.message)
       toast.success("Data has been inserted")
       setimage("")
@@ -158,7 +158,7 @@ function Content() {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <h6 className="px-1">CONTENT</h6>
       <hr />
       <br />
@@ -184,7 +184,7 @@ function Content() {
               <label for="validationCustomUsername" class="form-label">
                 Frontend Template
               </label>
-              <select class="form-select" name="frontendtemplate" value={frontendtemplate} onChange={(e)=>{setfrontendtemplate(e.target.value)}} aria-label="Default select example">
+              <select class="form-select" name="frontendtemplate" value={frontendtemplate} onChange={(e) => { setfrontendtemplate(e.target.value) }} aria-label="Default select example">
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
@@ -202,7 +202,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box3link2"
                   value={box3link2}
-                  onChange={(e)=>{setbox3link2(e.target.value)}}
+                  onChange={(e) => { setbox3link2(e.target.value) }}
                   required
                 />
               </div>
@@ -214,7 +214,7 @@ function Content() {
               <label for="validationCustomUsername" class="form-label">
                 Frontend & Admin Template
               </label>
-              <select class="form-select" name-="fadmintemplate" value={fadmintemplate} onChange={(e)=>{setfadmintemplate(e.target.value)}} aria-label="Default select example">
+              <select class="form-select" name-="fadmintemplate" value={fadmintemplate} onChange={(e) => { setfadmintemplate(e.target.value) }} aria-label="Default select example">
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
@@ -230,7 +230,7 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="menu"
-                  onChange={(e)=>{setmenu(e.target.files[0])}}
+                  onChange={(e) => { setmenu(e.target.files[0]) }}
                   // value={menu}
                   required
                 />
@@ -248,7 +248,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="banner1"
                   // value={banner1}
-                  onChange={(e)=>{setbanner1(e.target.files[0])}}
+                  onChange={(e) => { setbanner1(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -269,7 +269,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="pcolor"
                   value={pcolor}
-                  onChange={(e)=>{setpcolor(e.target.value)}}
+                  onChange={(e) => { setpcolor(e.target.value) }}
                   required
                 />
               </div>
@@ -286,7 +286,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="banner2"
                   // value={banner2}
-                  onChange={(e)=>{setbanner2(e.target.files[0])}}
+                  onChange={(e) => { setbanner2(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -303,7 +303,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="banner3"
                   // value={banner3}
-                  onChange={(e)=>{setbanner3(e.target.files[0])}}
+                  onChange={(e) => { setbanner3(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -324,7 +324,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="scolor"
                   value={scolor}
-                  onChange={(e)=>{setscolor(e.target.value)}}
+                  onChange={(e) => { setscolor(e.target.value) }}
                   required
                 />
               </div>
@@ -341,7 +341,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="banner4"
                   // value={banner4}
-                  onChange={(e)=>{setbanner4(e.target.files[0])}}
+                  onChange={(e) => { setbanner4(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -357,7 +357,7 @@ function Content() {
                   id="validationCustomUsername"
                   aria-describedby="inputGroupPrepend"
                   name="banner5"
-                  onChange={(e)=>{setbanner5(e.target.files[0])}}
+                  onChange={(e) => { setbanner5(e.target.files[0]) }}
                   // value={banner5}
                   required
                 />
@@ -379,7 +379,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="title1"
                   value={title1}
-                  onChange={(e)=>{settitle1(e.target.value)}}
+                  onChange={(e) => { settitle1(e.target.value) }}
                   required
                 />
               </div>
@@ -396,7 +396,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box1icon"
                   // value={box1icon}
-                  onChange={(e)=>{setbox1icon(e.target.files[0])}}
+                  onChange={(e) => { setbox1icon(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -413,7 +413,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box2icon"
                   // value={box2icon}
-                  onChange={(e)=>{setbox2icon(e.target.files[0])}}
+                  onChange={(e) => { setbox2icon(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -434,7 +434,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="title2"
                   value={title2}
-                  onChange={(e)=>{settitle2(e.target.value)}}
+                  onChange={(e) => { settitle2(e.target.value) }}
                   required
                 />
               </div>
@@ -451,7 +451,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box3icon"
                   // value={box3icon}
-                  onChange={(e)=>{setbox3icon(e.target.files[0])}}
+                  onChange={(e) => { setbox3icon(e.target.files[0]) }}
                   required
                 />
               </div>
@@ -472,7 +472,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="description1"
                   value={description1}
-                  onChange={(e)=>{setdescription1(e.target.value)}}
+                  onChange={(e) => { setdescription1(e.target.value) }}
                   required
                 />
               </div>
@@ -490,7 +490,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="description2"
                   value={description2}
-                  onChange={(e)=>{setdescription2(e.target.value)}}
+                  onChange={(e) => { setdescription2(e.target.value) }}
                   required
                 />
               </div>
@@ -511,7 +511,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="bannertext1"
                   value={bannertext1}
-                  onChange={(e)=>{setbannertext1(e.target.value)}}
+                  onChange={(e) => { setbannertext1(e.target.value) }}
                   required
                 />
               </div>
@@ -529,7 +529,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="bannertext2"
                   value={bannertext2}
-                  onChange={(e)=>{setbannertext2(e.target.value)}}
+                  onChange={(e) => { setbannertext2(e.target.value) }}
                   required
                 />
               </div>
@@ -550,7 +550,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box1title"
                   value={box1title}
-                  onChange={(e)=>{setbox1title(e.target.value)}}
+                  onChange={(e) => { setbox1title(e.target.value) }}
                   required
                 />
               </div>
@@ -568,7 +568,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box1description"
                   value={box1description}
-                  onChange={(e)=>{setbox1description(e.target.value)}}
+                  onChange={(e) => { setbox1description(e.target.value) }}
                   required
                 />
               </div>
@@ -589,7 +589,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box1link"
                   value={box1link}
-                  onChange={(e)=>{setbox1link(e.target.value)}}
+                  onChange={(e) => { setbox1link(e.target.value) }}
                   required
                 />
               </div>
@@ -607,7 +607,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box2title"
                   value={box2title}
-                  onChange={(e)=>{setbox2title(e.target.value)}}
+                  onChange={(e) => { setbox2title(e.target.value) }}
                   required
                 />
               </div>
@@ -628,7 +628,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box2description"
                   value={box2description}
-                  onChange={(e)=>{setbox2description(e.target.value)}}
+                  onChange={(e) => { setbox2description(e.target.value) }}
                   required
                 />
               </div>
@@ -646,7 +646,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box2link"
                   value={box2link}
-                  onChange={(e)=>{setbox2link(e.target.value)}}
+                  onChange={(e) => { setbox2link(e.target.value) }}
                   required
                 />
               </div>
@@ -667,7 +667,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box3title"
                   value={box3title}
-                  onChange={(e)=>{setbox3title(e.target.value)}}
+                  onChange={(e) => { setbox3title(e.target.value) }}
                   required
                 />
               </div>
@@ -685,7 +685,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box3description"
                   value={box3description}
-                  onChange={(e)=>{setbox3description(e.target.value)}}
+                  onChange={(e) => { setbox3description(e.target.value) }}
                   required
                 />
               </div>
@@ -703,7 +703,7 @@ function Content() {
                   aria-describedby="inputGroupPrepend"
                   name="box3link"
                   value={box3link}
-                  onChange={(e)=>{setbox3link(e.target.value)}}
+                  onChange={(e) => { setbox3link(e.target.value) }}
                   required
                 />
               </div>
@@ -735,7 +735,7 @@ function Content() {
               aria-describedby="inputGroupPrepend"
               name="link"
               value={link}
-              onChange={(e)=>{setlink(e.target.value)}}
+              onChange={(e) => { setlink(e.target.value) }}
               required
             />
           </div>
@@ -752,7 +752,7 @@ function Content() {
               id="validationCustomUsername"
               aria-describedby="inputGroupPrepend"
               name="image"
-              onChange={(e)=>{setimage(e.target.files[0])}}
+              onChange={(e) => { setimage(e.target.files[0]) }}
               required
             />
           </div>

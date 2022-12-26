@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { useParams } from "react-router-dom";
@@ -14,11 +14,11 @@ function SettingsApp() {
   const [standard_print, setstandard_print] = useState("On order received")
   const [main_print, setmain_print] = useState("We accept the order")
   const [kitchen_print, setkitchen_print] = useState("We accept the order")
-  const {id} = useParams();
+  const { id } = useParams();
   const getstatus = localStorage.getItem("status");
 
   async function register() {
-    if(getstatus === "true"){
+    if (getstatus === "true") {
       const details = {
         title,
         description,
@@ -29,14 +29,14 @@ function SettingsApp() {
         standard_print,
         main_print,
         kitchen_print,
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
       }
       try {
 
-        const result = await axios.post("http://localhost:5000/api/setting/apps",details).data;
+        const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/apps", details).data;
         console.log(result)
         toast.success("Data has been saved")
-  
+
         settitle("");
         setdescription("");
         setapi_key("");
@@ -46,16 +46,16 @@ function SettingsApp() {
         setstandard_print("On order received");
         setmain_print("We accept the order");
         setkitchen_print("We accept the order")
-  
-  
-  
-    } catch (error) {
+
+
+
+      } catch (error) {
         console.log(error);
         toast.warn("Something went wrong!")
-  
+
+      }
     }
-    }
-    else{
+    else {
       const details = {
         title,
         description,
@@ -70,10 +70,10 @@ function SettingsApp() {
       }
       try {
 
-        const result = await axios.post("http://localhost:5000/api/setting/apps",details).data;
+        const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/apps", details).data;
         console.log(result)
         toast.success("Data has been saved")
-  
+
         settitle("");
         setdescription("");
         setapi_key("");
@@ -83,20 +83,20 @@ function SettingsApp() {
         setstandard_print("On order received");
         setmain_print("We accept the order");
         setkitchen_print("We accept the order")
-  
-  
-  
-    } catch (error) {
+
+
+
+      } catch (error) {
         console.log(error);
         toast.warn("Something went wrong!")
-  
-    }
+
+      }
     }
 
   }
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <h6 className="px-1">APPS</h6>
       <hr />
       <br />
@@ -113,7 +113,7 @@ function SettingsApp() {
             type="text"
             placeholder="Impressum"
             value={title}
-            onChange={(e)=>{settitle(e.target.value)}}
+            onChange={(e) => { settitle(e.target.value) }}
           />
           <label htmlFor="impressum" className="mt-3">
             Impressum:
@@ -124,7 +124,7 @@ function SettingsApp() {
             type="text"
             rows="5"
             value={description}
-            onChange={(e)=>{setdescription(e.target.value)}}
+            onChange={(e) => { setdescription(e.target.value) }}
           />
           <h1 className="boldtext mt-5">Print Node</h1>
           <hr />
@@ -137,7 +137,7 @@ function SettingsApp() {
             type="text"
             placeholder="Enter printnode.com api key"
             value={api_key}
-            onChange={(e)=>{setapi_key(e.target.value)}}
+            onChange={(e) => { setapi_key(e.target.value) }}
           />
           <label htmlFor="titleimpress" className="mt-3">
             Main Thermal Printer ID:
@@ -148,7 +148,7 @@ function SettingsApp() {
             type="text"
             placeholder="Enter printnode printer  ID"
             value={main_printer}
-            onChange={(e)=>{setmain_printer(e.target.value)}}
+            onChange={(e) => { setmain_printer(e.target.value) }}
           />
           <label htmlFor="titleimpress" className="mt-3">
             Kitchen Thermal Printer ID:
@@ -159,7 +159,7 @@ function SettingsApp() {
             type="text"
             placeholder="Enter printnode printer ID"
             value={kitchen_printer}
-            onChange={(e)=>{setkitchen_printer(e.target.value)}}
+            onChange={(e) => { setkitchen_printer(e.target.value) }}
           />
           <label htmlFor="titleimpress" className="mt-3">
             Standard Printer ID:
@@ -170,12 +170,12 @@ function SettingsApp() {
             type="text"
             placeholder="Enter printnode printer ID for A4 Invoice printing"
             value={standard_printer}
-            onChange={(e)=>{setstandard_printer(e.target.value)}}
+            onChange={(e) => { setstandard_printer(e.target.value) }}
           />
           <label htmlFor="titleimpress" className="mt-3">
             Print A4 Standard order when:
           </label>
-          <select className="form-select" aria-label="Default select example" value={standard_print} onChange={(e)=>{setstandard_print(e.target.value)}}>
+          <select className="form-select" aria-label="Default select example" value={standard_print} onChange={(e) => { setstandard_print(e.target.value) }}>
             <option value="We accept the order">We accept the order</option>
             <option value="On order received" selected>
               On order received
@@ -184,7 +184,7 @@ function SettingsApp() {
           <label htmlFor="titleimpress" className="mt-3">
             Print on main thermal printer when:
           </label>
-          <select className="form-select" aria-label="Default select example" value={main_print} onChange={(e)=>{setmain_print(e.target.value)}}>
+          <select className="form-select" aria-label="Default select example" value={main_print} onChange={(e) => { setmain_print(e.target.value) }}>
             <option value="We accept the order" selected>
               We accept the order
             </option>
@@ -193,7 +193,7 @@ function SettingsApp() {
           <label htmlFor="titleimpress" className="mt-3">
             Print on kitchen thermal printer when:
           </label>
-          <select className="form-select" aria-label="Default select example" value={kitchen_print} onChange={(e)=>{setkitchen_print(e.target.value)}}>
+          <select className="form-select" aria-label="Default select example" value={kitchen_print} onChange={(e) => { setkitchen_print(e.target.value) }}>
             <option value="We accept the order" selected>
               We accept the order
             </option>

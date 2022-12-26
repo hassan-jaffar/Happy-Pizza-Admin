@@ -207,11 +207,11 @@ function OrdersTable() {
       }
       try {
         const data = await (
-          await axios.post("http://localhost:5000/api/admin/getallorders", detail)
+          await axios.post("https://apinodejs.creativeparkingsolutions.com/api/admin/getallorders", detail)
         ).data;
 
         const resturant = await (
-          await axios.get("http://localhost:5000/api/superadmin/orderreport")
+          await axios.get("https://apinodejs.creativeparkingsolutions.com/api/superadmin/orderreport")
         ).data;
         setOrders(data.data);
         setduplicateorders(data.data);

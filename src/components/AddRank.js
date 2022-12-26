@@ -11,9 +11,9 @@ function AddRank() {
   const [value, setvalue] = useState("");
   const [status, setstatus] = useState(false);
 
-  async function save(){
+  async function save() {
     const details = {
-      id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
+      id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID,
       name,
       value,
       status
@@ -21,7 +21,7 @@ function AddRank() {
     try {
       const result = await (
         await axios.post(
-          "http://localhost:5000/api/superadmin/addrank",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/addrank",
           details
         )
       ).data
@@ -29,7 +29,7 @@ function AddRank() {
       setname("");
       setvalue("")
       setstatus(false);
-      
+
     } catch (error) {
       console.log(error)
       toast.warn("Something went wrong! Please try again later")
@@ -37,7 +37,7 @@ function AddRank() {
   }
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
@@ -45,7 +45,7 @@ function AddRank() {
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -60,7 +60,7 @@ function AddRank() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -116,10 +116,9 @@ function AddRank() {
                     </li>
                     <li className="nav-item">
                       <Link
-                        to={`/setting/${
-                          JSON.parse(localStorage.getItem("currentuser"))[0]
+                        to={`/setting/${JSON.parse(localStorage.getItem("currentuser"))[0]
                             .resturant_ID
-                        }`}
+                          }`}
                         className="nav-link align-middle sidebartag"
                       >
                         <i className="fa-solid fa-gear"></i>
@@ -317,7 +316,7 @@ function AddRank() {
                       className="form-control mb-4"
                       placeholder="Rank Name"
                       value={name}
-                      onChange={(e)=>{setname(e.target.value)}}
+                      onChange={(e) => { setname(e.target.value) }}
                     />
                     <label htmlFor="defaultval" className="mb-2">
                       Default Value
@@ -328,7 +327,7 @@ function AddRank() {
                       className="form-control mb-4"
                       placeholder="Default Value"
                       value={value}
-                      onChange={(e)=>{setvalue(e.target.value)}}
+                      onChange={(e) => { setvalue(e.target.value) }}
                     />
                     <div class="form-check form-switch">
                       <input
@@ -336,7 +335,7 @@ function AddRank() {
                         type="checkbox"
                         id="flexSwitchCheckChecked"
                         value={status}
-                        onChange={(e)=>{setstatus(e.target.checked)}}
+                        onChange={(e) => { setstatus(e.target.checked) }}
                       />
                     </div>
                     <br />

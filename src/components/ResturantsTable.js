@@ -34,7 +34,7 @@ function ResturantsTable() {
     console.log(`Loading orderHistory from ${itemOffset} to ${endOffset}`);
     setresturants(duplicateresturants.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(duplicateresturants.length / 6));
-  }, [itemOffset,resturants]);
+  }, [itemOffset, resturants]);
 
   async function del(ID) {
     const info = {
@@ -44,7 +44,7 @@ function ResturantsTable() {
     try {
       const data = (
         await axios.post(
-          "http://localhost:5000/api/superadmin/deleteresturant",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/deleteresturant",
           info
         )
       ).data;
@@ -62,7 +62,7 @@ function ResturantsTable() {
     try {
       const data = (
         await axios.post(
-          "http://localhost:5000/api/superadmin/deactivateresturant",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/deactivateresturant",
           info
         )
       ).data;
@@ -79,7 +79,7 @@ function ResturantsTable() {
     try {
       const data = (
         await axios.post(
-          "http://localhost:5000/api/superadmin/activateresturant",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/activateresturant",
           info
         )
       ).data;
@@ -92,7 +92,7 @@ function ResturantsTable() {
   async function update() {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/api/superadmin/getallresturants")
+        await axios.get("https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallresturants")
       ).data;
       setresturants(data.data);
     } catch (error) {
@@ -101,17 +101,17 @@ function ResturantsTable() {
   }
 
   // Login as function
-  async function loginas(id){
+  async function loginas(id) {
     const detail = {
       id
     }
     try {
       const data = await (
-        await axios.post("http://localhost:5000/api/superadmin/loginas",detail)
+        await axios.post("https://apinodejs.creativeparkingsolutions.com/api/superadmin/loginas", detail)
       ).data;
-      
-      if(data.loginas === "false"){
-      toast.warn(data.message)
+
+      if (data.loginas === "false") {
+        toast.warn(data.message)
       }
 
       if (data.loginas === "true") {
@@ -123,7 +123,7 @@ function ResturantsTable() {
         window.location.href = "/home"
 
       }
-      
+
     } catch (error) {
       console.log(error)
       toast.warn(error.response.data.message)
@@ -135,7 +135,7 @@ function ResturantsTable() {
       try {
         const data = await (
           await axios.get(
-            "http://localhost:5000/api/superadmin/getallresturants"
+            "https://apinodejs.creativeparkingsolutions.com/api/superadmin/getallresturants"
           )
         ).data;
         setresturants(data.data);
@@ -155,7 +155,7 @@ function ResturantsTable() {
     if (e !== "-- Select an option --") {
       // const temprooms = duplicateorders.filter(order=>order.ID===e)
       const tempresturants = duplicateresturants.filter(
-        (resturants) =>resturants.ID === parseInt(e)
+        (resturants) => resturants.ID === parseInt(e)
       );
       console.log(tempresturants);
       // setresturants(tempresturants);
@@ -169,17 +169,17 @@ function ResturantsTable() {
 
     if (e === "false") {
       const tempresturants = duplicateresturants.filter(
-        (resturants) =>resturants.status === e
+        (resturants) => resturants.status === e
       );
       setresturants(tempresturants);
     }
-     else {
+    else {
       setresturants(resturants1);
     }
   }
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <div className="row justify-content-center">
         <div className="col-md-12 text-center">
           <div className="container mt-5">
@@ -220,12 +220,12 @@ function ResturantsTable() {
                           }}
                         >
                           <option>-- Select an option --</option>
-                          {resturants1.length > 0 && resturants1.map((resturant)=>{
+                          {resturants1.length > 0 && resturants1.map((resturant) => {
                             return <>
-                            <option key={resturant.ID} value={resturant.ID}>{resturant.name}</option>
+                              <option key={resturant.ID} value={resturant.ID}>{resturant.name}</option>
                             </>
                           })}
-                          
+
                         </select>
                       </div>
                       <div className="col-md-4">
@@ -237,7 +237,7 @@ function ResturantsTable() {
                           aria-label="Default select example"
                           defaultValue={"-- Select an option --"}
                           value={show}
-                          onChange={(e)=>{filterByType(e.target.value)}}
+                          onChange={(e) => { filterByType(e.target.value) }}
                         >
                           <option >-- Select an option --</option>
                           <option value="true">All</option>
@@ -346,9 +346,9 @@ function ResturantsTable() {
                                         data-bs-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="true"
-                                        // data-bs-container="body"
-                                        // data-bs-placement="bottom"
-                                        // data-bs-content="Deactivate"
+                                      // data-bs-container="body"
+                                      // data-bs-placement="bottom"
+                                      // data-bs-content="Deactivate"
                                       >
                                         <i className="fa-solid fa-ellipsis-vertical"></i>
                                       </button>
@@ -357,38 +357,38 @@ function ResturantsTable() {
                                         aria-labelledby="dropdownMenuButton"
                                       >
                                         <Link to={`/editrestuurant/${item.ID}`}>
-                                        <li className="dropdown-item">
-                                          <i className="far fa-edit"></i>
-                                          Edit
-                                        </li>
+                                          <li className="dropdown-item">
+                                            <i className="far fa-edit"></i>
+                                            Edit
+                                          </li>
                                         </Link>
-                                        <li className="dropdown-item" onClick={()=>{loginas(item.ID)}}>
+                                        <li className="dropdown-item" onClick={() => { loginas(item.ID) }}>
                                           <i className="fas fa-sign-in-alt"></i>
                                           Login as
                                         </li>
-                                      {item.status === "true" ? (
-                                        <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          deactivate(item.ID);
-                                        }}
-                                      >
-                                        <i className="far fa-times-circle"></i>
-                                        Deactivate
-                                      </li>
-                                      ):(
-                                        <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          activate(item.ID);
-                                        }}
-                                      >
-                                        <i className="far fa-check-circle"></i>
-                                        Activate
-                                      </li>
-                                      )}
+                                        {item.status === "true" ? (
+                                          <li
+                                            className="dropdown-item"
+                                            onClick={() => {
+                                              deactivate(item.ID);
+                                            }}
+                                          >
+                                            <i className="far fa-times-circle"></i>
+                                            Deactivate
+                                          </li>
+                                        ) : (
+                                          <li
+                                            className="dropdown-item"
+                                            onClick={() => {
+                                              activate(item.ID);
+                                            }}
+                                          >
+                                            <i className="far fa-check-circle"></i>
+                                            Activate
+                                          </li>
+                                        )}
 
-                                      
+
                                         <li
                                           className="dropdown-item"
                                           onClick={() => {
@@ -442,30 +442,30 @@ function ResturantsTable() {
                         </li>
                       </ul>
                     </nav> */}
-                                <ReactPaginate
-                breakLabel="..."
-                nextLabel="Next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< Previous"
-                renderOnZeroPageCount={null}
-         
-                marginPagesDisplayed={2}
-          
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-             
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
-                containerClassName="pagination"
-                activeClassName="active"
-             
-              />
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel="Next >"
+                      onPageChange={handlePageClick}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount}
+                      previousLabel="< Previous"
+                      renderOnZeroPageCount={null}
+
+                      marginPagesDisplayed={2}
+
+                      pageClassName="page-item"
+                      pageLinkClassName="page-link"
+                      previousClassName="page-item"
+                      previousLinkClassName="page-link"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+
+                      breakClassName="page-item"
+                      breakLinkClassName="page-link"
+                      containerClassName="pagination"
+                      activeClassName="active"
+
+                    />
                   </div>
 
                 </div>

@@ -11,9 +11,9 @@ function EditRank() {
   const [name, setname] = useState("");
   const [value, setvalue] = useState("");
   const [status, setstatus] = useState(false);
-  const {id} = useParams()
+  const { id } = useParams()
 
-  async function save(){
+  async function save() {
     const details = {
       id,
       name,
@@ -23,15 +23,15 @@ function EditRank() {
     try {
       const result = await (
         await axios.post(
-          "http://localhost:5000/api/superadmin/editrank",
+          "https://apinodejs.creativeparkingsolutions.com/api/superadmin/editrank",
           details
         )
       ).data
       toast.success("Rank has been updated")
       setInterval(() => {
-        window.location.href="/ranks"
+        window.location.href = "/ranks"
       }, 2000);
-      
+
     } catch (error) {
       console.log(error)
       toast.warn("Something went wrong! Please try again later")
@@ -43,14 +43,14 @@ function EditRank() {
       try {
         const data = await (
           await axios.get(
-            `http://localhost:5000/api/superadmin/geteditrank/${id}`
+            `https://apinodejs.creativeparkingsolutions.com/api/superadmin/geteditrank/${id}`
           )
         ).data;
 
         setrank(data.data)
         setname(data.data['name'])
         setvalue(data.data['value1'])
-        setstatus(data.data['status1'] === "true" ? (true):(false))
+        setstatus(data.data['status1'] === "true" ? (true) : (false))
       } catch (error) {
         console.log(error, "err");
       }
@@ -59,7 +59,7 @@ function EditRank() {
   }, []);
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Navbar />
       <div className="container-fluid">
         <div className="row flex-nowrap">
@@ -67,7 +67,7 @@ function EditRank() {
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -82,7 +82,7 @@ function EditRank() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -138,10 +138,9 @@ function EditRank() {
                     </li>
                     <li className="nav-item">
                       <Link
-                        to={`/setting/${
-                          JSON.parse(localStorage.getItem("currentuser"))[0]
+                        to={`/setting/${JSON.parse(localStorage.getItem("currentuser"))[0]
                             .resturant_ID
-                        }`}
+                          }`}
                         className="nav-link align-middle sidebartag"
                       >
                         <i className="fa-solid fa-gear"></i>
@@ -340,7 +339,7 @@ function EditRank() {
                       className="form-control mb-4"
                       placeholder="Rank Name ()"
                       value={name}
-                      onChange={(e)=>{setname(e.target.value)}}
+                      onChange={(e) => { setname(e.target.value) }}
                     />
                     <label htmlFor="defaultval" className="mb-2">
                       Default Value
@@ -351,7 +350,7 @@ function EditRank() {
                       className="form-control mb-4"
                       placeholder="Default Value ()"
                       value={value}
-                      onChange={(e)=>{setvalue(e.target.value)}}
+                      onChange={(e) => { setvalue(e.target.value) }}
                     />
                     <br />
                     <div class="form-check form-switch">
@@ -360,12 +359,12 @@ function EditRank() {
                         type="checkbox"
                         id="flexSwitchCheckChecked"
                         checked={status}
-                        onChange={(e)=>{setstatus(e.target.checked)}}
+                        onChange={(e) => { setstatus(e.target.checked) }}
                       />
                     </div>
                     <br />
                     <br />
-                    <br/>
+                    <br />
                     <button className="btn btnSignColor" onClick={save}>Save</button>
                   </div>
                 </div>

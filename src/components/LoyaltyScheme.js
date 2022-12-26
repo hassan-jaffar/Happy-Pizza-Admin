@@ -9,7 +9,7 @@ function LoyaltyScheme() {
   const [redeem, setredeem] = useState("");
   const [points, setpoints] = useState("");
   const [currency_points, setCurrency_points] = useState("");
-  const {id} = useParams();
+  const { id } = useParams();
   const getstatus = localStorage.getItem("status");
 
   async function register() {
@@ -19,16 +19,16 @@ function LoyaltyScheme() {
         redeem,
         points,
         currency_points,
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+        id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
       };
       try {
         const result = await axios.post(
-          "http://localhost:5000/api/setting/loyality",
+          "https://apinodejs.creativeparkingsolutions.com/api/setting/loyality",
           details
         ).data;
         console.log(result);
         toast.success("Data has been saved");
-  
+
         setStatus(false);
         setCurrency_points("");
         setpoints("");
@@ -38,7 +38,7 @@ function LoyaltyScheme() {
         toast.warn("Something went wrong!");
       }
     }
-    else{
+    else {
       const details = {
         status,
         redeem,
@@ -48,12 +48,12 @@ function LoyaltyScheme() {
       };
       try {
         const result = await axios.post(
-          "http://localhost:5000/api/setting/loyality",
+          "https://apinodejs.creativeparkingsolutions.com/api/setting/loyality",
           details
         ).data;
         console.log(result);
         toast.success("Data has been saved");
-  
+
         setStatus(false);
         setCurrency_points("");
         setpoints("");

@@ -37,7 +37,7 @@ function DeliveryArea() {
     }
     console.log(details)
     try {
-      const result = await axios.post("http://localhost:5000/api/setting/addzone", details).data;
+      const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/addzone", details).data;
       setname('');
       setdiscount("");
       setdelay('');
@@ -61,7 +61,7 @@ function DeliveryArea() {
 
   async function accordionClick(ID) {
     try {
-      const result = await (await axios.post(`http://localhost:5000/api/setting/showzonebyid/${ID}`)).data;
+      const result = await (await axios.post(`https://apinodejs.creativeparkingsolutions.com/api/setting/showzonebyid/${ID}`)).data;
       setname1(result.data[0].name)
       setdiscount1(result.data[0].discount);
       setdelay1(result.data[0].delay);
@@ -77,7 +77,7 @@ function DeliveryArea() {
 
   async function deletezone(ID) {
     try {
-      const result = await (await axios.post(`http://localhost:5000/api/setting/deletezone/${ID}`)).data;
+      const result = await (await axios.post(`https://apinodejs.creativeparkingsolutions.com/api/setting/deletezone/${ID}`)).data;
       update();
     } catch (error) {
       console.log(error)
@@ -95,7 +95,7 @@ function DeliveryArea() {
       ID
     }
     try {
-      const result = await axios.post("http://localhost:5000/api/setting/updatezone", details).data;
+      const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/setting/updatezone", details).data;
       accordionClick(ID)
       update()
     } catch (error) {
@@ -109,7 +109,7 @@ function DeliveryArea() {
     }
     try {
       const data = await (
-        await axios.post(`http://localhost:5000/api/setting/showzones`, details)
+        await axios.post(`https://apinodejs.creativeparkingsolutions.com/api/setting/showzones`, details)
       ).data;
       setzone(data.data)
       // setupdatetitle(data.data['title']);
@@ -126,7 +126,7 @@ function DeliveryArea() {
       }
       try {
         const data = await (
-          await axios.post(`http://localhost:5000/api/setting/showzones`, details)
+          await axios.post(`https://apinodejs.creativeparkingsolutions.com/api/setting/showzones`, details)
         ).data;
         setzone(data.data)
         // setupdatetitle(data.data['title']);

@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -11,56 +11,56 @@ function RegisterPage() {
   const [password, setpassword] = useState('');
   const [cpassword, setcpassword] = useState('');
 
-  async function register(){
+  async function register() {
     if (password === cpassword) {
-        const user = {
-            name,
-            email,
-            number,
-            password,
-            cpassword
-        };
+      const user = {
+        name,
+        email,
+        number,
+        password,
+        cpassword
+      };
 
-        console.log(user)
+      console.log(user)
 
-        try {
+      try {
 
-            // setloading(true)
-            const result = await axios.post("http://localhost:5000/api/admin/registeradmin",user).data;
-            console.log(result)
-            toast.success("Registration Successfull")
-            // setloading(true)
-            setInterval(() => {
-              window.location.href = "/"
-            }, 2000);
-
-            
+        // setloading(true)
+        const result = await axios.post("https://apinodejs.creativeparkingsolutions.com/api/admin/registeradmin", user).data;
+        console.log(result)
+        toast.success("Registration Successfull")
+        // setloading(true)
+        setInterval(() => {
+          window.location.href = "/"
+        }, 2000);
 
 
-            setname('')
-            setemail('')
-            setnumber('')
-            setpassword('')
-            setcpassword('')
 
-        } catch (error) {
-            console.log(error);
-            toast.warn("Something went wrong!")
-            // setloading(true)
-        }
+
+        setname('')
+        setemail('')
+        setnumber('')
+        setpassword('')
+        setcpassword('')
+
+      } catch (error) {
+        console.log(error);
+        toast.warn("Something went wrong!")
+        // setloading(true)
+      }
     }
-    else{
-        alert("Password is not matched");
+    else {
+      alert("Password is not matched");
     }
-}
+  }
 
   return (
     <>
-     <ToastContainer />
+      <ToastContainer />
       <div className="scrolling-disable">
         <div className="row justify-content-center gx-0">
           <div className="col-md-4 text-center mt-2 responsiveness">
-          <Link to="/">
+            <Link to="/">
               <img
                 className="menuimg"
                 src="https://www.happyspizzaburger.co.uk/uploads/restorants/198031cc-1875-4d54-8945-8135a96f353a_large.jpg"
@@ -75,7 +75,7 @@ function RegisterPage() {
                   type="text"
                   className="form-control mb-4"
                   placeholder="Name"
-                  value={name} 
+                  value={name}
                   onChange={(e) => { setname(e.target.value) }}
                   required
                 />
@@ -85,8 +85,8 @@ function RegisterPage() {
                   type="email"
                   className="form-control mb-4"
                   placeholder="Email"
-                  value={email} 
-              onChange={(e) => { setemail(e.target.value) }}
+                  value={email}
+                  onChange={(e) => { setemail(e.target.value) }}
                   required
                 />
                 <label htmlFor="phoneno">Phone</label>
@@ -95,8 +95,8 @@ function RegisterPage() {
                   type="tel"
                   className="form-control mb-4"
                   placeholder="Phone"
-                  value={number} 
-              onChange={(e) => { setnumber(e.target.value) }}
+                  value={number}
+                  onChange={(e) => { setnumber(e.target.value) }}
                   required
                 />
                 <label htmlFor="password">Password</label>
@@ -105,7 +105,7 @@ function RegisterPage() {
                   type="password"
                   className="form-control mb-4"
                   placeholder="Password"
-                  value={password} 
+                  value={password}
                   onChange={(e) => { setpassword(e.target.value) }}
                   required
                 />
@@ -115,7 +115,7 @@ function RegisterPage() {
                   type="password"
                   className="form-control mb-4"
                   placeholder="Confirm Password"
-                  value={cpassword} 
+                  value={cpassword}
                   onChange={(e) => { setcpassword(e.target.value) }}
                   required
                 />
