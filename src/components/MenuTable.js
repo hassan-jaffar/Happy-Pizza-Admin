@@ -185,7 +185,7 @@ function MenuTable() {
   async function editItemImage() {
     var formData = new FormData();
     formData.append("photo2", Editfile)
-    formData.append("categoryID2", itemID)
+    formData.append("itemID", itemID)
 
     const config = {
       headers: {
@@ -195,7 +195,7 @@ function MenuTable() {
 
     try {
       const result = await axios.post(
-        " http://localhost:5000/api/admin/createitem",
+        " http://localhost:5000/api/admin/updateitemimage",
         formData, config
       ).data;
       console.log(result);
@@ -884,7 +884,7 @@ function MenuTable() {
                                       <div className="text-center my-3">
                                         <img className="modal-img" src="" />
                                       </div>
-                                      <input type="hidden" id="categoryid2" name="categoryid2" value={items.ID} />
+                                      <input type="hidden" id="itemID" name="itemID" value={items.ID} />
                                     </div>
                                     <div className="modal-footer">
                                       <button
