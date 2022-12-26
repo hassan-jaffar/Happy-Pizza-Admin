@@ -426,7 +426,7 @@ function OrdersTable() {
 
                             <td>
                               <Link
-                                to={`/order-detail/${order.cart_Id}/${order.customer_Id}`}
+                                to={`/order-detail/${order.cart_Id}/${order.cart_Id}`}
                                 style={{ textDecoration: "none", color: "black" }}
                               >
                                 {order.house === "N/A" ? (<p>N/A</p>) : <>{order.house},Flat:{order.flat},{order.street},

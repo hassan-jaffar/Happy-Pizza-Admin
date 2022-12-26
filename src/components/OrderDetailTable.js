@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link,useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 
 function OrderDetailTable() {
   const [orders, setOrders] = useState([]);
   const [items, setItems] = useState([])
   const [info, setInfo] = useState([])
-  const {id} = useParams()
-  const {cid} = useParams()
+  const { id } = useParams()
+  const { cid } = useParams()
 
   async function add(id, status) {
     const user = {
@@ -25,7 +25,7 @@ function OrderDetailTable() {
         user
       ).data;
       console.log(result);
-    //   // update();
+      //   // update();
       update();
     } catch (error) {
       console.log(error);
@@ -57,7 +57,7 @@ function OrderDetailTable() {
         await axios.get("http://localhost:5000/api/admin/getliveorders")
       ).data;
       setInfo(data.data);
-      
+
       console.log(data.data);
     } catch (error) {
       console.log(error);
@@ -82,11 +82,11 @@ function OrderDetailTable() {
     async function fetchData() {
 
       const temp = {
-        customer_Id:cid
+        customer_Id: cid
       }
       try {
 
-        const data = (await axios.post("http://localhost:5000/api/admin/getcartorderdetailitems",temp)).data;
+        const data = (await axios.post("http://localhost:5000/api/admin/getcartorderdetailitems", temp)).data;
         console.log(data.data)
         setItems(data.data)
 
@@ -105,12 +105,12 @@ function OrderDetailTable() {
           await axios.get("http://localhost:5000/api/admin/getliveorders")
         ).data;
 
-        
+
         setInfo(data.data);
-        
-         
-        
-      
+
+
+
+
       } catch (error) {
         console.log(error);
       }
@@ -130,10 +130,10 @@ function OrderDetailTable() {
                 <h6>ORDER INFO</h6>
                 <hr />
                 <p>Invoice ID: {orders.cart_Id}</p>
-                <p>Delivery method: Delivery</p>
-                <p>Time slot: 7:36 PM - 8:06 PM</p>
-                <p>Payment method: STRIPE</p>
-                <p>Payment status: Paid</p>
+                {orders.cashondelivery === "true" || orders.paywithcard === "true" ? (<p>Delivery method: Delivery</p>) : (<p>Delivery method: Collection</p>)}
+                <p>Time slot: {orders.delivery_time}</p>
+                {orders.cashondelivery === "true" ? (<p>Payment method: STRIPE</p>) : orders.paywithcard === "true" ? (<p>Payment method: COD</p>) : (<p>Payment method: N/A</p>)}
+                <p>Payment status: Unpaid</p>
               </div>
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>ORDER DETAIL</h6>
@@ -149,17 +149,17 @@ function OrderDetailTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {items && items.map((item)=>{
+                      {items && items.map((item) => {
                         return <>
-                      <tr>
-                        <th scope="row">
-                          <img src={item.Image} className="orderdetailimg" style={{width:"20%",height:"auto"}} alt=".."/>
-                          {item.Title}
-                        </th>
-                        <td>{item.Quantity}</td>
-                        <td>${item.Price}</td>
-                        <td>${item.totalp}</td>
-                      </tr>
+                          <tr>
+                            <th scope="row">
+                              <img src={item.Image} className="orderdetailimg" style={{ width: "20%", height: "auto" }} alt=".." />
+                              {item.Title}
+                            </th>
+                            <td>{item.Quantity}</td>
+                            <td>£{item.Price}</td>
+                            <td>£{item.OPrice}</td>
+                          </tr>
                         </>
                       })}
 
@@ -182,11 +182,12 @@ function OrderDetailTable() {
                 <hr />
                 <p>Name: {orders.cname}</p>
                 <p>Email: {orders.email}</p>
-                <p>
+                {orders.house === "N/A" ? (<p>Address: N/A</p>) : (<p>
                   Address: House No: {orders.house}, {orders.street}, {orders.postcode},
                   {orders.town}
-                </p>
-                <p>Flat: {orders.flat}</p>
+                </p>)}
+                {orders.flat !== "N/A" && (<p>Flat: {orders.flat}</p>)}
+
               </div>
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>RESTAURANT INFORMATION</h6>
@@ -197,48 +198,48 @@ function OrderDetailTable() {
               </div>
             </div>
             <div className="col-md-4 py-4 px-4">
-                {info.map((item)=>{
-                  return <>
-                {item.Orderstatus === "1" ? (<>
-                  <div className="orderdetailcards bs br my-5 px-3 py-4">
-              <h6 className="mb-3">ACTIONS</h6>
-                <hr />
-                <button className="btn btn-primary me-2" onClick={() => {
-                                                add(
-                                                  item.cart_Id,
-                                                  item.Orderstatus
-                                                );
-                                              }}>Accept</button>
-                <button className="btn btn-primary" onClick={() => {
-                                                reject(
-                                                  item.cart_Id,
-                                                  item.Orderstatus
-                                                );
-                                              }}>Reject</button>
-                </div>
-                </>): item.Orderstatus === "2" ? (<>
-                  <div className="orderdetailcards bs br my-5 px-3 py-4">
-              <h6 className="mb-3">ACTIONS</h6>
-                <hr />
-                <button className="btn btn-primary me-2" onClick={() => {
-                                                add(
-                                                  item.cart_Id,
-                                                  item.Orderstatus
-                                                );
-                                              }}>Prepared</button>
-                <button className="btn btn-primary"  onClick={() => {
-                                                reject(
-                                                  item.cart_Id,
-                                                  item.Orderstatus
-                                                );
-                                              }}>Assign to deliver</button>
-                                              </div>
-                </>):(<>
-                  
-                </>)}
-                  
-                  </>
-                })}
+              {info.map((item) => {
+                return <>
+                  {item.Orderstatus === "1" ? (<>
+                    <div className="orderdetailcards bs br my-5 px-3 py-4">
+                      <h6 className="mb-3">ACTIONS</h6>
+                      <hr />
+                      <button className="btn btn-primary me-2" onClick={() => {
+                        add(
+                          item.cart_Id,
+                          item.Orderstatus
+                        );
+                      }}>Accept</button>
+                      <button className="btn btn-primary" onClick={() => {
+                        reject(
+                          item.cart_Id,
+                          item.Orderstatus
+                        );
+                      }}>Reject</button>
+                    </div>
+                  </>) : item.Orderstatus === "2" ? (<>
+                    <div className="orderdetailcards bs br my-5 px-3 py-4">
+                      <h6 className="mb-3">ACTIONS</h6>
+                      <hr />
+                      <button className="btn btn-primary me-2" onClick={() => {
+                        add(
+                          item.cart_Id,
+                          item.Orderstatus
+                        );
+                      }}>Prepared</button>
+                      <button className="btn btn-primary" onClick={() => {
+                        reject(
+                          item.cart_Id,
+                          item.Orderstatus
+                        );
+                      }}>Assign to deliver</button>
+                    </div>
+                  </>) : (<>
+
+                  </>)}
+
+                </>
+              })}
               <div className="orderdetailcards bs br my-5 px-3 py-4">
                 <h6>FINANCE</h6>
                 <hr />
@@ -247,23 +248,23 @@ function OrderDetailTable() {
                     <tbody>
                       <tr>
                         <td scope="row">SUB-TOTAL</td>
-                        <td>${orders.total}</td>
+                        <td>£{orders.Price}</td>
                       </tr>
                       <tr>
                         <td scope="row">DELIVERY</td>
-                        <td>${orders.total}</td>
+                        <td>£{orders.charges}</td>
                       </tr>
                       <tr>
                         <td scope="row">NET TOTAL</td>
-                        <td colspan="2">${orders.total}</td>
+                        <td colspan="2">£{orders.total}</td>
                       </tr>
                       <tr>
                         <td scope="row">DISCOUNT</td>
-                        <td colspan="2">${orders.total}</td>
+                        <td colspan="2">£0</td>
                       </tr>
                       <tr>
                         <th scope="row">TOTAL</th>
-                        <td colspan="2">${orders.total}</td>
+                        <td colspan="2">£{orders.total}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -316,94 +317,94 @@ function OrderDetailTable() {
                       </div>
                       {orders.Orderstatus === "3" ? (<>
                         <div className="timeline-block">
-                        <span className="timeline-step badge bg-success">
-                          <i className="fa fa-regular fa-bell"></i>
-                        </span>
-                        <div className="timeline-content">
-                          <div className="d-flex justify-content-between pt-1">
-                            <div>
-                              <span className="text-muted text-sm font-weight-bold">
-                                Completed by resturant
-                              </span>
-                            </div>
-                            {/* <div className="text-right">
+                          <span className="timeline-step badge bg-success">
+                            <i className="fa fa-regular fa-bell"></i>
+                          </span>
+                          <div className="timeline-content">
+                            <div className="d-flex justify-content-between pt-1">
+                              <div>
+                                <span className="text-muted text-sm font-weight-bold">
+                                  Completed by resturant
+                                </span>
+                              </div>
+                              {/* <div className="text-right">
                               <small className="text-muted">
                                 <i className="fas fa-clock me-1"></i>02 Sep 2022
                                 06:23 PM
                               </small>
                             </div> */}
+                            </div>
+                            <h6 className="text-sm mt-1 mb-0">
+                              Status from: {orders.owner_name}
+                            </h6>
                           </div>
-                          <h6 className="text-sm mt-1 mb-0">
-                            Status from: {orders.owner_name}
-                          </h6>
                         </div>
-                      </div>
-                      </>): orders.Orderstatus === "1" ? (<>
+                      </>) : orders.Orderstatus === "1" ? (<>
                         <div className="timeline-block">
-                        <span className="timeline-step badge bg-success">
-                          <i className="fa fa-regular fa-bell"></i>
-                        </span>
-                        <div className="timeline-content">
-                          <div className="d-flex justify-content-between pt-1">
-                            <div>
-                              <span className="text-muted text-sm font-weight-bold">
-                                Pending
-                              </span>
+                          <span className="timeline-step badge bg-success">
+                            <i className="fa fa-regular fa-bell"></i>
+                          </span>
+                          <div className="timeline-content">
+                            <div className="d-flex justify-content-between pt-1">
+                              <div>
+                                <span className="text-muted text-sm font-weight-bold">
+                                  Pending
+                                </span>
+                              </div>
+                              <div className="text-right">
+                                <small className="text-muted">
+                                  <i className="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
+                                </small>
+                              </div>
                             </div>
-                            <div className="text-right">
-                              <small className="text-muted">
-                                <i className="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
-                              </small>
-                            </div>
+                            {/* <h6 className="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6> */}
                           </div>
-                          {/* <h6 className="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6> */}
                         </div>
-                      </div>
-                      </>):  orders.Orderstatus === "2" ? (<>
+                      </>) : orders.Orderstatus === "2" ? (<>
                         <div className="timeline-block">
-                        <span className="timeline-step badge bg-success">
-                          <i className="fa fa-regular fa-bell"></i>
-                        </span>
-                        <div className="timeline-content">
-                          <div className="d-flex justify-content-between pt-1">
-                            <div>
-                              <span className="text-muted text-sm font-weight-bold">
-                                Accepted by resturant
-                              </span>
-                            </div>
-                            {/* <div className="text-right">
+                          <span className="timeline-step badge bg-success">
+                            <i className="fa fa-regular fa-bell"></i>
+                          </span>
+                          <div className="timeline-content">
+                            <div className="d-flex justify-content-between pt-1">
+                              <div>
+                                <span className="text-muted text-sm font-weight-bold">
+                                  Accepted by resturant
+                                </span>
+                              </div>
+                              {/* <div className="text-right">
                               <small className="text-muted">
                                 <i className="fas fa-clock me-1"></i>{moment(orders.DateTime).format('MMMM Do YYYY, h:mm:ss a')}
                               </small>
                             </div> */}
-                          </div>
-                          <h6 className="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6>
-                        </div>
-                      </div>
-                      </>):(<>
-                        <div className="timeline-block">
-                        <span className="timeline-step badge bg-success">
-                          <i className="fa fa-regular fa-bell"></i>
-                        </span>
-                        <div className="timeline-content">
-                          <div className="d-flex justify-content-between pt-1">
-                            <div>
-                              <span className="text-muted text-sm font-weight-bold">
-                                Rejected by resturant
-                              </span>
                             </div>
-                            {/* <div className="text-right">
+                            <h6 className="text-sm mt-1 mb-0">Status from: {orders.owner_name}</h6>
+                          </div>
+                        </div>
+                      </>) : (<>
+                        <div className="timeline-block">
+                          <span className="timeline-step badge bg-success">
+                            <i className="fa fa-regular fa-bell"></i>
+                          </span>
+                          <div className="timeline-content">
+                            <div className="d-flex justify-content-between pt-1">
+                              <div>
+                                <span className="text-muted text-sm font-weight-bold">
+                                  Rejected by resturant
+                                </span>
+                              </div>
+                              {/* <div className="text-right">
                               <small className="text-muted">
                                 <i className="fas fa-clock me-1"></i>02 Sep 2022
                                 06:23 PM
                               </small>
                             </div> */}
+                            </div>
+                            <h6 className="text-sm mt-1 mb-0">
+                              Status from: {orders.owner_name}
+                            </h6>
                           </div>
-                          <h6 className="text-sm mt-1 mb-0">
-                            Status from: {orders.owner_name}
-                          </h6>
                         </div>
-                      </div>
                       </>)}
 
 
