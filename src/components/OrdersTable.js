@@ -429,15 +429,18 @@ function OrdersTable() {
                                 to={`/order-detail/${order.cart_Id}/${order.customer_Id}`}
                                 style={{ textDecoration: "none", color: "black" }}
                               >
-                                {order.house},Flat:{order.flat},{order.street},
-                                {order.postcode},{order.town}
+                                {order.house === "N/A" ? (<p>N/A</p>) : <>{order.house},Flat:{order.flat},{order.street},
+                                  {order.postcode},{order.town}</>}
+
                               </Link>
                             </td>
                             <td>{moment(order.DateTime).format('MMMM Do YYYY, h:mm a')}</td>
                             <td>
-                              <span className="badge text-bg-primary primary">
+                              {order.cashondelivery === "true" || order.paywithcard === "true" ? (<span class="badge text-bg-primary primary">
+                                Delivery
+                              </span>) : (<span class="badge text-bg-primary primary">
                                 collection
-                              </span>
+                              </span>)}
                             </td>
                             <td>
                               <span className="badge text-bg-info info">
@@ -453,9 +456,13 @@ function OrdersTable() {
                               </span>
                             </td>
                             <td>
-                              <span className="badge text-bg-primary primary">
+                              {order.cashondelivery === "true" ? (<span class="badge text-bg-primary primary">
                                 cod(unpaid)
-                              </span>
+                              </span>) : order.paywithcard === "true" ? (<span class="badge text-bg-primary primary">
+                                stripe
+                              </span>) : (<span class="badge text-bg-primary primary">
+                                N/A
+                              </span>)}
                             </td>
                             <td>${order.total}</td>
                           </tr>
