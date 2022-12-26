@@ -28,6 +28,7 @@ function RestaurantManagement() {
   const [cash, setcash] = useState(false)
   const [pickup, setpickup] = useState(false)
   const [delivery, setdelivery] = useState(false)
+  const [imageShow, setimageShow] = useState(null)
   const { id } = useParams();
   const getstatus = localStorage.getItem("status");
 
@@ -126,6 +127,13 @@ function RestaurantManagement() {
       console.log(error);
     }
   }
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setimageShow(URL.createObjectURL(event.target.files[0]));
+    }
+  }
+
 
   useEffect(() => {
     if (getstatus === "true") {
@@ -406,11 +414,11 @@ function RestaurantManagement() {
               </label>
               <input className="form-control" type="file" id="formFile" name="photo"
                 onChange={(e) => {
-                  setfile(e.target.files[0])
+                  setfile(e.target.files[0], onImageChange)
                 }}
               />
               <img
-                src={file}
+                src={`http://localhost:5000${file}`}
                 // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
                 className="settingimg"
                 alt="404 not found"
@@ -425,6 +433,12 @@ function RestaurantManagement() {
                   setcimage(e.target.files[0])
                 }}
               />
+              <img
+                src={`http://localhost:5000${cimage}`}
+                // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
+                className="settingimg"
+                alt="404 not found"
+              />
             </div>
             <div className="my-3">
               <label htmlFor="formFile3" className="form-label">
@@ -436,10 +450,10 @@ function RestaurantManagement() {
                 }}
               />
               <img
-                src={rimage}
+                src={`http://localhost:5000${rimage}`}
                 // src="http://restaurant.clicknfeed.co.uk/uploads/restorants/cfa8a36f-4267-4e67-8369-edfea654b59b_large.jpg"
                 className="settingimg"
-                alt=".."
+                alt="404 not found"
               />
             </div>
           </div>
