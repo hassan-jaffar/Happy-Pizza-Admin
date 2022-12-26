@@ -16,16 +16,16 @@ function LiveOrders() {
 
   useEffect(() => {
     async function fetchData() {
-      const detail={
-        id:JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
+      const detail = {
+        id: JSON.parse(localStorage.getItem("currentuser"))[0].resturant_ID
       }
       try {
         const data = await (
-          await axios.post("http://localhost:5000/api/admin/getliveorders",detail)
+          await axios.post("http://localhost:5000/api/admin/getliveorders", detail)
         ).data;
 
         const count = await (
-          await axios.post("http://localhost:5000/api/admin/getliveorderscount",detail)
+          await axios.post("http://localhost:5000/api/admin/getliveorderscount", detail)
         ).data;
         setInfo(data.data);
 
@@ -102,7 +102,7 @@ function LiveOrders() {
             <div className="d-flex flex-column align-items-center px-3 pt-2 min-vh-100">
               <h5 className="my-5 text-center">
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>{JSON.parse(localStorage.getItem("currentuser"))[0].name}</>
                 ) : JSON.parse(localStorage.getItem("currentuser"))[0].role ===
@@ -117,7 +117,7 @@ function LiveOrders() {
                 id="menu"
               >
                 {getstatus === "true" &&
-                JSON.parse(localStorage.getItem("currentuser"))[0].role ===
+                  JSON.parse(localStorage.getItem("currentuser"))[0].role ===
                   1 ? (
                   <>
                     <li className="nav-item">
@@ -403,9 +403,14 @@ function LiveOrders() {
                                             {items.name}
                                           </h2>
                                           <h2 className="addresstime">
-                                            <span></span>House No: {items.house}
-                                            , {items.flat},{items.street},
-                                            {items.postcode},{items.town}
+                                            {items.house === "N/A" ? (<>
+                                              Collection
+                                            </>) : (<>
+                                              <span></span>House No: {items.house}
+                                              , {items.flat},{items.street},
+                                              {items.postcode},{items.town}
+                                            </>)}
+
                                           </h2>
                                           {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                           <div className="row btnrow">
@@ -515,9 +520,13 @@ function LiveOrders() {
                                             {items.name}
                                           </h2>
                                           <h2 className="addresstime">
-                                            <span></span>House No: {items.house}
-                                            , {items.flat},{items.street},
-                                            {items.postcode},{items.town}
+                                            {items.house === "N/A" ? (<>
+                                              Collection
+                                            </>) : (<>
+                                              <span></span>House No: {items.house}
+                                              , {items.flat},{items.street},
+                                              {items.postcode},{items.town}
+                                            </>)}
                                           </h2>
                                           {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                           <div className="row btnrow">
@@ -626,9 +635,13 @@ function LiveOrders() {
                                             {items.name}
                                           </h2>
                                           <h2 className="addresstime">
-                                            <span></span>House No: {items.house}
-                                            , {items.flat},{items.street},
-                                            {items.postcode},{items.town}
+                                            {items.house === "N/A" ? (<>
+                                              Collection
+                                            </>) : (<>
+                                              <span></span>House No: {items.house}
+                                              , {items.flat},{items.street},
+                                              {items.postcode},{items.town}
+                                            </>)}
                                           </h2>
                                           {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                           {/* <div className="row btnrow">
@@ -802,10 +815,13 @@ function LiveOrders() {
                                                 {items.name}
                                               </h2>
                                               <h2 className="addresstime">
-                                                <span></span>House No:{" "}
-                                                {items.house}, {items.flat},
-                                                {items.street},{items.postcode},
-                                                {items.town}
+                                                {items.house === "N/A" ? (<>
+                                                  Collection
+                                                </>) : (<>
+                                                  <span></span>House No: {items.house}
+                                                  , {items.flat},{items.street},
+                                                  {items.postcode},{items.town}
+                                                </>)}
                                               </h2>
                                               {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                               <div className="row btnrow">
@@ -922,10 +938,13 @@ function LiveOrders() {
                                                 {items.name}
                                               </h2>
                                               <h2 className="addresstime">
-                                                <span></span>House No:{" "}
-                                                {items.house}, {items.flat},
-                                                {items.street},{items.postcode},
-                                                {items.town}
+                                                {items.house === "N/A" ? (<>
+                                                  Collection
+                                                </>) : (<>
+                                                  <span></span>House No: {items.house}
+                                                  , {items.flat},{items.street},
+                                                  {items.postcode},{items.town}
+                                                </>)}
                                               </h2>
                                               {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                               <div className="row btnrow">
@@ -1047,10 +1066,13 @@ function LiveOrders() {
                                                 {items.name}
                                               </h2>
                                               <h2 className="addresstime">
-                                                <span></span>House No:{" "}
-                                                {items.house}, {items.flat},
-                                                {items.street},{items.postcode},
-                                                {items.town}
+                                                {items.house === "N/A" ? (<>
+                                                  Collection
+                                                </>) : (<>
+                                                  <span></span>House No: {items.house}
+                                                  , {items.flat},{items.street},
+                                                  {items.postcode},{items.town}
+                                                </>)}
                                               </h2>
                                               {/* <h2 className="addresstime">Time slot: 8:00 PM - 8:30 PM</h2> */}
                                               {/* <div className="row btnrow">
