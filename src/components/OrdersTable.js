@@ -464,7 +464,7 @@ function OrdersTable() {
                                 N/A
                               </span>)}
                             </td>
-                            <td>${order.total}</td>
+                            <td>£{order.total}</td>
                           </tr>
                         </>
                       );
