@@ -13,6 +13,7 @@ function RestaurantManagement() {
   const [charges, setcharges] = useState("");
   const [minimum_order, setminimum_order] = useState("");
   const [average_order, setaverage_order] = useState("");
+  const [average_order_delivery, setaverage_order_delivery] = useState("");
   const [time, settime] = useState();
   const [owner_name, setowner_name] = useState("");
   const [updateowner_name, setupdateowner_name] = useState("");
@@ -33,7 +34,6 @@ function RestaurantManagement() {
 
 
   async function register(e) {
-    e.preventDefault()
     var formData = new FormData();
     formData.append("description", description);
     formData.append("id", id);
@@ -42,6 +42,7 @@ function RestaurantManagement() {
     formData.append("charges", charges);
     formData.append("minimum_order", minimum_order);
     formData.append("average_order", average_order);
+    formData.append("average_order_delivery", average_order_delivery);
     formData.append("time", time);
     formData.append("photo", file);
     formData.append("cimage", cimage);
@@ -109,6 +110,7 @@ function RestaurantManagement() {
       setupdateowner_address(data.data['owner_address']);
       setminimum_order(data.data['minimum_order']);
       setaverage_order(data.data['average_order']);
+      setaverage_order_delivery(data.data['average_order_delivery']);
       setdescription(data.data['description']);
       setaddress(data.data['address']);
       setphone(data.data['phone']);
@@ -141,6 +143,7 @@ function RestaurantManagement() {
           setupdateowner_address(data.data['owner_address']);
           setminimum_order(data.data['minimum_order']);
           setaverage_order(data.data['average_order']);
+          setaverage_order_delivery(data.data['average_order_delivery']);
           setdescription(data.data['description']);
           setaddress(data.data['address']);
           setphone(data.data['phone']);
@@ -166,6 +169,7 @@ function RestaurantManagement() {
           setupdateowner_address(data.data['owner_address']);
           setminimum_order(data.data['minimum_order']);
           setaverage_order(data.data['average_order']);
+          setaverage_order_delivery(data.data['average_order_delivery']);
           setdescription(data.data['description']);
           setaddress(data.data['address']);
           setphone(data.data['phone']);
@@ -227,9 +231,9 @@ function RestaurantManagement() {
               placeholder="lahore, pakistan"
               name="address"
               value={address}
-              onChange={(e) => {
-                setaddress(e.target.value);
-              }}
+            // onChange={(e) => {
+            //   setaddress(e.target.value);
+            // }}
             />
             <label htmlFor="rstphone" className="mt-3">
               Restaurant Phone:
@@ -311,7 +315,7 @@ function RestaurantManagement() {
               }}
             />
             <label htmlFor="avgtime" className="mt-3">
-              Average Order Prepare Time in minutes:
+              Average Order Prepare Time in minutes (Collections):
             </label>
             <select
               className="form-select"
@@ -320,6 +324,35 @@ function RestaurantManagement() {
               value={average_order}
               onChange={(e) => {
                 setaverage_order(e.target.value);
+              }}
+            >
+              <option value="0">0</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option selected value="25">
+                25
+              </option>
+              <option value="30">30</option>
+              <option value="35">35</option>
+              <option value="40">40</option>
+              <option value="45">45</option>
+              <option value="50">50</option>
+              <option value="60">60</option>
+              <option value="90">90</option>
+              <option value="120">120</option>
+            </select>
+            <label htmlFor="average_order_delivery" className="mt-3">
+              Average Order Prepare Time in minutes (Delivery):
+            </label>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              name="average_order_delivery"
+              value={average_order_delivery}
+              onChange={(e) => {
+                setaverage_order_delivery(e.target.value);
               }}
             >
               <option value="0">0</option>
@@ -445,6 +478,7 @@ function RestaurantManagement() {
               type="text"
               placeholder="xxxx-xxxxxxx"
               value={updateowner_phone}
+              onChange={(e) => { setupdateowner_phone(e.target.value) }}
             />
             <input
               type="hidden"

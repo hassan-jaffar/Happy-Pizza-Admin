@@ -252,7 +252,7 @@ function OrderDetailTable() {
                       </tr>
                       <tr>
                         <td scope="row">DELIVERY</td>
-                        <td>£{orders.charges}</td>
+                        <td>{orders.cashondelivery === "true" || orders.paywithcard === "true" ? (<>£{orders.charges}</>) : (<>£0</>)}</td>
                       </tr>
                       <tr>
                         <td scope="row">NET TOTAL</td>
